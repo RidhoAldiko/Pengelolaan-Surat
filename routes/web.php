@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+//Mendefinisikan controller yang digunakan
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OperatorSuratController;
 use App\Http\Controllers\OperatorKepegawaianController;
@@ -14,10 +15,8 @@ use App\Http\Controllers\OperatorKepegawaianController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//root page (login)
-Route::get('/', function () {
-    return view('auth.login');
-});
+//Route root
+Route::get('/', [AdminController::class,'index'])->middleware('auth','role:0');
 
 //route authentication
 Auth::routes();
