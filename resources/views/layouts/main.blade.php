@@ -30,7 +30,15 @@ gtag('config', 'UA-94034622-3');
     <div class="main-wrapper main-wrapper-1">
         @include('templates.navbar')
         <!-- sidebar -->
-        @include('templates.sidebar')
+        @if (Auth::user()->role==0)
+            @include('templates.sidebar.sidebar-admin')
+        @endif
+        @if (Auth::user()->role==1)
+            @include('templates.sidebar.sidebar-operator-surat')
+        @endif
+        @if (Auth::user()->role==2)
+            @include('templates.sidebar.sidebar-operator-kepegawaian')
+        @endif
         <!-- endsidebar -->
 
         <!-- Main Content -->

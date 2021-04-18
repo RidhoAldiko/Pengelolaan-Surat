@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 //Mendefinisikan controller yang digunakan
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\OperatorSuratController;
-use App\Http\Controllers\OperatorKepegawaianController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\OperatorSurat\OperatorSuratController;
+use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
