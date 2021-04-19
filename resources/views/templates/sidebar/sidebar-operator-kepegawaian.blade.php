@@ -13,11 +13,11 @@
             </li>
             
             <li class="menu-header">Menu</li>
-            <li class="dropdown">
+            <li class="dropdown {{set_active(['data-pegawai.add','data-pegawai.index'])}}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Pegawai</span></a>
             <ul class="dropdown-menu">
-                <li><a class="nav-link" href="#">Data Pegawai</a></li>
-                <li><a class="nav-link" href="#">Tambah Pegawai</a></li>
+                <li class="{{set_active(['data-pegawai.index'])}}"><a class="nav-link" href="{{route('data-pegawai.index')}}">Data Pegawai</a></li>
+                <li class="{{set_active(['data-pegawai.add'])}}"><a class="nav-link" href="{{route('data-pegawai.add')}}">Tambah Pegawai</a></li>
             </ul>
         </ul>
     </aside>

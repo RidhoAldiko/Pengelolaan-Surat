@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Pegawai;
 
 class User extends Authenticatable
 {
@@ -17,10 +18,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'id','email','password','role','flag',
     ];
+    protected $primaryKey = 'id';
+
+    //tabel user terhubung dengan tabel pegawai dengan relasi one to one
+    public function pegawai()
+    {
+        return $this->belongsTo(Pegawai::class,'nip_pegawai','id');
+    }
+    
 
     /**
      * The attributes that should be hidden for arrays.

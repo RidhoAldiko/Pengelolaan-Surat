@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 @section('title','Masuk')
 @section('content')
-<div class="card card-primary">
+<div class="card card-primary mt-5">
     <div class="card-header"><h4>Masuk</h4></div>
         <div class="card-body">
             {{-- form --}}
