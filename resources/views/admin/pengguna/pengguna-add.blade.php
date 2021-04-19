@@ -13,7 +13,8 @@
                     <div class="card-body">
                         <form>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Masukan NIP / Nama Pegawai" >
+                                <input type="number" class="form-control search-input" placeholder="Masukan NIP Pegawai" >
+                                <div class="search-result"></div>
                             </div>
                             <div class="form-group">
                                 <input type="email" class="form-control"  id="email" name="email" placeholder="Masukan Email Pengguna">
