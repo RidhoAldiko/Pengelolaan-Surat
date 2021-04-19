@@ -8,7 +8,7 @@
         </div>
         <ul class="sidebar-menu">
             
-            <li class=active><a class="nav-link" href="{{route('operator-kepegawaian.index')}}">
+            <li class="{{set_active(['operator-kepegawaian.index'])}}"><a class="nav-link" href="{{route('operator-kepegawaian.index')}}">
                 <i class="fas fa-fire"></i><span>Dashboard</span></a>
             </li>
             
