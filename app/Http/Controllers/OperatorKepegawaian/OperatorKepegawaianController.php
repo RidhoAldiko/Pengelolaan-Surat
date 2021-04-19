@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\OperatorKepegawaian;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OperatorKepegawaian\PegawaiRequest;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 //inisialisasi model yang digunakan
@@ -74,16 +75,7 @@ class OperatorKepegawaianController extends Controller
         return view('operator-kepegawaian.pegawai.pegawai-add',\compact('unit','jabatan','golongan'));
     }
     //method store data pegawai
-    public function store_pegawai(Request $request){
-        $this->validate($request, [
-            'nip_pegawai' => ['required','string', 'max:18', 'unique:pegawai'],
-            'nama_pegawai' => ['required', 'string', 'max:255'],
-            'jenis_kelamin' => ['required','string'],
-            'alamat' => ['required', 'string'],
-            'id_unit' => ['required', 'string'],
-            'id_golongan' => ['required', 'string'],
-            'id_jabatan' => ['required', 'string'],
-        ]);
+    public function store_pegawai(PegawaiRequest $request){
         $data = $request->all();
         $data['status'] = 0;
         // dd($data);
