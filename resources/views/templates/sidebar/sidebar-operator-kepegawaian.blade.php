@@ -19,6 +19,14 @@
                 <li class="{{set_active(['data-pegawai.index'])}}"><a class="nav-link" href="{{route('data-pegawai.index')}}">Data Pegawai</a></li>
                 <li class="{{set_active(['data-pegawai.add'])}}"><a class="nav-link" href="{{route('data-pegawai.add')}}">Tambah Pegawai</a></li>
             </ul>
+
+            <li class="menu-header">Master Data</li>
+            <li class="dropdown {{set_active(['data-UnitKerja.create','data-UnitKerja.index'])}}">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Unit Kerja</span></a>
+            <ul class="dropdown-menu">
+                <li class="{{set_active(['data-UnitKerja.index'])}}"><a class="nav-link" href="{{route('data-UnitKerja.index')}}">Data Unit Kerja</a></li>
+                <li class="{{set_active(['data-UnitKerja.create'])}}"><a class="nav-link" href="{{route('data-UnitKerja.create')}}">Tambah Unit Kerja</a></li>
+            </ul>
         </ul>
     </aside>
     </div>

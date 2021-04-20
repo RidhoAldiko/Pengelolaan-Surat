@@ -121,5 +121,38 @@ gtag('config', 'UA-94034622-3');
     } );
     </script>
 
+@stack('add-script')
+{{-- script server side Unit Kerja --}}
+<script>
+    $(function() {
+        $('#dataUnitKerja').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{route('unitkerja.serverside')}}",
+            columns: [
+                {
+                    data: 'DT_RowIndex', 
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'nama',
+                    name: 'nama',
+                },
+                {
+                    data: 'status',
+                    name: 'status',
+                },
+                {
+                    data: 'aksi',
+                    name: 'aksi',
+                    orderable: false,
+                    searchable: false
+                },
+                ],
+            });
+
+    } );
+    </script>
+
 </body>
 </html>

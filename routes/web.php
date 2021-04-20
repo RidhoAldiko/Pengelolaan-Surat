@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\OperatorSurat\OperatorSuratController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
+use App\Http\Controllers\OperatorKepegawaian\UnitKerjaController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,6 +59,21 @@ Route::prefix('operator-kepegawaian')
         Route::get('tambah-pegawai', [OperatorKepegawaianController::class,'add_pegawai'])->name('data-pegawai.add');
         //operator-kepegawaian: store data pegawai
         Route::post('tambah-pegawai', [OperatorKepegawaianController::class,'store_pegawai'])->name('data-pegawai.store');
+//    ----------------------------------------------------Master Data-----------------------------------------------
+        //operator-kepegawaian:get table data unit kerja
+        Route::get('data-unit-kerja',[UnitKerjaController::class,'index'])->name('data-UnitKerja.index');
+        //operator-kepegawaian: get server side data pegawai
+        Route::get('serverside-unit-kerja',[UnitKerjaController::class,'unitkerja_serverSide'])->name('unitkerja.serverside');
+        //operator-kepegawaian:form data unit kerja
+        Route::get('tambah-unit-kerja',[UnitKerjaController::class,'create'])->name('data-UnitKerja.create');
+        //operator-kepegawaian:store data unit kerja
+        Route::post('tambah-unit-kerja',[UnitKerjaController::class,'store'])->name('data-UnitKerja.store');
+        //operator-kepegawaian:form edit data unit kerja
+        Route::get('edit-unit-kerja/{id_unit}',[UnitKerjaController::class,'edit'])->name('data-UnitKerja.edit');
+        //operator-kepegawaian:update data unit kerja
+        Route::put('edit-unit-kerja/{id_unit}',[UnitKerjaController::class,'update'])->name('data-UnitKerja.update');
+        // //operator-kepegawaian:delete data unit kerja
+        // Route::delete('data-unit-kerja/{id_unit}',[UnitKerjaController::class,'delete'])->name('data-UnitKerja.delete');
     });
 
 
