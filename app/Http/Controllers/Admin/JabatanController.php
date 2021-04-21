@@ -1,25 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\OperatorKepegawaian;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Requests\OperatorKepegawaian\JabatanRequest;
 use App\Models\Jabatan;
-use Illuminate\Http\Request;
 
 class JabatanController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $data   = Jabatan::all();
-        return view('operator-kepegawaian.masterdata.jenis-jabatan.jabatan',[
+        return view('admin.masterdata.jenis-jabatan.jabatan',[
             'items' => $data
         ]);
     }
 
     public function create()
     {
-        return view('operator-kepegawaian.masterdata.jenis-jabatan.jabatan-add');
+        return view('admin.masterdata.jenis-jabatan.jabatan-add');
     }
 
     public function store(JabatanRequest $request)
@@ -34,7 +39,7 @@ class JabatanController extends Controller
     public function edit($id)
     {
         $data          = Jabatan::findOrFail($id);
-        return view('operator-kepegawaian.masterdata.jenis-jabatan.jabatan-edit',[
+        return view('admin.masterdata.jenis-jabatan.jabatan-edit',[
             'item' => $data
         ]);
     }
@@ -47,10 +52,9 @@ class JabatanController extends Controller
         return redirect()->route('data-jabatan.index')->with('status','Data Berhasil Diedit');
     }
 
-    public function destroy($id)
+    public function destroy(Jabatan $data_jabatan)
     {
-        $data = jabatan::findOrFail($id);
-        $data->delete();
+        Jabatan::destroy($data_jabatan->id_jabatan);
         return redirect()->route('data-jabatan.index')->with('status','Data Berhasil Dihapus');
     }
 }

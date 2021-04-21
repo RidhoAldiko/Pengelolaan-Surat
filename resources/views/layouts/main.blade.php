@@ -70,10 +70,25 @@ gtag('config', 'UA-94034622-3');
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-
-
 <script>
     $(document).ready(function(){
+        //delete data golongan
+        $('.getIdGolongan').on('click',function(){
+            var _id = $(this).data("id");
+            $('.modal-footer form[action]').attr('action', 'data-golongan'+'/'+_id);
+        })
+        //delete data jabatan
+        $('.getIdJabatan').on('click',function(){
+            var _id = $(this).data("id");
+            $('.modal-footer form[action]').attr('action', 'data-jabatan'+'/'+_id);
+        })
+        //delete data unit kerja
+        $('.getIdUnitKerja').on('click',function(){
+            var _id = $(this).data("id");
+            $('.modal-footer form[action]').attr('action', 'data-unit_kerja'+'/'+_id);
+        })
+
+        //search nip pegawai
         $('.search-input').on('keyup',function(){
             
             var _data = $(this).val();
@@ -104,42 +119,6 @@ gtag('config', 'UA-94034622-3');
 </script>
 
 
-{{-- <script>
-    $(document).ready(function(){
-        $('.search-input').on('keyup',function(){
-            
-            var _data = $(this).val();
-            if (_data.length > 3) {
-                
-                $.ajax({
-                        url: '{{route('data-pegawai.search')}}',
-                        data:{
-                            data:_data
-                        },
-                        dataType : 'json',
-                        beforeSend:function(){
-                            $('.search-result').html('<a class="list-group-item list-group-item-action mt-2">Mohon tunggu..</a>').fadeIn();
-                        },
-                        success:function(res){
-                            if (res !== null) {
-                                $('.search-result').html('<a href="#" class="list-group-item list-group-item-action mt-2">'+res.nip_pegawai+'</a>').fadeIn();
-                            }else{
-                                $('.search-result').html('<a  class="list-group-item list-group-item-action mt-2">Pegawai tidak ditemukan</a>').fadeIn();
-                            }
-                            
-                        },
-                    });
-                $(document).on('click','a',function(){
-                    $('#nip_pegawai').val($(this).text());
-                    $('.search-result').fadeOut();
-                });
-                    
-            } else {
-                $('.search-result').fadeOut();
-            }
-        });
-    });
-</script> --}}
 {{-- script server side data pegawai --}}
 <script>
     $(function() {
