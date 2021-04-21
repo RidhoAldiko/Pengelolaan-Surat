@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 //Mendefinisikan controller yang digunakan
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\OperatorKepegawaian\GolonganController;
 use App\Http\Controllers\OperatorSurat\OperatorSuratController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
 use App\Http\Controllers\OperatorKepegawaian\UnitKerjaController;
@@ -59,7 +60,10 @@ Route::prefix('operator-kepegawaian')
         Route::get('tambah-pegawai', [OperatorKepegawaianController::class,'add_pegawai'])->name('data-pegawai.add');
         //operator-kepegawaian: store data pegawai
         Route::post('tambah-pegawai', [OperatorKepegawaianController::class,'store_pegawai'])->name('data-pegawai.store');
+        //operator-kepegawaian: form edit pegawai
+        Route::get('edit-data-pegawai/{nip}',[OperatorKepegawaianController::class,'edit'])->name('data-pegawai.edit');
 //    ----------------------------------------------------Master Data-----------------------------------------------
+        //UNIT KERJA
         //operator-kepegawaian:get table data unit kerja
         Route::get('data-unit-kerja',[UnitKerjaController::class,'index'])->name('data-UnitKerja.index');
         //operator-kepegawaian:form data unit kerja
@@ -70,8 +74,22 @@ Route::prefix('operator-kepegawaian')
         Route::get('edit-unit-kerja/{id_unit}',[UnitKerjaController::class,'edit'])->name('data-UnitKerja.edit');
         //operator-kepegawaian:update data unit kerja
         Route::put('edit-unit-kerja/{id_unit}',[UnitKerjaController::class,'update'])->name('data-UnitKerja.update');
-        // //operator-kepegawaian:delete data unit kerja
+        //operator-kepegawaian:delete data unit kerja
         Route::delete('data-unit-kerja/{id_unit}',[UnitKerjaController::class,'destroy'])->name('data-UnitKerja.delete');
+
+        //GOLONGAN
+        //operator-kepegawaian:get table data golongan
+        Route::get('data-golongan',[GolonganController::class,'index'])->name('data-golongan.index');
+        //operator-kepegawaian:form data golongan
+        Route::get('tambah-golongan',[GolonganController::class,'create'])->name('data-golongan.create');
+        //operator-kepegawaian:store data golongan
+        Route::post('tambah-golongan',[GolonganController::class,'store'])->name('data-golongan.store');
+        //oprator-kepegawaian: form edit golongan
+        Route::get('edit-golongan/{id_golongan}',[GolonganController::class,'edit'])->name('data-golongan.edit');
+        //oprator-kepegawaian: update data golongan
+        Route::put('edit-golongan/{id_golongan}',[GolonganController::class,'update'])->name('data-golongan.update');
+        //operator-kepegawaian:delete data golongan
+        Route::delete('data-golongan/{id_golongan}',[GolonganController::class,'destroy'])->name('data-golongan.delete');
     });
 
 
