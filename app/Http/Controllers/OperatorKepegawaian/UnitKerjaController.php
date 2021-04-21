@@ -13,32 +13,35 @@ class UnitKerjaController extends Controller
     //method untuk menampilkan tabel data unit kerja
     public function index()
     {
-        return view('operator-kepegawaian.masterdata.unit-kerja.unit-kerja');
+        $data   = Unit_kerja::all();
+        return view('operator-kepegawaian.masterdata.unit-kerja.unit-kerja',[
+            'items' => $data
+        ]);
     }
 
-    //method get server side unit kerja
-    public function unitkerja_serverSide()
-    {
-        $data = Unit_kerja::get();
+    // //method get server side unit kerja
+    // public function unitkerja_serverSide()
+    // {
+    //     $data = Unit_kerja::get();
 
-        return DataTables::of($data)
-                ->addIndexColumn()
-                ->editColumn('nama',function($data){
-                    return $data->nama_unit;
-                })
-                ->editColumn('status',function($data){
-                    return ($data->status == 0) ? 'aktif' : 'Nonaktif';
-                })
-                ->editColumn('aksi',function($data){
+    //     return DataTables::of($data)
+    //             ->addIndexColumn()
+    //             ->editColumn('nama',function($data){
+    //                 return $data->nama_unit;
+    //             })
+    //             ->editColumn('status',function($data){
+    //                 return ($data->status == 0) ? 'aktif' : 'Nonaktif';
+    //             })
+    //             ->editColumn('aksi',function($data){
 
-                    $button = ' <a href="'.route('data-UnitKerja.edit', $data->id_unit).'" class="btn btn-warning text-white btn-sm" title="Edit">
-                                    <i class="fas fa-pencil-alt"></i>
-                                </a>';
-                    return $button;
-                })
-                ->rawColumns(['aksi'])
-                ->make(true);
-    }
+    //                 $button = ' <a href="'.route('data-UnitKerja.edit', $data->id_unit).'" class="btn btn-warning text-white btn-sm" title="Edit">
+    //                                 <i class="fas fa-pencil-alt"></i>
+    //                             </a>';
+    //                 return $button;
+    //             })
+    //             ->rawColumns(['aksi'])
+    //             ->make(true);
+    // }
 
     //metod untuk menampilkan form tambah unit kerja
     public function create()
@@ -75,5 +78,12 @@ class UnitKerjaController extends Controller
         $item->update($data);
 
         return redirect()->route('data-UnitKerja.index')->with('status','Data Berhasil Edit');
+    }
+
+    public function destroy($id)
+    {
+        $data   = Unit_kerja::findOrFail($id);
+        $data->delete();
+        return redirect()->route('data-UnitKerja.index')->with('status','Data Berhasil Dihapus');
     }
 }

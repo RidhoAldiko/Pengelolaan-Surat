@@ -23,6 +23,7 @@
                                 </span>
                                 @enderror
                             </div>
+                            <a href="{{ route('data-UnitKerja.index') }}" class="btn btn-warning">Kembali</a>
                             <button type="submit" class="btn btn-primary">Tambah</button>
                         </form> 
                     </div>

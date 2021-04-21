@@ -62,8 +62,6 @@ Route::prefix('operator-kepegawaian')
 //    ----------------------------------------------------Master Data-----------------------------------------------
         //operator-kepegawaian:get table data unit kerja
         Route::get('data-unit-kerja',[UnitKerjaController::class,'index'])->name('data-UnitKerja.index');
-        //operator-kepegawaian: get server side data pegawai
-        Route::get('serverside-unit-kerja',[UnitKerjaController::class,'unitkerja_serverSide'])->name('unitkerja.serverside');
         //operator-kepegawaian:form data unit kerja
         Route::get('tambah-unit-kerja',[UnitKerjaController::class,'create'])->name('data-UnitKerja.create');
         //operator-kepegawaian:store data unit kerja
@@ -73,7 +71,7 @@ Route::prefix('operator-kepegawaian')
         //operator-kepegawaian:update data unit kerja
         Route::put('edit-unit-kerja/{id_unit}',[UnitKerjaController::class,'update'])->name('data-UnitKerja.update');
         // //operator-kepegawaian:delete data unit kerja
-        // Route::delete('data-unit-kerja/{id_unit}',[UnitKerjaController::class,'delete'])->name('data-UnitKerja.delete');
+        Route::delete('data-unit-kerja/{id_unit}',[UnitKerjaController::class,'destroy'])->name('data-UnitKerja.delete');
     });
 
 

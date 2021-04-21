@@ -21,11 +21,12 @@
             </ul>
 
             <li class="menu-header">Master Data</li>
-            <li class="dropdown {{set_active(['data-UnitKerja.create','data-UnitKerja.index'])}}">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Unit Kerja</span></a>
+            <li class="dropdown {{set_active(['data-UnitKerja.index'])}}">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Master Data</span></a>
             <ul class="dropdown-menu">
-                <li class="{{set_active(['data-UnitKerja.index'])}}"><a class="nav-link" href="{{route('data-UnitKerja.index')}}">Data Unit Kerja</a></li>
-                <li class="{{set_active(['data-UnitKerja.create'])}}"><a class="nav-link" href="{{route('data-UnitKerja.create')}}">Tambah Unit Kerja</a></li>
+                <li class=""><a class="nav-link" href="">Golongan</a></li>
+                <li class=""><a class="nav-link" href="">Jabatan</a></li>
+                <li class="{{set_active(['data-UnitKerja.index'])}}"><a class="nav-link" href="{{route('data-UnitKerja.index')}}">Unit Kerja</a></li>       
             </ul>
         </ul>
     </aside>
