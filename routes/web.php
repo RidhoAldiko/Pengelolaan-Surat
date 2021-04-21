@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 //Mendefinisikan controller yang digunakan
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\OperatorKepegawaian\GolonganController;
+use App\Http\Controllers\OperatorKepegawaian\JabatanController;
 use App\Http\Controllers\OperatorSurat\OperatorSuratController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
 use App\Http\Controllers\OperatorKepegawaian\UnitKerjaController;
@@ -90,6 +91,22 @@ Route::prefix('operator-kepegawaian')
         Route::put('edit-golongan/{id_golongan}',[GolonganController::class,'update'])->name('data-golongan.update');
         //operator-kepegawaian:delete data golongan
         Route::delete('data-golongan/{id_golongan}',[GolonganController::class,'destroy'])->name('data-golongan.delete');
+
+        //JABATAN
+        //operator-kepegawaian:get table data golongan
+        Route::get('data-jabatan',[JabatanController::class,'index'])->name('data-jabatan.index');
+        //operator-kepegawaian:form data jabatan
+        Route::get('tambah-jabatan',[JabatanController::class,'create'])->name('data-jabatan.create');
+        //operator-kepegawaian:store data jabatan
+        Route::post('tambah-jabatan',[JabatanController::class,'store'])->name('data-jabatan.store');
+        //oprator-kepegawaian: form edit jabatan
+        Route::get('edit-jabatan/{id_jabatan}',[JabatanController::class,'edit'])->name('data-jabatan.edit');
+        //oprator-kepegawaian: update data jabatan
+        Route::put('edit-jabatan/{id_jabatan}',[JabatanController::class,'update'])->name('data-jabatan.update');
+        //operator-kepegawaian:delete data jabatan
+        Route::delete('data-jabatan/{id_jabatan}',[JabatanController::class,'destroy'])->name('data-jabatan.delete');
+
+        
     });
 
 
