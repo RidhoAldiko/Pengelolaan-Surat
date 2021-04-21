@@ -3,19 +3,27 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Tambah Pengguna</h1>
+        <h1>Pengguna</h1>
     </div>
 
     <div class="section-body ">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card ">
+                <div class="card shadow ">
+                    <div class="card-header">
+                        <h4>Tambah Data Pengguna</h4>
+                    </div>
                     <div class="card-body">
                         <form>
+                            @csrf
                             <div class="form-group">
-                                <input type="number" class="form-control search-input" placeholder="Masukan NIP Pegawai" >
-                                <div class="search-result"></div>
+                                <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input" placeholder="Masukan NIP Pegawai" >
+                                <div class="row">
+                                    <div class="col-md-8 search-result">
+                                    </div>
+                                </div>
                             </div>
+                            
                             <div class="form-group">
                                 <input type="email" class="form-control"  id="email" name="email" placeholder="Masukan Email Pengguna">
                             </div>

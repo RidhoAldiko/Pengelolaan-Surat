@@ -1,25 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\OperatorKepegawaian;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Requests\OperatorKepegawaian\GolonganRequest;
 use App\Models\Golongan;
-use Illuminate\Http\Request;
 
 class GolonganController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $data   = Golongan::all();
-        return view('operator-kepegawaian.masterdata.jenis-golongan.golongan',[
+        return view('admin.masterdata.jenis-golongan.golongan',[
             'items' => $data
         ]);
     }
 
     public function create()
     {
-        return view('operator-kepegawaian.masterdata.jenis-golongan.golongan-add');
+        return view('admin.masterdata.jenis-golongan.golongan-add');
     }
 
     public function store(GolonganRequest $request)
@@ -34,7 +39,7 @@ class GolonganController extends Controller
     public function edit($id)
     {
         $data          = Golongan::findOrFail($id);
-        return view('operator-kepegawaian.masterdata.jenis-golongan.golongan-edit',[
+        return view('admin.masterdata.jenis-golongan.golongan-edit',[
             'item' => $data
         ]);
     }
@@ -47,11 +52,9 @@ class GolonganController extends Controller
         return redirect()->route('data-golongan.index')->with('status','Data Berhasil Diedit');
     }
 
-    public function destroy($id)
+    public function destroy(Golongan $data_golongan)
     {
-        $data = Golongan::findOrFail($id);
-        $data->delete();
+        Golongan::destroy($data_golongan->id_golongan);
         return redirect()->route('data-golongan.index')->with('status','Data Berhasil Dihapus');
     }
-
 }

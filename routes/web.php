@@ -3,11 +3,11 @@
 use Illuminate\Support\Facades\Route;
 //Mendefinisikan controller yang digunakan
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\OperatorKepegawaian\GolonganController;
-use App\Http\Controllers\OperatorKepegawaian\JabatanController;
+use App\Http\Controllers\Admin\GolonganController;
+use App\Http\Controllers\Admin\JabatanController;
+use App\Http\Controllers\Admin\UnitKerjaController;
 use App\Http\Controllers\OperatorSurat\OperatorSuratController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
-use App\Http\Controllers\OperatorKepegawaian\UnitKerjaController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -30,12 +30,24 @@ Auth::routes();
 Route::prefix('admin')
     ->middleware('auth','role:0')
     ->group(function(){
-        //admin dashboard
-        Route::get('/', [AdminController::class,'index'])->name('admin.index');
-        //admin: data pengguna
-        Route::get('data-pengguna', [AdminController::class,'data_pengguna'])->name('data-pengguna.index');
-        //admin: form tambah pengguna
-        Route::get('tambah-pengguna', [AdminController::class,'add_pengguna'])->name('data-pengguna.add');
+         //----Penggguna----
+            //admin dashboard
+            Route::get('/', [AdminController::class,'index'])->name('admin.index');
+            //admin: data pengguna
+            Route::get('data-pengguna', [AdminController::class,'data_pengguna'])->name('data-pengguna.index');
+            //admin: search pegawai
+            Route::get('search-pegawai', [AdminController::class,'search_pegawai'])->name('data-pegawai.search');
+            //admin: form tambah pengguna
+            Route::get('tambah-pengguna', [AdminController::class,'add_pengguna'])->name('data-pengguna.add');
+
+        //----Data master----
+        //UNIT KERJA
+            Route::resource('data-unit_kerja', UnitKerjaController::class);
+            //GOLONGAN
+            Route::resource('data-golongan', GolonganController::class);
+            
+            //JABATAN
+            Route::resource('data-jabatan', JabatanController::class);
         
     });
 
@@ -64,6 +76,7 @@ Route::prefix('operator-kepegawaian')
         //operator-kepegawaian: form edit pegawai
         Route::get('edit-data-pegawai/{nip}',[OperatorKepegawaianController::class,'edit'])->name('data-pegawai.edit');
         //operator-kepegawaian: udate data pegawai
+<<<<<<< HEAD
         Route::put('edit-data-pegawai/{nip}',[OperatorKepegawaianController::class,'update'])->name('data-pegawai.update');       
         
         //----------------------------------------------------Master Data-----------------------------------------------
@@ -80,36 +93,10 @@ Route::prefix('operator-kepegawaian')
         Route::put('edit-unit-kerja/{id_unit}',[UnitKerjaController::class,'update'])->name('data-UnitKerja.update');
         //operator-kepegawaian:delete data unit kerja
         Route::delete('data-unit-kerja/{id_unit}',[UnitKerjaController::class,'destroy'])->name('data-UnitKerja.delete');
+=======
+        Route::put('edit-data-pegawai/{nip}',[OperatorKepegawaianController::class,'update'])->name('data-pegawai.update');
+>>>>>>> origin
 
-        //GOLONGAN
-        //operator-kepegawaian:get table data golongan
-        Route::get('data-golongan',[GolonganController::class,'index'])->name('data-golongan.index');
-        //operator-kepegawaian:form data golongan
-        Route::get('tambah-golongan',[GolonganController::class,'create'])->name('data-golongan.create');
-        //operator-kepegawaian:store data golongan
-        Route::post('tambah-golongan',[GolonganController::class,'store'])->name('data-golongan.store');
-        //oprator-kepegawaian: form edit golongan
-        Route::get('edit-golongan/{id_golongan}',[GolonganController::class,'edit'])->name('data-golongan.edit');
-        //oprator-kepegawaian: update data golongan
-        Route::put('edit-golongan/{id_golongan}',[GolonganController::class,'update'])->name('data-golongan.update');
-        //operator-kepegawaian:delete data golongan
-        Route::delete('data-golongan/{id_golongan}',[GolonganController::class,'destroy'])->name('data-golongan.delete');
-
-        //JABATAN
-        //operator-kepegawaian:get table data golongan
-        Route::get('data-jabatan',[JabatanController::class,'index'])->name('data-jabatan.index');
-        //operator-kepegawaian:form data jabatan
-        Route::get('tambah-jabatan',[JabatanController::class,'create'])->name('data-jabatan.create');
-        //operator-kepegawaian:store data jabatan
-        Route::post('tambah-jabatan',[JabatanController::class,'store'])->name('data-jabatan.store');
-        //oprator-kepegawaian: form edit jabatan
-        Route::get('edit-jabatan/{id_jabatan}',[JabatanController::class,'edit'])->name('data-jabatan.edit');
-        //oprator-kepegawaian: update data jabatan
-        Route::put('edit-jabatan/{id_jabatan}',[JabatanController::class,'update'])->name('data-jabatan.update');
-        //operator-kepegawaian:delete data jabatan
-        Route::delete('data-jabatan/{id_jabatan}',[JabatanController::class,'destroy'])->name('data-jabatan.delete');
-
-        
     });
 
 
