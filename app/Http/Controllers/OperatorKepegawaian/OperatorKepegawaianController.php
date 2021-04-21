@@ -56,7 +56,7 @@ class OperatorKepegawaianController extends Controller
                     return ($data->status == 0) ? 'Aktif' : 'Nonaktif';
                 })
                 ->addColumn('aksi', function($data) {
-                    $button = ' <a href="#" class="btn btn-warning text-white btn-sm" title="Edit">
+                    $button = ' <a href="'.route('data-pegawai.edit', $data->nip_pegawai).'" class="btn btn-warning text-white btn-sm" title="Edit">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a> ';
                     return $button;
@@ -82,6 +82,29 @@ class OperatorKepegawaianController extends Controller
         //store data pegawai
         $store = Pegawai::create($data);
         return redirect()->route('data-pegawai.index')->with('status',"Data Berhasil Ditambah");
+    }
+    //method edit data
+    public function edit($id)
+    {
+        //get data unit kerja
+        $unit = Unit::where('status','=',0)->get();
+        //get data golongan
+        $golongan = Golongan::where('status','=',0)->get();
+        //get data jabatan
+        $jabatan = Jabatan::where('status','=',0)->get();
+
+        $pegawai   = Pegawai::findOrFail($id);
+        return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('unit','jabatan','golongan','pegawai'));
+    }
+
+    public function update(PegawaiRequest $request, $id)
+    {
+        $data = $request->all();
+       
+        $item = Pegawai::findOrFail($id);
+        $item->update($data);
+
+        return redirect()->route('data-pegawai.index')->with('status',"Data Berhasil Edit");
     }
 
 }
