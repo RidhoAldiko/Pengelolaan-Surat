@@ -29,6 +29,8 @@ Route::prefix('admin')
         Route::get('/', [AdminController::class,'index'])->name('admin.index');
         //admin: data pengguna
         Route::get('data-pengguna', [AdminController::class,'data_pengguna'])->name('data-pengguna.index');
+        //admin: search pegawai
+        Route::get('search-pegawai', [AdminController::class,'search_pegawai'])->name('data-pegawai.search');
         //admin: form tambah pengguna
         Route::get('tambah-pengguna', [AdminController::class,'add_pengguna'])->name('data-pengguna.add');
         
