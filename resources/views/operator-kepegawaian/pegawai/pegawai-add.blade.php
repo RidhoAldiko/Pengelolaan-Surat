@@ -3,14 +3,17 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Pegawai</h1>
+        <ol class="breadcrumb justify-content-end h4">
+            <li class="breadcrumb-item"><a href="{{route('data-pegawai.index')}}">Pegawai</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tambah data pegawai</li>
+        </ol>
     </div>
     <div class="section-body ">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow ">
                     <div class="card-header">
-                        <h4>Tambah Data Pegawai</h4>
+                        <h4>Form Data Pegawai</h4>
                     </div>
                     <div class="card-body">
                         <form action="{{route('data-pegawai.store')}}" method="POST">
@@ -25,6 +28,15 @@
                             </div>
 
                             <div class="form-group">
+                                <input type="number" id="nomor_karpeg" name="nomor_karpeg"  class="form-control @error('nomor_karpeg') is-invalid @enderror" placeholder="Masukan Nomor kartu Pegawai" value="{{old('nomor_karpeg')}}" >
+                                @error('nomor_karpeg')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
                                 <input type="text" id="nama_pegawai" name="nama_pegawai"  class="form-control @error('nama_pegawai') is-invalid @enderror" placeholder="Masukan Nama Pegawai" value="{{old('nama_pegawai')}}" >
                                 @error('nama_pegawai')
                                 <span class="invalid-feedback" role="alert">
@@ -32,6 +44,25 @@
                                 </span>
                                 @enderror
                             </div>
+
+                            <div class="form-group">
+                                <input type="text" id="tempat_lahir" name="tempat_lahir"  class="form-control @error('tempat_lahir') is-invalid @enderror" placeholder="Masukan tempat lahir" value="{{old('tempat_lahir')}}" >
+                                @error('tempat_lahir')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" id="tanggal_lahir" name="tanggal_lahir" onfocus="(this.type='date')"  class="form-control @error('tanggal_lahir') is-invalid @enderror" placeholder="Masukan Tanggal Lahir" value="{{old('tanggal_lahir')}}" >
+                                @error('tanggal_lahir')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
                             <div class="form-group">
                                 <select class="form-control @error('jenis_kelamin') is-invalid @enderror" id="jenis_kelamin" name="jenis_kelamin">
                                     <option selected disabled> --Pilih Jenis Kelamin-- </option>
@@ -44,14 +75,41 @@
                                 </span>
                                 @enderror
                             </div>
+
                             <div class="form-group">
-                                <textarea class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" placeholder="Masukan Alamat" rows="3">{{ old('Alamat') }}</textarea>
-                                @error('alamat')
+                                <select class="form-control @error('agama') is-invalid @enderror" id="agama" name="agama">
+                                    <option selected disabled> --Pilih Agama-- </option>
+                                    <option value="Islam"> Islam </option>
+                                    <option value="Katolik"> Katolik </option>
+                                    <option value="Protestan">Protestan</option>
+                                    <option value="Hindu">Hindu</option>
+                                    <option value="Buddha">Buddha</option>
+                                    <option value="Konghucu">Konghucu</option>
+                                </select>
+                                @error('agama')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
+
+                            <div class="form-group">
+                                <select class="form-control @error('status_perkawinan') is-invalid @enderror" id="status_perkawinan" name="status_perkawinan">
+                                    <option selected disabled> --Pilih Status Perkawinan-- </option>
+                                    <option value="Belum kawin">Belum Kawin</option>
+                                    <option value="Kawin"> Kawin </option>
+                                    <option value="Cerai Hidup">Cerai Hidup</option>
+                                    <option value="Cerai Mati">Cerai Mati</option>
+                                </select>
+                                @error('status_perkawinan')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            
+
                             <div class="form-group">
                                 <select class="form-control @error('id_unit') is-invalid @enderror" id="id_unit" name="id_unit">
                                     <option selected disabled> --Pilih Unit Kerja-- </option>
@@ -91,7 +149,7 @@
                                 </span>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-primary">Tambah</button>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan dan Lanjutkan</button>
                         </form> 
                     </div>
                 </div>

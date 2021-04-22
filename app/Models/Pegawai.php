@@ -15,7 +15,19 @@ class Pegawai extends Model
     protected $table='pegawai';
     // data yang bisa diinput oleh mahasiswa
     protected $fillable=[
-        'nip_pegawai','nama_pegawai','jenis_kelamin','alamat','id_unit','id_golongan','id_jabatan','foto','status'
+        'nip_pegawai',
+        'nama_pegawai',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'jenis_kelamin',
+        'agama',
+        'status_perkawinan',
+        'nomor_karpeg',
+        'id_unit',
+        'id_golongan',
+        'id_jabatan',
+        'foto',
+        'status'
     ];
     //pk dari tabel pegawai
     protected $primaryKey = 'nip_pegawai';

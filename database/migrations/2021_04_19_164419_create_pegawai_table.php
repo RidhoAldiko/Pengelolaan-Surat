@@ -15,9 +15,13 @@ class CreatePegawaiTable extends Migration
     {
         Schema::create('pegawai', function (Blueprint $table) {
             $table->char('nip_pegawai',18)->primary();
+            $table->char('nomor_karpeg',25);
             $table->string('nama_pegawai',60);
+            $table->string('tempat_lahir',10);
+            $table->date('tanggal_lahir');
             $table->string('jenis_kelamin',10);
-            $table->text('alamat');
+            $table->string('agama',30);
+            $table->string('status_perkawinan',30);
             $table->smallInteger('id_unit')->unsigned();
             $table->smallInteger('id_golongan')->unsigned();
             $table->smallInteger('id_jabatan')->unsigned();

@@ -28,8 +28,8 @@
                                 <input type="email" class="form-control"  id="email" name="email" placeholder="Masukan Email Pengguna">
                             </div>
                             <div class="form-group">
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option> --Pilih Hak Akses-- </option>
+                            <select class="form-control" id="role" nam="role">
+                                <option> --Pilih Role Akses-- </option>
                                 <option>1</option>
                             </select>
                             </div>

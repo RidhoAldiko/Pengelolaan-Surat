@@ -3,8 +3,11 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Pegawai</h1>
+        <ol class="breadcrumb justify-content-end h4">
+            <li class="breadcrumb-item active text-bold" aria-current="page">Pegawai</li>
+        </ol>
     </div>
+    
     @if (session('status'))
     <div class="alert shadow alert-success alert-dismissible fade show" role="alert">
         {{ session('status') }}
