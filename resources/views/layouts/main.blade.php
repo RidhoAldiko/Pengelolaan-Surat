@@ -118,7 +118,6 @@ gtag('config', 'UA-94034622-3');
     });
 </script>
 
-
 {{-- script server side data pegawai --}}
 <script>
     $(function() {
@@ -159,6 +158,8 @@ gtag('config', 'UA-94034622-3');
             });
     } );
     </script>
+
+@stack('script-tambahanakhir')
 
 </body>
 </html>

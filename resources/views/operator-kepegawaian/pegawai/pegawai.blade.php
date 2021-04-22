@@ -39,4 +39,39 @@
         </div>
     </div>
 </section>
+ <!-- delete Modal-->
+ <div class="modal fade" id="deletePegawai" tabindex="-1" role="dialog" aria-labelledby="deletePegawaiLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header justify-content-center">
+            <h4 class="modal-title h4" id="deletePegawaiLabel">Ingin menghapus data ?</h4>
+            {{-- <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            </button> --}}
+        </div>
+        <div class="modal-body">
+            <h5 class="h5 text-center alert-text">Tekan "hapus" untuk menghapus.</h5> 
+            <div class="modal-footer d-flex justify-content-center">        
+                <form action="" method="post"  class="d-inline">
+                    @csrf
+                    @method('delete')
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button class="btn btn-danger" type="submit">Hapus</button>
+                </form> </td>
+                
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
 @endsection
+
+@push('script-tambahanakhir')
+<script>
+    //detele untuk data pegawai bagian operator kepegawaian
+    $(document).on('click', '.getIdPegawai', function() {
+        var _id = $(this).data("id");
+        $('.modal-footer form[action]').attr('action', 'data-pegawai'+'/'+_id);
+    })
+</script>
+@endpush

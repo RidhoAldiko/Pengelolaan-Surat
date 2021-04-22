@@ -24,7 +24,10 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [AdminController::class,'index'])->middleware('auth','role:0');
 
 //route authentication
-Auth::routes();
+Auth::routes([
+    //register dimatikan
+    'register' => false
+]);
 
 //route role 0 = admin
 Route::prefix('admin')
@@ -73,30 +76,12 @@ Route::prefix('operator-kepegawaian')
         Route::get('tambah-pegawai', [OperatorKepegawaianController::class,'add_pegawai'])->name('data-pegawai.add');
         //operator-kepegawaian: store data pegawai
         Route::post('tambah-pegawai', [OperatorKepegawaianController::class,'store_pegawai'])->name('data-pegawai.store');
+         //operator-kepegawaian: Hapus data pegawai
+         Route::delete('data-pegawai/{data_pegawai}',[OperatorKepegawaianController::class,'destroy'])->name('data-pegawai.destroy');
         //operator-kepegawaian: form edit pegawai
         Route::get('edit-data-pegawai/{nip}',[OperatorKepegawaianController::class,'edit'])->name('data-pegawai.edit');
         //operator-kepegawaian: udate data pegawai
-<<<<<<< HEAD
-        Route::put('edit-data-pegawai/{nip}',[OperatorKepegawaianController::class,'update'])->name('data-pegawai.update');       
-        
-        //----------------------------------------------------Master Data-----------------------------------------------
-        //UNIT KERJA
-        //operator-kepegawaian:get table data unit kerja
-        Route::get('data-unit-kerja',[UnitKerjaController::class,'index'])->name('data-UnitKerja.index');
-        //operator-kepegawaian:form data unit kerja
-        Route::get('tambah-unit-kerja',[UnitKerjaController::class,'create'])->name('data-UnitKerja.create');
-        //operator-kepegawaian:store data unit kerja
-        Route::post('tambah-unit-kerja',[UnitKerjaController::class,'store'])->name('data-UnitKerja.store');
-        //operator-kepegawaian:form edit data unit kerja
-        Route::get('edit-unit-kerja/{id_unit}',[UnitKerjaController::class,'edit'])->name('data-UnitKerja.edit');
-        //operator-kepegawaian:update data unit kerja
-        Route::put('edit-unit-kerja/{id_unit}',[UnitKerjaController::class,'update'])->name('data-UnitKerja.update');
-        //operator-kepegawaian:delete data unit kerja
-        Route::delete('data-unit-kerja/{id_unit}',[UnitKerjaController::class,'destroy'])->name('data-UnitKerja.delete');
-=======
         Route::put('edit-data-pegawai/{nip}',[OperatorKepegawaianController::class,'update'])->name('data-pegawai.update');
->>>>>>> origin
-
     });
 
 

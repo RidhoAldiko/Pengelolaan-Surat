@@ -56,9 +56,13 @@ class OperatorKepegawaianController extends Controller
                     return ($data->status == 0) ? 'Aktif' : 'Nonaktif';
                 })
                 ->addColumn('aksi', function($data) {
-                    $button = ' <a href="'.route('data-pegawai.edit', $data->nip_pegawai).'" class="btn btn-warning text-white btn-sm" title="Edit">
+                    $button = ' <a href="'.route('data-pegawai.edit',$data->nip_pegawai).'" class="btn btn-warning text-white btn-sm" title="Edit">
                                     <i class="fas fa-pencil-alt"></i>
-                                </a> ';
+                                </a>
+                                <a href="#" class="btn btn-danger btn-sm getIdPegawai" data-toggle="modal" data-target="#deletePegawai" data-id="'.$data->nip_pegawai.'" >
+                                    <i class="fas fa-trash fa-sm"></i>
+                                </a>
+                                ';
                     return $button;
                 })
                 ->rawColumns(['aksi'])
@@ -105,6 +109,12 @@ class OperatorKepegawaianController extends Controller
         $item->update($data);
 
         return redirect()->route('data-pegawai.index')->with('status',"Data Berhasil Edit");
+    }
+
+    public function destroy(Pegawai $data_pegawai)
+    {
+        Pegawai::destroy($data_pegawai->nip_pegawai);
+        return redirect()->route('data-pegawai.index')->with('status','Data Berhasil Dihapus');
     }
 
 }
