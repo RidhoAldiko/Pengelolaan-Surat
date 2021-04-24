@@ -82,6 +82,8 @@ Route::prefix('operator-kepegawaian')
         Route::get('edit-data-pegawai/{nip}',[OperatorKepegawaianController::class,'edit'])->name('data-pegawai.edit');
         //operator-kepegawaian: udate data pegawai
         Route::put('edit-data-pegawai/{nip}',[OperatorKepegawaianController::class,'update'])->name('data-pegawai.update');
+        //operator-kepegawaian: detail pegawai
+        Route::get('detail-data-pegawai/{data_pegawai}',[OperatorKepegawaianController::class,'show'])->name('data-pegawai.show');
     });
 
 

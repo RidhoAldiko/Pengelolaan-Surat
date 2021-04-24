@@ -56,7 +56,11 @@ class OperatorKepegawaianController extends Controller
                     return ($data->status == 0) ? 'Aktif' : 'Nonaktif';
                 })
                 ->addColumn('aksi', function($data) {
-                    $button = ' <a href="'.route('data-pegawai.edit',$data->nip_pegawai).'" class="btn btn-warning text-white btn-sm" title="Edit">
+                    $button = ' 
+                                <a href="'.route('data-pegawai.show',$data->nip_pegawai).'" class="btn btn-primary text-white btn-sm" title="Edit">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="'.route('data-pegawai.edit',$data->nip_pegawai).'" class="btn btn-warning text-white btn-sm" title="Edit">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
                                 <a href="#" class="btn btn-danger btn-sm getIdPegawai" data-toggle="modal" data-target="#deletePegawai" data-id="'.$data->nip_pegawai.'" >
@@ -87,6 +91,14 @@ class OperatorKepegawaianController extends Controller
         $store = Pegawai::create($data);
         return redirect()->route('data-pegawai.index')->with('status',"Data Berhasil Ditambah");
     }
+
+    //method untuk detail pegawai
+    public function show($id)
+    {
+        $pegawai   = Pegawai::findOrFail($id);
+        return view('operator-kepegawaian.pegawai.pegawai-detail', compact('pegawai'));
+    }
+
     //method edit data
     public function edit($id)
     {
