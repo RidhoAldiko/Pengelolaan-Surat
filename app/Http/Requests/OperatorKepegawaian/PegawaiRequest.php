@@ -24,7 +24,7 @@ class PegawaiRequest extends FormRequest
     public function rules()
     {
         return [
-            'nip_pegawai' => ['required','string', 'max:18', 'unique:pegawai'],
+            'nip_pegawai' => ['required','string', 'max:18'],
             'nama_pegawai' => ['required', 'string', 'max:60'],
             'nomor_karpeg' => ['required', 'string'],
             'tempat_lahir' => ['required', 'string'],

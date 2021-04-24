@@ -3,7 +3,10 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-    <h1>Detail Pegawai - <code>{{ $pegawai->nama_pegawai }}</code></h1>
+      <ol class="breadcrumb justify-content-end h4">
+          <li class="breadcrumb-item"><a href="{{route('data-pegawai.index')}}">Pegawai</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Detail pegawai - <code>{{ $pegawai->nama_pegawai }}</code></li>
+      </ol>
     </div>
 
     <div class="section-body">
