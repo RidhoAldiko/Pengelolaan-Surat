@@ -10,6 +10,7 @@ use Yajra\DataTables\DataTables;
 use App\Models\Pegawai;
 use App\Models\Unit_kerja as Unit;
 use App\Models\Golongan;
+use App\Models\Hobi;
 use App\Models\Jabatan;
 
 class OperatorKepegawaianController extends Controller
@@ -84,11 +85,23 @@ class OperatorKepegawaianController extends Controller
     }
     //method store data pegawai
     public function store_pegawai(PegawaiRequest $request){
+        
         $data = $request->all();
+        
         $data['status'] = 0;
         // dd($data);
         //store data pegawai
         $store = Pegawai::create($data);
+        //hitung berapa banyak hobi yang dipunya
+        if (count($data['hobi'])) {
+            foreach ($data['hobi'] as $item => $value) {
+                $data2 = [
+                    'hobi'          => $data['hobi'][$item],
+                    'nip_pegawai'   => $data['nip_pegawai']
+                ];
+                Hobi::create($data2);
+            }
+        }
         return redirect()->route('data-pegawai.index')->with('status',"Data Berhasil Ditambah");
     }
 

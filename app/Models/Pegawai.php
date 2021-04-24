@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Unit_kerja;
 use App\Models\Golongan;
 use App\Models\Jabatan;
+use App\Models\Hobi;
 
 class Pegawai extends Model
 {
@@ -55,6 +56,11 @@ class Pegawai extends Model
     public function jabatan()
     {
         return $this->belongsTo(Jabatan::class,'id_jabatan','id_jabatan');
+    }
+    //table pegawai memiliki banyak hobi yang dikirim ketabel hobi dengan relasi one to many
+    public function hobi()
+    {
+        return $this->hasMany(Hobi::class,'nip_pegawai','id_hobi');
     }
 
 }

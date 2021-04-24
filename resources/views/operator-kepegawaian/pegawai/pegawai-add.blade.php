@@ -108,8 +108,6 @@
                                 @enderror
                             </div>
 
-                            
-
                             <div class="form-group">
                                 <select class="form-control @error('id_unit') is-invalid @enderror" id="id_unit" name="id_unit">
                                     <option selected disabled> --Pilih Unit Kerja-- </option>
@@ -149,6 +147,18 @@
                                 </span>
                                 @enderror
                             </div>
+                            <div class="form-group">
+                                <input type="text" id="hobi" name="hobi[]"  class="form-control @error('hobi') is-invalid @enderror" placeholder="Masukan hobi" value="{{old('hobi')}}" >
+                                @error('hobi')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group text-right">
+                                <a href="#" class="tambahhobi btn bt-sm btn-primary text-right">Tambah Hobi</a>
+                            </div>
+                            <div class="hobii"></div>
                             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan dan Lanjutkan</button>
                         </form> 
                     </div>
@@ -158,3 +168,21 @@
     </div>
 </section>
 @endsection
+
+@push('script-tambahanakhir')
+    <script type="text/javascript">
+        $('.tambahhobi').on('click',function(e){
+            console.log('ok');
+            e.preventDefault();
+            tambahHobi();
+        });
+        function tambahHobi(){
+            var hobii = '<div class="datahobi"><div class="form-group"><input type="text" id="hobi" name="hobi[]"  class="form-control @error('hobi') is-invalid @enderror" placeholder="Masukan hobi" value="{{old('hobi')}}" >@error('hobi')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div><div class="form-group text-right"><a href="#" class="remove btn bt-sm btn-warning text-right">Hapus Hobi</a></div></div>';
+            $('.hobii').append(hobii);
+        };
+        $(document).on('click', '.remove', function(e) {
+            e.preventDefault();
+            $(this).parent().parent().remove();
+        })
+    </script>
+@endpush
