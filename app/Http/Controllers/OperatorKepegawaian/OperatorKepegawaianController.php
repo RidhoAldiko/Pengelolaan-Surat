@@ -99,8 +99,8 @@ class OperatorKepegawaianController extends Controller
     //method untuk detail pegawai
     public function show($id)
     {
-        $datapegawai        = Pegawai::with(['jabatan','golongan','unit_kerja','hobi'])->where('nip_pegawai',$id)->findOrFail($id);
-        
+        $datapegawai        = Pegawai::with(['jabatan','golongan','unit_kerja','hobi','alamat'])->where('nip_pegawai',$id)->findOrFail($id);
+        dd($datapegawai);
         return view('operator-kepegawaian.pegawai.pegawai-detail',[
             'pegawai'       => $datapegawai,
         ]);
@@ -116,7 +116,8 @@ class OperatorKepegawaianController extends Controller
         //get data jabatan
         $jabatan = Jabatan::where('status','=',0)->get();
 
-        $pegawai   = Pegawai::findOrFail($id);
+        $pegawai = Pegawai::with(['jabatan','golongan','unit_kerja','hobi','alamat'])->where('nip_pegawai',$id)->findOrFail($id);
+       
         return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('unit','jabatan','golongan','pegawai'));
     }
 

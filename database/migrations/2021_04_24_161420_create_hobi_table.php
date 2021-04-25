@@ -15,7 +15,7 @@ class CreateHobiTable extends Migration
     {
         Schema::create('hobi', function (Blueprint $table) {
             $table->smallIncrements('id_hobi');
-            $table->string('hobi',25)->unique();;
+            $table->string('hobi',25)->unique();
             $table->char('nip_pegawai',18);
             // foreign key dari tabel pegawai
             $table->foreign('nip_pegawai')->references('nip_pegawai')->on('pegawai')->onUpdate('cascade');

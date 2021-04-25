@@ -30,6 +30,6 @@ class HobiController extends Controller
                 Hobi::create($data2);
             }
         }
-        return redirect()->route('data-pegawai.edit',$data['nip_pegawai'])->with('status',"Data hobi berhasil dihapus");
+        return redirect()->route('data-pegawai.edit',$data['nip_pegawai'])->with('status',"Data hobi berhasil ditambah");
     }
 }

@@ -8,7 +8,15 @@
             <li class="breadcrumb-item active" aria-current="page">Edit data pegawai</li>
         </ol>
     </div>
-    <a href="{{ route('data-pegawai.index') }}" class="btn btn-sm btn-warning mb-3 ml-3">Kembali</a>
+    @if (session('status'))
+    <div class="alert shadow alert-success alert-dismissible fade show" role="alert">
+        {{ session('status') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+    <a href="{{ route('data-pegawai.index') }}" class="btn btn-sm btn-warning mt-1 mb-3 ml-3">Kembali</a>
     <div class="section-body ">
         <div class="col-12">
             <div class="card shadow">
@@ -36,7 +44,7 @@
                             <div class="col-md-8">
                                 <div class="card shadow ">
                                     <div class="card-header">
-                                        <h4>Edit Data Pegawai</h4>
+                                        <h4>Edit Data Pegawai - <code>{{ $pegawai->nama_pegawai }}</code></h4>
                                     </div>
                                     <div class="card-body">
                                         <form action="{{ route('data-pegawai.update',$pegawai->nip_pegawai) }}" method="POST">
@@ -149,10 +157,8 @@
                                                 <label for="id_unit" class="form-control-label col-sm-3 text-md-right">Unit Kerja</label>
                                                 <div class="col-sm-6 col-md-9">
                                                     <select class="form-control @error('id_unit') is-invalid @enderror" id="id_unit" name="id_unit">
+                                                        <option value="{{$pegawai->id_unit}}">{{$pegawai->unit_kerja->nama_unit}}</option>
                                                         @foreach ($unit as $un)
-                                                        @if ($pegawai->id_unit == $un->id_unit)
-                                                        <option value="{{$pegawai->id_unit}}">{{$un->nama_unit}}</option>
-                                                        @endif 
                                                         <option value="{{$un->id_unit}}">{{$un->nama_unit}}</option>
                                                         @endforeach
                                                     </select>
@@ -167,10 +173,8 @@
                                                 <label for="id_golongan" class="form-control-label col-sm-3 text-md-right">Golongan</label>
                                                 <div class="col-sm-6 col-md-9">
                                                     <select class="form-control @error('id_golongan') is-invalid @enderror" id="id_golongan" name="id_golongan">
+                                                        <option value="{{$pegawai->id_golongan}}">{{$pegawai->golongan->nama_golongan}}</option>
                                                         @foreach ($golongan as $gl)
-                                                        @if ($pegawai->id_golongan == $gl->id_golongan)
-                                                        <option value="{{$pegawai->id_golongan}}">{{$gl->nama_golongan}}</option>
-                                                        @endif
                                                         <option value="{{$gl->id_golongan}}">{{$gl->nama_golongan}}</option>
                                                         @endforeach
                                                     </select>
@@ -185,10 +189,8 @@
                                                 <label for="id_jabatan" class="form-control-label col-sm-3 text-md-right">Jabatan</label>
                                                 <div class="col-sm-6 col-md-9">
                                                     <select class="form-control @error('id_jabatan') is-invalid @enderror" id="id_jabatan" name="id_jabatan">
+                                                        <option value="{{$pegawai->id_jabatan}}">{{$pegawai->jabatan->nama_jabatan}}</option>
                                                         @foreach ($jabatan as $jb)
-                                                        @if ($pegawai->id_jabatan == $jb->id_jabatan)
-                                                        <option value="{{$pegawai->id_jabatan}}">{{$jb->nama_jabatan}}</option>
-                                                        @endif
                                                         <option value="{{$jb->id_jabatan}}">{{$jb->nama_jabatan}}</option>
                                                         @endforeach
                                                     </select>
@@ -212,16 +214,16 @@
                             <div class="col-md-8">
                                 <div class="card shadow">
                                     <div class="card-header">
-                                        <h4>Hobi</h4>
+                                        <h4>Hobi - <code>{{ $pegawai->nama_pegawai }}</code></h4>
                                     </div>
                                     <div class="card-body">
                                         @if ($pegawai->hobi->count() > 0)
                                             <div class="table-responsive">
-                                                <table class="table table-bordered table-hover table-striped">
+                                                <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                                                     <thead>
                                                         <tr class="text-center">
-                                                            <td>Hobi</td>
-                                                            <td>Aksi</td>
+                                                            <th scope="col">Hobi</th>
+                                                            <th scope="col">Aksi</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -232,7 +234,7 @@
                                                                     <form action="{{ route('data-hobi.destroy',$item->id_hobi) }}" method="post">
                                                                         @csrf
                                                                         @method('delete')
-                                                                        <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus hobi ini?')" type="submit"> <i class="fas fa-trash fa-sm"></i>Hapus</button>
+                                                                        <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus hobi ini?')" type="submit"> <i class="fas fa-trash fa-sm"></i> Hapus</button>
                                                                     </form> 
                                                                 </td>
                                                             </tr>
@@ -240,7 +242,8 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                         @else
+                                            @else
+                                            <p class="text-muted">Anda belum inputkan Hobi, Inputkan Hobi dengan BENAR.!</p>
                                             <form action="{{route('data-hobi.store')}}" method="POST">
                                                 @csrf
                                                 <div class="form-group row left-items-center">
@@ -262,13 +265,123 @@
                                                 <button type="submit" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
                                             </form> 
                                         @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </div>
                     <div class="tab-pane fade" id="alamat" role="tabpanel" aria-labelledby="alamat-tab">
-                    Vestibulum imperdiet odio sed neque ultricies, ut dapibus mi maximus. Proin ligula massa, gravida in lacinia efficitur, hendrerit eget mauris. Pellentesque fermentum, sem interdum molestie finibus, nulla diam varius leo, nec varius lectus elit id dolor. Nam malesuada orci non ornare vulputate. Ut ut sollicitudin magna. Vestibulum eget ligula ut ipsum venenatis ultrices. Proin bibendum bibendum augue ut luctus.
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="card shadow">
+                                    <div class="card-header">
+                                        <h4>Alamat - <code>{{ $pegawai->nama_pegawai }} </code></h4>
+                                    </div>
+                                    <div class="card-body">
+                                        @if ($pegawai->alamat->count() > 0)
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                    <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Jalan</th>
+                                                            <th scope="col">Kelurahan / Desa</th>
+                                                            <th scope="col">Kecamatan</th>
+                                                            <th scope="col">Kabupaten Kota</th>
+                                                            <th scope="col">Provinsi</th>
+                                                            <th scope="col">Aksi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($pegawai->alamat as $item)
+                                                                <tr class="text-center">
+                                                                    <td>{{ $item->jalan }}</td>
+                                                                    <td>{{ $item->kelurahan_desa }}</td>
+                                                                    <td>{{ $item->kecamatan }}</td>
+                                                                    <td>{{ $item->kabupaten_kota }}</td>
+                                                                    <td>{{ $item->provinsi }}</td>
+                                                                    <td>
+                                                                        <form action="{{ route('data-alamat.destroy',$item->id_alamat) }}" method="post">
+                                                                            @csrf
+                                                                            @method('delete')
+                                                                            <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus hobi ini?')" type="submit"> <i class="fas fa-trash fa-sm"></i> Hapus</button>
+                                                                        </form> 
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                        @else
+                                        <p class="text-muted">Anda belum inputkan alamat, Inputkan Alamat dengan BENAR.!</p>
+                                            <form action="{{route('data-alamat.store')}}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="nip_pegawai" value="{{ $pegawai->nip_pegawai }}">
+                                                <div class="form-group row left-items-center">
+                                                    <label for="jalan" class="form-control-label col-sm-3 text-md-right">Jalan</label>
+                                                    <div class="col-sm-6 col-md-9">
+                                                        <input type="text" id="jalan" name="jalan[]"  class="form-control @error('jalan') is-invalid @enderror" >
+                                                        @error('jalan')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row left-items-center">
+                                                    <label for="kelurahan_desa" class="form-control-label col-sm-3 text-md-right">Kelurahan / Desa</label>
+                                                    <div class="col-sm-6 col-md-9">
+                                                        <input type="text" id="kelurahan_desa" name="kelurahan_desa[]"  class="form-control @error('kelurahan_desa') is-invalid @enderror" >
+                                                        @error('kelurahan_desa')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row left-items-center">
+                                                    <label for="kecamatan" class="form-control-label col-sm-3 text-md-right">Kecamatan</label>
+                                                    <div class="col-sm-6 col-md-9">
+                                                        <input type="text" id="kecamatan" name="kecamatan[]"  class="form-control @error('kecamatan') is-invalid @enderror" >
+                                                        @error('kecamatan')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row left-items-center">
+                                                    <label for="kabupaten_kota" class="form-control-label col-sm-3 text-md-right">Kabupaten / Kota</label>
+                                                    <div class="col-sm-6 col-md-9">
+                                                        <input type="text" id="kabupaten_kota" name="kabupaten_kota[]"  class="form-control @error('kabupaten_kota') is-invalid @enderror" >
+                                                        @error('kabupaten_kota')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row left-items-center">
+                                                    <label for="provinsi" class="form-control-label col-sm-3 text-md-right">Provinsi</label>
+                                                    <div class="col-sm-6 col-md-9">
+                                                        <input type="text" id="provinsi" name="provinsi[]"  class="form-control @error('provinsi') is-invalid @enderror" >
+                                                        @error('provinsi')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="form-group text-right">
+                                                    <a href="#" class="tambahalamat btn bt-sm btn-primary text-right"><i class="fa fa-plus"></i></a>
+                                                </div>
+                                                <div class="alamatt"></div>
+                                                <button type="submit" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                                            </form> 
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="keterangan" role="tabpanel" aria-labelledby="keterangan-tab">
                         Vestibulum imperdiet odio sed neque ultricies, ut dapibus mi maximus. Proin ligula massa, gravida in lacinia efficitur, hendrerit eget mauris. Pellentesque fermentum, sem interdum molestie finibus, nulla diam varius leo, nec varius lectus elit id dolor. Nam malesuada orci non ornare vulputate. Ut ut sollicitudin magna. Vestibulum eget ligula ut ipsum venenatis ultrices. Proin bibendum bibendum augue ut luctus.
@@ -286,9 +399,9 @@
 
 @push('script-tambahanakhir')
     <script type="text/javascript">
+    //javascript untuk tambah hobi
         $('.tambahhobi').on('click',function(e){
             console.log('ok');
-            
             tambahHobi();
             e.preventDefault();
         });
@@ -297,6 +410,22 @@
             $('.hobii').append(hobii);
         };
         $(document).on('click', '.remove', function(e) {
+            e.preventDefault();
+            $(this).parent().parent().remove();
+        })
+
+    //javascript untuk tambah alamat
+    $('.tambahalamat').on('click',function(e){
+            console.log('ok');
+            
+            tambahAlamat();
+            e.preventDefault();
+        });
+        function tambahAlamat(){
+            var alamatt = '<div class="dataalamat"><div class="form-group row left-items-center"><label for="jalan" class="form-control-label col-sm-3 text-md-right">Jalan</label><div class="col-sm-6 col-md-9"><input type="text" id="jalan" name="jalan[]"  class="form-control @error('jalan') is-invalid @enderror" > @error('jalan')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group row left-items-center"><label for="kelurahan_desa" class="form-control-label col-sm-3 text-md-right">Kelurahan / Desa</label><div class="col-sm-6 col-md-9"><input type="text" id="kelurahan_desa" name="kelurahan_desa[]"  class="form-control @error('kelurahan_desa') is-invalid @enderror" >@error('kelurahan_desa')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group row left-items-center"><label for="kecamatan" class="form-control-label col-sm-3 text-md-right">Kecamatan</label><div class="col-sm-6 col-md-9"><input type="text" id="kecamatan" name="kecamatan[]"  class="form-control @error('kecamatan') is-invalid @enderror" >@error('kecamatan')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group row left-items-center"><label for="kabupaten_kota" class="form-control-label col-sm-3 text-md-right">Kabupaten / Kota</label><div class="col-sm-6 col-md-9"><input type="text" id="kabupaten_kota" name="kabupaten_kota[]"  class="form-control @error('kabupaten_kota') is-invalid @enderror" >@error('kabupaten_kota')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group row left-items-center"><label for="provinsi" class="form-control-label col-sm-3 text-md-right">Provinsi</label><div class="col-sm-6 col-md-9"><input type="text" id="provinsi" name="provinsi[]"  class="form-control @error('provinsi') is-invalid @enderror" >@error('provinsi')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group text-right"><a href="#" class="hapusalamat btn bt-sm btn-warning text-right"><i class="fa fa-minus"></i></a></div></div>';
+            $('.alamatt').append(alamatt);
+        };
+        $(document).on('click', '.hapusalamat', function(e) {
             e.preventDefault();
             $(this).parent().parent().remove();
         })

@@ -9,6 +9,7 @@ use App\Models\Unit_kerja;
 use App\Models\Golongan;
 use App\Models\Jabatan;
 use App\Models\Hobi;
+use App\Models\Alamat;
 
 class Pegawai extends Model
 {
@@ -61,6 +62,11 @@ class Pegawai extends Model
     public function hobi()
     {
         return $this->hasMany(Hobi::class,'nip_pegawai','nip_pegawai');
+    }
+    //table pegawai memiliki banyak alamat yang dikirim ketabel alamat dengan relasi one to many
+    public function alamat()
+    {
+        return $this->hasMany(Alamat::class,'nip_pegawai','nip_pegawai');
     }
 
 }

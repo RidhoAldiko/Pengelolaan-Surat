@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\GolonganController;
 use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\UnitKerjaController;
+use App\Http\Controllers\OperatorKepegawaian\AlamatController;
 use App\Http\Controllers\OperatorKepegawaian\HobiController;
 use App\Http\Controllers\OperatorSurat\OperatorSuratController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
@@ -90,7 +91,12 @@ Route::prefix('operator-kepegawaian')
         //operrator-kepegawaian:tambah hobi
         Route::post('edit-data-pegawai/',[HobiController::class,'store'])->name('data-hobi.store');
         //operator-kepegawain:hapus data hobi
-        Route::delete('edit-data-pegawai/{id}',[HobiController::class,'destroy'])->name('data-hobi.destroy');
+        Route::delete('edit-data-pegawai/hapushobi/{id_hobi}',[HobiController::class,'destroy'])->name('data-hobi.destroy');
+        // ---------------------------------alamat-------------------------------------------------
+        // //operrator-kepegawaian:tambah alamat
+        Route::post('edit-data-pegawai/',[AlamatController::class,'store'])->name('data-alamat.store');
+        // //operator-kepegawain:hapus data hobi
+        Route::delete('edit-data-pegawai/hapusalamat/{id_alamat}',[AlamatController::class,'destroy'])->name('data-alamat.destroy');
     });
 
 
