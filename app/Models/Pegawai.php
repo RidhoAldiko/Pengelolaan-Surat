@@ -10,6 +10,7 @@ use App\Models\Golongan;
 use App\Models\Jabatan;
 use App\Models\Hobi;
 use App\Models\Alamat;
+use App\Models\KeteranganBadan;
 
 class Pegawai extends Model
 {
@@ -67,6 +68,12 @@ class Pegawai extends Model
     public function alamat()
     {
         return $this->hasMany(Alamat::class,'nip_pegawai','nip_pegawai');
+    }
+
+    //table pegawai memiliki 1 relasi yang dikirim ke tabel user dengan relasi one to one
+    public function keterangan_badan()
+    {
+        return $this->hasOne(KeteranganBadan::class,'nip_pegawai','nip_pegawai');
     }
 
 }

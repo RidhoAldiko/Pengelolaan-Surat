@@ -107,95 +107,100 @@
                                         </p>
                                         @empty
                                         <p class="border-bottom text-gray-800">
-                                            - Hobi Belum Diisi!-
+                                            - Hobi Belum Diisi, lengkapi di menu edit -
                                         </p>
                                         @endforelse
-                                        
                                     </div>
                             </div>
                         </div>            
                     </div>
                     <div class="tab-pane fade" id="alamat" role="tabpanel" aria-labelledby="alamat-tab">
                         <div class="row justify-content-center">
-                            <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label>Jalan</label>
-                                        <p class="border-bottom text-gray-800">
-                                            19850200312100211
-                                        </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Kelurahan/Desa</label>
-                                        <p class="border-bottom text-gray-800">
-                                            19850200312100211
-                                        </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Kecamatan</label>
-                                        <p class="border-bottom text-gray-800">
-                                            19850200312100211
-                                        </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Kabupaten/Kota</label>
-                                        <p class="border-bottom text-gray-800">
-                                            19850200312100211
-                                        </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Provinsi</label>
-                                        <p class="border-bottom text-gray-800">
-                                            19850200312100211
-                                        </p>
-                                    </div>
-                            </div>
+                            @if ($pegawai->alamat->count() > 0)
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th scope="col">Jalan</th>
+                                                    <th scope="col">Kelurahan / Desa</th>
+                                                    <th scope="col">Kecamatan</th>
+                                                    <th scope="col">Kabupaten Kota</th>
+                                                    <th scope="col">Provinsi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($pegawai->alamat as $item)
+                                                        <tr class="text-center">
+                                                            <td>{{ $item->jalan }}</td>
+                                                            <td>{{ $item->kelurahan_desa }}</td>
+                                                            <td>{{ $item->kecamatan }}</td>
+                                                            <td>{{ $item->kabupaten_kota }}</td>
+                                                            <td>{{ $item->provinsi }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                </div>
+                            @else
+                            <p class="border-bottom text-gray-800">
+                                - Alamat belum diisi, lengkapi di menu edit -
+                            </p>
+                            @endif
                         </div>
                     </div>
                     <div class="tab-pane fade" id="keterangan" role="tabpanel" aria-labelledby="keterangan-tab">
                         <div class="row justify-content-center">
                             <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label>Tinggi Badan</label>
-                                        <p class="border-bottom text-gray-800">
-                                            19850200312100211
+                                @if ($pegawai->keterangan_badan != null)
+                                <div class="form-group">
+                                    <label>Tinggi Badan</label>
+                                    <p class="border-bottom text-gray-800">
+                                        {{ $pegawai->keterangan_badan->tinggi }}
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Berat Badan</label>
+                                    <p class="border-bottom text-gray-800">
+                                        {{ $pegawai->keterangan_badan->berat_badan }}
+                                        </p>                                  
+                                    </div>
+                                <div class="form-group">
+                                    <label>Rambut</label>
+                                    <p class="border-bottom text-gray-800">
+                                        {{ $pegawai->keterangan_badan->rambut }}
+                                        </p>                                  
+                                    </div>
+                                <div class="form-group">
+                                    <label>Bentuk Muka</label>
+                                    <p class="border-bottom text-gray-800">
+                                        {{ $pegawai->keterangan_badan->bentuk_muka }}
+                                        </p>                                  
+                                </div>
+                                <div class="form-group">
+                                    <label>Warna Kulit</label>
+                                    <p class="border-bottom text-gray-800">
+                                        {{ $pegawai->keterangan_badan->warna_kulit }}
+                                        </p>                                  
+                                </div>
+                                <div class="form-group">
+                                    <label>Ciri-ciri Khas</label>
+                                    <p class="border-bottom text-gray-800">
+                                        {{ $pegawai->keterangan_badan->ciri_khas }}
                                         </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Berat Badan</label>
-                                        <p class="border-bottom text-gray-800">
-                                                19850200312100211
-                                            </p>                                  
-                                        </div>
-                                    <div class="form-group">
-                                        <label>Rambut</label>
-                                        <p class="border-bottom text-gray-800">
-                                                19850200312100211
-                                            </p>                                  
-                                        </div>
-                                    <div class="form-group">
-                                        <label>Bentuk Muka</label>
-                                        <p class="border-bottom text-gray-800">
-                                                19850200312100211
-                                            </p>                                  
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Warna Kulit</label>
-                                        <p class="border-bottom text-gray-800">
-                                                19850200312100211
-                                            </p>                                  
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Ciri-ciri Khas</label>
-                                        <p class="border-bottom text-gray-800">
-                                                19850200312100211
-                                            </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Cacat Tubuh</label>
-                                        <p class="border-bottom text-gray-800">
-                                                19850200312100211
-                                            </p>
-                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Cacat Tubuh</label>
+                                    <p class="border-bottom text-gray-800">
+                                        {{ $pegawai->keterangan_badan->cacat_tubuh }}
+                                    </p>
+                                </div>
+                                @else
+                                <p class="border-bottom text-gray-800">
+                                    - Keterangan Badan belum diisi, lengkapi di menu edit -
+                                </p>
+                                @endif
                             </div>
                         </div>
                     </div>

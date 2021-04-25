@@ -384,7 +384,204 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="keterangan" role="tabpanel" aria-labelledby="keterangan-tab">
-                        Vestibulum imperdiet odio sed neque ultricies, ut dapibus mi maximus. Proin ligula massa, gravida in lacinia efficitur, hendrerit eget mauris. Pellentesque fermentum, sem interdum molestie finibus, nulla diam varius leo, nec varius lectus elit id dolor. Nam malesuada orci non ornare vulputate. Ut ut sollicitudin magna. Vestibulum eget ligula ut ipsum venenatis ultrices. Proin bibendum bibendum augue ut luctus.
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="card shadow ">
+                                    <div class="card-header">
+                                        <h4>Keterangan Badan - <code>{{ $pegawai->nama_pegawai }}</code></h4>
+                                    </div>
+                                    <div class="card-body">
+                                        @if ($pegawai->keterangan_badan != null)
+                                        <form action="{{ route('data-keterangan-badan.update',$pegawai->keterangan_badan->id_ketbadan) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="nip_pegawai" value="{{ $pegawai->keterangan_badan->nip_pegawai }}">
+                                            <div class="form-group row left-items-center">
+                                                <label for="tinggi" class="form-control-label col-sm-3 text-md-right">Tingggi Badan</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="number" id="tinggi" name="tinggi"  class="form-control @error('tinggi') is-invalid @enderror"  value="{{ $pegawai->keterangan_badan->tinggi }}" >
+                                                    @error('tinggi')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row left-items-center">
+                                                <label for="berat_badan" class="form-control-label col-sm-3 text-md-right">Berat Badan</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="number" id="berat_badan" name="berat_badan"  class="form-control @error('berat_badan') is-invalid @enderror"  value="{{ $pegawai->keterangan_badan->berat_badan }}" >
+                                                    @error('berat_badan')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row left-items-center">
+                                                <label for="rambut" class="form-control-label col-sm-3 text-md-right">Tipe Rambut</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="text" id="rambut" name="rambut"  class="form-control @error('rambut') is-invalid @enderror"  value="{{ $pegawai->keterangan_badan->rambut }}" >
+                                                    @error('rambut')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div> 
+                                            <div class="form-group row left-items-center">
+                                                <label for="bentuk_muka" class="form-control-label col-sm-3 text-md-right">Bentuk Muka</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <select class="form-control @error('bentuk_muka') is-invalid @enderror" id="bentuk_muka" name="bentuk_muka">
+                                                        <option value="{{ $pegawai->keterangan_badan->bentuk_muka }}"> {{ $pegawai->keterangan_badan->bentuk_muka }} </option>
+                                                        <option value="Bulat"> Bulat </option>
+                                                        <option value="Persegi"> Persegi </option>
+                                                        <option value="Diamond">Diamond</option>
+                                                        <option value="Oval">Oval</option>
+                                                        <option value="Hati">Hati</option>
+                                                        <option value="Persegi Panjang">Persegi Panjang</option>
+                                                        <option value="Segi Tiga">Segi Tiga</option>
+                                                    </select>
+                                                    @error('bentuk_muka')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row left-items-center">
+                                                <label for="warna_kulit" class="form-control-label col-sm-3 text-md-right">Warna Kulit</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="text" id="warna_kulit" name="warna_kulit"  class="form-control @error('warna_kulit') is-invalid @enderror"  value="{{ $pegawai->keterangan_badan->warna_kulit }}" >
+                                                    @error('warna_kulit')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row left-items-center">
+                                                <label for="ciri_khas" class="form-control-label col-sm-3 text-md-right">Ciri Khas</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="text" id="ciri_khas" name="ciri_khas"  class="form-control @error('ciri_khas') is-invalid @enderror"  value="{{ $pegawai->keterangan_badan->ciri_khas }}" >
+                                                    @error('ciri_khas')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row left-items-center">
+                                                <label for="cacat_tubuh" class="form-control-label col-sm-3 text-md-right">Cacat Tubuh</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="text" id="cacat_tubuh" name="cacat_tubuh"  class="form-control @error('cacat_tubuh') is-invalid @enderror"  value="{{ $pegawai->keterangan_badan->cacat_tubuh }}" >
+                                                    @error('cacat_tubuh')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Edit</button>
+                                        </form>
+                                        @else
+                                        <p class="text-muted">Anda belum inputkan Keterangan Badan, Inputkan Keterangan Badan dengan BENAR.!</p>
+                                        <form action="{{ route('data-keterangan-badan.store') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="nip_pegawai" value="{{ $pegawai->nip_pegawai }}">
+                                            <div class="form-group row left-items-center">
+                                                <label for="tinggi" class="form-control-label col-sm-3 text-md-right">Tingggi Badan</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="number" id="tinggi" name="tinggi"  class="form-control @error('tinggi') is-invalid @enderror"  value="{{ old('tinggi') }}" >
+                                                    @error('tinggi')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row left-items-center">
+                                                <label for="berat_badan" class="form-control-label col-sm-3 text-md-right">Berat Badan</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="number" id="berat_badan" name="berat_badan"  class="form-control @error('berat_badan') is-invalid @enderror"  value="{{ old('berat_badan') }}" >
+                                                    @error('berat_badan')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row left-items-center">
+                                                <label for="rambut" class="form-control-label col-sm-3 text-md-right">Tipe Rambut</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="text" id="rambut" name="rambut"  class="form-control @error('rambut') is-invalid @enderror"  value="{{ old('rambut') }}" >
+                                                    @error('rambut')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div> 
+                                            <div class="form-group row left-items-center">
+                                                <label for="bentuk_muka" class="form-control-label col-sm-3 text-md-right">Bentuk Muka</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <select class="form-control @error('bentuk_muka') is-invalid @enderror" id="bentuk_muka" name="bentuk_muka">
+                                                        <option selected disabled> --Pilih-- </option>
+                                                        <option value="Bulat"> Bulat </option>
+                                                        <option value="Persegi"> Persegi </option>
+                                                        <option value="Diamond">Diamond</option>
+                                                        <option value="Oval">Oval</option>
+                                                        <option value="Hati">Hati</option>
+                                                        <option value="Persegi Panjang">Persegi Panjang</option>
+                                                        <option value="Segi Tiga">Segi Tiga</option>
+                                                    </select>
+                                                    @error('bentuk_muka')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row left-items-center">
+                                                <label for="warna_kulit" class="form-control-label col-sm-3 text-md-right">Warna Kulit</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="text" id="warna_kulit" name="warna_kulit"  class="form-control @error('warna_kulit') is-invalid @enderror"  value="{{ old('warna_kulit') }}" >
+                                                    @error('warna_kulit')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row left-items-center">
+                                                <label for="ciri_khas" class="form-control-label col-sm-3 text-md-right">Ciri Khas</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="text" id="ciri_khas" name="ciri_khas"  class="form-control @error('ciri_khas') is-invalid @enderror"  value="{{ old('ciri_khas') }}" >
+                                                    @error('ciri_khas')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row left-items-center">
+                                                <label for="cacat_tubuh" class="form-control-label col-sm-3 text-md-right">Cacat Tubuh</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="text" id="cacat_tubuh" name="cacat_tubuh"  class="form-control @error('cacat_tubuh') is-invalid @enderror"  value="{{ old('cacat_tubuh') }}" >
+                                                    @error('cacat_tubuh')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                                        </form> 
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="riwayat" role="tabpanel" aria-labelledby="riwayat-tab">
                         Vestibulum imperdiet odio sed neque ultricies, ut dapibus mi maximus. Proin ligula massa, gravida in lacinia efficitur, hendrerit eget mauris. Pellentesque fermentum, sem interdum molestie finibus, nulla diam varius leo, nec varius lectus elit id dolor. Nam malesuada orci non ornare vulputate. Ut ut sollicitudin magna. Vestibulum eget ligula ut ipsum venenatis ultrices. Proin bibendum bibendum augue ut luctus.

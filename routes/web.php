@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\UnitKerjaController;
 use App\Http\Controllers\OperatorKepegawaian\AlamatController;
 use App\Http\Controllers\OperatorKepegawaian\HobiController;
+use App\Http\Controllers\OperatorKepegawaian\KeteranganBadanController;
 use App\Http\Controllers\OperatorSurat\OperatorSuratController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
 use Illuminate\Support\Facades\Auth;
@@ -89,14 +90,20 @@ Route::prefix('operator-kepegawaian')
         Route::get('detail-data-pegawai/{data_pegawai}',[OperatorKepegawaianController::class,'show'])->name('data-pegawai.show');
         // ---------------------------------hobi-------------------------------------------------
         //operrator-kepegawaian:tambah hobi
-        Route::post('edit-data-pegawai/',[HobiController::class,'store'])->name('data-hobi.store');
+        Route::post('edit-data-pegawai-hobi/',[HobiController::class,'store'])->name('data-hobi.store');
         //operator-kepegawain:hapus data hobi
-        Route::delete('edit-data-pegawai/hapushobi/{id_hobi}',[HobiController::class,'destroy'])->name('data-hobi.destroy');
+        Route::delete('edit-data-pegawai-alamat/hapushobi/{id_hobi}',[HobiController::class,'destroy'])->name('data-hobi.destroy');
         // ---------------------------------alamat-------------------------------------------------
         // //operrator-kepegawaian:tambah alamat
-        Route::post('edit-data-pegawai/',[AlamatController::class,'store'])->name('data-alamat.store');
+        Route::post('edit-data-pegawai-alamat/',[AlamatController::class,'store'])->name('data-alamat.store');
         // //operator-kepegawain:hapus data hobi
-        Route::delete('edit-data-pegawai/hapusalamat/{id_alamat}',[AlamatController::class,'destroy'])->name('data-alamat.destroy');
+        Route::delete('edit-data-pegawai-alamat/hapusalamat/{id_alamat}',[AlamatController::class,'destroy'])->name('data-alamat.destroy');
+         // ---------------------------------keterangan badan-------------------------------------------------
+        // //operrator-kepegawaian:tambah alamat
+        Route::post('edit-data-pegawai-keterangan-badan/',[KeteranganBadanController::class,'store'])->name('data-keterangan-badan.store');
+        // //operator-kepegawain:hapus data hobi
+        Route::put('edit-data-pegawai-keterangan-badan/hapusaketbadan/{id_badan}',[KeteranganBadanController::class,'update'])->name('data-keterangan-badan.update');
+        
     });
 
 
