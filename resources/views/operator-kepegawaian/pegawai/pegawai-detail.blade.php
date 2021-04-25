@@ -3,136 +3,242 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-      <ol class="breadcrumb justify-content-end h4">
-          <li class="breadcrumb-item"><a href="{{route('data-pegawai.index')}}">Pegawai</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Detail pegawai - <code>{{ $pegawai->nama_pegawai }}</code></li>
-      </ol>
+        <ol class="breadcrumb justify-content-end h4">
+            <li class="breadcrumb-item"><a href="{{route('data-pegawai.index')}}">Pegawai</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detail Pegawai</li>
+        </ol>
     </div>
-
-    <div class="section-body">
-        <div class="row">
-            <div class="col-12 col-sm-9 col-lg-9">
-                <div class="card  ">
-                  <div class="card-body shadow">
-                    <ul class="nav nav-pills" id="myTab3" role="tablist">
-                      <li class="nav-item">
-                        <a class="nav-link active" id="home-tab3" data-toggle="tab" href="#home3" role="tab" aria-controls="home" aria-selected="true">Profil</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#profile3" role="tab" aria-controls="profile" aria-selected="false">Suami/Istri</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" id="contact-tab3" data-toggle="tab" href="#contact3" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                      </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent2">
-                      <div class="tab-pane fade show active" id="home3" role="tabpanel" aria-labelledby="home-tab3">
-                        <div class="row mt-2">
-                            <div class="col-8 col-sm-4 col-lg-4">
-                                <table>
-                                    <tr>
-                                        <td>FOTO</td>
-                                    </tr>
-                                </table>
+    
+    <div class="section-body ">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                    <a class="nav-link active" id="pegawai-tab" data-toggle="tab" href="#pegawai" role="tab" aria-controls="pegawai" aria-selected="true">Pegawai</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" id="hobi-tab" data-toggle="tab" href="#hobi" role="tab" aria-controls="hobi" aria-selected="false">Hobi</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" id="alamat-tab" data-toggle="tab" href="#alamat" role="tab" aria-controls="alamat" aria-selected="false">Alamat Rumah</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="keterangan-tab" data-toggle="tab" href="#keterangan" role="tab" aria-controls="keterangan" aria-selected="false">Keterangan Badan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="riwayat-tab" data-toggle="tab" href="#riwayat" role="tab" aria-controls="riwayat" aria-selected="false">Riwayat Pendidikan</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="pegawai" role="tabpanel" aria-labelledby="pegawai-tab">
+                            <div class="text-center my-3">
+                                <img src="{{asset('img/avatar/avatar-1.png')}}" class="rounded-circle shadow" alt="Profil" width="100px">
+                                <h4 class="mt-2 text-primary font-weight-bold">Ridho Aldiko</h4>
                             </div>
-                            <div class="col-12 col-sm-6 col-lg-6">
-                                <table>
-                                    <tr>
-                                        <td width="15">Nama Pegawai</td>
-                                        <td width="1">:</td>
-                                        <td width="20">{{ $pegawai->nama_pegawai }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>NIP Pegawai</td>
-                                        <td width="1">:</td>
-                                        <td width="20">{{ $pegawai->nip_pegawai }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jenis Kelamin</td>
-                                        <td width="1">:</td>
-                                        <td width="20">{{ $pegawai->jenis_kelamin }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tempat,TGL</td>
-                                        <td width="1">:</td>
-                                        <td width="20"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Umur</td>
-                                        <td width="1">:</td>
-                                        <td width="20"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Golongan Darah</td>
-                                        <td width="1">:</td>
-                                        <td width="20"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Agama</td>
-                                        <td width="1">:</td>
-                                        <td width="20"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Status Pernikahan</td>
-                                        <td width="1">:</td>
-                                        <td width="20"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>No.Tlp</td>
-                                        <td width="1">:</td>
-                                        <td width="20"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email</td>
-                                        <td width="1">:</td>
-                                        <td width="20"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Alamat</td>
-                                        <td width="1">:</td>
-                                        <td width="20"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Status Kepegawaian</td>
-                                        <td width="1">:</td>
-                                        <td width="20"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Unit Kerja</td>
-                                        <td width="1">:</td>
-                                        <td width="20"></td>
-                                    </tr>
-                                </table>
+                            <div class="row justify-content-center">
+                                <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label>NIP</label>
+                                            <p class="border-bottom text-gray-800">
+                                                19850330-200312-1-002
+                                            </p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nomor Kartu Pegawai</label>
+                                            <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Tempat Lahir</label>
+                                            <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Tanggal Lahir</label>
+                                            <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Jenis Kelamin</label>
+                                            <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Agama</label>
+                                            <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Status Perkawinan</label>
+                                            <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Unit Kerja</label>
+                                            <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Jabatan</label>
+                                            <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Golongan</label>
+                                            <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>
+                                        </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane fade" id="hobi" role="tabpanel" aria-labelledby="hobi-tab">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Hobi</label>
+                                        <p class="border-bottom text-gray-800">
+                                            19850200312100211
+                                        </p>
+                                    </div>
+                            </div>
+                        </div>            
+                    </div>
+                    <div class="tab-pane fade" id="alamat" role="tabpanel" aria-labelledby="alamat-tab">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Jalan</label>
+                                        <p class="border-bottom text-gray-800">
+                                            19850200312100211
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Kelurahan/Desa</label>
+                                        <p class="border-bottom text-gray-800">
+                                            19850200312100211
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Kecamatan</label>
+                                        <p class="border-bottom text-gray-800">
+                                            19850200312100211
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Kabupaten/Kota</label>
+                                        <p class="border-bottom text-gray-800">
+                                            19850200312100211
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Provinsi</label>
+                                        <p class="border-bottom text-gray-800">
+                                            19850200312100211
+                                        </p>
+                                    </div>
                             </div>
                         </div>
-                      </div>
-                      <div class="tab-pane fade" id="profile3" role="tabpanel" aria-labelledby="profile-tab3">
-                        Sed sed metus vel lacus hendrerit tempus. Sed efficitur velit tortor, ac efficitur est lobortis quis. Nullam lacinia metus erat, sed fermentum justo rutrum ultrices. Proin quis iaculis tellus. Etiam ac vehicula eros, pharetra consectetur dui.
-                      </div>
-                      <div class="tab-pane fade" id="contact3" role="tabpanel" aria-labelledby="contact-tab3">
-                        Vestibulum imperdiet odio sed neque ultricies, ut dapibus mi maximus. Proin ligula massa, gravida in lacinia efficitur, hendrerit eget mauris. Pellentesque fermentum, sem interdum molestie finibus, nulla diam varius leo, nec varius lectus elit id dolor.
-                      </div>
                     </div>
-                  </div>
+                    <div class="tab-pane fade" id="keterangan" role="tabpanel" aria-labelledby="keterangan-tab">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Tinggi Badan</label>
+                                        <p class="border-bottom text-gray-800">
+                                            19850200312100211
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Berat Badan</label>
+                                        <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>                                  
+                                        </div>
+                                    <div class="form-group">
+                                        <label>Rambut</label>
+                                        <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>                                  
+                                        </div>
+                                    <div class="form-group">
+                                        <label>Bentuk Muka</label>
+                                        <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>                                  
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Warna Kulit</label>
+                                        <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>                                  
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ciri-ciri Khas</label>
+                                        <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Cacat Tubuh</label>
+                                        <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="riwayat" role="tabpanel" aria-labelledby="riwayat-tab">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Jalan</label>
+                                        <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>
+                        
+                                        </div>
+                                    <div class="form-group">
+                                        <label>Kelurahan/Desa</label>
+                                        <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>
+                                        </div>
+                                    <div class="form-group">
+                                        <label>Kecamatan</label>
+                                        <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>
+                                        </div>
+                                    <div class="form-group">
+                                        <label>Kabupaten/Kota</label>
+                                        <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>
+                                        </div>
+                                    <div class="form-group">
+                                        <label>Provinsi</label>
+                                        <p class="border-bottom text-gray-800">
+                                                19850200312100211
+                                            </p>                                  
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-
-              <div class="col-12 col-sm-2 col-md-3">
-                <div class="card shadow">
-                    <ul class="nav nav-pills flex-column" id="myTab4" role="tablist">
-                        <li class="nav-item">
-                          <a class="nav-link " id="home-tab4" data-toggle="tab" href="#home4" role="tab" aria-controls="home" aria-selected="true">Home</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#profile4" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" id="contact-tab4" data-toggle="tab" href="#contact4" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                        </li>
-                      </ul>
                 </div>
-              </div>
-        </div>
+            </div>
+            </div>
     </div>
 </section>
 @endsection

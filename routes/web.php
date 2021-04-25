@@ -48,7 +48,6 @@ Route::prefix('admin')
             Route::resource('data-unit_kerja', UnitKerjaController::class);
             //GOLONGAN
             Route::resource('data-golongan', GolonganController::class);
-            
             //JABATAN
             Route::resource('data-jabatan', JabatanController::class);
         
@@ -77,9 +76,11 @@ Route::prefix('operator-kepegawaian')
         //operator-kepegawaian: store data pegawai
         Route::post('tambah-pegawai', [OperatorKepegawaianController::class,'store_pegawai'])->name('data-pegawai.store');
          //operator-kepegawaian: Hapus data pegawai
-         Route::delete('data-pegawai/{data_pegawai}',[OperatorKepegawaianController::class,'destroy'])->name('data-pegawai.destroy');
+        Route::delete('data-pegawai/{data_pegawai}',[OperatorKepegawaianController::class,'destroy'])->name('data-pegawai.destroy');
         //operator-kepegawaian: form edit pegawai
         Route::get('edit-data-pegawai/{nip}',[OperatorKepegawaianController::class,'edit'])->name('data-pegawai.edit');
+        //operator-kepegawaian: detail data pegawai
+        Route::get('show-data-pegawai/{nip}',[OperatorKepegawaianController::class,'show'])->name('data-pegawai.show');
         //operator-kepegawaian: udate data pegawai
         Route::put('edit-data-pegawai/{nip}',[OperatorKepegawaianController::class,'update'])->name('data-pegawai.update');
         //operator-kepegawaian: detail pegawai
