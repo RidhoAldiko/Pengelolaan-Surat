@@ -56,11 +56,15 @@ class OperatorKepegawaianController extends Controller
                     return ($data->status == 0) ? 'Aktif' : 'Nonaktif';
                 })
                 ->addColumn('aksi', function($data) {
-                    $button = ' <a href="'.route('data-pegawai.edit',$data->nip_pegawai).'" class="btn btn-warning text-white btn-sm" title="Edit">
-                                    <i class="fas fa-pencil-alt"></i>
+                    $button = ' 
+                                <a href="'.route('data-pegawai.show',$data->nip_pegawai).'" class="btn btn-success text-white btn-sm" title="Edit">
+                                <i class="fas fa-info"></i> Detail
+                                </a>
+                                <a href="'.route('data-pegawai.edit',$data->nip_pegawai).'" class="btn btn-warning text-white btn-sm" title="Edit">
+                                    <i class="fas fa-pencil-alt"></i> Edit
                                 </a>
                                 <a href="#" class="btn btn-danger btn-sm getIdPegawai" data-toggle="modal" data-target="#deletePegawai" data-id="'.$data->nip_pegawai.'" >
-                                    <i class="fas fa-trash fa-sm"></i>
+                                    <i class="fas fa-trash fa-sm"></i> Hapus
                                 </a>
                                 ';
                     return $button;
@@ -77,6 +81,10 @@ class OperatorKepegawaianController extends Controller
         //get data jabatan
         $jabatan = Jabatan::where('status','=',0)->get();
         return view('operator-kepegawaian.pegawai.pegawai-add',\compact('unit','jabatan','golongan'));
+    }
+
+    public function show($id){
+        return \view('operator-kepegawaian.pegawai.pegawai-detail');
     }
     //method store data pegawai
     public function store_pegawai(PegawaiRequest $request){
@@ -104,7 +112,7 @@ class OperatorKepegawaianController extends Controller
     public function update(PegawaiRequest $request, $id)
     {
         $data = $request->all();
-       
+    
         $item = Pegawai::findOrFail($id);
         $item->update($data);
 
