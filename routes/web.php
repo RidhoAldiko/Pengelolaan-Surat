@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\GolonganController;
 use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\UnitKerjaController;
+use App\Http\Controllers\OperatorKepegawaian\HobiController;
 use App\Http\Controllers\OperatorSurat\OperatorSuratController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
 use Illuminate\Support\Facades\Auth;
@@ -85,6 +86,11 @@ Route::prefix('operator-kepegawaian')
         Route::put('edit-data-pegawai/{nip}',[OperatorKepegawaianController::class,'update'])->name('data-pegawai.update');
         //operator-kepegawaian: detail pegawai
         Route::get('detail-data-pegawai/{data_pegawai}',[OperatorKepegawaianController::class,'show'])->name('data-pegawai.show');
+        // ---------------------------------hobi-------------------------------------------------
+        //operrator-kepegawaian:tambah hobi
+        Route::post('edit-data-pegawai/',[HobiController::class,'store'])->name('data-hobi.store');
+        //operator-kepegawain:hapus data hobi
+        Route::delete('edit-data-pegawai/{id}',[HobiController::class,'destroy'])->name('data-hobi.destroy');
     });
 
 

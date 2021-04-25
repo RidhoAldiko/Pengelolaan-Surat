@@ -99,8 +99,11 @@ class OperatorKepegawaianController extends Controller
     //method untuk detail pegawai
     public function show($id)
     {
-        $pegawai   = Pegawai::findOrFail($id);
-        return view('operator-kepegawaian.pegawai.pegawai-detail', compact('pegawai'));
+        $datapegawai        = Pegawai::with(['jabatan','golongan','unit_kerja','hobi'])->where('nip_pegawai',$id)->findOrFail($id);
+        
+        return view('operator-kepegawaian.pegawai.pegawai-detail',[
+            'pegawai'       => $datapegawai,
+        ]);
     }
 
     //method edit data
@@ -120,22 +123,10 @@ class OperatorKepegawaianController extends Controller
     public function update(PegawaiRequest $request, $id)
     {
         $data = $request->all();
-
         $data['tanggal_lahir'] = date('Y-m-d', strtotime($data['tanggal_lahir']));
-        
         $item = Pegawai::findOrFail($id);
         $item->update($data);
-         //hitung berapa banyak hobi yang dipunya
-         if (count($data['hobi'])) {
-            foreach ($data['hobi'] as $item => $value) {
-                $data2 = [
-                    'hobi'          => $data['hobi'][$item],
-                    'nip_pegawai'   => $data['nip_pegawai']
-                ];
-                Hobi::create($data2);
-            }
-        }
-
+        
         return redirect()->route('data-pegawai.index')->with('status',"Data Berhasil Edit");
     }
 

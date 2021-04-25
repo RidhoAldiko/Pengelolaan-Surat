@@ -60,7 +60,7 @@ class Pegawai extends Model
     //table pegawai memiliki banyak hobi yang dikirim ketabel hobi dengan relasi one to many
     public function hobi()
     {
-        return $this->hasMany(Hobi::class,'nip_pegawai','id_hobi');
+        return $this->hasMany(Hobi::class,'nip_pegawai','nip_pegawai');
     }
 
 }

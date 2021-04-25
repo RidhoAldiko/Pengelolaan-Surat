@@ -8,10 +8,10 @@
             <li class="breadcrumb-item active" aria-current="page">Detail Pegawai</li>
         </ol>
     </div>
-    
+    <a href="{{ route('data-pegawai.index') }}" class="btn btn-sm btn-warning mb-3 ml-3">Kembali</a>
     <div class="section-body ">
         <div class="col-12">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-body">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
@@ -34,69 +34,63 @@
                     <div class="tab-pane fade show active" id="pegawai" role="tabpanel" aria-labelledby="pegawai-tab">
                             <div class="text-center my-3">
                                 <img src="{{asset('img/avatar/avatar-1.png')}}" class="rounded-circle shadow" alt="Profil" width="100px">
-                                <h4 class="mt-2 text-primary font-weight-bold">Ridho Aldiko</h4>
+                                <h4 class="mt-2 text-primary font-weight-bold">{{ $pegawai->nama_pegawai }}</h4>
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-md-8">
                                         <div class="form-group">
                                             <label>NIP</label>
                                             <p class="border-bottom text-gray-800">
-                                                19850330-200312-1-002
+                                                {{ $pegawai->nip_pegawai }}
                                             </p>
                                         </div>
                                         <div class="form-group">
                                             <label>Nomor Kartu Pegawai</label>
                                             <p class="border-bottom text-gray-800">
-                                                19850200312100211
+                                                {{ $pegawai->nomor_kerpeg }}
                                             </p>
                                             
                                         </div>
                                         <div class="form-group">
-                                            <label>Tempat Lahir</label>
+                                            <label>Tempat Lahir, Tanggal Lahir</label>
                                             <p class="border-bottom text-gray-800">
-                                                19850200312100211
-                                            </p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Tanggal Lahir</label>
-                                            <p class="border-bottom text-gray-800">
-                                                19850200312100211
+                                                {{ $pegawai->tempat_lahir }}, {{ $pegawai->tanggal_lahir }}
                                             </p>
                                         </div>
                                         <div class="form-group">
                                             <label>Jenis Kelamin</label>
                                             <p class="border-bottom text-gray-800">
-                                                19850200312100211
+                                                {{ $pegawai->jenis_kelamin }}
                                             </p>
                                         </div>
                                         <div class="form-group">
                                             <label>Agama</label>
                                             <p class="border-bottom text-gray-800">
-                                                19850200312100211
+                                                {{ $pegawai->agama }}
                                             </p>
                                         </div>
                                         <div class="form-group">
                                             <label>Status Perkawinan</label>
                                             <p class="border-bottom text-gray-800">
-                                                19850200312100211
+                                                {{ $pegawai->status_perkawinan }}
                                             </p>
                                         </div>
                                         <div class="form-group">
                                             <label>Unit Kerja</label>
                                             <p class="border-bottom text-gray-800">
-                                                19850200312100211
+                                                {{ $pegawai->unit_kerja->nama_unit }}
                                             </p>
                                         </div>
                                         <div class="form-group">
                                             <label>Jabatan</label>
                                             <p class="border-bottom text-gray-800">
-                                                19850200312100211
+                                                {{ $pegawai->jabatan->nama_jabatan }}
                                             </p>
                                         </div>
                                         <div class="form-group">
                                             <label>Golongan</label>
                                             <p class="border-bottom text-gray-800">
-                                                19850200312100211
+                                                {{ $pegawai->golongan->nama_golongan }}
                                             </p>
                                         </div>
                                 </div>
@@ -107,9 +101,16 @@
                             <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Hobi</label>
+                                        @forelse ($pegawai->hobi as $item)
                                         <p class="border-bottom text-gray-800">
-                                            19850200312100211
+                                            {{ $item->hobi }}
                                         </p>
+                                        @empty
+                                        <p class="border-bottom text-gray-800">
+                                            - Hobi Belum Diisi!-
+                                        </p>
+                                        @endforelse
+                                        
                                     </div>
                             </div>
                         </div>            
