@@ -33,7 +33,11 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="pegawai" role="tabpanel" aria-labelledby="pegawai-tab">
                             <div class="text-center my-3">
-                                <img src="{{asset('img/avatar/avatar-1.png')}}" class="rounded-circle shadow" alt="Profil" width="100px">
+                                @if ($pegawai->foto !=null)
+                                <img src="{{ asset('/storage/foto/'.$pegawai->foto)}}" class="rounded-circle shadow" alt="Profil" width="100px">
+                                @else
+                                <img src="{{asset('img/avatar/avatar-1.png')}}" class="rounded-circle shadow" alt="Profil" width="100px">    
+                                @endif
                                 <h4 class="mt-2 text-primary font-weight-bold">{{ $pegawai->nama_pegawai }}</h4>
                             </div>
                             <div class="row justify-content-center">

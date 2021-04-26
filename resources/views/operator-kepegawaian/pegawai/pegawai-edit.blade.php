@@ -35,7 +35,7 @@
                         <a class="nav-link" id="keterangan-tab" data-toggle="tab" href="#keterangan" role="tab" aria-controls="keterangan" aria-selected="false">Keterangan Badan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="riwayat-tab" data-toggle="tab" href="#riwayat" role="tab" aria-controls="riwayat" aria-selected="false">Keterangan Badan</a>
+                        <a class="nav-link" id="riwayat-tab" data-toggle="tab" href="#riwayat" role="tab" aria-controls="riwayat" aria-selected="false">Riwayat Pendidikan</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -47,9 +47,20 @@
                                         <h4>Edit Data Pegawai - <code>{{ $pegawai->nama_pegawai }}</code></h4>
                                     </div>
                                     <div class="card-body">
-                                        <form action="{{ route('data-pegawai.update',$pegawai->nip_pegawai) }}" method="POST">
+                                        <form action="{{ route('data-pegawai.update',$pegawai->nip_pegawai) }}" method="POST" enctype="multipart/form-data">
                                             @method('PUT')
                                             @csrf
+                                            <div class="form-group row left-items-center">
+                                                <label for="foto" class="form-control-label col-sm-3 text-md-right">Foto</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="file" id="foto" name="foto"  class="form-control @error('foto') is-invalid @enderror"  value="{{ $pegawai->foto }}" >
+                                                    @error('foto')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
                                             <div class="form-group row left-items-center">
                                                 <label for="nip_pegawai" class="form-control-label col-sm-3 text-md-right">Nip pegawai</label>
                                                 <div class="col-sm-6 col-md-9">
