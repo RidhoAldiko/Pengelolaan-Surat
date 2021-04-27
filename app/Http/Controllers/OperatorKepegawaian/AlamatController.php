@@ -29,6 +29,21 @@ class AlamatController extends Controller
         return redirect()->route('data-pegawai.edit',$data['nip_pegawai'])->with('status',"Data Alamat berhasil ditambah");
     }
 
+    public function edit($id)
+    {
+        $pegawai = Alamat::findOrFail($id);
+        return view('operator-kepegawaian.alamat.alamat-edit',compact('pegawai'));
+    }
+
+    public function update(AlamatRequest $request, $id) 
+    {
+        $data   = $request->all();
+        $item   = Alamat::findOrFail($id);
+        $item->update($data);
+
+        return redirect()->route('data-pegawai.edit',$data['nip_pegawai'])->with('status',"Data Alamat berhasil diedit");
+    }
+
     public function destroy($id_rumah)
     {
         $data = Alamat::findOrFail($id_rumah);

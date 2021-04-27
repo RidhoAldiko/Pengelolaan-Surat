@@ -97,8 +97,9 @@ Route::prefix('operator-kepegawaian')
         // ---------------------------------alamat-------------------------------------------------
         // //operrator-kepegawaian:tambah alamat
         Route::post('edit-data-pegawai-alamat/',[AlamatController::class,'store'])->name('data-alamat.store');
-        // //operator-kepegawain:hapus data hobi
         Route::delete('edit-data-pegawai-alamat/hapusalamat/{id_alamat}',[AlamatController::class,'destroy'])->name('data-alamat.destroy');
+        Route::get('edit-data-pegawai-alamat/{id_alamat}',[AlamatController::class,'edit'])->name('data-alamat.edit');
+        Route::put('edit-data-pegawai-alamat/{id_alamat}',[AlamatController::class,'update'])->name('data-alamat.update');
          // ---------------------------------keterangan badan-------------------------------------------------
         // //operrator-kepegawaian:tambah alamat
         Route::post('edit-data-pegawai-keterangan-badan/',[KeteranganBadanController::class,'store'])->name('data-keterangan-badan.store');

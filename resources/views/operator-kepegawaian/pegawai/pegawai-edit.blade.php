@@ -311,10 +311,11 @@
                                                                     <td>{{ $item->kabupaten_kota }}</td>
                                                                     <td>{{ $item->provinsi }}</td>
                                                                     <td>
-                                                                        <form action="{{ route('data-alamat.destroy',$item->id_alamat) }}" method="post">
+                                                                        <a href="{{ route('data-alamat.edit',$item->id_alamat) }}" class="btn btn-sm btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                                                                        <form action="{{ route('data-alamat.destroy',$item->id_alamat) }}" method="post" class="d-inline">
                                                                             @csrf
                                                                             @method('delete')
-                                                                            <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus hobi ini?')" type="submit"> <i class="fas fa-trash fa-sm"></i> Hapus</button>
+                                                                            <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus hobi ini?')" type="submit"> <i class="fas fa-trash fa-sm"></i></button>
                                                                         </form> 
                                                                     </td>
                                                                 </tr>
@@ -686,8 +687,6 @@
 
     //javascript untuk tambah alamat
     $('.tambahalamat').on('click',function(e){
-            console.log('ok');
-            
             tambahAlamat();
             e.preventDefault();
         });
