@@ -121,7 +121,7 @@
                     <div class="tab-pane fade" id="alamat" role="tabpanel" aria-labelledby="alamat-tab">
                         <div class="row justify-content-center">
                             @if ($pegawai->alamat->count() > 0)
-                                <div class="col-md-12">
+                                <div class="col-md-8">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                                             <thead>

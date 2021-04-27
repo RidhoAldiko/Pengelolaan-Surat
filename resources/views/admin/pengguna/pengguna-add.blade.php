@@ -14,10 +14,11 @@
                         <h4>Tambah Data Pengguna</h4>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form action="{{route('data-pengguna.store')}}" method="post">
                             @csrf
                             <div class="form-group">
-                                <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input" placeholder="Masukan NIP Pegawai" >
+                                <label for="nip_pegawai">NIP Pegawai</label>
+                                <input type="number" name="nip_pegawai" id="nip_pegawai" class="form-control search-input" placeholder="Masukan NIP Pegawai" >
                                 <div class="row">
                                     <div class="col-md-8 search-result">
                                     </div>
@@ -25,13 +26,21 @@
                             </div>
                             
                             <div class="form-group">
-                                <input type="email" class="form-control"  id="email" name="email" placeholder="Masukan Email Pengguna">
+                                <label for="email">Email Pegawai</label>
+                                <input type="email" class="form-control "  id="email" name="email" placeholder="Masukan Email Pegawai">
                             </div>
                             <div class="form-group">
-                            <select class="form-control" id="role" nam="role">
-                                <option> --Pilih Role Akses-- </option>
-                                <option>1</option>
+                            <label for="nip_pegawai">Pilih Role Akses</label>
+                            <select class="form-control role-user" id="role" name="role">
+                                <option value="0"> Super Admin</option>
+                                <option value="1"> Operator Surat</option>
+                                <option value="2"> Operator Pegawai</option>
+                                <option value="3"> User Disposisi</option>
                             </select>
+                            </div>
+
+                            <div class="form-group level-surat">
+                                
                             </div>
                             <button type="submit" class="btn btn-primary">Tambah</button>
                         </form> 

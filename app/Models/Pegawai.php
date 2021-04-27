@@ -34,8 +34,6 @@ class Pegawai extends Model
     ];
     //pk dari tabel pegawai
     protected $primaryKey = 'nip_pegawai';
-    // disable fungsi increment dari table dosen
-    public $incrementing = false;
     // tentukan tipe data dari primary
     protected $keyType ='string';
 

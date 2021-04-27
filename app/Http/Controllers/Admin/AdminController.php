@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Pegawai;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -21,6 +23,9 @@ class AdminController extends Controller
 
     //function halaman data pengguna
     public function data_pengguna(){
+        // $data = User::select('user.*','nama_pegawai')
+        //         ->join('pegawai', 'nip', '=', 'pegawai.id_unit')
+        //         ->get();
         return view('admin.pengguna.pengguna');
     }
 
@@ -30,17 +35,17 @@ class AdminController extends Controller
         if ($request->has('data')) {
             $data = $request->data;
             //get nip pegawai 
-            $results = Pegawai::where('nip_pegawai', 'LIKE' ,'%' . $data . '%')->get('nip_pegawai');
+            $results = Pegawai::where('nip_pegawai', 'LIKE' ,'%' . $data . '%')->get();
             //make output
             $output = '<div class="list-group  mt-2">';
             //cek jika data tersedia
-            if ($results->count() > 1) {
+            if ($results->count() >= 1) {
                 //looping data
                 foreach ($results as $result) {
                     //concat output untuk menampilkan data
                     $output .= '
                         <a href="#" class="list-group-item list-group-item-action">'
-                            .$result->nip_pegawai.
+                            .$result->nip_pegawai. 
                         '</a>
                     ';
                 }
@@ -66,5 +71,18 @@ class AdminController extends Controller
     //function form tambah pengguna
     public function add_pengguna(){
         return view('admin.pengguna.pengguna-add');
+    }
+
+    //function store data pengguna
+    public function store(Request $request){
+        $data = $request->all();
+        $data ['id'] = $request->nip_pegawai;
+        $result = Pegawai::where('nip_pegawai',$data['nip_pegawai'])->first('tanggal_lahir');
+        // $pass = strtotime($result->tanggal_lahir);
+        $tanggal_lahir = str_replace("-", "", $result->tanggal_lahir);
+        $data['flag'] = '0';
+        $data['password'] = Hash::make($tanggal_lahir);
+        $user = User::create($data);
+        return redirect()->route('data-pengguna.index')->with('status','Pengguna Berhasil Ditambah');
     }
 }

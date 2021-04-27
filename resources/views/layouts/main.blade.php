@@ -88,6 +88,32 @@ gtag('config', 'UA-94034622-3');
             $('.modal-footer form[action]').attr('action', 'data-unit_kerja'+'/'+_id);
         })
 
+        //delete data level surat
+        $('.getIdLevelSurat').on('click',function(){
+            var _id = $(this).data("id");
+            $('.modal-footer form[action]').attr('action', 'data-level_surat'+'/'+_id);
+        })
+
+        //menampilkan input level surat jika role = 3
+        $('.role-user').on('change',function(){
+            var _id = $(this).val();
+            if (_id == 3) {
+                $.ajax({
+                        url: '{{route('data-level_surat.level')}}',
+                        method : 'GET',
+                        beforeSend:function(){
+                            $('.level-surat').html('mohon tunggu');
+                        },
+                        success:function(res){
+                            $('.level-surat').html(res).fadeIn();
+                        },
+                    })
+
+            } else {
+                $('.level-surat').fadeOut();
+            }
+        })
+
         //search nip pegawai
         $('.search-input').on('keyup',function(){
             

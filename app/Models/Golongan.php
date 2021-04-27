@@ -14,7 +14,7 @@ class Golongan extends Model
     protected $fillable = [
         'nama_golongan','status'
     ];
-    //tabel Jabatan terhubung dengan tabel golongan dengan relasi one to one
+    //tabel golongan terhubung dengan tabel pegawai dengan relasi one to one
     public function pegawai()
     {
         return $this->hasOne(Pegawai::class,'id_golongan','id_golongan');
