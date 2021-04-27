@@ -32,7 +32,7 @@ class AlamatController extends Controller
     public function destroy($id_rumah)
     {
         $data = Alamat::findOrFail($id_rumah);
-        $data->delete($data); 
+        $data->delete(); 
         return redirect()->route('data-pegawai.edit',$data->nip_pegawai)->with('status',"Data alamat berhasil dihapus");       
     }
 }

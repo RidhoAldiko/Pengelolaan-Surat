@@ -12,7 +12,7 @@ class HobiController extends Controller
     public function destroy($id)
     {
         $data  = Hobi::findOrFail($id);
-        $data->delete($data);
+        $data->delete();
 
         return redirect()->route('data-pegawai.edit',$data->nip_pegawai)->with('status',"Data hobi berhasil dihapus");
     }

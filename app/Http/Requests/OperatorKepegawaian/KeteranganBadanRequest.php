@@ -27,7 +27,7 @@ class KeteranganBadanRequest extends FormRequest
             'tinggi'        => 'required|integer',
             'berat_badan'   => 'required|integer',
             'rambut'        => 'required|string|max:30',       
-            'bentuk_muka'   => 'required|string|max:30',
+            'bentuk_muka'   => 'required|string|max:10',
             'warna_kulit'   => 'required|string|max:30',
             'ciri_khas'     => 'required|max:50',
             'cacat_tubuh'   => 'required|max:50'
@@ -49,7 +49,7 @@ class KeteranganBadanRequest extends FormRequest
             'rambut.max'                 => 'Maksimal rambut 30 karakter',
             'rambut.string'              => 'Inputan berupa huruf',
             'bentuk_muka.required'            => 'bentuk muka tidak boleh kosong',
-            'bentuk_muka.max'                 => 'Maksimal bentuk muka 30 karakter',
+            'bentuk_muka.max'                 => 'Maksimal bentuk muka 10 karakter',
             'bentuk_muka.string'              => 'Inputan berupa huruf',
             'ciri_khas.required'         => 'ciri khas tidak boleh kosong',
             'ciri_khas.max'              => 'Maksimal ciri khas 50 karakter',

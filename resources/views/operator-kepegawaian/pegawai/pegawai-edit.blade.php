@@ -595,7 +595,69 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="riwayat" role="tabpanel" aria-labelledby="riwayat-tab">
-                        Vestibulum imperdiet odio sed neque ultricies, ut dapibus mi maximus. Proin ligula massa, gravida in lacinia efficitur, hendrerit eget mauris. Pellentesque fermentum, sem interdum molestie finibus, nulla diam varius leo, nec varius lectus elit id dolor. Nam malesuada orci non ornare vulputate. Ut ut sollicitudin magna. Vestibulum eget ligula ut ipsum venenatis ultrices. Proin bibendum bibendum augue ut luctus.
+                        <div class="row justify-content-center">
+                                    @if ($pegawai->riwayat_pendidikan->count() > 0)
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Riwayat Pendidikan</label>
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                        <thead>
+                                                                <tr class="text-center">
+                                                                    <th scope="col">Jenis</th>
+                                                                    <th scope="col">Nama</th>
+                                                                    <th scope="col">Jurusan</th>
+                                                                    <th scope="col">No STTB</th>
+                                                                    <th scope="col">Tgl STTB</th>
+                                                                    <th scope="col">Tempat</th>
+                                                                    <th scope="col">Kepsek/Rektor</th>
+                                                                    <th scope="col">Mulai</th>
+                                                                    <th scope="col">Sampai</th>
+                                                                    <th scope="col">Tanda Lulus</th>
+                                                                    <th scope="col">Aksi</th>
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($pegawai->riwayat_pendidikan as $item)
+                                                                <tr>
+                                                                    <td>{{ $item->jenis_pendidikan }}</td>
+                                                                    <td>{{ $item->nama_pendidikan }}</td>
+                                                                    <td>{{ $item->jurusan }}</td>
+                                                                    <td>{{ $item->no_sttb }}</td>
+                                                                    <td>{{ date('d/m/Y', strtotime($item->tgl_sttb)) }}</td>
+                                                                    <td>{{ $item->tempat }}</td>
+                                                                    <td>{{ $item->nama_kepsek }}</td>
+                                                                    <td>{{ date('d/m/Y', strtotime($item->mulai)) }}</td>
+                                                                    <td>{{ date('d/m/Y', strtotime($item->sampai)) }}</td>
+                                                                    <td>{{ $item->tanda_lulus }}</td>
+                                                                    <td>
+                                                                        <a href="{{ route('riwayat-pendidikan.edit',$item->id_riwayatpendidikan) }}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                                            <i class="fas fa-pencil-alt"></i>
+                                                                        </a>
+                                                                        <form action="{{ route('riwayat-pendidikan.destroy',$item->id_riwayatpendidikan) }}" method="post" class="d-inline">
+                                                                            @csrf
+                                                                            @method('delete')
+                                                                            <button class="btn btn-sm btn-danger" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                        </form> 
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @else
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label>Riwayat Pendidikan - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                            <p class="border-bottom text-gray-800">
+                                                - Riwayat Pendidikan Belum Diisi, lengkapi di menu Riwayat pendidikan -
+                                            </p>
+                                        </div>
+                                    </div>
+                                    @endif
+                        </div>
                     </div>
                 </div>
                 </div>
