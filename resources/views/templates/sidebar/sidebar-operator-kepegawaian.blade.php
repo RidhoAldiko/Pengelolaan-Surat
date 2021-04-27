@@ -20,7 +20,26 @@
                 <li class="{{set_active(['data-pegawai.add'])}}"><a class="nav-link" href="{{route('data-pegawai.add')}}">Tambah Pegawai</a></li>
             </ul>
 
-            
+            {{-- <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-file"></i> <span>Dokumen Pegawai</span></a>
+            <ul class="dropdown-menu">
+                <li class=""><a class="nav-link" href="">Tambah Dokumen</a></li>
+            </ul> --}}
+
+            <li class="dropdown {{set_active(['riwayat-pendidikan.create'])}}">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-university"></i> <span>Riwayat Pendidikan</span></a>
+            <ul class="dropdown-menu">
+                <li class="{{set_active(['riwayat-pendidikan.create'])}}"><a class="nav-link" href="{{ route('riwayat-pendidikan.create') }}">Sekolah</a></li>
+            </ul>
+{{-- 
+            <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Riwayat Keluarga</span></a>
+            <ul class="dropdown-menu">
+                <li class=""><a class="nav-link" href="">Suami / Istri</a></li>
+                <li class=""><a class="nav-link" href="">Anak</a></li>
+                <li class=""><a class="nav-link" href="">Orang Tua</a></li>
+            </ul> --}}
+
         </ul>
     </aside>
     </div>

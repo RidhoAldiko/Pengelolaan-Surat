@@ -14,6 +14,7 @@ use App\Models\Hobi;
 use App\Models\Jabatan;
 use App\Models\Alamat;
 use App\Models\KeteranganBadan;
+use App\Models\RiwayatPendidikan;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Storage;
 
@@ -103,7 +104,7 @@ class OperatorKepegawaianController extends Controller
     //method untuk detail pegawai
     public function show($id)
     {
-        $datapegawai        = Pegawai::with(['jabatan','golongan','unit_kerja','hobi','alamat','keterangan_badan'])->where('nip_pegawai',$id)->findOrFail($id);
+        $datapegawai        = Pegawai::with(['jabatan','golongan','unit_kerja','hobi','alamat','keterangan_badan','riwayat_pendidikan'])->where('nip_pegawai',$id)->findOrFail($id);
         
         return view('operator-kepegawaian.pegawai.pegawai-detail',[
             'pegawai'       => $datapegawai,
@@ -120,7 +121,7 @@ class OperatorKepegawaianController extends Controller
         //get data jabatan
         $jabatan = Jabatan::where('status','=',0)->get();
         //untuk mendapatkan data pegawai dan data milik pegawai
-        $pegawai = Pegawai::with(['jabatan','golongan','unit_kerja','hobi','alamat','keterangan_badan'])->where('nip_pegawai',$id)->findOrFail($id);
+        $pegawai = Pegawai::with(['jabatan','golongan','unit_kerja','hobi','alamat','keterangan_badan','riwayat_pendidikan'])->where('nip_pegawai',$id)->findOrFail($id);
         
         return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('unit','jabatan','golongan','pegawai'));
     }

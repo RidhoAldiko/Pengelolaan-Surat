@@ -20,7 +20,7 @@ class KeteranganBadanController extends Controller
     {
         $data   = $request->all();
         $item   = KeteranganBadan::findOrFail($id);
-        $item->update($data);
+        $item->update();
         return redirect()->route('data-pegawai.edit',$data['nip_pegawai'])->with('status',"Data Keterangan Badan berhasil diedit");
     }
 }
