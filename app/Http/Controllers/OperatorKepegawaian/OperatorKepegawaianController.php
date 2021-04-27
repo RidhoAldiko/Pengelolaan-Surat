@@ -92,6 +92,11 @@ class OperatorKepegawaianController extends Controller
     //method store data pegawai
     public function store_pegawai(PegawaiRequest $request){
         
+        $this->validate($request,[
+            'nip_pegawai' => 'unique:pegawai'
+        ],[
+            'nip_pegawai.unique' => 'Nip pegawai tidak boleh sama',
+        ]);
         $data = $request->all();
         $data['status'] = 0;
         // dd($data);

@@ -17,7 +17,7 @@ class CreatePegawaiTable extends Migration
             $table->char('nip_pegawai',18)->primary();
             $table->char('nomor_karpeg',25);
             $table->string('nama_pegawai',60);
-            $table->string('tempat_lahir',10);
+            $table->string('tempat_lahir',30);
             $table->date('tanggal_lahir');
             $table->string('jenis_kelamin',10);
             $table->string('agama',30);
