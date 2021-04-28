@@ -21,7 +21,7 @@ class CreateKeteranganKeluargaTable extends Migration
             $table->string('jenis_kelamin',10);
             $table->string('tempat_lahir',60);
             $table->date('tgl_lahir');
-            $table->date('tgl_nikah');
+            $table->date('tgl_nikah')->nullable();
             $table->string('pekerjaan',50);
         });
     }

@@ -24,7 +24,36 @@ class KeteranganKeluargaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nip_pegawai'   => 'required',
+            'status'        => 'required',
+            'nama'          => 'required|string|max:60',
+            'jenis_kelamin' => 'required',
+            'tempat_lahir'  => 'required|string|max:60',
+            'tgl_lahir'     => 'required',
+            'pekerjaan'     => 'required|string|max:50',
+        ];
+    }
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'nip_pegawai.required'     => 'Nip pegawai tidak boleh kosong',
+            'status.required'          => 'Status tidak boleh kosong',
+            'nama.required'            => 'Nama tidak boleh kosong',
+            'nama.max'                 => 'Maksimal nama 60 karakter',
+            'nama.string'              => 'Inputan berupa huruf',
+            'jenis_kelamin.required'   => 'Jenis kelamain tidak boleh kosong',
+            'tempat_lahir.required'    => 'Tempat lahir tidak boleh kosong',
+            'tempat_lahir.max'         => 'Maksimal Tempat lahir 60 karakter',
+            'tempat_lahir.string'      => 'Inputan berupa huruf',
+            'tgl_lahir.required'   => 'Tanggal lahir tidak boleh kosong',
+            'pekerjaan.required'    => 'Tempat lahir tidak boleh kosong',
+            'pekerjaan.max'         => 'Maksimal Tempat lahir 60 karakter',
+            'pekerjaan.string'      => 'Inputan berupa huruf',
         ];
     }
 }

@@ -29,6 +29,9 @@
                     <li class="nav-item">
                         <a class="nav-link" id="riwayat-tab" data-toggle="tab" href="#riwayat" role="tab" aria-controls="riwayat" aria-selected="false">Riwayat Pendidikan</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="keluarga-tab" data-toggle="tab" href="#keluarga" role="tab" aria-controls="keluarga" aria-selected="false">Riwayat Keluarga</a>
+                    </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="pegawai" role="tabpanel" aria-labelledby="pegawai-tab">
@@ -270,6 +273,58 @@
                                     <label>Riwayat Pendidikan - <code>{{ $pegawai->nama_pegawai }}</code></label>
                                     <p class="border-bottom text-gray-800">
                                         - Riwayat Pendidikan Belum Diisi, lengkapi di menu Riwayat pendidikan -
+                                    </p>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="keluarga" role="tabpanel" aria-labelledby="keluarga-tab">
+                        <div class="row justify-content-center">
+                            @if ($pegawai->keterangan_keluarga->count() > 0)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Keterangan Keluarga - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Status</th>
+                                                            <th scope="col">Nama</th>
+                                                            <th scope="col">Jenis Kelamin</th>
+                                                            <th scope="col">Tempat Lahir</th>
+                                                            <th scope="col">Tanggal Lahir</th>
+                                                            <th scope="col">Tanggal Nikah</th>
+                                                            <th scope="col">Pekerjaan</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($pegawai->keterangan_keluarga as $item)
+                                                        <tr>
+                                                            <td>{{ $item->status }}</td>
+                                                            <td>{{ $item->nama }}</td>
+                                                            <td>{{ $item->jenis_kelamin }}</td>
+                                                            <td>{{ $item->tempat_lahir }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->tgl_lahir)) }}</td>
+                                                            <td>@if ($item->tgl_nikah == null)
+                                                                -
+                                                                @else
+                                                                   {{ date('d/m/Y', strtotime($item->tgl_nikah)) }} 
+                                                                @endif</td>
+                                                            <td>{{ $item->pekerjaan }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Keterangan Keluarga - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                    <p class="border-bottom text-gray-800">
+                                        - Keterangan keluarga Belum Diisi, lengkapi di menu lengkapi terlebih dahulu dimenu riwayat keluarga -
                                     </p>
                                 </div>
                             </div>

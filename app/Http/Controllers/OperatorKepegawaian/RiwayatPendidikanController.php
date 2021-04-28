@@ -19,6 +19,12 @@ class RiwayatPendidikanController extends Controller
     public function store(RiwayatPendidikanRequest $request)
     {
         $data   = $request->all();
+        //pisahkan dan ambil nip pegawai saja
+        $explode = explode(' - ',$request->nip_pegawai,-1);
+        //masukan nip ke variabel data['id]
+        $data ['id'] = $explode[0];
+        //timpa nip lama dengan nip baru yang sudah dipisahkan dari nama
+        $data['nip_pegawai'] = $data['id'];
         RiwayatPendidikan::create($data);
 
         return redirect()->route('riwayat-pendidikan.create')->with('status',"Data Pendidikan berhasil ditambah");
