@@ -19,7 +19,7 @@ class CreateKeteranganBadanTable extends Migration
             $table->integer('tinggi');
             $table->integer('berat_badan');
             $table->string('rambut',30);
-            $table->string('bentuk_muka',10);
+            $table->string('bentuk_muka',20);
             $table->string('warna_kulit',30);
             $table->string('ciri_khas',50);
             $table->string('cacat_tubuh',50);

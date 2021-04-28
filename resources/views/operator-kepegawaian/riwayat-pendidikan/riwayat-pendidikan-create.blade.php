@@ -31,15 +31,15 @@
                     </div>
                     <div class="card-body">
                       <p class="text-muted">Masukan data Pendidikan pegawai dengan benar dan tepat.!</p>
+                     
                       <div class="form-group row align-items-center">
                         <label for="nip_pegawai" class="form-control-label col-sm-3 text-md-right">Pegawai</label>
                         <div class="col-sm-6 col-md-9">
-                          <select class="form-control selectric @error('nip_pegawai') is-invalid @enderror" id="nip_pegawai" name="nip_pegawai">
-                            <option selected disabled>-Pilih Pegawai-</option>
-                            @foreach ($pegawai as $p)
-                            <option value="{{ $p->nip_pegawai }}">{{ $p->nama_pegawai }} - {{ $p->nip_pegawai }}</option>
-                            @endforeach
-                          </select>
+                          <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input" placeholder="Masukan NIP Pegawai" >
+                          <div class="row">
+                              <div class="col-md-8 search-result">
+                              </div>
+                          </div>
                           @error('nip_pegawai')
                           <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
