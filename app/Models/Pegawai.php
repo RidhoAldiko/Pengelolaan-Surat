@@ -89,5 +89,10 @@ class Pegawai extends Model
     {
         return $this->hasMany(OrangtuaKandung::class,'nip_pegawai','nip_pegawai');
     }
+    //table pegawai memiliki banyak mertua yang dikirim ketabel alamat dengan relasi one to many
+    public function mertua()
+    {
+        return $this->hasMany(Mertua::class,'nip_pegawai','nip_pegawai');
+    }
 
 }

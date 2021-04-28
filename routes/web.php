@@ -11,6 +11,7 @@ use App\Http\Controllers\OperatorKepegawaian\AlamatController;
 use App\Http\Controllers\OperatorKepegawaian\HobiController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganBadanController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganKeluargaController;
+use App\Http\Controllers\OperatorKepegawaian\MertuaController;
 use App\Http\Controllers\OperatorSurat\OperatorSuratController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
 use App\Http\Controllers\OperatorKepegawaian\OrangtuaKandungController;
@@ -122,6 +123,8 @@ Route::prefix('operator-kepegawaian')
         Route::resource('pegawai-keterangan-keluarga',KeteranganKeluargaController::class);
         // -----------------------Orang Tua Kandung---------------------------------
         Route::resource('pegawai-orangtua-kandung',OrangtuaKandungController::class);
+        // -----------------------mertua---------------------------------
+        Route::resource('pegawai-mertua',MertuaController::class);
         
     });
 
