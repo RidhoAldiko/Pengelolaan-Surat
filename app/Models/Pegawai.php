@@ -84,5 +84,10 @@ class Pegawai extends Model
     {
         return $this->hasMany(KeteranganKeluarga::class,'nip_pegawai','nip_pegawai');
     }
+    //table pegawai memiliki banyak orang tua kandung yang dikirim ketabel alamat dengan relasi one to many
+    public function orangtua_kandung()
+    {
+        return $this->hasMany(OrangtuaKandung::class,'nip_pegawai','nip_pegawai');
+    }
 
 }

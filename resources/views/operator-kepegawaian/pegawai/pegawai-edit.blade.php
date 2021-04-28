@@ -720,7 +720,60 @@
                                 <div class="form-group">
                                     <label>Keterangan Keluarga - <code>{{ $pegawai->nama_pegawai }}</code></label>
                                     <p class="border-bottom text-gray-800">
-                                        - Keterangan keluarga Belum Diisi, lengkapi di menu lengkapi terlebih dahulu dimenu riwayat keluarga -
+                                        - Keterangan keluarga Belum Diisi, lengkapi terlebih dahulu dimenu riwayat keluarga -
+                                    </p>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="row justify-content-center">
+                            @if ($pegawai->orangtua_kandung->count() > 0)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Orang Tua Kandung- <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Status</th>
+                                                            <th scope="col">Nama</th>
+                                                            <th scope="col">Tanggal Lahir</th>
+                                                            <th scope="col">Pekerjaan</th>
+                                                            <th scope="col">Keterangan</th>
+                                                            <th scope="col">Aksi</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($pegawai->orangtua_kandung as $item)
+                                                        <tr>
+                                                            <td>{{ $item->status }}</td>
+                                                            <td>{{ $item->nama }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->tgl_lahir)) }}</td>
+                                                            <td>{{ $item->pekerjaan }}</td>
+                                                            <td>{{ $item->keterangan }}</td>
+                                                            <td>
+                                                                <a href="{{ route('pegawai-orangtua-kandung.edit',$item->id_orangtua) }}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                </a>
+                                                                <form action="{{ route('pegawai-orangtua-kandung.destroy',$item->id_orangtua) }}" method="post" class="d-inline">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button class="btn btn-sm btn-danger" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                </form> 
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Orang Tua Kandung - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                    <p class="border-bottom text-gray-800">
+                                        - Orang Tua Kandung Belum Diisi, lengkapi terlebih dahulu dimenu riwayat keluarga -
                                     </p>
                                 </div>
                             </div>

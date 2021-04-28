@@ -32,11 +32,11 @@
                 <li class="{{set_active(['riwayat-pendidikan.create'])}}"><a class="nav-link" href="{{ route('riwayat-pendidikan.create') }}">Sekolah</a></li>
             </ul>
 
-            <li class="dropdown {{set_active(['pegawai-keterangan-keluarga.create'])}}">
+            <li class="dropdown {{set_active(['pegawai-keterangan-keluarga.create','pegawai-orangtua-kandung.create'])}}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Riwayat Keluarga</span></a>
             <ul class="dropdown-menu">
                 <li class="{{set_active(['pegawai-keterangan-keluarga.create'])}}"><a class="nav-link" href="{{ route('pegawai-keterangan-keluarga.create') }}">Keluarga</a></li>
-                <li class=""><a class="nav-link" href="">Orang Tua Kandung</a></li>
+                <li class="{{set_active(['pegawai-orangtua-kandung.create'])}}"><a class="nav-link" href="{{ route('pegawai-orangtua-kandung.create') }}">Orang Tua Kandung</a></li>
                 <li class=""><a class="nav-link" href="">Saudara Kandung</a></li>
                 <li class=""><a class="nav-link" href="">Mertua</a></li>
             </ul>

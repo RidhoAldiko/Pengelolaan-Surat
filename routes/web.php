@@ -13,6 +13,7 @@ use App\Http\Controllers\OperatorKepegawaian\KeteranganBadanController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganKeluargaController;
 use App\Http\Controllers\OperatorSurat\OperatorSuratController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
+use App\Http\Controllers\OperatorKepegawaian\OrangtuaKandungController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatPendidikanController;
 use Illuminate\Support\Facades\Auth;
 
@@ -116,14 +117,11 @@ Route::prefix('operator-kepegawaian')
         // //operator-kepegawain:hapus data hobi
         Route::put('edit-data-pegawai-keterangan-badan/editketbadan/{id_badan}',[KeteranganBadanController::class,'update'])->name('data-keterangan-badan.update');
         //-------------------Riwayat pendidikan -------------------------------------------
-        Route::get('tambah-riwayat-pendidikan',[RiwayatPendidikanController::class,'create'])->name('riwayat-pendidikan.create');
-        Route::post('tambah-riwayat-pendidikan',[RiwayatPendidikanController::class,'store'])->name('riwayat-pendidikan.store');
-        Route::delete('edit-data-pegawai-riwayat-pendidikan/hapus/{id_pendidikan}',[RiwayatPendidikanController::class,'destroy'])->name('riwayat-pendidikan.destroy');
-        Route::get('edit-riwayat-pendidikan/{id_pendidikan}',[RiwayatPendidikanController::class,'edit'])->name('riwayat-pendidikan.edit');
-        Route::put('edit-riwayat-pendidikan/{id_pendidikan}',[RiwayatPendidikanController::class,'update'])->name('riwayat-pendidikan.update');
-        
+        Route::resource('riwayat-pendidikan',RiwayatPendidikanController::class);
         // --------------------Keterangan Keluarga------------------------------
         Route::resource('pegawai-keterangan-keluarga',KeteranganKeluargaController::class);
+        // -----------------------Orang Tua Kandung---------------------------------
+        Route::resource('pegawai-orangtua-kandung',OrangtuaKandungController::class);
         
     });
 
