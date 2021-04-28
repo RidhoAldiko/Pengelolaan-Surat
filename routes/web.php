@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\GolonganController;
 use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\UnitKerjaController;
+use App\Http\Controllers\Admin\LevelSuratController;
 use App\Http\Controllers\OperatorKepegawaian\AlamatController;
 use App\Http\Controllers\OperatorKepegawaian\HobiController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganBadanController;
@@ -46,9 +47,15 @@ Route::prefix('admin')
             Route::get('search-pegawai', [AdminController::class,'search_pegawai'])->name('data-pegawai.search');
             //admin: form tambah pengguna
             Route::get('tambah-pengguna', [AdminController::class,'add_pengguna'])->name('data-pengguna.add');
+            //admin: store data pengguna
+            Route::post('data-pengguna', [AdminController::class,'store'])->name('data-pengguna.store');
+            
 
         //----Data master----
-        //UNIT KERJA
+            //LEVEL SURAT
+            Route::resource('data-level_surat', LevelSuratController::class);
+            Route::get('get-level_surat', [LevelSuratController::class,'data_level_surat'])->name('data-level_surat.level');
+            //UNIT KERJA
             Route::resource('data-unit_kerja', UnitKerjaController::class);
             //GOLONGAN
             Route::resource('data-golongan', GolonganController::class);
