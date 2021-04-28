@@ -18,7 +18,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="nip_pegawai">NIP Pegawai</label>
-                                <input type="number" name="nip_pegawai" id="nip_pegawai" class="form-control search-input" placeholder="Masukan NIP Pegawai" >
+                                <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input" placeholder="Masukan NIP / Nama Pegawai" >
                                 <div class="row">
                                     <div class="col-md-8 search-result">
                                     </div>
