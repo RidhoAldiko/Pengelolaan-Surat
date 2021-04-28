@@ -114,7 +114,7 @@ gtag('config', 'UA-94034622-3');
             }
         })
 
-        //search nip pegawai
+        // search nip pegawai
         $('.search-input').on('keyup',function(){
             
             var _data = $(this).val();
