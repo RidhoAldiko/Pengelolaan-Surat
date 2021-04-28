@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\LevelSuratController;
 use App\Http\Controllers\OperatorKepegawaian\AlamatController;
 use App\Http\Controllers\OperatorKepegawaian\HobiController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganBadanController;
+use App\Http\Controllers\OperatorKepegawaian\KeteranganKeluargaController;
 use App\Http\Controllers\OperatorSurat\OperatorSuratController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatPendidikanController;
@@ -76,6 +77,8 @@ Route::prefix('operator-surat')
 Route::prefix('operator-kepegawaian')
     ->middleware('auth','role:2')
     ->group(function(){
+        //admin: search pegawai
+        Route::get('search-pegawai', [AdminController::class,'search_pegawai'])->name('data-pegawai.search');
         //operator-kepegawaian dashboard
         Route::get('/', [OperatorKepegawaianController::class,'index'])->name('operator-kepegawaian.index');
         //operator-kepegawaian: table data pegawai
@@ -118,6 +121,10 @@ Route::prefix('operator-kepegawaian')
         Route::delete('edit-data-pegawai-riwayat-pendidikan/hapus/{id_pendidikan}',[RiwayatPendidikanController::class,'destroy'])->name('riwayat-pendidikan.destroy');
         Route::get('edit-riwayat-pendidikan/{id_pendidikan}',[RiwayatPendidikanController::class,'edit'])->name('riwayat-pendidikan.edit');
         Route::put('edit-riwayat-pendidikan/{id_pendidikan}',[RiwayatPendidikanController::class,'update'])->name('riwayat-pendidikan.update');
+        
+        // --------------------Keterangan Keluarga------------------------------
+        Route::resource('pegawai-keterangan-keluarga',KeteranganKeluargaController::class);
+        
     });
 
 
