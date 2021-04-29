@@ -18,25 +18,41 @@
                             @csrf
                             <div class="form-group">
                                 <label for="nip_pegawai">NIP Pegawai</label>
-                                <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input-admin" placeholder="Masukan NIP / Nama Pegawai" >
+                                <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input-admin @error('nip_pegawai') is-invalid @enderror" placeholder="Masukan NIP / Nama Pegawai" value="{{old('nip_pegawai')}}">
                                 <div class="row">
                                     <div class="col-md-8 search-result-admin">
                                     </div>
                                 </div>
+                                @error('nip_pegawai')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             
                             <div class="form-group">
                                 <label for="email">Email Pegawai</label>
-                                <input type="email" class="form-control "  id="email" name="email" placeholder="Masukan Email Pegawai">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror"  id="email" name="email" placeholder="Masukan Email Pegawai" value="{{old('email')}}">
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                            <label for="nip_pegawai">Pilih Role Akses</label>
-                            <select class="form-control role-user" id="role" name="role">
-                                <option value="0"> Super Admin</option>
-                                <option value="1"> Operator Surat</option>
-                                <option value="2"> Operator Pegawai</option>
-                                <option value="3"> User Disposisi</option>
-                            </select>
+                                <label for="email">Role Akses</label>
+                                <select class="form-control role-user @error('role') is-invalid @enderror" id="role" name="role">
+                                    <option selected disabled> --Pilih Role Akses-- </option>
+                                    <option value="0"> Super Admin</option>
+                                    <option value="1"> Operator Surat</option>
+                                    <option value="2"> Operator Pegawai</option>
+                                    <option value="3"> User Disposisi</option>
+                                </select>
+                                @error('role')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
 
                             <div class="form-group level-surat">
