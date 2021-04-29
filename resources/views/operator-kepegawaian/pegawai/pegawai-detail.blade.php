@@ -373,6 +373,48 @@
                             @endif
                         </div>
                         <div class="row justify-content-center">
+                            @if ($pegawai->saudara_kandung->count() > 0)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Saudara Kandung - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Nama</th>
+                                                            <th scope="col">Jenis Kelamin</th>
+                                                            <th scope="col">Tanggal Lahir</th>
+                                                            <th scope="col">Pekerjaan</th>
+                                                            <th scope="col">Keterangan</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($pegawai->saudara_kandung as $item)
+                                                        <tr>
+                                                            <td>{{ $item->nama }}</td>
+                                                            <td>{{ $item->jenis_kelamin }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->tgl_lahir)) }}</td>
+                                                            <td>{{ $item->pekerjaan }}</td>
+                                                            <td>{{ $item->keterangan }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Saudara Kandung - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                    <p class="border-bottom text-gray-800">
+                                        - Saudara Kandung Belum Diisi, lengkapi terlebih dahulu dimenu riwayat keluarga -
+                                    </p>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="row justify-content-center">
                             @if ($pegawai->mertua->count() > 0)
                                 <div class="col-md-12">
                                     <div class="form-group">

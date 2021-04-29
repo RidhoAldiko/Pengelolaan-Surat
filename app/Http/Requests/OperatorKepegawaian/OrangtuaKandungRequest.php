@@ -46,7 +46,7 @@ class OrangtuaKandungRequest extends FormRequest
             'nama.string'              => 'Inputan berupa huruf',
             'tgl_lahir.required'   => 'Tanggal lahir tidak boleh kosong',
             'pekerjaan.required'    => 'Tempat lahir tidak boleh kosong',
-            'pekerjaan.max'         => 'Maksimal Tempat lahir 60 karakter',
+            'pekerjaan.max'         => 'Maksimal Tempat lahir 50 karakter',
             'pekerjaan.string'      => 'Inputan berupa huruf',
         ];
     }

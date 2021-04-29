@@ -4,7 +4,7 @@ namespace App\Http\Requests\OperatorKepegawaian;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MertuaRequest extends FormRequest
+class SaudaraKandungRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,8 @@ class MertuaRequest extends FormRequest
     {
         return [
             'nip_pegawai'   => 'required',
-            'status'        => 'required',
             'nama'          => 'required|string|max:60',
+            'jenis_kelamin' => 'required',
             'tgl_lahir'     => 'required',
             'pekerjaan'     => 'required|string|max:50',
         ];
@@ -40,10 +40,10 @@ class MertuaRequest extends FormRequest
     {
         return [
             'nip_pegawai.required'     => 'Nip pegawai tidak boleh kosong',
-            'status.required'          => 'Status tidak boleh kosong',
             'nama.required'            => 'Nama tidak boleh kosong',
             'nama.max'                 => 'Maksimal nama 60 karakter',
             'nama.string'              => 'Inputan berupa huruf',
+            'jenis_kelamin.required'   => 'Jenis kelamin tidak boleh kosong',
             'tgl_lahir.required'   => 'Tanggal lahir tidak boleh kosong',
             'pekerjaan.required'    => 'Tempat lahir tidak boleh kosong',
             'pekerjaan.max'         => 'Maksimal Tempat lahir 50 karakter',
