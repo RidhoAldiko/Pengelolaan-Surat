@@ -78,3 +78,12 @@
     </div>
 </div>
 @endsection
+@push('script-delete-jabatan')
+<script>
+    //delete data jabatan
+    $('.getIdJabatan').on('click',function(){
+        var _id = $(this).data("id");
+        $('.modal-footer form[action]').attr('action', 'data-jabatan'+'/'+_id);
+    })
+</script>
+@endpush

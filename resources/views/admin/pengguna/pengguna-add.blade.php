@@ -18,9 +18,9 @@
                             @csrf
                             <div class="form-group">
                                 <label for="nip_pegawai">NIP Pegawai</label>
-                                <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input" placeholder="Masukan NIP / Nama Pegawai" >
+                                <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input-nip" placeholder="Masukan NIP / Nama Pegawai" >
                                 <div class="row">
-                                    <div class="col-md-8 search-result">
+                                    <div class="col-md-8 search-result-nip">
                                     </div>
                                 </div>
                             </div>
@@ -51,3 +51,58 @@
     </div>
 </section>
 @endsection
+@push('search-pegawai-page_tambah-pengguna')
+<script>
+    $('.search-input-nip').on('keyup',function(){
+            
+            var _data = $(this).val();
+            if (_data.length > 3) {
+                
+                $.ajax({
+                        url: '{{route('data-pegawai.search')}}',
+                        data:{
+                            data:_data
+                        },
+                        method : 'GET',
+                        beforeSend:function(){
+                            $('.search-result-nip').html('mohon tunggu');
+                        },
+                        success:function(res){
+                            $('.search-result-nip').html(res).fadeIn();
+                        },
+                    });
+                    $(document).on('click','a',function(){
+                    $('#nip_pegawai').val($(this).text());
+                    $('.search-result-nip').fadeOut();
+                });    
+            } else {
+                $('.search-result-nip').fadeOut();
+            }
+        });
+</script>
+@endpush
+
+@push('script-menampilan-level-surat')
+<script>
+//menampilkan input level surat jika role = 3
+$('.role-user').on('change',function(){
+    var _id = $(this).val();
+    if (_id == 3) {
+        $.ajax({
+                url: '{{route('data-level_surat.level')}}',
+                method : 'GET',
+                beforeSend:function(){
+                    $('.level-surat').html('mohon tunggu');
+                },
+                success:function(res){
+                    $('.level-surat').html(res).fadeIn();
+                },
+            })
+
+    } else {
+        $('.level-surat').fadeOut();
+    }
+})
+</script>
+@endpush
+

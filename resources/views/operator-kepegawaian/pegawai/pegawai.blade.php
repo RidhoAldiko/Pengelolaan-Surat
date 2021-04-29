@@ -69,7 +69,7 @@
 </div>
 @endsection
 
-@push('script-tambahanakhir')
+@push('script-delete-pegawai')
 <script>
     //detele untuk data pegawai bagian operator kepegawaian
     $(document).on('click', '.getIdPegawai', function() {
@@ -77,4 +77,46 @@
         $('.modal-footer form[action]').attr('action', 'data-pegawai'+'/'+_id);
     })
 </script>
+@endpush
+
+@push('script-server-side_pegawai')
+<script>
+    $(function() {
+        $('#dataPegawai').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{route('pegawai.serverside')}}",
+            columns: [
+                {
+                    data: 'nip',
+                    name: 'nip',
+                },
+                {
+                    data: 'nama',
+                    name: 'nama',
+                },
+                {
+                    data: 'unit',
+                    name: 'unit',
+                },
+                {
+                    data: 'golongan',
+                    name: 'golongan',
+                },
+                {
+                    data: 'jabatan',
+                    name: 'jabatan',
+                },
+                {
+                    data: 'status',
+                    name: 'status',
+                },
+                {
+                    data: 'aksi',
+                    name: 'aksi',
+                },
+                ],
+            });
+    } );
+    </script>
 @endpush

@@ -78,3 +78,12 @@
     </div>
 </div>
 @endsection
+@push('script-delete-level_surat')
+<script>
+    //delete data level surat
+    $('.getIdLevelSurat').on('click',function(){
+        var _id = $(this).data("id");
+        $('.modal-footer form[action]').attr('action', 'data-level_surat'+'/'+_id);
+    })
+</script>
+@endpush
