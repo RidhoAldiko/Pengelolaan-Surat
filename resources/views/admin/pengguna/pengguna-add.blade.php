@@ -18,9 +18,9 @@
                             @csrf
                             <div class="form-group">
                                 <label for="nip_pegawai">NIP Pegawai</label>
-                                <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input-nip" placeholder="Masukan NIP / Nama Pegawai" >
+                                <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input-admin" placeholder="Masukan NIP / Nama Pegawai" >
                                 <div class="row">
-                                    <div class="col-md-8 search-result-nip">
+                                    <div class="col-md-8 search-result-admin">
                                     </div>
                                 </div>
                             </div>
@@ -51,36 +51,6 @@
     </div>
 </section>
 @endsection
-@push('search-pegawai-page_tambah-pengguna')
-<script>
-    $('.search-input-nip').on('keyup',function(){
-            
-            var _data = $(this).val();
-            if (_data.length > 3) {
-                
-                $.ajax({
-                        url: '{{route('data-pegawai.search')}}',
-                        data:{
-                            data:_data
-                        },
-                        method : 'GET',
-                        beforeSend:function(){
-                            $('.search-result-nip').html('mohon tunggu');
-                        },
-                        success:function(res){
-                            $('.search-result-nip').html(res).fadeIn();
-                        },
-                    });
-                    $(document).on('click','a',function(){
-                    $('#nip_pegawai').val($(this).text());
-                    $('.search-result-nip').fadeOut();
-                });    
-            } else {
-                $('.search-result-nip').fadeOut();
-            }
-        });
-</script>
-@endpush
 
 @push('script-menampilan-level-surat')
 <script>

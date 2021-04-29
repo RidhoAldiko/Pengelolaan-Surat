@@ -70,14 +70,71 @@ gtag('config', 'UA-94034622-3');
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+{{-- global script untuk search nip/nama pegawai middleware admin --}}
+<script>
+    $('.search-input-admin').on('keyup',function(){
+            
+            var _data = $(this).val();
+            if (_data.length > 3) {
+                
+                $.ajax({
+                        url: '{{route('data-pegawai.search')}}',
+                        data:{
+                            data:_data
+                        },
+                        method : 'GET',
+                        beforeSend:function(){
+                            $('.search-result-admin').html('mohon tunggu');
+                        },
+                        success:function(res){
+                            $('.search-result-admin').html(res).fadeIn();
+                        },
+                    });
+                    $(document).on('click','a',function(){
+                    $('#nip_pegawai').val($(this).text());
+                    $('.search-result-admin').fadeOut();
+                });    
+            } else {
+                $('.search-result-admin').fadeOut();
+            }
+        });
+</script>
+
+{{--global script untuk search nip/nama pegawai middleware operator kepegawaian --}}
+<script>
+    $('.search-input').on('keyup',function(){
+            
+            var _data = $(this).val();
+            if (_data.length > 3) {
+                
+                $.ajax({
+                        url: '{{route('operator-kepegawaian.search')}}',
+                        data:{
+                            data:_data
+                        },
+                        method : 'GET',
+                        beforeSend:function(){
+                            $('.search-result').html('mohon tunggu');
+                        },
+                        success:function(res){
+                            $('.search-result').html(res).fadeIn();
+                        },
+                    });
+                    $(document).on('click','a',function(){
+                    $('#nip_pegawai').val($(this).text());
+                    $('.search-result').fadeOut();
+                });    
+            } else {
+                $('.search-result').fadeOut();
+            }
+        });
+</script>
 {{-- script pengguna --}}
 @stack('script-menampilan-level-surat')
 @stack('search-pegawai-page_tambah-pengguna')
 {{-- script pegawai --}}
 @stack('script-server-side_pegawai')
 @stack('script-delete-pegawai')
-{{-- script riwayat pendidikan --}}
-@stack('search-pegawai-page_riwayat-pendidikan')
 {{-- script master --}}
 @stack('script-delete-golongan')
 @stack('script-delete-jabatan')

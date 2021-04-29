@@ -31,13 +31,12 @@
                     </div>
                     <div class="card-body">
                       <p class="text-muted">Masukan data Pendidikan pegawai dengan benar dan tepat.!</p>
-                     
                       <div class="form-group row align-items-center">
                         <label for="nip_pegawai" class="form-control-label col-sm-3 text-md-right">Pegawai</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input-riwayat" placeholder="Masukan NIP Pegawai" >
+                          <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input" placeholder="Masukan NIP Pegawai" >
                           <div class="row">
-                              <div class="col-md-12 search-result-riwayat">
+                              <div class="col-md-12 search-result">
                               </div>
                           </div>
                           @error('nip_pegawai')
@@ -186,34 +185,3 @@
     </div>
 </section>
 @endsection
-@push('search-pegawai-page_riwayat-pendidikan')
-<script>
-    // search nip pegawai
-    $('.search-input-riwayat').on('keyup',function(){
-        
-        var _data = $(this).val();
-        if (_data.length > 3) {
-            
-            $.ajax({
-                    url: '{{route('operator-kepegawaian.search')}}',
-                    data:{
-                        data:_data
-                    },
-                    method : 'GET',
-                    beforeSend:function(){
-                        $('.search-result-riwayat').html('mohon tunggu');
-                    },
-                    success:function(res){
-                        $('.search-result-riwayat').html(res).fadeIn();
-                    },
-                });
-                $(document).on('click','a',function(){
-                $('#nip_pegawai').val($(this).text());
-                $('.search-result-riwayat').fadeOut();
-            });    
-        } else {
-            $('.search-result-riwayat').fadeOut();
-        }
-    });
-</script>
-@endpush
