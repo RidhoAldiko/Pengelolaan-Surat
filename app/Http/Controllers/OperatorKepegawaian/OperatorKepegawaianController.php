@@ -14,7 +14,11 @@ use App\Models\Hobi;
 use App\Models\Jabatan;
 use App\Models\Alamat;
 use App\Models\KeteranganBadan;
+use App\Models\KeteranganKeluarga;
+use App\Models\Mertua;
+use App\Models\OrangtuaKandung;
 use App\Models\RiwayatPendidikan;
+use App\Models\SaudaraKandung;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Storage;
 
@@ -186,19 +190,45 @@ class OperatorKepegawaianController extends Controller
     //metod untuk menghapus data pegawai serta data yang berhubungan dengan pegawai
     public function destroy(Pegawai $data_pegawai)
     {
-        $data = Pegawai::with(['hobi','alamat','keterangan_badan'])->where('nip_pegawai',$data_pegawai->nip_pegawai)->findOrFail($data_pegawai->nip_pegawai);
+
+        $data = Pegawai::with(['hobi','alamat',
+                        'keterangan_badan',
+                        'riwayat_pendidikan',
+                        'keterangan_keluarga',
+                        'orangtua_kandung',
+                        'mertua','saudara_kandung'])->where('nip_pegawai',$data_pegawai->nip_pegawai)->findOrFail($data_pegawai->nip_pegawai);
            
             //jika databasenya ada alamat maka hapus alamatnya
-            if ($data->alamat->count() > 0) {
+            if ($data->alamat != null) {
                 Alamat::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
             }
             //jika databasenya ada hobi maka hapus hobinya
-            if ($data->hobi->count() > 0) {
+            if ($data->hobi != null) {
                 Hobi::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
             }
             //jika databasenya ada keterangan badan maka hpus keterangan badanya
-            if ($data->keterangan_badan->count() > 0) {
+            if ($data->keterangan_badan != null) {
                 KeteranganBadan::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika databasenya ada riwayat pendidikan maka hpus
+            if ($data->riwayat_pendidikan != null) {
+                RiwayatPendidikan::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika databasenya ada keterangan keluarga maka hpus
+            if ($data->keterangan_keluarga != null) {
+                KeteranganKeluarga::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika databasenya ada orang tua kandung maka hpus
+            if ($data->orangtua_kandung != null) {
+                OrangtuaKandung::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika databasenya ada mertua maka hpus
+            if ($data->mertua != null) {
+                Mertua::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            } 
+            //jika databasenya ada saudara kandung maka hpus
+            if ($data->saudara_kandung != null) {
+                SaudaraKandung::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
             }
             //untuk menghapus foto yang tersimpan
             if ($data->foto) {
