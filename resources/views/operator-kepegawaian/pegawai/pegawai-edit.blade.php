@@ -939,6 +939,57 @@
                             </div>
                             @endif
                         </div>
+                        <div class="row justify-content-center">
+                            @if ($pegawai->pengalaman_keluar_negeri->count() > 0)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Riwayat Pengalaman Keluar Negeri - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Negara</th>
+                                                            <th scope="col">Tujuan Kunjungan</th>
+                                                            <th scope="col">Lama Kunjungan</th>
+                                                            <th scope="col">Yang Membiayai</th>
+                                                            <th scope="col">Aksi</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($pegawai->pengalaman_keluar_negeri as $item)
+                                                        <tr class="text-center">
+                                                            <td>{{ $item->negara }}</td>
+                                                            <td>{{ $item->tujuan }}</td>
+                                                            <td>{{ $item->lama }}</td>
+                                                            <td>{{ $item->membiayai }}</td>
+                                                            <td>
+                                                                <a href="{{ route('pegawai-pengalaman-keluar-negeri.edit',$item->id_keluarnegri) }}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                </a>
+                                                                <form action="{{ route('pegawai-pengalaman-keluar-negeri.destroy',$item->id_keluarnegri) }}" method="post" class="d-inline">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data Mertua ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                </form> 
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Riwayat Pengalaman Keluar Negeri - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                    <p class="border-bottom text-gray-800">
+                                        - Riwayat Pengalaman Keluar Negeri Belum Diisi, lengkapi dimenu Kepegawaian -
+                                    </p>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
                 </div>

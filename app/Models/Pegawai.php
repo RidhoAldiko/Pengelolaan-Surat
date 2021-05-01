@@ -108,5 +108,10 @@ class Pegawai extends Model
     {
         return $this->hasMany(Penghargaan::class,'nip_pegawai','nip_pegawai');
     }
+    //table pegawai memiliki banyak pengalaman keluar negeri yang dikirim ketabel pengalaman keluar negeri dengan relasi one to many
+    public function pengalaman_keluar_negeri()
+    {
+        return $this->hasMany(PengalamanKeluarNegeri::class,'nip_pegawai','nip_pegawai');
+    }
 
 }

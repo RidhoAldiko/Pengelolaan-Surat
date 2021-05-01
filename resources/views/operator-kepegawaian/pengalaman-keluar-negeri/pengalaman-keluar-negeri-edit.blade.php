@@ -1,11 +1,11 @@
 @extends('layouts.main')
-@section('title','Edit Penghargaan Pegawai')
+@section('title','Edit Pengalaman Keluar Negeri')
 @section('content')
 <section class="section">
     <div class="section-header">
         <ol class="breadcrumb justify-content-end h4">
             <li class="breadcrumb-item"><a href="">Pegawai</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Edit data Penghargaan Pegawai</li>
+            <li class="breadcrumb-item active" aria-current="page">Edit data Pengalaman Keluar Negeri</li>
         </ol>
     </div>
     @if (session('status'))
@@ -23,22 +23,22 @@
     <div class="section-body">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <form id="setting-form" method="POST" action="{{ route('pegawai-penghargaan.update',$pegawai->id_penghargaan) }}">
-                    @method('PUT')
+                <form id="setting-form" method="POST" action="{{ route('pegawai-pengalaman-keluar-negeri.update',$pegawai->id_keluarnegri) }}">
+                  @method('PUT')
                     @csrf
                   <div class="card shadow" id="settings-card">
                     <div class="card-header">
-                      <h4>Riwayat Penghargaan Pegawai - <code>{{ $pegawai->nip_pegawai }}</h4>
+                      <h4>Riwayat Pengalaman Keluar Negeri - <code>{{ $pegawai->nip_pegawai }}</code></h4>
                     </div>
                     <div class="card-body">
-                      <p class="text-muted">Masukan data Penghargaan pegawai dengan benar dan tepat.!</p>
+                      <p class="text-muted">Masukan data Pengalaman Keluar Negeri dengan benar dan tepat.!</p>
 
                       <div class="form-group row align-items-center">
                           <input type="hidden" name="nip_pegawai" value="{{ $pegawai->nip_pegawai }}">
-                        <label for="nama_penghargaan" class="form-control-label col-sm-3 text-md-right">Nama Bintang/ Penghargaan</label>
+                        <label for="negara" class="form-control-label col-sm-3 text-md-right">Negara</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" id="nama_penghargaan" name="nama_penghargaan"  class="form-control @error('nama_penghargaan') is-invalid @enderror" value="{{ $pegawai->nama_penghargaan }}" >
-                            @error('nama_penghargaan')
+                          <input type="text" id="negara" name="negara"  class="form-control @error('negara') is-invalid @enderror" value="{{ $pegawai->negara }}" >
+                            @error('negara')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -47,10 +47,10 @@
                       </div>
 
                       <div class="form-group row align-items-center">
-                        <label for="tahun" class="form-control-label col-sm-3 text-md-right">Tahun Perolehan</label>
+                        <label for="tujuan" class="form-control-label col-sm-3 text-md-right">Tujuan Kunjungan</label>
                         <div class="col-sm-6 col-md-9">
-                            <input type="text" id="tahun" name="tahun"  class="form-control @error('tahun') is-invalid @enderror" value="{{ $pegawai->tahun }}" >
-                            @error('tahun')
+                            <input type="text" id="tujuan" name="tujuan"  class="form-control @error('tujuan') is-invalid @enderror" value="{{ $pegawai->tujuan }}" >
+                            @error('tujuan')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -59,10 +59,22 @@
                       </div>
 
                       <div class="form-group row align-items-center">
-                        <label for="negara_instansi" class="form-control-label col-sm-3 text-md-right">Nama Negara/ Instansi</label>
+                        <label for="lama" class="form-control-label col-sm-3 text-md-right">Lama Kunjungan</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" id="negara_instansi" name="negara_instansi"  class="form-control @error('negara_instansi') is-invalid @enderror" value="{{ $pegawai->negara_instansi }}" >
-                            @error('negara_instansi')
+                          <input type="text" id="lama" name="lama"  class="form-control @error('lama') is-invalid @enderror" value="{{ $pegawai->lama }}" >
+                            @error('lama')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                      </div>
+
+                      <div class="form-group row align-items-center">
+                        <label for="membiayai" class="form-control-label col-sm-3 text-md-right">Yang Membiayai</label>
+                        <div class="col-sm-6 col-md-9">
+                          <input type="text" id="membiayai" name="membiayai"  class="form-control @error('membiayai') is-invalid @enderror" value="{{ $pegawai->membiayai }}" >
+                            @error('membiayai')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

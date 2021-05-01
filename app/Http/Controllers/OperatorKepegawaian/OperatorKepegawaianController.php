@@ -17,6 +17,7 @@ use App\Models\KeteranganBadan;
 use App\Models\KeteranganKeluarga;
 use App\Models\Mertua;
 use App\Models\OrangtuaKandung;
+use App\Models\PengalamanKeluarNegeri;
 use App\Models\Penghargaan;
 use App\Models\RiwayatPendidikan;
 use App\Models\SaudaraKandung;
@@ -120,7 +121,8 @@ class OperatorKepegawaianController extends Controller
                                 'riwayat_pendidikan',
                                 'keterangan_keluarga',
                                 'orangtua_kandung',
-                                'mertua','saudara_kandung'])->where('nip_pegawai',$id)->findOrFail($id);
+                                'mertua','saudara_kandung',
+                                'penghargaan','pengalaman_keluar_negeri'])->where('nip_pegawai',$id)->findOrFail($id);
         
         return view('operator-kepegawaian.pegawai.pegawai-detail',[
             'pegawai'       => $datapegawai,
@@ -145,7 +147,7 @@ class OperatorKepegawaianController extends Controller
                         'keterangan_keluarga',
                         'orangtua_kandung',
                         'mertua','saudara_kandung',
-                        'penghargaan'])->where('nip_pegawai',$id)->findOrFail($id);
+                        'penghargaan','pengalaman_keluar_negeri'])->where('nip_pegawai',$id)->findOrFail($id);
         
         return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('unit','jabatan','golongan','pegawai'));
     }
@@ -198,7 +200,7 @@ class OperatorKepegawaianController extends Controller
                         'keterangan_keluarga',
                         'orangtua_kandung',
                         'mertua','saudara_kandung',
-                        'penghargaan'])->where('nip_pegawai',$data_pegawai->nip_pegawai)->findOrFail($data_pegawai->nip_pegawai);
+                        'penghargaan','pengalaman_keluar_negeri'])->where('nip_pegawai',$data_pegawai->nip_pegawai)->findOrFail($data_pegawai->nip_pegawai);
            
             //jika databasenya ada alamat maka hapus alamatnya
             if ($data->alamat != null) {
@@ -235,6 +237,10 @@ class OperatorKepegawaianController extends Controller
             //jika databasenya ada penghargaan maka hpus
             if ($data->penghargaan != null) {
                 Penghargaan::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika databasenya ada penghargaan maka hpus
+            if ($data->pengalaman_keluar_negeri != null) {
+                PengalamanKeluarNegeri::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
             }
             //untuk menghapus foto yang tersimpan
             if ($data->foto) {

@@ -493,7 +493,47 @@
                                 <div class="form-group">
                                     <label>Riwayat Bintang/Penghargaan - <code>{{ $pegawai->nama_pegawai }}</code></label>
                                     <p class="border-bottom text-gray-800">
-                                        - Riwayat Bintang/Penghargaan Belum Diisi, lengkapi di menu Kepegawaian -
+                                        - Riwayat Bintang/Penghargaan Belum Diisi, lengkapi dimenu Kepegawaian -
+                                    </p>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="row justify-content-center">
+                            @if ($pegawai->pengalaman_keluar_negeri->count() > 0)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Riwayat Pengalaman Keluar Negeri - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Negara</th>
+                                                            <th scope="col">Tujuan Kunjungan</th>
+                                                            <th scope="col">Lama Kunjungan</th>
+                                                            <th scope="col">Yang Membiayai</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($pegawai->pengalaman_keluar_negeri as $item)
+                                                        <tr class="text-center">
+                                                            <td>{{ $item->negara }}</td>
+                                                            <td>{{ $item->tujuan }}</td>
+                                                            <td>{{ $item->lama }}</td>
+                                                            <td>{{ $item->membiayai }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Riwayat Pengalaman Keluar Negeri - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                    <p class="border-bottom text-gray-800">
+                                        - Riwayat Pengalaman Keluar Negeri Belum Diisi, lengkapi dimenu Kepegawaian -
                                     </p>
                                 </div>
                             </div>

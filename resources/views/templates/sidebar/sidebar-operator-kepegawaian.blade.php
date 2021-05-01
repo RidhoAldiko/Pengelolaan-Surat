@@ -41,10 +41,11 @@
                 <li class="{{set_active(['pegawai-mertua.create'])}}"><a class="nav-link" href="{{ route('pegawai-mertua.create') }}">Mertua</a></li>
             </ul>
 
-            <li class="dropdown {{set_active(['pegawai-penghargaan.create'])}}">
+            <li class="dropdown {{set_active(['pegawai-pengalaman-keluar-negeri.create','pegawai-penghargaan.create'])}}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-folder-open"></i> <span>Kepegawaian</span></a>
             <ul class="dropdown-menu">
                 <li class="{{set_active(['pegawai-penghargaan.create'])}}"><a class="nav-link" href="{{ route('pegawai-penghargaan.create') }}">Penghargaan</a></li>
+                <li class="{{set_active(['pegawai-pengalaman-keluar-negeri.create'])}}"><a class="nav-link" href="{{ route('pegawai-pengalaman-keluar-negeri.create') }}">Pengalaman Keluar Negeri</a></li>
             </ul>
 
         </ul>

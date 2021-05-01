@@ -16,6 +16,7 @@ use App\Http\Controllers\OperatorKepegawaian\MertuaController;
 use App\Http\Controllers\OperatorSurat\OperatorSuratController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
 use App\Http\Controllers\OperatorKepegawaian\OrangtuaKandungController;
+use App\Http\Controllers\OperatorKepegawaian\PengalamanKeluarNegeriController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatPendidikanController;
 use App\Http\Controllers\OperatorKepegawaian\SaudaraKandungController;
 use Illuminate\Support\Facades\Auth;
@@ -131,6 +132,8 @@ Route::prefix('operator-kepegawaian')
         Route::resource('pegawai-saudara-kandung',SaudaraKandungController::class);
         // -----------------------penghargaan---------------------------------
         Route::resource('pegawai-penghargaan',PenghargaanController::class);
+        // -----------------------penghargaan---------------------------------
+        Route::resource('pegawai-pengalaman-keluar-negeri',PengalamanKeluarNegeriController::class);
         
     });
 
