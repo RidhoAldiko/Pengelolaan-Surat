@@ -63,7 +63,7 @@
                       <div class="form-group row align-items-center">
                         <label for="tahun" class="form-control-label col-sm-3 text-md-right">Tahun Perolehan</label>
                         <div class="col-sm-6 col-md-9">
-                            <input type="text" id="tahun" name="tahun"  class="form-control @error('tahun') is-invalid @enderror" value="{{ old('tahun') }}" >
+                            <input type="number" id="tahun" name="tahun"  class="form-control @error('tahun') is-invalid @enderror" value="{{ old('tahun') }}" >
                             @error('tahun')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

@@ -113,5 +113,10 @@ class Pegawai extends Model
     {
         return $this->hasMany(PengalamanKeluarNegeri::class,'nip_pegawai','nip_pegawai');
     }
+    //table pegawai memiliki banyak organisasi yang dikirim ketabel organisasi dengan relasi one to many
+    public function organisasi()
+    {
+        return $this->hasMany(Organisasi::class,'nip_pegawai','nip_pegawai');
+    }
 
 }

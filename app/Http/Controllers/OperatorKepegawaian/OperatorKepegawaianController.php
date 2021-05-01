@@ -17,6 +17,7 @@ use App\Models\KeteranganBadan;
 use App\Models\KeteranganKeluarga;
 use App\Models\Mertua;
 use App\Models\OrangtuaKandung;
+use App\Models\Organisasi;
 use App\Models\PengalamanKeluarNegeri;
 use App\Models\Penghargaan;
 use App\Models\RiwayatPendidikan;
@@ -122,10 +123,20 @@ class OperatorKepegawaianController extends Controller
                                 'keterangan_keluarga',
                                 'orangtua_kandung',
                                 'mertua','saudara_kandung',
-                                'penghargaan','pengalaman_keluar_negeri'])->where('nip_pegawai',$id)->findOrFail($id);
-        
+                                'penghargaan','pengalaman_keluar_negeri',
+                                'organisasi'])->where('nip_pegawai',$id)->findOrFail($id);
+        //untuk mengambil data organisasi pada waktu Semasa SLTA ke bawah                       
+        $organisasi1        = Organisasi::where('waktu','Semasa SLTA ke bawah')->where('nip_pegawai',$id)->get();
+        //untuk mengambil data organisasi pada waktu Semasa Perguruan Tinggi                      
+        $organisasi2        = Organisasi::where('waktu','Semasa Perguruan Tinggi')->where('nip_pegawai',$id)->get();
+        //untuk mengambil data organisasi pada waktu Selesai Pendidikan atau Selama Menjadi PNS                      
+        $organisasi3        = Organisasi::where('waktu','Selesai Pendidikan atau Selama Menjadi PNS')->where('nip_pegawai',$id)->get();
+      
         return view('operator-kepegawaian.pegawai.pegawai-detail',[
             'pegawai'       => $datapegawai,
+            'organisasi1'   => $organisasi1,
+            'organisasi2'   => $organisasi2,
+            'organisasi3'   => $organisasi3,
         ]);
     }
 
@@ -147,9 +158,16 @@ class OperatorKepegawaianController extends Controller
                         'keterangan_keluarga',
                         'orangtua_kandung',
                         'mertua','saudara_kandung',
-                        'penghargaan','pengalaman_keluar_negeri'])->where('nip_pegawai',$id)->findOrFail($id);
+                        'penghargaan','pengalaman_keluar_negeri',
+                        'organisasi'])->where('nip_pegawai',$id)->findOrFail($id);
+        //untuk mengambil data organisasi pada waktu Semasa SLTA ke bawah                       
+        $organisasi1        = Organisasi::where('waktu','Semasa SLTA ke bawah')->where('nip_pegawai',$id)->get();
+        //untuk mengambil data organisasi pada waktu Semasa Perguruan Tinggi                      
+        $organisasi2        = Organisasi::where('waktu','Semasa Perguruan Tinggi')->where('nip_pegawai',$id)->get();
+        //untuk mengambil data organisasi pada waktu Selesai Pendidikan atau Selama Menjadi PNS                      
+        $organisasi3        = Organisasi::where('waktu','Selesai Pendidikan atau Selama Menjadi PNS')->where('nip_pegawai',$id)->get();
         
-        return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('unit','jabatan','golongan','pegawai'));
+        return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('unit','jabatan','golongan','pegawai','organisasi1','organisasi2','organisasi3'));
     }
 
     public function update(PegawaiRequest $request, $id)
@@ -200,7 +218,8 @@ class OperatorKepegawaianController extends Controller
                         'keterangan_keluarga',
                         'orangtua_kandung',
                         'mertua','saudara_kandung',
-                        'penghargaan','pengalaman_keluar_negeri'])->where('nip_pegawai',$data_pegawai->nip_pegawai)->findOrFail($data_pegawai->nip_pegawai);
+                        'penghargaan','pengalaman_keluar_negeri',
+                        'organisasi'])->where('nip_pegawai',$data_pegawai->nip_pegawai)->findOrFail($data_pegawai->nip_pegawai);
            
             //jika databasenya ada alamat maka hapus alamatnya
             if ($data->alamat != null) {
@@ -241,6 +260,10 @@ class OperatorKepegawaianController extends Controller
             //jika databasenya ada penghargaan maka hpus
             if ($data->pengalaman_keluar_negeri != null) {
                 PengalamanKeluarNegeri::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika databasenya ada organisasi maka hpus
+            if ($data->organisasi != null) {
+                Organisasi::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
             }
             //untuk menghapus foto yang tersimpan
             if ($data->foto) {

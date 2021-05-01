@@ -26,10 +26,11 @@
                 <li class=""><a class="nav-link" href="">Tambah Dokumen</a></li>
             </ul> --}}
 
-            <li class="dropdown {{set_active(['riwayat-pendidikan.create'])}}">
+            <li class="dropdown {{set_active(['pegawai-organisasi.create','riwayat-pendidikan.create'])}}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-university"></i> <span>Riwayat Pendidikan</span></a>
             <ul class="dropdown-menu">
                 <li class="{{set_active(['riwayat-pendidikan.create'])}}"><a class="nav-link" href="{{ route('riwayat-pendidikan.create') }}">Sekolah</a></li>
+                <li class="{{set_active(['pegawai-organisasi.create'])}}"><a class="nav-link" href="{{ route('pegawai-organisasi.create') }}">Organisasi</a></li>
             </ul>
 
             <li class="dropdown {{set_active(['pegawai-saudara-kandung.create','pegawai-mertua.create','pegawai-orangtua-kandung.create','pegawai-keterangan-keluarga.create'])}}">
