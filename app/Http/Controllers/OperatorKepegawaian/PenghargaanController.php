@@ -26,4 +26,26 @@ class PenghargaanController extends Controller
         Penghargaan::create($data);
         return redirect()->route('pegawai-penghargaan.create')->with('status','Data penghargaan berhasil ditambah');
     }
+
+    public function edit($id)
+    {
+        $pegawai = Penghargaan::findOrFail($id);
+        return view('operator-kepegawaian.penghargaan.penghargaan-edit',compact('pegawai'));
+    }
+
+    public function update(PenghargaanRequest $request, $id)
+    {
+        $data = $request->all();
+        $item = Penghargaan::findOrFail($id);
+        $item->update($data);
+
+        return redirect()->route('data-pegawai.edit',$data['nip_pegawai'])->with('status',"Data bintang/penghargaan berhasil diedit");
+    }
+
+    public function destroy($id)
+    {
+        $data = Penghargaan::findOrFail($id);
+        $data->delete();
+        return redirect()->route('data-pegawai.edit',$data->nip_pegawai)->with('status',"Data bintang/penghargaan berhasil diedit");
+    }
 }

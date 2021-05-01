@@ -40,6 +40,9 @@
                     <li class="nav-item">
                         <a class="nav-link" id="keluarga-tab" data-toggle="tab" href="#keluarga" role="tab" aria-controls="keluarga" aria-selected="false">Riwayat Keluarga</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="kepegawaian-tab" data-toggle="tab" href="#kepegawaian" role="tab" aria-controls="kepegawaian" aria-selected="false">Kepegawaian</a>
+                    </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="pegawai" role="tabpanel" aria-labelledby="pegawai-tab">
@@ -623,7 +626,7 @@
                                                         </thead>
                                                         <tbody>
                                                             @foreach ($pegawai->riwayat_pendidikan as $item)
-                                                                <tr>
+                                                                <tr class="text-center">
                                                                     <td>{{ $item->jenis_pendidikan }}</td>
                                                                     <td>{{ $item->nama_pendidikan }}</td>
                                                                     <td>{{ $item->jurusan }}</td>
@@ -685,7 +688,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($pegawai->keterangan_keluarga as $item)
-                                                        <tr>
+                                                        <tr class="text-center">
                                                             <td>{{ $item->status }}</td>
                                                             <td>{{ $item->nama }}</td>
                                                             <td>{{ $item->jenis_kelamin }}</td>
@@ -745,7 +748,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($pegawai->orangtua_kandung as $item)
-                                                        <tr>
+                                                        <tr class="text-center">
                                                             <td>{{ $item->status }}</td>
                                                             <td>{{ $item->nama }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($item->tgl_lahir)) }}</td>
@@ -798,7 +801,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($pegawai->saudara_kandung as $item)
-                                                        <tr>
+                                                        <tr class="text-center">
                                                             <td>{{ $item->nama }}</td>
                                                             <td>{{ $item->jenis_kelamin }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($item->tgl_lahir)) }}</td>
@@ -851,7 +854,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($pegawai->mertua as $item)
-                                                        <tr>
+                                                        <tr class="text-center">
                                                             <td>{{ $item->status }}</td>
                                                             <td>{{ $item->nama }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($item->tgl_lahir)) }}</td>
@@ -880,6 +883,57 @@
                                     <label>Mertua - <code>{{ $pegawai->nama_pegawai }}</code></label>
                                     <p class="border-bottom text-gray-800">
                                         - Mertua Belum Diisi, lengkapi terlebih dahulu dimenu riwayat keluarga -
+                                    </p>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="kepegawaian" role="tabpanel" aria-labelledby="kepegawaian-tab">
+                        <div class="row justify-content-center">
+                            @if ($pegawai->penghargaan->count() > 0)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Riwayat Bintang/Penghargaan - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Nama Bintang/ Penghargaan</th>
+                                                            <th scope="col">Tahun Perolehan</th>
+                                                            <th scope="col">Nama Negara/ Instansi</th>
+                                                            <th scope="col">Aksi</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($pegawai->penghargaan as $item)
+                                                        <tr class="text-center">
+                                                            <td>{{ $item->nama_penghargaan }}</td>
+                                                            <td>{{ $item->tahun }}</td>
+                                                            <td>{{ $item->negara_instansi }}</td>
+                                                            <td>
+                                                                <a href="{{ route('pegawai-penghargaan.edit',$item->id_penghargaan) }}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                </a>
+                                                                <form action="{{ route('pegawai-penghargaan.destroy',$item->id_penghargaan) }}" method="post" class="d-inline">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data Mertua ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                </form> 
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Riwayat Bintang/Penghargaan - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                    <p class="border-bottom text-gray-800">
+                                        - Riwayat Bintang/Penghargaan Belum Diisi, lengkapi di menu Kepegawaian -
                                     </p>
                                 </div>
                             </div>
