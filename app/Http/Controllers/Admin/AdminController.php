@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Admin\PenggunaRequest;
 use Illuminate\Http\Request;
 use App\Models\Pegawai;
 use App\Models\User;
@@ -76,7 +77,7 @@ class AdminController extends Controller
     }
 
     //function store data pengguna
-    public function store(Request $request){
+    public function store(PenggunaRequest $request){
         //request semua data inputan
         $data = $request->all();
         //pisahkan dan ambil nip pegawai saja

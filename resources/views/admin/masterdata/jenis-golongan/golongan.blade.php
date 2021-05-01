@@ -80,3 +80,13 @@
     </div>
 </div>
 @endsection
+
+@push('script-delete-golongan')
+<script>
+    //delete data golongan
+    $('.getIdGolongan').on('click',function(){
+        var _id = $(this).data("id");
+        $('.modal-footer form[action]').attr('action', 'data-golongan'+'/'+_id);
+    })
+</script>
+@endpush

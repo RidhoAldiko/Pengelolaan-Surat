@@ -107,7 +107,6 @@ class OperatorKepegawaianController extends Controller
         // dd($data);
         //store data pegawai
         $store = Pegawai::create($data);
-       
         return redirect()->route('data-pegawai.index')->with('status',"Data Berhasil Ditambah");
     }
 

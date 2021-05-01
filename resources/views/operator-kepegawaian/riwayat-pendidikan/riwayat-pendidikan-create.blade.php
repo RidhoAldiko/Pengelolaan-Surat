@@ -31,7 +31,6 @@
                     </div>
                     <div class="card-body">
                       <p class="text-muted">Masukan data Pendidikan pegawai dengan benar dan tepat.!</p>
-                     
                       <div class="form-group row align-items-center">
                         <label for="nip_pegawai" class="form-control-label col-sm-3 text-md-right">Pegawai</label>
                         <div class="col-sm-6 col-md-9">

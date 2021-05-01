@@ -70,58 +70,45 @@ gtag('config', 'UA-94034622-3');
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+{{-- global script untuk search nip/nama pegawai middleware admin --}}
 <script>
-    $(document).ready(function(){
-        //delete data golongan
-        $('.getIdGolongan').on('click',function(){
-            var _id = $(this).data("id");
-            $('.modal-footer form[action]').attr('action', 'data-golongan'+'/'+_id);
-        })
-        //delete data jabatan
-        $('.getIdJabatan').on('click',function(){
-            var _id = $(this).data("id");
-            $('.modal-footer form[action]').attr('action', 'data-jabatan'+'/'+_id);
-        })
-        //delete data unit kerja
-        $('.getIdUnitKerja').on('click',function(){
-            var _id = $(this).data("id");
-            $('.modal-footer form[action]').attr('action', 'data-unit_kerja'+'/'+_id);
-        })
-
-        //delete data level surat
-        $('.getIdLevelSurat').on('click',function(){
-            var _id = $(this).data("id");
-            $('.modal-footer form[action]').attr('action', 'data-level_surat'+'/'+_id);
-        })
-
-        //menampilkan input level surat jika role = 3
-        $('.role-user').on('change',function(){
-            var _id = $(this).val();
-            if (_id == 3) {
-                $.ajax({
-                        url: '{{route('data-level_surat.level')}}',
-                        method : 'GET',
-                        beforeSend:function(){
-                            $('.level-surat').html('mohon tunggu');
-                        },
-                        success:function(res){
-                            $('.level-surat').html(res).fadeIn();
-                        },
-                    })
-
-            } else {
-                $('.level-surat').fadeOut();
-            }
-        })
-
-        // search nip pegawai
-        $('.search-input').on('keyup',function(){
+    $('.search-input-admin').on('keyup',function(){
             
             var _data = $(this).val();
             if (_data.length > 3) {
                 
                 $.ajax({
                         url: '{{route('data-pegawai.search')}}',
+                        data:{
+                            data:_data
+                        },
+                        method : 'GET',
+                        beforeSend:function(){
+                            $('.search-result-admin').html('mohon tunggu');
+                        },
+                        success:function(res){
+                            $('.search-result-admin').html(res).fadeIn();
+                        },
+                    });
+                    $(document).on('click','a',function(){
+                    $('#nip_pegawai').val($(this).text());
+                    $('.search-result-admin').fadeOut();
+                });    
+            } else {
+                $('.search-result-admin').fadeOut();
+            }
+        });
+</script>
+
+{{--global script untuk search nip/nama pegawai middleware operator kepegawaian --}}
+<script>
+    $('.search-input').on('keyup',function(){
+            
+            var _data = $(this).val();
+            if (_data.length > 3) {
+                
+                $.ajax({
+                        url: '{{route('operator-kepegawaian.search')}}',
                         data:{
                             data:_data
                         },
@@ -141,51 +128,18 @@ gtag('config', 'UA-94034622-3');
                 $('.search-result').fadeOut();
             }
         });
-    });
 </script>
-
-{{-- script server side data pegawai --}}
-<script>
-    $(function() {
-        $('#dataPegawai').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{route('pegawai.serverside')}}",
-            columns: [
-                {
-                    data: 'nip',
-                    name: 'nip',
-                },
-                {
-                    data: 'nama',
-                    name: 'nama',
-                },
-                {
-                    data: 'unit',
-                    name: 'unit',
-                },
-                {
-                    data: 'golongan',
-                    name: 'golongan',
-                },
-                {
-                    data: 'jabatan',
-                    name: 'jabatan',
-                },
-                {
-                    data: 'status',
-                    name: 'status',
-                },
-                {
-                    data: 'aksi',
-                    name: 'aksi',
-                },
-                ],
-            });
-    } );
-    </script>
-
-@stack('script-tambahanakhir')
+{{-- script pengguna --}}
+@stack('script-menampilan-level-surat')
+@stack('search-pegawai-page_tambah-pengguna')
+{{-- script pegawai --}}
+@stack('script-server-side_pegawai')
+@stack('script-delete-pegawai')
+{{-- script master --}}
+@stack('script-delete-golongan')
+@stack('script-delete-jabatan')
+@stack('script-delete-unit_kerja')
+@stack('script-delete-level_surat')
 
 </body>
 </html>

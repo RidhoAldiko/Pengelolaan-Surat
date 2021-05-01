@@ -82,7 +82,7 @@ Route::prefix('operator-kepegawaian')
     ->middleware('auth','role:2')
     ->group(function(){
         //admin: search pegawai
-        Route::get('search-pegawai', [AdminController::class,'search_pegawai'])->name('data-pegawai.search');
+        Route::get('search-pegawai', [AdminController::class,'search_pegawai'])->name('operator-kepegawaian.search');
         //operator-kepegawaian dashboard
         Route::get('/', [OperatorKepegawaianController::class,'index'])->name('operator-kepegawaian.index');
         //operator-kepegawaian: table data pegawai

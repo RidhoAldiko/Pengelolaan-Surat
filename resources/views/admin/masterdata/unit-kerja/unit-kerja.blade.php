@@ -76,3 +76,12 @@
     </div>
 </div>
 @endsection
+@push('script-delete-unit_kerja')
+<script>
+    //delete data unit kerja
+    $('.getIdUnitKerja').on('click',function(){
+        var _id = $(this).data("id");
+        $('.modal-footer form[action]').attr('action', 'data-unit_kerja'+'/'+_id);
+    })
+</script>
+@endpush
