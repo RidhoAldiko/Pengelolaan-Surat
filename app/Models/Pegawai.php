@@ -13,6 +13,10 @@ use App\Models\Alamat;
 use App\Models\KeteranganBadan;
 use App\Models\RiwayatPendidikan;
 use App\Models\KeteranganKeluarga;
+use App\Models\OrangtuaKandung;
+use App\Models\Mertua;
+use App\Models\SaudaraKandung;
+use App\Models\Penghargaan;
 
 class Pegawai extends Model
 {
@@ -69,35 +73,40 @@ class Pegawai extends Model
     {
         return $this->hasMany(Alamat::class,'nip_pegawai','nip_pegawai');
     }
-    //table pegawai memiliki 1 relasi yang dikirim ke tabel user dengan relasi one to one
+    //table pegawai memiliki 1 relasi yang dikirim ke tabel keterangan badan dengan relasi one to one
     public function keterangan_badan()
     {
         return $this->hasOne(KeteranganBadan::class,'nip_pegawai','nip_pegawai');
     }
-    //table pegawai memiliki banyak alamat yang dikirim ketabel alamat dengan relasi one to many
+    //table pegawai memiliki banyak alamat yang dikirim ketabel riwayat pendidikan dengan relasi one to many
     public function riwayat_pendidikan()
     {
         return $this->hasMany(RiwayatPendidikan::class,'nip_pegawai','nip_pegawai');
     }
-    //table pegawai memiliki banyak keterangan keluarga yang dikirim ketabel alamat dengan relasi one to many
+    //table pegawai memiliki banyak keterangan keluarga yang dikirim ketabel ketabel keluarga dengan relasi one to many
     public function keterangan_keluarga()
     {
         return $this->hasMany(KeteranganKeluarga::class,'nip_pegawai','nip_pegawai');
     }
-    //table pegawai memiliki banyak orang tua kandung yang dikirim ketabel alamat dengan relasi one to many
+    //table pegawai memiliki banyak orang tua kandung yang dikirim ketabel orang tua kandung dengan relasi one to many
     public function orangtua_kandung()
     {
         return $this->hasMany(OrangtuaKandung::class,'nip_pegawai','nip_pegawai');
     }
-    //table pegawai memiliki banyak mertua yang dikirim ketabel alamat dengan relasi one to many
+    //table pegawai memiliki banyak mertua yang dikirim ketabel mertua dengan relasi one to many
     public function mertua()
     {
         return $this->hasMany(Mertua::class,'nip_pegawai','nip_pegawai');
     }
-    //table pegawai memiliki banyak saudara kandung yang dikirim ketabel alamat dengan relasi one to many
+    //table pegawai memiliki banyak saudara kandung yang dikirim ketabel saudara kandung dengan relasi one to many
     public function saudara_kandung()
     {
         return $this->hasMany(SaudaraKandung::class,'nip_pegawai','nip_pegawai');
+    }
+    //table pegawai memiliki banyak penghargaan yang dikirim ketabel penghargaan dengan relasi one to many
+    public function penghargaan()
+    {
+        return $this->hasMany(Penghargaan::class,'nip_pegawai','nip_pegawai');
     }
 
 }

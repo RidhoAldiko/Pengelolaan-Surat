@@ -54,7 +54,7 @@
                                         <div class="form-group">
                                             <label>Nomor Kartu Pegawai</label>
                                             <p class="border-bottom text-gray-800">
-                                                {{ $pegawai->nomor_kerpeg }}
+                                                {{ $pegawai->nomor_karpeg }}
                                             </p>
                                             
                                         </div>

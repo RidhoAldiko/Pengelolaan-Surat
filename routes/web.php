@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\GolonganController;
 use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\UnitKerjaController;
 use App\Http\Controllers\Admin\LevelSuratController;
+use App\Http\Controllers\OperatorKepegawaian\PenghargaanController;
 use App\Http\Controllers\OperatorKepegawaian\AlamatController;
 use App\Http\Controllers\OperatorKepegawaian\HobiController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganBadanController;
@@ -128,6 +129,8 @@ Route::prefix('operator-kepegawaian')
         Route::resource('pegawai-mertua',MertuaController::class);
         // -----------------------saudara kandung---------------------------------
         Route::resource('pegawai-saudara-kandung',SaudaraKandungController::class);
+        // -----------------------penghargaan---------------------------------
+        Route::resource('pegawai-penghargaan',PenghargaanController::class);
         
     });
 

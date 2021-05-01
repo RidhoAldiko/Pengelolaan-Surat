@@ -20,7 +20,7 @@ class CreateOrangtuaKandungTable extends Migration
             $table->string('nama',60);
             $table->date('tgl_lahir');
             $table->string('pekerjaan',50);
-            $table->text('keterangan')->nullable();
+            $table->text('keterangan')->nullable()->default('-');
         });
     }
 

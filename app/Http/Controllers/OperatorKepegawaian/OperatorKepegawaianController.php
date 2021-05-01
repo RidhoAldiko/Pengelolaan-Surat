@@ -17,6 +17,7 @@ use App\Models\KeteranganBadan;
 use App\Models\KeteranganKeluarga;
 use App\Models\Mertua;
 use App\Models\OrangtuaKandung;
+use App\Models\Penghargaan;
 use App\Models\RiwayatPendidikan;
 use App\Models\SaudaraKandung;
 use Illuminate\Auth\Events\Validated;
@@ -144,7 +145,8 @@ class OperatorKepegawaianController extends Controller
                         'riwayat_pendidikan',
                         'keterangan_keluarga',
                         'orangtua_kandung',
-                        'mertua','saudara_kandung'])->where('nip_pegawai',$id)->findOrFail($id);
+                        'mertua','saudara_kandung',
+                        'penghargaan'])->where('nip_pegawai',$id)->findOrFail($id);
         
         return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('unit','jabatan','golongan','pegawai'));
     }
@@ -196,7 +198,8 @@ class OperatorKepegawaianController extends Controller
                         'riwayat_pendidikan',
                         'keterangan_keluarga',
                         'orangtua_kandung',
-                        'mertua','saudara_kandung'])->where('nip_pegawai',$data_pegawai->nip_pegawai)->findOrFail($data_pegawai->nip_pegawai);
+                        'mertua','saudara_kandung',
+                        'penghargaan'])->where('nip_pegawai',$data_pegawai->nip_pegawai)->findOrFail($data_pegawai->nip_pegawai);
            
             //jika databasenya ada alamat maka hapus alamatnya
             if ($data->alamat != null) {
@@ -229,6 +232,10 @@ class OperatorKepegawaianController extends Controller
             //jika databasenya ada saudara kandung maka hpus
             if ($data->saudara_kandung != null) {
                 SaudaraKandung::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika databasenya ada penghargaan maka hpus
+            if ($data->penghargaan != null) {
+                Penghargaan::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
             }
             //untuk menghapus foto yang tersimpan
             if ($data->foto) {
