@@ -1068,6 +1068,59 @@
                     </div>
                     <div class="tab-pane fade" id="kepegawaian" role="tabpanel" aria-labelledby="kepegawaian-tab">
                         <div class="row justify-content-center">
+                            @if ($pegawai->diklat_penjenjangan->count() > 0)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Riwayat Diklat Penjenjangan - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Nama Diklat</th>
+                                                            <th scope="col">Tahun</th>
+                                                            <th scope="col">Nomor</th>
+                                                            <th scope="col">Tanggal</th>
+                                                            <th scope="col">Bukti Lulus</th>
+                                                            <th scope="col">Aksi</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($pegawai->diklat_penjenjangan as $item)
+                                                        <tr class="text-center">
+                                                            <td>{{ $item->nama_diklat }}</td>
+                                                            <td>{{ $item->tahun }}</td>
+                                                            <td>{{ $item->nomor }}</td>
+                                                            <td>{{ $item->tanggal }}</td>
+                                                            <td><a href='{{ asset('/storage/bukti_lulus/'.$item->bukti_lulus)}}' target='_blank' title='download'><i class='fa fa-file'></i></a></td>
+                                                            <td>
+                                                                <a href="{{ route('pegawai-diklat-penjenjangan.edit',$item->id_diklat) }}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                </a>
+                                                                <form action="{{ route('pegawai-diklat-penjenjangan.destroy',$item->id_diklat) }}" method="post" class="d-inline">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data Diklat Penjenjangan ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                </form> 
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Riwayat Diklat Penjenjangan - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                    <p class="border-bottom text-gray-800">
+                                        - Riwayat Diklat Penjenjangan belum diisi, lengkapi dimenu Kepegawaian -
+                                    </p>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="row justify-content-center">
                             @if ($pegawai->penghargaan->count() > 0)
                                 <div class="col-md-12">
                                     <div class="form-group">

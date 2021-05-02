@@ -128,5 +128,10 @@ class Pegawai extends Model
     {
         return $this->hasMany(Mutasi::class,'nip_pegawai','nip_pegawai');
     }
+    //table pegawai memiliki banyak diklat_penjenjangan yang dikirim ketabel diklat_penjenjangan dengan relasi one to many
+    public function diklat_penjenjangan()
+    {
+        return $this->hasMany(DiklatPenjenjangan::class,'nip_pegawai','nip_pegawai');
+    }
 
 }
