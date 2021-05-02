@@ -17,6 +17,7 @@ use App\Models\KeteranganBadan;
 use App\Models\KeteranganKeluarga;
 use App\Models\KeteranganLain;
 use App\Models\Mertua;
+use App\Models\Mutasi;
 use App\Models\OrangtuaKandung;
 use App\Models\Organisasi;
 use App\Models\PengalamanKeluarNegeri;
@@ -125,7 +126,8 @@ class OperatorKepegawaianController extends Controller
                                 'orangtua_kandung',
                                 'mertua','saudara_kandung',
                                 'penghargaan','pengalaman_keluar_negeri',
-                                'organisasi','keterangan_lain'])->where('nip_pegawai',$id)->findOrFail($id);
+                                'organisasi','keterangan_lain',
+                                'mutasi'])->where('nip_pegawai',$id)->findOrFail($id);
         
         //untuk mengambil data organisasi pada waktu Semasa SLTA ke bawah                       
         $organisasi1        = Organisasi::where('waktu','Semasa SLTA ke bawah')->where('nip_pegawai',$id)->get();
@@ -161,7 +163,8 @@ class OperatorKepegawaianController extends Controller
                         'orangtua_kandung',
                         'mertua','saudara_kandung',
                         'penghargaan','pengalaman_keluar_negeri',
-                        'organisasi','keterangan_lain'])->where('nip_pegawai',$id)->findOrFail($id);
+                        'organisasi','keterangan_lain',
+                        'mutasi'])->where('nip_pegawai',$id)->findOrFail($id);
         //untuk mengambil data organisasi pada waktu Semasa SLTA ke bawah                       
         $organisasi1        = Organisasi::where('waktu','Semasa SLTA ke bawah')->where('nip_pegawai',$id)->get();
         //untuk mengambil data organisasi pada waktu Semasa Perguruan Tinggi                      
@@ -221,7 +224,8 @@ class OperatorKepegawaianController extends Controller
                         'orangtua_kandung',
                         'mertua','saudara_kandung',
                         'penghargaan','pengalaman_keluar_negeri',
-                        'organisasi','keterangan_lain'])->where('nip_pegawai',$data_pegawai->nip_pegawai)->findOrFail($data_pegawai->nip_pegawai);
+                        'organisasi','keterangan_lain',
+                        'mutasi'])->where('nip_pegawai',$data_pegawai->nip_pegawai)->findOrFail($data_pegawai->nip_pegawai);
            
             //jika databasenya ada alamat maka hapus alamatnya
             if ($data->alamat != null) {
@@ -268,8 +272,12 @@ class OperatorKepegawaianController extends Controller
                 Organisasi::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
             }
             //jika databasenya ada keterangan lain maka hpus
-            if ($data->organisasi != null) {
+            if ($data->keterangan_lain != null) {
                 KeteranganLain::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika databasenya ada mutasi maka hpus
+            if ($data->mutasi != null) {
+                Mutasi::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
             }
             //untuk menghapus foto yang tersimpan
             if ($data->foto) {

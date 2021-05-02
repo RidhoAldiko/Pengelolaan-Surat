@@ -50,6 +50,9 @@
                 <li class="{{set_active(['pegawai-keterangan-lain.create'])}}"><a class="nav-link" href="{{ route('pegawai-keterangan-lain.create') }}">Keterangan Lain</a></li>
             </ul>
 
+            <li class="{{set_active(['pegawai-mutasi.create'])}}"><a class="nav-link" href="{{route('pegawai-mutasi.create')}}">
+                <i class="fa fa-retweet"></i><span>Mutasi Pegawai</span></a>
+            </li>
         </ul>
     </aside>
     </div>

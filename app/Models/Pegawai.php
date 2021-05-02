@@ -123,5 +123,10 @@ class Pegawai extends Model
     {
         return $this->hasMany(KeteranganLain::class,'nip_pegawai','nip_pegawai');
     }
+    //table pegawai memiliki banyak mutasi yang dikirim ketabel mutasi dengan relasi one to many
+    public function mutasi()
+    {
+        return $this->hasMany(Mutasi::class,'nip_pegawai','nip_pegawai');
+    }
 
 }
