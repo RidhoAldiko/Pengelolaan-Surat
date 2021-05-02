@@ -17,8 +17,7 @@ class DiklatPenjenjangan extends Model
         'nama_diklat',
         'tahun',
         'nomor',
-        'tanggal',
-        'bukti_lulus'
+        'tanggal'
     ];
 
     public function pegawai()

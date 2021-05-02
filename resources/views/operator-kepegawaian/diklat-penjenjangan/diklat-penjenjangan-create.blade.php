@@ -92,18 +92,6 @@
                           </div>
                       </div>
 
-                      <div class="form-group row align-items-center">
-                        <label for="bukti_lulus" class="form-control-label col-sm-3 text-md-right">Bukti Lulus</label>
-                        <div class="col-sm-6 col-md-9">
-                            <input type="file" id="bukti_lulus" name="bukti_lulus"  class="form-control @error('bukti_lulus') is-invalid @enderror" value="{{ old('bukti_lulus') }}" >
-                            @error('bukti_lulus')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                      </div>
-
                     </div>
                     <div class="card-footer bg-whitesmoke">
                       <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>

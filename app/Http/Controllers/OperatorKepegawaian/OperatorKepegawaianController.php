@@ -282,10 +282,6 @@ class OperatorKepegawaianController extends Controller
             }
             //cek apakah ada diklat atau tidak, jika ada hapus bukti dan datanya
             if ($data->diklat_penjenjangan != null) {
-                //hapus semua diklat penjenjangan yang dimiliki
-                foreach ($data->diklat_penjenjangan as $diklat) {
-                    Storage::delete('/public/bukti_lulus/'.$diklat->bukti_lulus);
-                }
                 DiklatPenjenjangan::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
             }
             //untuk menghapus foto yang tersimpan

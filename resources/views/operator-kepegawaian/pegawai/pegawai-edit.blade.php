@@ -1080,7 +1080,6 @@
                                                             <th scope="col">Tahun</th>
                                                             <th scope="col">Nomor</th>
                                                             <th scope="col">Tanggal</th>
-                                                            <th scope="col">Bukti Lulus</th>
                                                             <th scope="col">Aksi</th>
                                                         </tr>
                                                 </thead>
@@ -1090,8 +1089,7 @@
                                                             <td>{{ $item->nama_diklat }}</td>
                                                             <td>{{ $item->tahun }}</td>
                                                             <td>{{ $item->nomor }}</td>
-                                                            <td>{{ $item->tanggal }}</td>
-                                                            <td><a href='{{ asset('/storage/bukti_lulus/'.$item->bukti_lulus)}}' target='_blank' title='download'><i class='fa fa-file'></i></a></td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
                                                             <td>
                                                                 <a href="{{ route('pegawai-diklat-penjenjangan.edit',$item->id_diklat) }}" class="btn btn-warning text-white btn-sm" title="Edit">
                                                                     <i class="fas fa-pencil-alt"></i>
@@ -1242,7 +1240,7 @@
                                                             <td>{{ $item->jenis }}</td>
                                                             <td>{{ $item->penjabat }}</td>
                                                             <td>{{ $item->nomor }}</td>
-                                                            <td>{{ $item->tanggal }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
                                                             <td>
                                                                 <a href="{{ route('pegawai-keterangan-lain.edit',$item->id_ketlain) }}" class="btn btn-warning text-white btn-sm" title="Edit">
                                                                     <i class="fas fa-pencil-alt"></i>
@@ -1295,7 +1293,7 @@
                                                             <td>{{ $item->jenis_mutasi }}</td>
                                                             <td>{{ $item->asal }}</td>
                                                             <td>{{ $item->tujuan }}</td>
-                                                            <td>{{ $item->tanggal }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
                                                             <td>
                                                                 <a href="{{ route('pegawai-mutasi.edit',$item->id_mutasi) }}" class="btn btn-warning text-white btn-sm" title="Edit">
                                                                     <i class="fas fa-pencil-alt"></i>

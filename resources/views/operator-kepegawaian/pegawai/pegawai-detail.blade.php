@@ -618,7 +618,6 @@
                                                             <th scope="col">Tahun</th>
                                                             <th scope="col">Nomor</th>
                                                             <th scope="col">Tanggal</th>
-                                                            <th scope="col">Bukti Lulus</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
@@ -628,7 +627,6 @@
                                                             <td>{{ $item->tahun }}</td>
                                                             <td>{{ $item->nomor }}</td>
                                                             <td>{{ $item->tanggal }}</td>
-                                                            <td><a href='{{ asset('/storage/bukti_lulus/'.$item->bukti_lulus)}}' target='_blank' title='download'><i class='fa fa-file'></i></a></td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

@@ -20,7 +20,6 @@ class CreateDiklatPenjenjanganTable extends Migration
             $table->string('tahun',5);
             $table->string('nomor',60);
             $table->date('tanggal');
-            $table->string('bukti_lulus',254);//ini bukti lulus
         });
     }
 
