@@ -680,6 +680,46 @@
                             </div>
                             @endif
                         </div>
+                        <div class="row justify-content-center">
+                            @if ($pegawai->keterangan_lain->count() > 0)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Riwayat Keterangan lain - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Jenis</th>
+                                                            <th scope="col">Penjabat</th>
+                                                            <th scope="col">Nomor</th>
+                                                            <th scope="col">Tanggal</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($pegawai->keterangan_lain as $item)
+                                                        <tr class="text-center">
+                                                            <td>{{ $item->jenis }}</td>
+                                                            <td>{{ $item->penjabat }}</td>
+                                                            <td>{{ $item->nomor }}</td>
+                                                            <td>{{ $item->tanggal }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Riwayat Keterangan lain - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                    <p class="border-bottom text-gray-800">
+                                        - Riwayat Keterangan lain belum diisi, lengkapi dimenu Kepegawaian -
+                                    </p>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
                 </div>

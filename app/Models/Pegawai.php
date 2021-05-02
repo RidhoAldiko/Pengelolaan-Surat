@@ -118,5 +118,10 @@ class Pegawai extends Model
     {
         return $this->hasMany(Organisasi::class,'nip_pegawai','nip_pegawai');
     }
+    //table pegawai memiliki banyak keterangan lain yang dikirim ketabel keterangan lain dengan relasi one to many
+    public function keterangan_lain()
+    {
+        return $this->hasMany(KeteranganLain::class,'nip_pegawai','nip_pegawai');
+    }
 
 }

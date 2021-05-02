@@ -12,6 +12,7 @@ use App\Http\Controllers\OperatorKepegawaian\AlamatController;
 use App\Http\Controllers\OperatorKepegawaian\HobiController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganBadanController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganKeluargaController;
+use App\Http\Controllers\OperatorKepegawaian\KeteranganLainController;
 use App\Http\Controllers\OperatorKepegawaian\MertuaController;
 use App\Http\Controllers\OperatorSurat\OperatorSuratController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
@@ -137,6 +138,8 @@ Route::prefix('operator-kepegawaian')
         Route::resource('pegawai-pengalaman-keluar-negeri',PengalamanKeluarNegeriController::class);
         // -----------------------organisasi---------------------------------
         Route::resource('pegawai-organisasi',OrganisasiController::class);
+         // -----------------------keterangan lain---------------------------------
+         Route::resource('pegawai-keterangan-lain',KeteranganLainController::class);
         
     });
 

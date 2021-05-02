@@ -46,6 +46,6 @@ class PenghargaanController extends Controller
     {
         $data = Penghargaan::findOrFail($id);
         $data->delete();
-        return redirect()->route('data-pegawai.edit',$data->nip_pegawai)->with('status',"Data bintang/penghargaan berhasil diedit");
+        return redirect()->route('data-pegawai.edit',$data->nip_pegawai)->with('status',"Data bintang/penghargaan berhasil dihapus");
     }
 }
