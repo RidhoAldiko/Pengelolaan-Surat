@@ -38,6 +38,9 @@
                     <li class="nav-item">
                         <a class="nav-link" id="mutasi-tab" data-toggle="tab" href="#mutasi" role="tab" aria-controls="mutasi" aria-selected="false">Mutasi</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="dokumen-tab" data-toggle="tab" href="#dokumen" role="tab" aria-controls="dokumen" aria-selected="false">Dokumen</a>
+                    </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="pegawai" role="tabpanel" aria-labelledby="pegawai-tab">
@@ -800,6 +803,46 @@
                                     <label>Riwayat Mutasi - <code>{{ $pegawai->nama_pegawai }}</code></label>
                                     <p class="border-bottom text-gray-800">
                                         - Riwayat Mutasi belum diisi, lengkapi dimenu Mutasi -
+                                    </p>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="dokumen" role="tabpanel" aria-labelledby="dokumen-tab">
+                        <div class="row justify-content-center">
+                            @if ($pegawai->dokumen_pegawai->count() > 0)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Riwayat File Dokumen - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Nama Pegawai</th>
+                                                            <th scope="col">Keterangan</th>
+                                                            <th scope="col">File Dokumen</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($pegawai->dokumen_pegawai as $item)
+                                                        <tr class="text-center">
+                                                            <td>{{ $item->nama_dokumen }}</td>
+                                                            <td>{{ $item->keterangan }}</td>
+                                                            <td><a href='{{ asset('/storage/file_dokumen/'.$item->file_dokumen)}}' target='_blank' title='download'><i class='fa fa-file'></i></a></td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Riwayat File Dokumen - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                    <p class="border-bottom text-gray-800">
+                                        - Riwayat File Dokumen belum diisi, lengkapi dimenu Dokumen Pegawai -
                                     </p>
                                 </div>
                             </div>

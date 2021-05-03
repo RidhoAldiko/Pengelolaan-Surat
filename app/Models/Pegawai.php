@@ -133,5 +133,10 @@ class Pegawai extends Model
     {
         return $this->hasMany(DiklatPenjenjangan::class,'nip_pegawai','nip_pegawai');
     }
+    //table pegawai memiliki banyak dokumen pegawai yang dikirim ketabel dokumen pegawai dengan relasi one to many
+    public function dokumen_pegawai()
+    {
+        return $this->hasMany(DokumenPegawai::class,'nip_pegawai','nip_pegawai');
+    }
 
 }

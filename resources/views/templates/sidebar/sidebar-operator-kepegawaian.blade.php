@@ -54,6 +54,11 @@
             <li class="{{set_active(['pegawai-mutasi.create'])}}"><a class="nav-link" href="{{route('pegawai-mutasi.create')}}">
                 <i class="fa fa-retweet"></i><span>Mutasi Pegawai</span></a>
             </li>
+
+            <li class="{{set_active(['dokumen-pegawai.create'])}}"><a class="nav-link" href="{{route('dokumen-pegawai.create')}}">
+                <i class="fa fa-book"></i><span>Dokumen Pegawai</span></a>
+            </li>
+
         </ul>
     </aside>
     </div>

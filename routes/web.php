@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\LevelSuratController;
 use App\Http\Controllers\OperatorKepegawaian\PenghargaanController;
 use App\Http\Controllers\OperatorKepegawaian\AlamatController;
 use App\Http\Controllers\OperatorKepegawaian\DiklatPenjenjanganController;
+use App\Http\Controllers\OperatorKepegawaian\DokumenPegawaiController;
 use App\Http\Controllers\OperatorKepegawaian\HobiController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganBadanController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganKeluargaController;
@@ -146,6 +147,8 @@ Route::prefix('operator-kepegawaian')
          Route::resource('pegawai-mutasi',MutasiController::class);
          // -----------------------diklat penjenjangan---------------------------------
          Route::resource('pegawai-diklat-penjenjangan',DiklatPenjenjanganController::class);
+         // -----------------------dokumen pegawai---------------------------------
+         Route::resource('dokumen-pegawai',DokumenPegawaiController::class);
         
     });
 
