@@ -22,6 +22,7 @@ use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
 use App\Http\Controllers\OperatorKepegawaian\OrangtuaKandungController;
 use App\Http\Controllers\OperatorKepegawaian\OrganisasiController;
 use App\Http\Controllers\OperatorKepegawaian\PengalamanKeluarNegeriController;
+use App\Http\Controllers\OperatorKepegawaian\RiwayatPangkatController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatPendidikanController;
 use App\Http\Controllers\OperatorKepegawaian\SaudaraKandungController;
 use Illuminate\Support\Facades\Auth;
@@ -147,6 +148,8 @@ Route::prefix('operator-kepegawaian')
          Route::resource('pegawai-mutasi',MutasiController::class);
          // -----------------------diklat penjenjangan---------------------------------
          Route::resource('pegawai-diklat-penjenjangan',DiklatPenjenjanganController::class);
+         // -----------------------riwayat pangkat---------------------------------
+         Route::resource('pegawai-riwayat-pangkat',RiwayatPangkatController::class);
          // -----------------------dokumen pegawai---------------------------------
          Route::resource('dokumen-pegawai',DokumenPegawaiController::class);
         

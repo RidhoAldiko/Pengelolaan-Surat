@@ -23,6 +23,10 @@ class CreateOrganisasiTable extends Migration
             $table->string('tahun_selesai',5);
             $table->text('tempat');
             $table->string('pimpinan',30);
+
+
+            // foreign key dari tabel pegawai
+            $table->foreign('nip_pegawai')->references('nip_pegawai')->on('pegawai')->onUpdate('cascade');
         });
     }
 

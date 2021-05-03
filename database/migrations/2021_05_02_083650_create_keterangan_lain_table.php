@@ -20,6 +20,10 @@ class CreateKeteranganLainTable extends Migration
             $table->string('penjabat',60);
             $table->string('nomor',60);
             $table->date('tanggal');
+
+
+            // foreign key dari tabel pegawai
+            $table->foreign('nip_pegawai')->references('nip_pegawai')->on('pegawai')->onUpdate('cascade');
         });
     }
 

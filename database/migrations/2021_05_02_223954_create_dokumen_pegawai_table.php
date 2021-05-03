@@ -17,8 +17,11 @@ class CreateDokumenPegawaiTable extends Migration
             $table->smallIncrements('id_dokpegawai');
             $table->char('nip_pegawai',18);
             $table->string('nama_dokumen',60);
-            $table->text('keterangan')->nullable()->default('-');
+            $table->text('keterangan')->default('-');
             $table->string('file_dokumen',254);
+
+            // foreign key dari tabel pegawai
+            $table->foreign('nip_pegawai')->references('nip_pegawai')->on('pegawai')->onUpdate('cascade');
         });
     }
 

@@ -1071,6 +1071,59 @@
                     </div>
                     <div class="tab-pane fade" id="kepegawaian" role="tabpanel" aria-labelledby="kepegawaian-tab">
                         <div class="row justify-content-center">
+                            @if ($pegawai->riwayat_pangkat->count() > 0)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Riwayat Pangkat Pegawai - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Golongan</th>
+                                                            <th scope="col">TMT</th>
+                                                            <th scope="col">Penjabat</th>
+                                                            <th scope="col">Nomor</th>
+                                                            <th scope="col">Tanggal</th>
+                                                            <th scope="col">Aksi</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($pegawai->riwayat_pangkat as $item)
+                                                        <tr class="text-center">
+                                                            <td>{{ $item->golongan->nama_golongan }}</td>
+                                                            <td>{{ $item->tmt }}</td>
+                                                            <td>{{ $item->penjabat }}</td>
+                                                            <td>{{ $item->nomor }}</td>
+                                                            <td>{{ $item->tanggal }}</td>
+                                                            <td>
+                                                                <a href="{{ route('pegawai-riwayat-pangkat.edit',$item->id_riwayat_pangkat) }}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                </a>
+                                                                <form action="{{ route('pegawai-riwayat-pangkat.destroy',$item->id_riwayat_pangkat) }}" method="post" class="d-inline">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data riwayat pangkat ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                </form> 
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Riwayat Pangkat Pegawai - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                    <p class="border-bottom text-gray-800">
+                                        - Riwayat Pangkat Pegawai belum diisi, lengkapi dimenu Kepegawaian -
+                                    </p>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="row justify-content-center">
                             @if ($pegawai->diklat_penjenjangan->count() > 0)
                                 <div class="col-md-12">
                                     <div class="form-group">

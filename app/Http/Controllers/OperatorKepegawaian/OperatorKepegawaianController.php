@@ -26,6 +26,7 @@ use App\Models\RiwayatPendidikan;
 use App\Models\SaudaraKandung;
 use App\Models\DiklatPenjenjangan;
 use App\Models\DokumenPegawai;
+use App\Models\RiwayatPangkat;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Storage;
 
@@ -130,7 +131,7 @@ class OperatorKepegawaianController extends Controller
                                 'penghargaan','pengalaman_keluar_negeri',
                                 'organisasi','keterangan_lain',
                                 'mutasi','diklat_penjenjangan',
-                                'dokumen_pegawai'])->where('nip_pegawai',$id)->findOrFail($id);
+                                'dokumen_pegawai','riwayat_pangkat'])->where('nip_pegawai',$id)->findOrFail($id);
         
         //untuk mengambil data organisasi pada waktu Semasa SLTA ke bawah                       
         $organisasi1        = Organisasi::where('waktu','Semasa SLTA ke bawah')->where('nip_pegawai',$id)->get();
@@ -168,7 +169,7 @@ class OperatorKepegawaianController extends Controller
                         'penghargaan','pengalaman_keluar_negeri',
                         'organisasi','keterangan_lain',
                         'mutasi','diklat_penjenjangan',
-                        'dokumen_pegawai'])->where('nip_pegawai',$id)->findOrFail($id);
+                        'dokumen_pegawai','riwayat_pangkat'])->where('nip_pegawai',$id)->findOrFail($id);
         //untuk mengambil data organisasi pada waktu Semasa SLTA ke bawah                       
         $organisasi1        = Organisasi::where('waktu','Semasa SLTA ke bawah')->where('nip_pegawai',$id)->get();
         //untuk mengambil data organisasi pada waktu Semasa Perguruan Tinggi                      
@@ -230,7 +231,7 @@ class OperatorKepegawaianController extends Controller
                         'penghargaan','pengalaman_keluar_negeri',
                         'organisasi','keterangan_lain',
                         'mutasi','diklat_penjenjangan',
-                        'dokumen_pegawai'])->where('nip_pegawai',$data_pegawai->nip_pegawai)->findOrFail($data_pegawai->nip_pegawai);
+                        'dokumen_pegawai','riwayat_pangkat'])->where('nip_pegawai',$data_pegawai->nip_pegawai)->findOrFail($data_pegawai->nip_pegawai);
     
             //jika databasenya ada alamat maka hapus alamatnya
             if ($data->alamat != null) {
@@ -287,6 +288,10 @@ class OperatorKepegawaianController extends Controller
             //jika ada diklat hapus 
             if ($data->diklat_penjenjangan != null) {
                 DiklatPenjenjangan::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika ada pangkat hapus 
+            if ($data->riwayat_pangkat != null) {
+                RiwayatPangkat::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
             }
             //cek apakah ada dokumen atau tidak, jika ada hapus bukti dan datanya
             if ($data->dokumen_pegawai != null) {

@@ -20,6 +20,10 @@ class CreatePengalamanKeluarNegeriTable extends Migration
             $table->string('tujuan',100);
             $table->string('lama',20);
             $table->string('membiayai',60);
+
+
+            // foreign key dari tabel pegawai
+            $table->foreign('nip_pegawai')->references('nip_pegawai')->on('pegawai')->onUpdate('cascade');
         });
     }
 

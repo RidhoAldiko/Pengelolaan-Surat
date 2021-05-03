@@ -19,6 +19,9 @@ class CreatePenghargaanTable extends Migration
             $table->string('nama_penghargaan',100);
             $table->string('tahun',5);
             $table->string('negara_instansi',60);
+
+            // foreign key dari tabel pegawai
+            $table->foreign('nip_pegawai')->references('nip_pegawai')->on('pegawai')->onUpdate('cascade');
         });
     }
 

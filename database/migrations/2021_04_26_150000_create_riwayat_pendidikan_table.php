@@ -26,6 +26,10 @@ class CreateRiwayatPendidikanTable extends Migration
             $table->date('mulai');
             $table->date('sampai');
             $table->string('tanda_lulus',50);
+
+
+            // foreign key dari tabel pegawai
+            $table->foreign('nip_pegawai')->references('nip_pegawai')->on('pegawai')->onUpdate('cascade');
         });
     }
 

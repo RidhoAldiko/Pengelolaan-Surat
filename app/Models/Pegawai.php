@@ -138,5 +138,10 @@ class Pegawai extends Model
     {
         return $this->hasMany(DokumenPegawai::class,'nip_pegawai','nip_pegawai');
     }
+    //table pegawai memiliki banyak riwayat pangkat pegawai yang dikirim ketabel riwayat pangkat pegawai dengan relasi one to many
+    public function riwayat_pangkat()
+    {
+        return $this->hasMany(RiwayatPangkat::class,'nip_pegawai','nip_pegawai');
+    }
 
 }

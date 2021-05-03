@@ -20,6 +20,11 @@ class CreateMutasiTable extends Migration
             $table->string('asal',60);
             $table->string('tujuan',60);
             $table->date('tanggal');
+
+
+
+            // foreign key dari tabel pegawai
+            $table->foreign('nip_pegawai')->references('nip_pegawai')->on('pegawai')->onUpdate('cascade');
         });
     }
 
