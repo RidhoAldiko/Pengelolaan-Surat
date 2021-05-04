@@ -41,7 +41,12 @@ class OperatorKepegawaianController extends Controller
     //method dashboad
     public function index()
     {   
-        return view('operator-kepegawaian.dashboard');
+        return view('operator-kepegawaian.dashboard',[
+            'total_pegawai' => Pegawai::count(),
+            'total_dokumen'  => DokumenPegawai::count(),
+            'total_mutasi'  => Mutasi::count(),
+            'total_penghargaan'    => Penghargaan::count()
+        ]);
     }
     // method form data pegawai
     public function data_pegawai(){
@@ -237,7 +242,8 @@ class OperatorKepegawaianController extends Controller
                         'penghargaan','pengalaman_keluar_negeri',
                         'organisasi','keterangan_lain',
                         'mutasi','diklat_penjenjangan',
-                        'dokumen_pegawai','riwayat_pangkat'])->where('nip_pegawai',$data_pegawai->nip_pegawai)->findOrFail($data_pegawai->nip_pegawai);
+                        'dokumen_pegawai','riwayat_pangkat',
+                        'riwayat_kgb'])->where('nip_pegawai',$data_pegawai->nip_pegawai)->findOrFail($data_pegawai->nip_pegawai);
     
             //jika databasenya ada alamat maka hapus alamatnya
             if ($data->alamat != null) {
@@ -298,6 +304,10 @@ class OperatorKepegawaianController extends Controller
             //jika ada pangkat hapus 
             if ($data->riwayat_pangkat != null) {
                 RiwayatPangkat::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika ada pangkat hapus 
+            if ($data->riwayat_kgb != null) {
+                RiwayatKGB::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
             }
             //cek apakah ada dokumen atau tidak, jika ada hapus bukti dan datanya
             if ($data->dokumen_pegawai != null) {
