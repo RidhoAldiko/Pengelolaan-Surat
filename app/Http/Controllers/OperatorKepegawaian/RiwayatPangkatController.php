@@ -21,7 +21,7 @@ class RiwayatPangkatController extends Controller
     public function store(RiwayatPangkatRequest $request)
     {
         $data = $request->all();
-
+        
         //pisahkan dan ambil nip pegawai saja
         $explode = explode(' - ',$request->nip_pegawai,-1);
         //timpa nip lama dengan nip baru yang sudah dipisahkan dari nama

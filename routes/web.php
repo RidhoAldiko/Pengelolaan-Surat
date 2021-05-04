@@ -23,6 +23,7 @@ use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
 use App\Http\Controllers\OperatorKepegawaian\OrangtuaKandungController;
 use App\Http\Controllers\OperatorKepegawaian\OrganisasiController;
 use App\Http\Controllers\OperatorKepegawaian\PengalamanKeluarNegeriController;
+use App\Http\Controllers\OperatorKepegawaian\RiwayatKGBController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatPangkatController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatPendidikanController;
 use App\Http\Controllers\OperatorKepegawaian\SaudaraKandungController;
@@ -139,9 +140,11 @@ Route::prefix('operator-kepegawaian')
         Route::resource('pegawai-mertua',MertuaController::class);
         // -----------------------saudara kandung---------------------------------
         Route::resource('pegawai-saudara-kandung',SaudaraKandungController::class);
+
+                    //kepegawaian
         // -----------------------penghargaan---------------------------------
         Route::resource('pegawai-penghargaan',PenghargaanController::class);
-        // -----------------------penghargaan---------------------------------
+        // -----------------------pengalaman keluar negeri---------------------------------
         Route::resource('pegawai-pengalaman-keluar-negeri',PengalamanKeluarNegeriController::class);
         // -----------------------organisasi---------------------------------
         Route::resource('pegawai-organisasi',OrganisasiController::class);
@@ -153,6 +156,8 @@ Route::prefix('operator-kepegawaian')
          Route::resource('pegawai-diklat-penjenjangan',DiklatPenjenjanganController::class);
          // -----------------------riwayat pangkat---------------------------------
          Route::resource('pegawai-riwayat-pangkat',RiwayatPangkatController::class);
+         // -----------------------riwayat KGB---------------------------------
+         Route::resource('pegawai-riwayat-kgb',RiwayatKGBController::class);
          // -----------------------dokumen pegawai---------------------------------
          Route::resource('dokumen-pegawai',DokumenPegawaiController::class);
         

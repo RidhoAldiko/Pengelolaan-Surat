@@ -143,5 +143,10 @@ class Pegawai extends Model
     {
         return $this->hasMany(RiwayatPangkat::class,'nip_pegawai','nip_pegawai');
     }
+    //table pegawai memiliki banyak riwayat kgb pegawai yang dikirim ketabel riwayat kgb pegawai dengan relasi one to many
+    public function riwayat_kgb()
+    {
+        return $this->hasMany(RiwayatKGB::class,'nip_pegawai','nip_pegawai');
+    }
 
 }

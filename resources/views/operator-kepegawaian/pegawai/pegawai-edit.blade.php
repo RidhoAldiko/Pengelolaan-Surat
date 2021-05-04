@@ -47,7 +47,10 @@
                         <a class="nav-link" id="mutasi-tab" data-toggle="tab" href="#mutasi" role="tab" aria-controls="mutasi" aria-selected="false">Mutasi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="dokumen-tab" data-toggle="tab" href="#dokumen" role="tab" aria-controls="dokumen" aria-selected="false">Dokumen</a>
+                        <a class="nav-link" id="dokumen-tab" data-toggle="tab" href="#dokumen" role="tab" aria-controls="dokumen" aria-selected="false">Dokumen Pegawai</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="kgb-tab" data-toggle="tab" href="#kgb" role="tab" aria-controls="kgb" aria-selected="false">Kenaikan Gaji Berkala</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -1094,7 +1097,7 @@
                                                             <td>{{ $item->tmt }}</td>
                                                             <td>{{ $item->penjabat }}</td>
                                                             <td>{{ $item->nomor }}</td>
-                                                            <td>{{ $item->tanggal }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
                                                             <td>
                                                                 <a href="{{ route('pegawai-riwayat-pangkat.edit',$item->id_riwayat_pangkat) }}" class="btn btn-warning text-white btn-sm" title="Edit">
                                                                     <i class="fas fa-pencil-alt"></i>
@@ -1424,6 +1427,58 @@
                                     <label>Riwayat File Dokumen - <code>{{ $pegawai->nama_pegawai }}</code></label>
                                     <p class="border-bottom text-gray-800">
                                         - Riwayat File Dokumen belum diisi, lengkapi dimenu Dokumen Pegawai -
+                                    </p>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="kgb" role="tabpanel" aria-labelledby="kgb-tab">
+                        <div class="row justify-content-center">
+                            @if ($pegawai->riwayat_kgb->count() > 0)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Riwayat Kenaikan Gaji Berkala - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Golongan</th>
+                                                            <th scope="col">Gaji</th>
+                                                            <th scope="col">Mulai Berlaku</th>
+                                                            <th scope="col">Aksi</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($kgb as $item)
+                                                        <tr class="text-center">
+                                                            <td>@if ($pegawai->golongan->id_golongan == $item->gaji->id_golongan)
+                                                                {{ $pegawai->golongan->nama_golongan }}
+                                                            @endif</td>
+                                                            <td>{{ $item->gaji->jumlah_gaji }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->mulai_berlaku)) }}</td><td>
+                                                                <a href="{{ route('pegawai-riwayat-kgb.edit',$item->id_riwayat_kgb) }}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                </a>
+                                                                <form action="{{ route('pegawai-riwayat-kgb.destroy',$item->id_riwayat_kgb) }}" method="post" class="d-inline">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data kenaikan gaji berkala ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                </form> 
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Riwayat Kenaikan Gaji Berkala - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                    <p class="border-bottom text-gray-800">
+                                        - Riwayat Kenaikan Gaji Berkala belum diisi, lengkapi dimenu Dokumen Kepegawaian -
                                     </p>
                                 </div>
                             </div>

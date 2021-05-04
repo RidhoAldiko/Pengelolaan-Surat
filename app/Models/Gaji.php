@@ -23,4 +23,10 @@ class Gaji extends Model
     {
         return $this->belongsTo(Golongan::class,'id_golongan','id_golongan');
     }
+
+    //table pegawai memiliki 1 relasi yang dikirim ke tabel unit_kerja dengan relasi one to one
+    public function riwayat_kgb()
+    {
+        return $this->belongsTo(RiwayatKGB::class,'id_gaji','id_gaji');
+    }
 }

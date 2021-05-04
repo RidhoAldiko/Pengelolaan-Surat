@@ -26,6 +26,7 @@ use App\Models\RiwayatPendidikan;
 use App\Models\SaudaraKandung;
 use App\Models\DiklatPenjenjangan;
 use App\Models\DokumenPegawai;
+use App\Models\RiwayatKGB;
 use App\Models\RiwayatPangkat;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Storage;
@@ -131,7 +132,8 @@ class OperatorKepegawaianController extends Controller
                                 'penghargaan','pengalaman_keluar_negeri',
                                 'organisasi','keterangan_lain',
                                 'mutasi','diklat_penjenjangan',
-                                'dokumen_pegawai','riwayat_pangkat'])->where('nip_pegawai',$id)->findOrFail($id);
+                                'dokumen_pegawai','riwayat_pangkat',
+                                'riwayat_kgb'])->where('nip_pegawai',$id)->findOrFail($id);
         
         //untuk mengambil data organisasi pada waktu Semasa SLTA ke bawah                       
         $organisasi1        = Organisasi::where('waktu','Semasa SLTA ke bawah')->where('nip_pegawai',$id)->get();
@@ -139,12 +141,14 @@ class OperatorKepegawaianController extends Controller
         $organisasi2        = Organisasi::where('waktu','Semasa Perguruan Tinggi')->where('nip_pegawai',$id)->get();
         //untuk mengambil data organisasi pada waktu Selesai Pendidikan atau Selama Menjadi PNS                      
         $organisasi3        = Organisasi::where('waktu','Selesai Pendidikan atau Selama Menjadi PNS')->where('nip_pegawai',$id)->get();
+        $kgb                = RiwayatKGB::with(['gaji'])->get();
       
         return view('operator-kepegawaian.pegawai.pegawai-detail',[
             'pegawai'       => $datapegawai,
             'organisasi1'   => $organisasi1,
             'organisasi2'   => $organisasi2,
             'organisasi3'   => $organisasi3,
+            'kgb'           => $kgb
         ]);
     }
 
@@ -169,15 +173,17 @@ class OperatorKepegawaianController extends Controller
                         'penghargaan','pengalaman_keluar_negeri',
                         'organisasi','keterangan_lain',
                         'mutasi','diklat_penjenjangan',
-                        'dokumen_pegawai','riwayat_pangkat'])->where('nip_pegawai',$id)->findOrFail($id);
+                        'dokumen_pegawai','riwayat_pangkat',
+                        'riwayat_kgb'])->where('nip_pegawai',$id)->findOrFail($id);
         //untuk mengambil data organisasi pada waktu Semasa SLTA ke bawah                       
         $organisasi1        = Organisasi::where('waktu','Semasa SLTA ke bawah')->where('nip_pegawai',$id)->get();
         //untuk mengambil data organisasi pada waktu Semasa Perguruan Tinggi                      
         $organisasi2        = Organisasi::where('waktu','Semasa Perguruan Tinggi')->where('nip_pegawai',$id)->get();
         //untuk mengambil data organisasi pada waktu Selesai Pendidikan atau Selama Menjadi PNS                      
         $organisasi3        = Organisasi::where('waktu','Selesai Pendidikan atau Selama Menjadi PNS')->where('nip_pegawai',$id)->get();
-        
-        return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('unit','jabatan','golongan','pegawai','organisasi1','organisasi2','organisasi3'));
+        $kgb                = RiwayatKGB::with(['gaji'])->get();
+
+        return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('unit','jabatan','golongan','pegawai','organisasi1','organisasi2','organisasi3','kgb'));
     }
 
     public function update(PegawaiRequest $request, $id)
