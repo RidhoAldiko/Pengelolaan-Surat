@@ -30,7 +30,7 @@ class JabatanController extends Controller
     public function store(JabatanRequest $request)
     {
         $data           = $request->all();
-        $data['status'] = '0';
+        $data['status'] = 0;
         jabatan::create($data);
 
         return redirect()->route('data-jabatan.index')->with('status','Data Berhasil Ditambah');

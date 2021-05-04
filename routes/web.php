@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 //Mendefinisikan controller yang digunakan
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\GajiController;
 use App\Http\Controllers\Admin\GolonganController;
 use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\UnitKerjaController;
@@ -73,6 +74,8 @@ Route::prefix('admin')
             Route::resource('data-golongan', GolonganController::class);
             //JABATAN
             Route::resource('data-jabatan', JabatanController::class);
+            //GAJI
+            Route::resource('data-gaji', GajiController::class);
         
     });
 

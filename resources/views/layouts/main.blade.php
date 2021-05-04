@@ -140,6 +140,7 @@ gtag('config', 'UA-94034622-3');
 @stack('script-delete-jabatan')
 @stack('script-delete-unit_kerja')
 @stack('script-delete-level_surat')
+@stack('script-delete-gaji')
 
 </body>
 </html>
