@@ -15,10 +15,19 @@ use App\Models\Jabatan;
 use App\Models\Alamat;
 use App\Models\KeteranganBadan;
 use App\Models\KeteranganKeluarga;
+use App\Models\KeteranganLain;
 use App\Models\Mertua;
+use App\Models\Mutasi;
 use App\Models\OrangtuaKandung;
+use App\Models\Organisasi;
+use App\Models\PengalamanKeluarNegeri;
+use App\Models\Penghargaan;
 use App\Models\RiwayatPendidikan;
 use App\Models\SaudaraKandung;
+use App\Models\DiklatPenjenjangan;
+use App\Models\DokumenPegawai;
+use App\Models\RiwayatKGB;
+use App\Models\RiwayatPangkat;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,7 +41,12 @@ class OperatorKepegawaianController extends Controller
     //method dashboad
     public function index()
     {   
-        return view('operator-kepegawaian.dashboard');
+        return view('operator-kepegawaian.dashboard',[
+            'total_pegawai' => Pegawai::count(),
+            'total_dokumen'  => DokumenPegawai::count(),
+            'total_mutasi'  => Mutasi::count(),
+            'total_penghargaan'    => Penghargaan::count()
+        ]);
     }
     // method form data pegawai
     public function data_pegawai(){
@@ -119,10 +133,27 @@ class OperatorKepegawaianController extends Controller
                                 'riwayat_pendidikan',
                                 'keterangan_keluarga',
                                 'orangtua_kandung',
-                                'mertua','saudara_kandung'])->where('nip_pegawai',$id)->findOrFail($id);
+                                'mertua','saudara_kandung',
+                                'penghargaan','pengalaman_keluar_negeri',
+                                'organisasi','keterangan_lain',
+                                'mutasi','diklat_penjenjangan',
+                                'dokumen_pegawai','riwayat_pangkat',
+                                'riwayat_kgb'])->where('nip_pegawai',$id)->findOrFail($id);
         
+        //untuk mengambil data organisasi pada waktu Semasa SLTA ke bawah                       
+        $organisasi1        = Organisasi::where('waktu','Semasa SLTA ke bawah')->where('nip_pegawai',$id)->get();
+        //untuk mengambil data organisasi pada waktu Semasa Perguruan Tinggi                      
+        $organisasi2        = Organisasi::where('waktu','Semasa Perguruan Tinggi')->where('nip_pegawai',$id)->get();
+        //untuk mengambil data organisasi pada waktu Selesai Pendidikan atau Selama Menjadi PNS                      
+        $organisasi3        = Organisasi::where('waktu','Selesai Pendidikan atau Selama Menjadi PNS')->where('nip_pegawai',$id)->get();
+        $kgb                = RiwayatKGB::with(['gaji'])->get();
+      
         return view('operator-kepegawaian.pegawai.pegawai-detail',[
             'pegawai'       => $datapegawai,
+            'organisasi1'   => $organisasi1,
+            'organisasi2'   => $organisasi2,
+            'organisasi3'   => $organisasi3,
+            'kgb'           => $kgb
         ]);
     }
 
@@ -143,9 +174,21 @@ class OperatorKepegawaianController extends Controller
                         'riwayat_pendidikan',
                         'keterangan_keluarga',
                         'orangtua_kandung',
-                        'mertua','saudara_kandung'])->where('nip_pegawai',$id)->findOrFail($id);
-        
-        return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('unit','jabatan','golongan','pegawai'));
+                        'mertua','saudara_kandung',
+                        'penghargaan','pengalaman_keluar_negeri',
+                        'organisasi','keterangan_lain',
+                        'mutasi','diklat_penjenjangan',
+                        'dokumen_pegawai','riwayat_pangkat',
+                        'riwayat_kgb'])->where('nip_pegawai',$id)->findOrFail($id);
+        //untuk mengambil data organisasi pada waktu Semasa SLTA ke bawah                       
+        $organisasi1        = Organisasi::where('waktu','Semasa SLTA ke bawah')->where('nip_pegawai',$id)->get();
+        //untuk mengambil data organisasi pada waktu Semasa Perguruan Tinggi                      
+        $organisasi2        = Organisasi::where('waktu','Semasa Perguruan Tinggi')->where('nip_pegawai',$id)->get();
+        //untuk mengambil data organisasi pada waktu Selesai Pendidikan atau Selama Menjadi PNS                      
+        $organisasi3        = Organisasi::where('waktu','Selesai Pendidikan atau Selama Menjadi PNS')->where('nip_pegawai',$id)->get();
+        $kgb                = RiwayatKGB::with(['gaji'])->get();
+
+        return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('unit','jabatan','golongan','pegawai','organisasi1','organisasi2','organisasi3','kgb'));
     }
 
     public function update(PegawaiRequest $request, $id)
@@ -195,8 +238,13 @@ class OperatorKepegawaianController extends Controller
                         'riwayat_pendidikan',
                         'keterangan_keluarga',
                         'orangtua_kandung',
-                        'mertua','saudara_kandung'])->where('nip_pegawai',$data_pegawai->nip_pegawai)->findOrFail($data_pegawai->nip_pegawai);
-           
+                        'mertua','saudara_kandung',
+                        'penghargaan','pengalaman_keluar_negeri',
+                        'organisasi','keterangan_lain',
+                        'mutasi','diklat_penjenjangan',
+                        'dokumen_pegawai','riwayat_pangkat',
+                        'riwayat_kgb'])->where('nip_pegawai',$data_pegawai->nip_pegawai)->findOrFail($data_pegawai->nip_pegawai);
+    
             //jika databasenya ada alamat maka hapus alamatnya
             if ($data->alamat != null) {
                 Alamat::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
@@ -229,10 +277,51 @@ class OperatorKepegawaianController extends Controller
             if ($data->saudara_kandung != null) {
                 SaudaraKandung::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
             }
+            //jika databasenya ada penghargaan maka hpus
+            if ($data->penghargaan != null) {
+                Penghargaan::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika databasenya ada penghargaan maka hpus
+            if ($data->pengalaman_keluar_negeri != null) {
+                PengalamanKeluarNegeri::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika databasenya ada organisasi maka hpus
+            if ($data->organisasi != null) {
+                Organisasi::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika databasenya ada keterangan lain maka hpus
+            if ($data->keterangan_lain != null) {
+                KeteranganLain::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika databasenya ada mutasi maka hpus
+            if ($data->mutasi != null) {
+                Mutasi::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika ada diklat hapus 
+            if ($data->diklat_penjenjangan != null) {
+                DiklatPenjenjangan::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika ada pangkat hapus 
+            if ($data->riwayat_pangkat != null) {
+                RiwayatPangkat::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //jika ada pangkat hapus 
+            if ($data->riwayat_kgb != null) {
+                RiwayatKGB::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
+            //cek apakah ada dokumen atau tidak, jika ada hapus bukti dan datanya
+            if ($data->dokumen_pegawai != null) {
+                //hapus semua dokumen yang dimiliki
+                foreach ($data->dokumen_pegawai as $diklat) {
+                    Storage::delete('/public/file_dokumen/'.$diklat->file_dokumen);
+                }
+                DokumenPegawai::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
+            }
             //untuk menghapus foto yang tersimpan
             if ($data->foto) {
                 Storage::delete('/public/foto/'.$data->foto);
             }
+            
         Pegawai::destroy($data_pegawai->nip_pegawai);
         
         return redirect()->route('data-pegawai.index')->with('status','Data Berhasil Dihapus');

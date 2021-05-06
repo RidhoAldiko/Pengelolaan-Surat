@@ -32,7 +32,7 @@ class UnitKerjaController extends Controller
     public function store(UnitKerjaRequest $request)
     {
         $data           = $request->all();
-        $data['status'] = '0';
+        $data['status'] = 0;
 
         Unit_kerja::create($data);
         

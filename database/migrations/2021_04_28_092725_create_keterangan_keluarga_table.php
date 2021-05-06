@@ -23,6 +23,10 @@ class CreateKeteranganKeluargaTable extends Migration
             $table->date('tgl_lahir');
             $table->date('tgl_nikah')->nullable();
             $table->string('pekerjaan',50);
+
+
+            // foreign key dari tabel pegawai
+            $table->foreign('nip_pegawai')->references('nip_pegawai')->on('pegawai')->onUpdate('cascade');
         });
     }
 

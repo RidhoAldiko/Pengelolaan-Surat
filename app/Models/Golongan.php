@@ -19,4 +19,10 @@ class Golongan extends Model
     {
         return $this->hasOne(Pegawai::class,'id_golongan','id_golongan');
     }
+
+    //tabel golongan terhubung dengan tabel pegawai dengan relasi one to one
+    public function riwayat_pangkat()
+    {
+        return $this->hasOne(RiwayatPangkat::class,'id_golongan','id_golongan');
+    }
 }

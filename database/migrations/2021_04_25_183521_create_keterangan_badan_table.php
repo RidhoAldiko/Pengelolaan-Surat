@@ -23,6 +23,10 @@ class CreateKeteranganBadanTable extends Migration
             $table->string('warna_kulit',30);
             $table->string('ciri_khas',50);
             $table->string('cacat_tubuh',50);
+
+
+            // foreign key dari tabel pegawai
+            $table->foreign('nip_pegawai')->references('nip_pegawai')->on('pegawai')->onUpdate('cascade');
         });
     }
 

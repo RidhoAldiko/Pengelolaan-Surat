@@ -45,6 +45,9 @@
                     <a class="nav-link" href="{{route('data-level_surat.index')}}">
                         Level Surat
                     </a>
+                </li>
+                <li class="{{ set_active(['data-gaji.index']) }}">
+                    <a class="nav-link" href="{{ route('data-gaji.index') }}">Gaji</a>
                 </li>       
             </ul>
     </ul>

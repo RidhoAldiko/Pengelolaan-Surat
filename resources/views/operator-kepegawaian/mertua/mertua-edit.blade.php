@@ -8,18 +8,7 @@
             <li class="breadcrumb-item active" aria-current="page">Edit data mertua pegawai</li>
         </ol>
     </div>
-    @if (session('status'))
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="alert shadow alert-success alert-dismissible fade show" role="alert">
-          {{ session('status') }}
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-          </button>
-      </div>
-      </div>
-    </div>
-    @endif
+    <a href="{{ route('data-pegawai.edit',$pegawai->nip_pegawai) }}" class="btn btn-sm btn-warning mb-3 ml-3">Kembali</a>
     <div class="section-body">
         <div class="row justify-content-center">
             <div class="col-md-8">

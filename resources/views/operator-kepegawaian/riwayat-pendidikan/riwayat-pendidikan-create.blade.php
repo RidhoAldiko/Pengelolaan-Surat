@@ -34,7 +34,7 @@
                       <div class="form-group row align-items-center">
                         <label for="nip_pegawai" class="form-control-label col-sm-3 text-md-right">Pegawai</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input" placeholder="Masukan NIP Pegawai" >
+                          <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input @error('nip_pegawai') is-invalid @enderror" placeholder="Masukan NIP Pegawai" >
                           <div class="row">
                               <div class="col-md-12 search-result">
                               </div>
@@ -52,14 +52,18 @@
                         <div class="col-sm-6 col-md-9">
                           <select class="form-control selectric @error('jenis_pendidikan') is-invalid @enderror" id="jenis_pendidikan" name="jenis_pendidikan">
                             <option selected disabled>-Pilih-</option>
-                            <option value="TK">TK</option>
                             <option value="SD">SD</option>
-                            <option value="SMP">SMP</option>
-                            <option value="SMA/SMK">SMA/SMK</option>
-                            <option value="Diploma">Diploma</option>
-                            <option value="Sarjana">Sarjana</option>
-                            <option value="Magister">Magister</option>
-                            <option value="Doktor">Doktor</option>
+                            <option value="SLTP">SLTP</option>
+                            <option value="SLTA">SLTA</option>
+                            <option value="D.I">D.I</option>
+                            <option value="D.II">D.II</option>
+                            <option value="D.III/AKADEMI">D.III/AKADEMI</option>
+                            <option value="D.IV">D.IV</option>
+                            <option value="S.1">S.1</option>
+                            <option value="S.2">S.2</option>
+                            <option value="S.3">S.3</option>
+                            <option value="Spesialis I">Spesialis I</option>
+                            <option value="Spesialis II">Spesialis II</option>
                           </select>
                           @error('jenis_pendidikan')
                           <span class="invalid-feedback" role="alert">

@@ -3,19 +3,29 @@
 use Illuminate\Support\Facades\Route;
 //Mendefinisikan controller yang digunakan
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\GajiController;
 use App\Http\Controllers\Admin\GolonganController;
 use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\UnitKerjaController;
 use App\Http\Controllers\Admin\LevelSuratController;
+use App\Http\Controllers\OperatorKepegawaian\PenghargaanController;
 use App\Http\Controllers\OperatorKepegawaian\AlamatController;
+use App\Http\Controllers\OperatorKepegawaian\DiklatPenjenjanganController;
+use App\Http\Controllers\OperatorKepegawaian\DokumenPegawaiController;
 use App\Http\Controllers\OperatorKepegawaian\HobiController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganBadanController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganKeluargaController;
+use App\Http\Controllers\OperatorKepegawaian\KeteranganLainController;
 use App\Http\Controllers\OperatorKepegawaian\MertuaController;
+use App\Http\Controllers\OperatorKepegawaian\MutasiController;
 use App\Http\Controllers\OperatorSurat\OperatorSuratController;
 use App\Http\Controllers\OperatorSurat\SuratMasukController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
 use App\Http\Controllers\OperatorKepegawaian\OrangtuaKandungController;
+use App\Http\Controllers\OperatorKepegawaian\OrganisasiController;
+use App\Http\Controllers\OperatorKepegawaian\PengalamanKeluarNegeriController;
+use App\Http\Controllers\OperatorKepegawaian\RiwayatKGBController;
+use App\Http\Controllers\OperatorKepegawaian\RiwayatPangkatController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatPendidikanController;
 use App\Http\Controllers\OperatorKepegawaian\SaudaraKandungController;
 use Illuminate\Support\Facades\Auth;
@@ -66,6 +76,8 @@ Route::prefix('admin')
             Route::resource('data-golongan', GolonganController::class);
             //JABATAN
             Route::resource('data-jabatan', JabatanController::class);
+            //GAJI
+            Route::resource('data-gaji', GajiController::class);
         
     });
 
@@ -159,6 +171,26 @@ Route::prefix('operator-kepegawaian')
         Route::resource('pegawai-mertua',MertuaController::class);
         // -----------------------saudara kandung---------------------------------
         Route::resource('pegawai-saudara-kandung',SaudaraKandungController::class);
+
+                    //kepegawaian
+        // -----------------------penghargaan---------------------------------
+        Route::resource('pegawai-penghargaan',PenghargaanController::class);
+        // -----------------------pengalaman keluar negeri---------------------------------
+        Route::resource('pegawai-pengalaman-keluar-negeri',PengalamanKeluarNegeriController::class);
+        // -----------------------organisasi---------------------------------
+        Route::resource('pegawai-organisasi',OrganisasiController::class);
+         // -----------------------keterangan lain---------------------------------
+         Route::resource('pegawai-keterangan-lain',KeteranganLainController::class);
+         // -----------------------mutasi---------------------------------
+         Route::resource('pegawai-mutasi',MutasiController::class);
+         // -----------------------diklat penjenjangan---------------------------------
+         Route::resource('pegawai-diklat-penjenjangan',DiklatPenjenjanganController::class);
+         // -----------------------riwayat pangkat---------------------------------
+         Route::resource('pegawai-riwayat-pangkat',RiwayatPangkatController::class);
+         // -----------------------riwayat KGB---------------------------------
+         Route::resource('pegawai-riwayat-kgb',RiwayatKGBController::class);
+         // -----------------------dokumen pegawai---------------------------------
+         Route::resource('dokumen-pegawai',DokumenPegawaiController::class);
         
     });
 

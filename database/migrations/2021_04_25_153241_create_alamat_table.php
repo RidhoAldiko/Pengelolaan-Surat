@@ -21,6 +21,10 @@ class CreateAlamatTable extends Migration
             $table->string('kecamatan',60);
             $table->string('kabupaten_kota',50);
             $table->string('provinsi',50);
+
+
+            // foreign key dari tabel pegawai
+            $table->foreign('nip_pegawai')->references('nip_pegawai')->on('pegawai')->onUpdate('cascade');
         });
     }
 

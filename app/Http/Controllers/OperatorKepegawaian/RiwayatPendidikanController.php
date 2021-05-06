@@ -12,8 +12,8 @@ class RiwayatPendidikanController extends Controller
 {
     public function create()
     {
-        $pegawai    = Pegawai::where('status','0')->orderBy('nama_pegawai','asc')->get();
-        return view('operator-kepegawaian.riwayat-pendidikan.riwayat-pendidikan-create',compact('pegawai'));
+
+        return view('operator-kepegawaian.riwayat-pendidikan.riwayat-pendidikan-create');
     }
 
     public function store(RiwayatPendidikanRequest $request)

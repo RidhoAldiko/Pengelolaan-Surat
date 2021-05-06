@@ -30,7 +30,7 @@ class GolonganController extends Controller
     public function store(GolonganRequest $request)
     {
         $data           = $request->all();
-        $data['status'] = '0';
+        $data['status'] = 0;
         Golongan::create($data);
 
         return redirect()->route('data-golongan.index')->with('status','Data Berhasil Ditambah');
