@@ -14,12 +14,14 @@ class RiwayatKGB extends Model
     protected $fillable     = [
         'nip_pegawai',
         'mulai_berlaku',
-        'id_gaji'
+        'batas_berlaku',
+        'id_gaji',
+        'status'
     ];
 
     public function pegawai()
     {
-        return $this->belongsTo(Pegawai::class, 'nip_pegawai','id_riwayat_kgb');
+        return $this->belongsTo(Pegawai::class, 'nip_pegawai','nip_pegawai');
     }
 
     //tabel Jabatan terhubung dengan tabel gaji dengan relasi one to one

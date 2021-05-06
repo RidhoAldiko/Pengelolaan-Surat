@@ -923,7 +923,7 @@
                                                             @endif</td>
                                                             <td>{{ $item->gaji->jumlah_gaji }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($item->mulai_berlaku)) }}</td>
-                                                            <td>{{ date('d/m/Y', strtotime('+2 year', strtotime( $item->mulai_berlaku ))) }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->batas_berlaku)) }}</td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

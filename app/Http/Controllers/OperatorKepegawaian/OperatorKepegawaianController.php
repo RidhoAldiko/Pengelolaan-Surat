@@ -29,6 +29,8 @@ use App\Models\DokumenPegawai;
 use App\Models\RiwayatKGB;
 use App\Models\RiwayatPangkat;
 use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class OperatorKepegawaianController extends Controller
@@ -41,11 +43,15 @@ class OperatorKepegawaianController extends Controller
     //method dashboad
     public function index()
     {   
+
+        $dataKGB            = RiwayatKGB::with(['pegawai','gaji'])->where('status',0)->orderBy('id_riwayat_kgb','desc')->get();
+        
         return view('operator-kepegawaian.dashboard',[
             'total_pegawai' => Pegawai::count(),
             'total_dokumen'  => DokumenPegawai::count(),
             'total_mutasi'  => Mutasi::count(),
-            'total_penghargaan'    => Penghargaan::count()
+            'total_penghargaan'    => Penghargaan::count(),
+            'data_kgb'          => $dataKGB
         ]);
     }
     // method form data pegawai
@@ -89,6 +95,9 @@ class OperatorKepegawaianController extends Controller
                                 </a>
                                 <a href="#" class="btn btn-danger btn-sm getIdPegawai" data-toggle="modal" data-target="#deletePegawai" data-id="'.$data->nip_pegawai.'" >
                                     <i class="fas fa-trash fa-sm"></i> Hapus
+                                </a>
+                                <a href="'.route('data-pegawai.cetakperorangan',$data->nip_pegawai).'" class="btn btn-primary text-white btn-sm" title="Edit">
+                                <i class="fas fa-print"></i> Print
                                 </a>
                                 ';
                     return $button;
@@ -146,7 +155,7 @@ class OperatorKepegawaianController extends Controller
         $organisasi2        = Organisasi::where('waktu','Semasa Perguruan Tinggi')->where('nip_pegawai',$id)->get();
         //untuk mengambil data organisasi pada waktu Selesai Pendidikan atau Selama Menjadi PNS                      
         $organisasi3        = Organisasi::where('waktu','Selesai Pendidikan atau Selama Menjadi PNS')->where('nip_pegawai',$id)->get();
-        $kgb                = RiwayatKGB::with(['gaji'])->get();
+        $kgb                = RiwayatKGB::with(['gaji'])->where('nip_pegawai',$id)->orderBy('id_riwayat_kgb','desc')->get();
       
         return view('operator-kepegawaian.pegawai.pegawai-detail',[
             'pegawai'       => $datapegawai,
@@ -186,7 +195,7 @@ class OperatorKepegawaianController extends Controller
         $organisasi2        = Organisasi::where('waktu','Semasa Perguruan Tinggi')->where('nip_pegawai',$id)->get();
         //untuk mengambil data organisasi pada waktu Selesai Pendidikan atau Selama Menjadi PNS                      
         $organisasi3        = Organisasi::where('waktu','Selesai Pendidikan atau Selama Menjadi PNS')->where('nip_pegawai',$id)->get();
-        $kgb                = RiwayatKGB::with(['gaji'])->get();
+        $kgb                = RiwayatKGB::with(['gaji'])->where('nip_pegawai',$id)->orderBy('id_riwayat_kgb','desc')->get();
 
         return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('unit','jabatan','golongan','pegawai','organisasi1','organisasi2','organisasi3','kgb'));
     }
@@ -229,6 +238,28 @@ class OperatorKepegawaianController extends Controller
                 
         return redirect()->route('data-pegawai.index')->with('status',"Data Berhasil Edit");
     }
+
+    //metod untuk cetak pegawai perorangan
+    public function cetak_perorangan($id)
+    {
+        dd($id);
+        $pegawai = Pegawai::with([
+            'jabatan','golongan',
+            'unit_kerja','hobi',
+            'alamat','keterangan_badan',
+            'riwayat_pendidikan',
+            'keterangan_keluarga',
+            'orangtua_kandung',
+            'mertua','saudara_kandung',
+            'penghargaan','pengalaman_keluar_negeri',
+            'organisasi','keterangan_lain',
+            'mutasi','diklat_penjenjangan',
+            'dokumen_pegawai','riwayat_pangkat',
+            'riwayat_kgb'])->where('nip_pegawai',$id)->findOrFail($id);
+            
+            return view('operator-kepegawaian.pegawai.cetak_perorangan',compact('pegawai'));
+    }
+
     //metod untuk menghapus data pegawai serta data yang berhubungan dengan pegawai
     public function destroy(Pegawai $data_pegawai)
     {
