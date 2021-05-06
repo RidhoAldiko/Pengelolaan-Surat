@@ -3,7 +3,11 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Pengguna</h1>
+        <h1>Pengguna Sistem</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="{{route('data-pengguna.index')}}">Pengguna Sistem</a></div>
+            <div class="breadcrumb-item">Tambah Pengguna Sistem</div>
+        </div>
     </div>
 
     <div class="section-body ">
@@ -11,7 +15,7 @@
             <div class="col-md-8">
                 <div class="card shadow ">
                     <div class="card-header">
-                        <h4>Tambah Data Pengguna</h4>
+                        <h4>Tambah Pengguna Sistem</h4>
                     </div>
                     <div class="card-body">
                         <form action="{{route('data-pengguna.store')}}" method="post">
@@ -58,7 +62,8 @@
                             <div class="form-group level-surat">
                                 
                             </div>
-                            <button type="submit" class="btn btn-primary">Tambah</button>
+                            <a href="{{ route('data-pengguna.index') }}" class="btn btn-warning"><i class="fas fa-chevron-left"></i> Kembali</a>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i><span> Simpan</span></button>
                         </form> 
                     </div>
                 </div>

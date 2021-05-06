@@ -3,7 +3,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Unit Kerja</h1>
+        <h1>Data Unit Kerja</h1>
     </div>
     <a href="{{ route('data-unit_kerja.create') }}" class="btn btn-primary mb-3"><i class="fas fa-plus"></i> Tambah Data Unit Kerja</a>
     @if (session('status'))
@@ -17,7 +17,7 @@
     <div class="section-body">
         <div class="card shadow">
             <div class="card-header">
-                <h4>Tabel Data Unit Kerja</h4>
+                <h4>Data Unit Kerja</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -34,9 +34,12 @@
                             <tr class="text-center">
                                 <td>{{ $item->nama_unit }}</td>
                                 <td>{{ $item->status == '0' ? 'Aktif' : 'Nonaktif' }}</td>
-                                <td><a href="{{ route('data-unit_kerja.edit',$item->id_unit) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit fa-sm"></i></a>
+                                <td>
+                                    <a href="{{ route('data-unit_kerja.edit',$item->id_unit) }}" class="btn btn-warning btn-sm">
+                                        <i class="fas fa-edit fa-sm"></i> <span>Ubah</span>
+                                    </a>
                                     <a href="#" class="btn btn-danger btn-sm getIdUnitKerja" data-toggle="modal" data-target="#deleteUnitKerja" data-id="{{$item->id_unit}}" >
-                                        <i class="fas fa-trash fa-sm"></i>
+                                        <i class="fas fa-trash fa-sm"> <span>Hapus</span></i>
                                     </a>
                                 </td>
                             </tr>

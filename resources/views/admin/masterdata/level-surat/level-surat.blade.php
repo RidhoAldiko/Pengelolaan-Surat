@@ -17,7 +17,7 @@
     <div class="section-body">
         <div class="card shadow">
             <div class="card-header">
-                <h4>Tabel Data Level Surat</h4>
+                <h4>Data Level Surat</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -34,10 +34,14 @@
                             <tr class="text-center">
                                 <td>{{ $item->nama_level }}</td>
                                 <td>{{ $item->urutan_level }}</td>
-                                <td><a href="{{ route('data-level_surat.edit',$item->id_level_surat) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit fa-sm"></i></a>
+                                <td>
+                                    <a href="{{ route('data-level_surat.edit',$item->id_level_surat) }}" class="btn btn-warning btn-sm">
+                                        <i class="fas fa-edit fa-sm"></i> <span>Ubah</span>
+                                    </a>
                                     <a href="#" class="btn btn-danger btn-sm getIdLevelSurat" data-toggle="modal" data-target="#deleteLevel" data-id="{{$item->id_level_surat}}" >
-                                        <i class="fas fa-trash fa-sm"></i>
-                                    </a> </td>
+                                        <i class="fas fa-trash fa-sm"> <span>Hapus</span></i>
+                                    </a> 
+                                </td>
                             </tr>
                             @empty
                                 <tr class="text-center">

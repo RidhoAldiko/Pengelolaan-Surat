@@ -24,9 +24,12 @@ class AdminController extends Controller
 
     //function halaman data pengguna
     public function data_pengguna(){
-        // $data = User::select('user.*','nama_pegawai')
-        //         ->join('pegawai', 'nip', '=', 'pegawai.id_unit')
-        //         ->get();
+        $data = User::select('users.*','nama_pegawai','pegawai.id_jabatan','nama_jabatan','unit_kerja.id_unit','nama_unit')
+                ->join('pegawai', 'nip_pegawai', '=', 'users.id')
+                ->join('unit_kerja', 'unit_kerja.id_unit', '=', 'pegawai.id_unit')
+                ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+                ->get();
+        // dd($data);
         return view('admin.pengguna.pengguna');
     }
 
