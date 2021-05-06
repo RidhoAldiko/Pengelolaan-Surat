@@ -30,6 +30,9 @@ class RedirectIfAuthenticated
             }else 
             if (Auth::guard($guard)->check() && Auth::user()->role == 2) {
                 return redirect()->route('operator-kepegawaian.index');
+            }else 
+            if (Auth::guard($guard)->check() && Auth::user()->role == 3) {
+                return redirect()->route('user-disposisi.index');
             }
         }
 

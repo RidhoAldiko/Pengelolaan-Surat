@@ -17,11 +17,11 @@
     <div class="section-body">
         <div class="card shadow">
             <div class="card-header">
-                <h4>Tabel Data Golongan</h4>
+                <h4>Data Golongan</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table  class="table table-bordered table-hover table-striped" id="dataUnitKerja" width="100%" cellspacing="0">
+                    <table  class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                         <thead>
                             <tr class="text-center">
                                 <th scope="col">Unit Golongan</th>
@@ -34,10 +34,10 @@
                             <tr class="text-center">
                             <td>{{ $item->nama_golongan }}</td>
                             <td>{{ $item->status == '0' ? 'Aktif' : 'Nonaktif' }}</td>
-                            <td><a href="{{ route('data-golongan.edit',$item->id_golongan) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit fa-sm"></i></a>
+                            <td><a href="{{ route('data-golongan.edit',$item->id_golongan) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit fa-sm"></i> <span>Ubah</span></a>
                                 
                                 <a href="#" class="btn btn-danger btn-sm getIdGolongan" data-toggle="modal" data-target="#deleteGolongan" data-id="{{$item->id_golongan}}" >
-                                    <i class="fas fa-trash fa-sm"></i>
+                                    <i class="fas fa-trash fa-sm"></i> <span>Hapus</span>
                                 </a>
                             </td>
                             </tr>

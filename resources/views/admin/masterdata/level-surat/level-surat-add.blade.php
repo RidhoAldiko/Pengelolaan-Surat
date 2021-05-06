@@ -1,9 +1,15 @@
 @extends('layouts.main')
-@section('title','Tambah Level Surat')
+@section('title','Level Surat | Tambah ')
 @section('content')
 <section class="section">
     <div class="section-header">
         <h1>Level Surat</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active">
+                <a href="{{route('data-unit_kerja.index')}}">Data Level Surat</a>
+            </div>
+            <div class="breadcrumb-item">Tambah Data Level Surat</div>
+        </div>
     </div>
     <div class="section-body ">
         <div class="row justify-content-center">
@@ -32,8 +38,12 @@
                                 @enderror
                             </div>
                             
-                            <a href="{{ route('data-level_surat.index') }}" class="btn btn-warning">Kembali</a>
-                            <button type="submit" class="btn btn-primary">Tambah</button>
+                            <a href="{{ route('data-level_surat.index') }}" class="btn btn-warning">
+                                <i class="fas fa-chevron-left"></i> <span>Kembali<span>
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> <span> Simpan</span>
+                            </button>
                         </form> 
                     </div>
                 </div>

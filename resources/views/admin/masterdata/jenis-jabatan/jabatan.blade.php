@@ -3,7 +3,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Jabatan</h1>
+        <h1>Data Jabatan</h1>
     </div>
     <a href="{{ route('data-jabatan.create') }}" class="btn btn-primary mb-3"><i class="fas fa-plus"></i> Tambah Data Jabatan</a>
     @if (session('status'))
@@ -17,11 +17,11 @@
     <div class="section-body">
         <div class="card shadow">
             <div class="card-header">
-                <h4>Tabel Data Jabatan</h4>
+                <h4>Data Jabatan</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table  class="table table-bordered table-hover table-striped" id="datajabatan" width="100%" cellspacing="0">
+                    <table  class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                         <thead>
                             <tr class="text-center">
                                 <th scope="col">Jabatan</th>
@@ -34,9 +34,9 @@
                             <tr class="text-center">
                                 <td>{{ $item->nama_jabatan }}</td>
                                 <td>{{ $item->status == '0' ? 'Aktif' : 'Nonaktif' }}</td>
-                                <td><a href="{{ route('data-jabatan.edit',$item->id_jabatan) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit fa-sm"></i></a>
+                                <td><a href="{{ route('data-jabatan.edit',$item->id_jabatan) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit fa-sm"></i> <span>Ubah</span></a>
                                     <a href="#" class="btn btn-danger btn-sm getIdJabatan" data-toggle="modal" data-target="#deleteJabatan" data-id="{{$item->id_jabatan}}" >
-                                        <i class="fas fa-trash fa-sm"></i>
+                                        <i class="fas fa-trash fa-sm"> <span>Hapus</span></i>
                                     </a> </td>
                             </tr>
                             @empty

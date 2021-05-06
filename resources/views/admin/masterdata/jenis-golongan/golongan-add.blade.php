@@ -1,9 +1,13 @@
 @extends('layouts.main')
-@section('title','Tambah Golongan')
+@section('title','Golongan | Tambah')
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Golongan</h1>
+        <h1>Data Golongan</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="{{route('data-golongan.index')}}">Data Golongan</a></div>
+            <div class="breadcrumb-item">Tambah Data Golongan</div>
+        </div>
     </div>
     <div class="section-body ">
         <div class="row justify-content-center">
@@ -23,8 +27,12 @@
                                 </span>
                                 @enderror
                             </div>
-                            <a href="{{ route('data-golongan.index') }}" class="btn btn-warning">Kembali</a>
-                            <button type="submit" class="btn btn-primary">Tambah</button>
+                            <a href="{{ route('data-golongan.index') }}" class="btn btn-warning">
+                                <i class="fas fa-chevron-left"></i> <span>Kembali</span>
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> <span> Simpan</span>
+                            </button>
                         </form> 
                     </div>
                 </div>

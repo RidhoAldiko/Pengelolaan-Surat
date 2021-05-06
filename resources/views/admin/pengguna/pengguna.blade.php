@@ -5,15 +5,16 @@
     <div class="section-header">
         <h1>Pengguna Sistem</h1>
     </div>
+    <a href="{{ route('data-pengguna.add') }}" class="btn btn-primary mb-3"><i class="fas fa-plus"></i> Tambah Pengguna Sistem</a>
 
     <div class="section-body">
         <div class="card">
             <div class="card-header">
-                <h4>Tabel Data Pengguna Sistem</h4>
+                <h4>Data Pengguna Sistem</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
