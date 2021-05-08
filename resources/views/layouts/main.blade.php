@@ -164,8 +164,8 @@ gtag('config', 'UA-94034622-3');
 @stack('search-pegawai-page_tambah-pengguna')
 {{-- script pegawai --}}
 @stack('script-server-side_pegawai')
-@stack('script-server-side_surat-masuk')
-@stack('script-server-side_disposisi-surat-masuk')
+@stack('script-surat-masuk')
+@stack('script-disposisi-surat-masuk')
 @stack('script-server-side_arsip-surat-masuk')
 @stack('script-delete-pegawai')
 {{-- script master --}}

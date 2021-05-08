@@ -20,7 +20,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped" id="dataDisposisiMasuk" width="100%" cellspacing="0">
+                    <table class="table table-bordered table-hover table-striped" id="disposisi-surat-masuk" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th scope="col">No.</th>
@@ -33,6 +33,45 @@
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            @foreach ($results as $result)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$result->pengirim}}</td>
+                                    <td>{{$result->indeks}}</td>
+                                    <td>{{$result->nomor_surat}}</td>
+                                    <td>{{$result->tanggal_surat}}</td>
+                                    <td>{{$result->tanggal_disposisi}}</td>
+                                    <td>
+                                        @if ($result->status == 0)
+                                            {{ 'Terdaftar' }} 
+                                        @else
+                                            {{ 'Berjalan' }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($result->status == 0)
+                                            <a href="#" class="btn btn-success text-white btn-sm" title="Edit">
+                                                <i class="fas fa-info"></i> Detail
+                                            </a>
+                                            <a href="{{route('disposisi-surat-masuk.teruskan',$result->id_disposisi_surat_masuk)}}" class="btn btn-primary btn-sm" >
+                                                <i class="fas fa-angle-right"></i> Teruskan
+                                            </a>
+                                            <a href="#" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                <i class="fas fa-pencil-alt"></i> Edit
+                                            </a>
+                                            <a href="#" class="btn btn-danger btn-sm getIdSurat" data-toggle="modal" data-target="#deleteSurat" data-id="'.$result->id_disposisi_surat_masuk.'" >
+                                                <i class="fas fa-trash fa-sm"></i> Hapus
+                                            </a>
+                                        @else
+                                            <a href="#" class="btn btn-success text-white btn-sm" title="Edit">
+                                                <i class="fas fa-info"></i> Detail
+                                            </a>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -40,48 +79,10 @@
     </div>
 </section>
 @endsection
-@push('script-server-side_disposisi-surat-masuk')
+@push('script-disposisi-surat-masuk')
 <script>
-    $(function() {
-        $('#dataDisposisiMasuk').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{route('disposisi_surat_masuk.serverside')}}",
-            columns: [
-                {
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                },
-                {
-                    data: 'pengirim',
-                    name: 'pengirim'
-                },
-                {
-                    data: 'indeks',
-                    name: 'indeks'
-                },
-                {
-                    data: 'nomor_surat',
-                    name: 'nomor_surat'
-                },
-                {
-                    data: 'tanggal_surat',
-                    name: 'tanggal_surat'
-                },
-                {
-                    data: 'tanggal_penyelesaian',
-                    name: 'tanggal_penyelesaian'
-                },
-                {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
-                    data: 'aksi',
-                    name: 'aksi'
-                },
-                ],
-            });
+    $(document).ready( function () {
+        $('#disposisi-surat-masuk').DataTable();
     } );
-    </script>
+</script>
 @endpush
