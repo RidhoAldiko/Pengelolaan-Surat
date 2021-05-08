@@ -20,6 +20,7 @@ class SuratMasukController extends Controller
      */
     public function index()
     {   
+        
         return view('operator-surat.surat-masuk.surat-masuk');
     }
 
@@ -100,10 +101,10 @@ class SuratMasukController extends Controller
                 })
                 ->addColumn('aksi', function($data) {
                     $button = '
-                            <a href="'.route('surat-masuk.edit',$data->id_surat_masuk).'" class="btn btn-success text-white btn-sm" title="Edit">
+                            <a href="#" class="btn btn-success text-white btn-sm" title="Edit">
                             <i class="fas fa-info"></i> Detail
                             </a>
-                            <a href="'.route('surat-masuk.edit',$data->id_surat_masuk).'" class="btn btn-warning text-white btn-sm" title="Edit">
+                            <a href="#" class="btn btn-warning text-white btn-sm" title="Edit">
                             <i class="fas fa-pencil-alt"></i> Edit
                             </a>
                             <a href="#" class="btn btn-danger btn-sm getIdSurat" data-toggle="modal" data-target="#deleteSurat" data-id="'.$data->id_surat.'" >
@@ -132,9 +133,9 @@ class SuratMasukController extends Controller
     }
 
     public function data_disposisi(){
-        // $data = SuratMasuk::select('surat_masuk.*','indeks','tanggal_disposisi')
+        // $data = SuratMasuk::select('surat_masuk.*','indeks','id_disposisi_surat_masuk','tanggal_disposisi','disposisi_surat_masuk.status')
         //         ->join('disposisi_surat_masuk', 'disposisi_surat_masuk.id_surat_masuk', '=', 'surat_masuk.id_surat_masuk')
-        //         ->where('status','1')
+        //         ->where('disposisi_surat_masuk.status','1')
         //         ->get();
         // dd($data);
         return view('operator-surat.disposisi.disposisi-masuk');
@@ -142,12 +143,14 @@ class SuratMasukController extends Controller
 
     public function ignore_disposisi($id){
         $update=SuratMasuk::where('id_surat_masuk', $id)->update(['status' => '2']);
-        return redirect()->route('disposisi_surat_masuk.index')->with('status',"Surat Masuk tidak di disposisikan");
+        return redirect()->route('arsip-surat-masuk.index')->with('status',"Surat Masuk berhasil diarsipkan");
     }
 
     public function disposisi_masuk_serverside(){
         $data = SuratMasuk::select('surat_masuk.*','indeks','id_disposisi_surat_masuk','tanggal_disposisi','disposisi_surat_masuk.status')
                 ->join('disposisi_surat_masuk', 'disposisi_surat_masuk.id_surat_masuk', '=', 'surat_masuk.id_surat_masuk')
+                ->where('disposisi_surat_masuk.status','1')
+                ->orWhere('disposisi_surat_masuk.status','0')
                 ->get();
         return DataTables::of($data)
                 ->addIndexColumn()
@@ -180,10 +183,10 @@ class SuratMasukController extends Controller
                             <a href="'.route('disposisi-surat-masuk.teruskan',$data->id_disposisi_surat_masuk).'" class="btn btn-primary btn-sm" >
                             <i class="fas fa-angle-right"></i> Teruskan
                             </a>
-                            <a href="'.route('surat-masuk.edit',$data->id_disposisi_surat_masuk).'" class="btn btn-success text-white btn-sm" title="Edit">
+                            <a href="#" class="btn btn-success text-white btn-sm" title="Edit">
                             <i class="fas fa-info"></i> Detail
                             </a>
-                            <a href="'.route('surat-masuk.edit',$data->id_disposisi_surat_masuk).'" class="btn btn-warning text-white btn-sm" title="Edit">
+                            <a href="#" class="btn btn-warning text-white btn-sm" title="Edit">
                             <i class="fas fa-pencil-alt"></i> Edit
                             </a>
                             <a href="#" class="btn btn-danger btn-sm getIdSurat" data-toggle="modal" data-target="#deleteSurat" data-id="'.$data->id_disposisi_surat_masuk.'" >
@@ -191,23 +194,18 @@ class SuratMasukController extends Controller
                             </a>
                             
                             ';
+                            return $button;
                     }else
                     if ($data->status == 1) {
                         $button = '
-                            <a href="'.route('surat-masuk.edit',$data->id_disposisi_surat_masuk).'" class="btn btn-success text-white btn-sm" title="Edit">
+                            <a href="#" class="btn btn-success text-white btn-sm" title="Edit">
                             <i class="fas fa-info"></i> Detail
                             </a>
-                            <a href="'.route('surat-masuk.edit',$data->id_disposisi_surat_masuk).'" class="btn btn-warning text-white btn-sm" title="Edit">
-                            <i class="fas fa-pencil-alt"></i> Edit
-                            </a>
-                            <a href="#" class="btn btn-danger btn-sm getIdSurat" data-toggle="modal" data-target="#deleteSurat" data-id="'.$data->id_disposisi_surat_masuk.'" >
-                                <i class="fas fa-trash fa-sm"></i> Hapus
-                            </a>
-                            
                             ';
+                        return $button;
                     }
                     
-                    return $button;
+                    
                 })
                 ->rawColumns(['aksi'])
                 ->make(true);

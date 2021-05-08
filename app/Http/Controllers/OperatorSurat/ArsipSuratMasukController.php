@@ -4,6 +4,9 @@ namespace App\Http\Controllers\OperatorSurat;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Storage;
+use App\Models\SuratMasuk;
 
 class ArsipSuratMasukController extends Controller
 {
@@ -14,72 +17,37 @@ class ArsipSuratMasukController extends Controller
      */
     public function index()
     {
-        //
+        return view('operator-surat.arsip.arsip-surat-masuk');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function arsip_surat_serverside(){
+        $data = SuratMasuk::where('status','2')->orWhere('status','3')->get();
+        return DataTables::of($data)
+                ->addIndexColumn()
+                ->editColumn('pengirim', function($data){ 
+                    return $data->pengirim; 
+                })
+                ->editColumn('nomor_surat', function($data){ 
+                    return $data->nomor_surat; 
+                })
+                ->editColumn('tanggal_surat', function($data){ 
+                    return date("d/m/Y", strtotime($data->tanggal_surat));
+                })
+                ->addColumn('status', function($data) {
+                    if ($data->status == 1) {
+                        return "didisposisi";
+                    }else
+                    if ($data->status == 2) {
+                        return "Tidak didisposisi";
+                    }else
+                    if ($data->status == 3) {
+                        return "Selesai didisposisi";
+                    }
+                })
+                ->addColumn('file_surat', function($data) {
+                    $file = '<a href="'.Storage::url($data->file_surat).'" target="_blank"> <i class="fa fa-file-pdf fa-2x"></i></a>';
+                    return $file;
+                })
+                ->rawColumns(['file_surat'])
+                ->make(true);
     }
 }

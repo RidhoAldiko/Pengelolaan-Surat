@@ -166,6 +166,7 @@ gtag('config', 'UA-94034622-3');
 @stack('script-server-side_pegawai')
 @stack('script-server-side_surat-masuk')
 @stack('script-server-side_disposisi-surat-masuk')
+@stack('script-server-side_arsip-surat-masuk')
 @stack('script-delete-pegawai')
 {{-- script master --}}
 @stack('script-delete-golongan')

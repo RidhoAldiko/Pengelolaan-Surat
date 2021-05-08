@@ -20,6 +20,7 @@ use App\Http\Controllers\OperatorKepegawaian\MertuaController;
 use App\Http\Controllers\OperatorKepegawaian\MutasiController;
 use App\Http\Controllers\OperatorSurat\OperatorSuratController;
 use App\Http\Controllers\OperatorSurat\SuratMasukController;
+use App\Http\Controllers\OperatorSurat\ArsipSuratMasukController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
 use App\Http\Controllers\OperatorKepegawaian\OrangtuaKandungController;
 use App\Http\Controllers\OperatorKepegawaian\OrganisasiController;
@@ -116,6 +117,9 @@ Route::prefix('operator-surat')
         // operator-surat store teruskan disposisi surat masuk 
         Route::post('teruskan-disposisi-surat-masuk',[SuratMasukController::class,'teruskan_disposisi_store'])->name('disposisi-surat-masuk-teruskan.store');
     // ---------------------------------Arsip Surat-------------------------------------------------
+        // operator-surat store arsip surat
+        Route::get('arsip-surat-masuk', [ArsipSuratMasukController::class,'index'])->name('arsip-surat-masuk.index');
+        Route::get('arsip-surat-masuk-serverside', [ArsipSuratMasukController::class,'arsip_surat_serverside'])->name('arsip-surat-masuk.serverside');
     
     });
 
