@@ -29,6 +29,7 @@
                                 <th scope="col">Tgl Surat</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">File</th>
+                                <th scope="col">Aksi</th>
                             </tr>
                         </thead>
                     </table>
@@ -69,6 +70,10 @@
                 {
                     data: 'file_surat',
                     name: 'file_surat'
+                },
+                {
+                    data: 'aksi',
+                    name: 'aksi'
                 },
                 ],
             });

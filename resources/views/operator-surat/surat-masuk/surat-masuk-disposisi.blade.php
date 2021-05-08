@@ -32,7 +32,7 @@
 
                             <div class="form-group">
                                 <label for="tanggal_disposisi">Tanggal Disposisi</label>
-                                <input type="text" id="tanggal_disposisi" name="tanggal_disposisi" onfocus="(this.type='date')"  class="form-control @error('tanggal_disposisi') is-invalid @enderror" placeholder="Masukan tanggal penyelesaian" value="{{old('tanggal_disposisi')}}" >
+                                <input type="text" id="tanggal_disposisi" name="tanggal_disposisi" onfocus="(this.type='date')"  class="form-control @error('tanggal_disposisi') is-invalid @enderror" placeholder="Masukan tanggal disposisi" value="{{old('tanggal_disposisi')}}" >
                                 @error('tanggal_disposisi')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

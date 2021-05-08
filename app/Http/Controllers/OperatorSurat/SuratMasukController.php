@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 use App\Models\SuratMasuk;
 use App\Models\User;
+use App\Http\Requests\OperatorSurat\SuratMasukRequest;
 use App\Models\DisposisiSuratMasuk as DisposisiMasuk;
 use App\Models\TeruskanDisposisiMasuk;
 
@@ -28,6 +29,9 @@ class SuratMasukController extends Controller
     {
         if ($request->has('data')) {
             $data = $request->data;
+            //get nip pegawai 
+            // $results = User::where('id', 'LIKE' ,'%' . $data . '%')
+            //                     ->get();
             $results = User::select('users.*','nama_pegawai','pegawai.id_jabatan','nama_jabatan','unit_kerja.id_unit','nama_unit')
                 ->join('pegawai', 'nip_pegawai', '=', 'users.id')
                 ->join('unit_kerja', 'unit_kerja.id_unit', '=', 'pegawai.id_unit')
@@ -108,8 +112,18 @@ class SuratMasukController extends Controller
         $update=DisposisiMasuk::where('id_disposisi_surat_masuk', $request->id_disposisi_surat_masuk)->update(['status' => '1']);
         return redirect()->route('disposisi_surat_masuk.index')->with('status',"Disposisi Surat Masuk berhasil diteruskan kepada pengguna");
     }
+    public function create()
+    {
+        return view('operator-surat.surat-masuk.surat-masuk-add');
+    }
 
-    public function store(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(SuratMasukRequest $request)
     {
         $data = $request->all();
         $data['file_surat'] = $request->file('file_surat')->store(

@@ -161,6 +161,7 @@ gtag('config', 'UA-94034622-3');
 </script>
 {{-- script pengguna --}}
 @stack('script-menampilan-level-surat')
+@stack('script-custom-file')
 @stack('search-pegawai-page_tambah-pengguna')
 {{-- script pegawai --}}
 @stack('script-server-side_pegawai')

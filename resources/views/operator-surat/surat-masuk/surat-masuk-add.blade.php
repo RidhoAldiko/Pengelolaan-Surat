@@ -57,11 +57,17 @@
                             </div>
                             <div class="form-group">
                                 <label for="isi_ringkasan">Isi Ringkasan</label>
-                                <textarea class="form-control" id="isi_ringkasan" name="isi_ringkasan" rows="3"></textarea>
+                                <textarea class="form-control @error('isi_ringkasan') is-invalid @enderror" id="isi_ringkasan" name="isi_ringkasan" rows="3">{{old('isi_ringkasan')}}</textarea>
+                                @error('isi_ringkasan')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="hubungan_nomor_surat">Hubungan Nomor Surat</label>
                                 <input type="text" id="hubungan_nomor_surat" name="hubungan_nomor_surat"  class="form-control @error('hubungan_nomor_surat') is-invalid @enderror" placeholder="Masukan Hubungan Nomor Surat" value="{{old('hubungan_nomor_surat')}}" >
+                                <span class="text-info">*Jika tidak ada boleh dikosongkan</span><br>
                                 @error('hubungan_nomor_surat')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -71,7 +77,7 @@
                             <div class="form-group">
                                 <label for="file_surat">File Surat</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input @error('file_surat') is-invalid @enderror" id="validatedCustomFile" name="file_surat" required value="{{old('file_surat')}}">
+                                    <input type="file" class="custom-file-input @error('file_surat') is-invalid @enderror" id="validatedCustomFile" name="file_surat" value="{{old('file_surat')}}">
                                     <label class="custom-file-label" for="validatedCustomFile">Pilih File Surat
                                     </label>
                                     <span class="text-info">*File Berformat PDF.</span><br>
@@ -93,3 +99,10 @@
     </div>
 </section>
 @endsection
+@push('script-custom-file')
+    <script>
+        $(document).on('change', '.custom-file-input', function (event) {
+        $(this).next('.custom-file-label').html(event.target.files[0].name);
+        })
+    </script>
+@endpush
