@@ -95,9 +95,7 @@ class OperatorKepegawaianController extends Controller
                                 <a href="#" class="btn btn-danger btn-sm getIdPegawai" data-toggle="modal" data-target="#deletePegawai" data-id="'.$data->nip_pegawai.'" >
                                     <i class="fas fa-trash fa-sm"></i> Hapus
                                 </a>
-                                <a href="'.route('data-pegawai.cetakperorangan',$data->nip_pegawai).'" class="btn btn-primary text-white btn-sm" title="Edit">
-                                <i class="fas fa-print"></i> Print
-                                </a>
+                                
                                 ';
                     return $button;
                 })

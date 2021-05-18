@@ -1644,19 +1644,5 @@
             e.preventDefault();
             $(this).parent().parent().remove();
         })
-
-    //javascript untuk tambah alamat
-    // $('.tambahalamat').on('click',function(e){
-    //         tambahAlamat();
-    //         e.preventDefault();
-    //     });
-    //     function tambahAlamat(){
-    //         var alamatt = '<div class="dataalamat"><div class="form-group row left-items-center"><label for="jalan" class="form-control-label col-sm-3 text-md-right">Jalan</label><div class="col-sm-6 col-md-9"><input type="text" id="jalan" name="jalan[]"  class="form-control @error('jalan') is-invalid @enderror" > @error('jalan')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group row left-items-center"><label for="kelurahan_desa" class="form-control-label col-sm-3 text-md-right">Kelurahan / Desa</label><div class="col-sm-6 col-md-9"><input type="text" id="kelurahan_desa" name="kelurahan_desa[]"  class="form-control @error('kelurahan_desa') is-invalid @enderror" >@error('kelurahan_desa')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group row left-items-center"><label for="kecamatan" class="form-control-label col-sm-3 text-md-right">Kecamatan</label><div class="col-sm-6 col-md-9"><input type="text" id="kecamatan" name="kecamatan[]"  class="form-control @error('kecamatan') is-invalid @enderror" >@error('kecamatan')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group row left-items-center"><label for="kabupaten_kota" class="form-control-label col-sm-3 text-md-right">Kabupaten / Kota</label><div class="col-sm-6 col-md-9"><input type="text" id="kabupaten_kota" name="kabupaten_kota[]"  class="form-control @error('kabupaten_kota') is-invalid @enderror" >@error('kabupaten_kota')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group row left-items-center"><label for="provinsi" class="form-control-label col-sm-3 text-md-right">Provinsi</label><div class="col-sm-6 col-md-9"><input type="text" id="provinsi" name="provinsi[]"  class="form-control @error('provinsi') is-invalid @enderror" >@error('provinsi')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group text-right"><a href="#" class="hapusalamat btn bt-sm btn-warning text-right"><i class="fa fa-minus"></i></a></div></div>';
-    //         $('.alamatt').append(alamatt);
-    //     };
-    //     $(document).on('click', '.hapusalamat', function(e) {
-    //         e.preventDefault();
-    //         $(this).parent().parent().remove();
-    //     })
     </script>
 @endpush
