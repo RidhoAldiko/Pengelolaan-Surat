@@ -9,7 +9,6 @@ use Yajra\DataTables\DataTables;
 //inisialisasi model yang digunakan
 use App\Models\Pegawai;
 use App\Models\Unit_kerja as Unit;
-use App\Models\Golongan;
 use App\Models\Hobi;
 use App\Models\Jabatan;
 use App\Models\Alamat;
@@ -61,9 +60,8 @@ class OperatorKepegawaianController extends Controller
     // method get server side data pegawai
     public function pegawai_serverSide(){
         //get data pegawai 
-        $data = Pegawai::select('pegawai.*','nama_unit','nama_golongan','nama_jabatan')
+        $data = Pegawai::select('pegawai.*','nama_unit','nama_jabatan')
                 ->join('unit_kerja', 'unit_kerja.id_unit', '=', 'pegawai.id_unit')
-                ->join('golongan', 'golongan.id_golongan', '=', 'pegawai.id_golongan')
                 ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
                 ->get();
         return DataTables::of($data)
@@ -75,9 +73,6 @@ class OperatorKepegawaianController extends Controller
                 })
                 ->editColumn('unit', function($data){ 
                     return $data->nama_unit; 
-                })
-                ->editColumn('golongan', function($data){ 
-                    return $data->nama_golongan; 
                 })
                 ->editColumn('jabatan', function($data){ 
                     return $data->nama_jabatan; 
@@ -109,11 +104,9 @@ class OperatorKepegawaianController extends Controller
     public function add_pegawai(){
         //get data unit kerja
         $unit = Unit::where('status','=',0)->get();
-        //get data golongan
-        $golongan = Golongan::where('status','=',0)->get();
         //get data jabatan
         $jabatan = Jabatan::where('status','=',0)->get();
-        return view('operator-kepegawaian.pegawai.pegawai-add',\compact('unit','jabatan','golongan'));
+        return view('operator-kepegawaian.pegawai.pegawai-add',\compact('unit','jabatan'));
     }
 
     //method store data pegawai
@@ -136,7 +129,7 @@ class OperatorKepegawaianController extends Controller
     public function show($id)
     {
         $datapegawai        = Pegawai::with([
-                                'jabatan','golongan',
+                                'jabatan',
                                 'unit_kerja','hobi',
                                 'alamat','keterangan_badan',
                                 'riwayat_pendidikan',
@@ -156,7 +149,8 @@ class OperatorKepegawaianController extends Controller
         //untuk mengambil data organisasi pada waktu Selesai Pendidikan atau Selama Menjadi PNS                      
         $organisasi3        = Organisasi::where('waktu','Selesai Pendidikan atau Selama Menjadi PNS')->where('nip_pegawai',$id)->get();
         $kgb                = RiwayatKGB::with(['gaji'])->where('nip_pegawai',$id)->orderBy('id_riwayat_kgb','desc')->get();
-      
+        
+
         return view('operator-kepegawaian.pegawai.pegawai-detail',[
             'pegawai'       => $datapegawai,
             'organisasi1'   => $organisasi1,
@@ -171,13 +165,11 @@ class OperatorKepegawaianController extends Controller
     {
         //get data unit kerja
         $unit = Unit::where('status','=',0)->get();
-        //get data golongan
-        $golongan = Golongan::where('status','=',0)->get();
         //get data jabatan
         $jabatan = Jabatan::where('status','=',0)->get();
         //untuk mendapatkan data pegawai dan data milik pegawai
         $pegawai = Pegawai::with([
-                        'jabatan','golongan',
+                        'jabatan',
                         'unit_kerja','hobi',
                         'alamat','keterangan_badan',
                         'riwayat_pendidikan',
@@ -197,7 +189,7 @@ class OperatorKepegawaianController extends Controller
         $organisasi3        = Organisasi::where('waktu','Selesai Pendidikan atau Selama Menjadi PNS')->where('nip_pegawai',$id)->get();
         $kgb                = RiwayatKGB::with(['gaji'])->where('nip_pegawai',$id)->orderBy('id_riwayat_kgb','desc')->get();
 
-        return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('unit','jabatan','golongan','pegawai','organisasi1','organisasi2','organisasi3','kgb'));
+        return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('unit','jabatan','pegawai','organisasi1','organisasi2','organisasi3','kgb'));
     }
 
     public function update(PegawaiRequest $request, $id)
@@ -244,7 +236,7 @@ class OperatorKepegawaianController extends Controller
     {
         dd($id);
         $pegawai = Pegawai::with([
-            'jabatan','golongan',
+            'jabatan',
             'unit_kerja','hobi',
             'alamat','keterangan_badan',
             'riwayat_pendidikan',

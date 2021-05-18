@@ -199,22 +199,6 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row left-items-center">
-                                                <label for="id_golongan" class="form-control-label col-sm-3 text-md-right">Golongan</label>
-                                                <div class="col-sm-6 col-md-9">
-                                                    <select class="form-control @error('id_golongan') is-invalid @enderror" id="id_golongan" name="id_golongan">
-                                                        <option value="{{$pegawai->id_golongan}}">{{$pegawai->golongan->nama_golongan}}</option>
-                                                        @foreach ($golongan as $gl)
-                                                        <option value="{{$gl->id_golongan}}">{{$gl->nama_golongan}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('id_golongan')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="form-group row left-items-center">
                                                 <label for="id_jabatan" class="form-control-label col-sm-3 text-md-right">Jabatan</label>
                                                 <div class="col-sm-6 col-md-9">
                                                     <select class="form-control @error('id_jabatan') is-invalid @enderror" id="id_jabatan" name="id_jabatan">

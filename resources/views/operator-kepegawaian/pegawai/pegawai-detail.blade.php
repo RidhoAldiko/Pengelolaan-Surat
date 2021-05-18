@@ -112,7 +112,7 @@
                                         <div class="form-group">
                                             <label>Golongan</label>
                                             <p class="border-bottom text-gray-800">
-                                                {{ $pegawai->golongan->nama_golongan }}
+                                               
                                             </p>
                                         </div>
                                 </div>
