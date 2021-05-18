@@ -285,113 +285,142 @@
                     </div>
                     <div class="tab-pane fade" id="alamat" role="tabpanel" aria-labelledby="alamat-tab">
                         <div class="row justify-content-center">
-                            <div class="col-md-12">
+                            <div class="col-md-8">
                                 <div class="card shadow">
                                     <div class="card-header">
                                         <h4>Alamat - <code>{{ $pegawai->nama_pegawai }} </code></h4>
                                     </div>
                                     <div class="card-body">
-                                        @if ($pegawai->alamat->count() > 0)
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
-                                                    <thead>
-                                                        <tr class="text-center">
-                                                            <th scope="col">Jalan</th>
-                                                            <th scope="col">Kelurahan / Desa</th>
-                                                            <th scope="col">Kecamatan</th>
-                                                            <th scope="col">Kabupaten Kota</th>
-                                                            <th scope="col">Provinsi</th>
-                                                            <th scope="col">Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach ($pegawai->alamat as $item)
-                                                                <tr class="text-center">
-                                                                    <td>{{ $item->jalan }}</td>
-                                                                    <td>{{ $item->kelurahan_desa }}</td>
-                                                                    <td>{{ $item->kecamatan }}</td>
-                                                                    <td>{{ $item->kabupaten_kota }}</td>
-                                                                    <td>{{ $item->provinsi }}</td>
-                                                                    <td>
-                                                                        <a href="{{ route('data-alamat.edit',$item->id_alamat) }}" class="btn btn-sm btn-warning"><i class="fas fa-pencil-alt"></i></a>
-                                                                        <form action="{{ route('data-alamat.destroy',$item->id_alamat) }}" method="post" class="d-inline">
-                                                                            @csrf
-                                                                            @method('delete')
-                                                                            <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin menghapus alamat ini?')" type="submit"> <i class="fas fa-trash fa-sm"></i></button>
-                                                                        </form> 
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                        @if ($pegawai->alamat != null)
+                                        <form id="setting-form" method="POST" action="{{ route('data-alamat.update',$pegawai->alamat->id_alamat) }}">
+                                            @method('PUT')
+                                            @csrf
+                                              <p class="text-muted">Masukan data Alamat pegawai dengan benar dan tepat.!</p>
+                                                
+                                                    <input type="hidden" name="nip_pegawai" value="{{ $pegawai->alamat->nip_pegawai }}">
+                                                    <div class="form-group row left-items-center">
+                                                        <label for="jalan" class="form-control-label col-sm-3 text-md-right">Jalan</label>
+                                                        <div class="col-sm-6 col-md-9">
+                                                            <input type="text" id="jalan" name="jalan" value="{{ $pegawai->alamat->jalan }}"  class="form-control @error('jalan') is-invalid @enderror" >
+                                                            @error('jalan')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row left-items-center">
+                                                        <label for="kelurahan_desa" class="form-control-label col-sm-3 text-md-right">Kelurahan / Desa</label>
+                                                        <div class="col-sm-6 col-md-9">
+                                                            <input type="text" id="kelurahan_desa" name="kelurahan_desa" value="{{ $pegawai->alamat->kelurahan_desa }}"  class="form-control @error('kelurahan_desa') is-invalid @enderror" >
+                                                            @error('kelurahan_desa')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row left-items-center">
+                                                        <label for="kecamatan" class="form-control-label col-sm-3 text-md-right">Kecamatan</label>
+                                                        <div class="col-sm-6 col-md-9">
+                                                            <input type="text" id="kecamatan" name="kecamatan" value="{{ $pegawai->alamat->kecamatan }}"  class="form-control @error('kecamatan') is-invalid @enderror" >
+                                                            @error('kecamatan')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row left-items-center">
+                                                        <label for="kabupaten_kota" class="form-control-label col-sm-3 text-md-right">Kabupaten / Kota</label>
+                                                        <div class="col-sm-6 col-md-9">
+                                                            <input type="text" id="kabupaten_kota" name="kabupaten_kota" value="{{ $pegawai->alamat->kabupaten_kota }}" class="form-control @error('kabupaten_kota') is-invalid @enderror" >
+                                                            @error('kabupaten_kota')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row left-items-center">
+                                                        <label for="provinsi" class="form-control-label col-sm-3 text-md-right">Provinsi</label>
+                                                        <div class="col-sm-6 col-md-9">
+                                                            <input type="text" id="provinsi" name="provinsi" value="{{ $pegawai->alamat->provinsi }}" class="form-control @error('provinsi') is-invalid @enderror" >
+                                                            @error('provinsi')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                            <div class="card-footer bg-whitesmoke">
+                                              <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Edit</button>
+                                            </div>
+                                        </form>   
                                         @else
                                         <p class="text-muted">Anda belum inputkan alamat, Inputkan Alamat dengan BENAR.!</p>
-                                            <form action="{{route('data-alamat.store')}}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="nip_pegawai" value="{{ $pegawai->nip_pegawai }}">
-                                                <div class="form-group row left-items-center">
-                                                    <label for="jalan" class="form-control-label col-sm-3 text-md-right">Jalan</label>
-                                                    <div class="col-sm-6 col-md-9">
-                                                        <input type="text" id="jalan" name="jalan[]"  class="form-control @error('jalan') is-invalid @enderror" >
-                                                        @error('jalan')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror
-                                                    </div>
+                                        <form action="{{route('data-alamat.store')}}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="nip_pegawai" value="{{ $pegawai->nip_pegawai }}">
+                                            <div class="form-group row left-items-center">
+                                                <label for="jalan" class="form-control-label col-sm-3 text-md-right">Jalan</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="text" id="jalan" name="jalan"  class="form-control @error('jalan') is-invalid @enderror" >
+                                                    @error('jalan')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                                 </div>
-                                                <div class="form-group row left-items-center">
-                                                    <label for="kelurahan_desa" class="form-control-label col-sm-3 text-md-right">Kelurahan / Desa</label>
-                                                    <div class="col-sm-6 col-md-9">
-                                                        <input type="text" id="kelurahan_desa" name="kelurahan_desa[]"  class="form-control @error('kelurahan_desa') is-invalid @enderror" >
-                                                        @error('kelurahan_desa')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror
-                                                    </div>
+                                            </div>
+                                            <div class="form-group row left-items-center">
+                                                <label for="kelurahan_desa" class="form-control-label col-sm-3 text-md-right">Kelurahan / Desa</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="text" id="kelurahan_desa" name="kelurahan_desa"  class="form-control @error('kelurahan_desa') is-invalid @enderror" >
+                                                    @error('kelurahan_desa')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                                 </div>
-                                                <div class="form-group row left-items-center">
-                                                    <label for="kecamatan" class="form-control-label col-sm-3 text-md-right">Kecamatan</label>
-                                                    <div class="col-sm-6 col-md-9">
-                                                        <input type="text" id="kecamatan" name="kecamatan[]"  class="form-control @error('kecamatan') is-invalid @enderror" >
-                                                        @error('kecamatan')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror
-                                                    </div>
+                                            </div>
+                                            <div class="form-group row left-items-center">
+                                                <label for="kecamatan" class="form-control-label col-sm-3 text-md-right">Kecamatan</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="text" id="kecamatan" name="kecamatan"  class="form-control @error('kecamatan') is-invalid @enderror" >
+                                                    @error('kecamatan')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                                 </div>
-                                                <div class="form-group row left-items-center">
-                                                    <label for="kabupaten_kota" class="form-control-label col-sm-3 text-md-right">Kabupaten / Kota</label>
-                                                    <div class="col-sm-6 col-md-9">
-                                                        <input type="text" id="kabupaten_kota" name="kabupaten_kota[]"  class="form-control @error('kabupaten_kota') is-invalid @enderror" >
-                                                        @error('kabupaten_kota')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror
-                                                    </div>
+                                            </div>
+                                            <div class="form-group row left-items-center">
+                                                <label for="kabupaten_kota" class="form-control-label col-sm-3 text-md-right">Kabupaten / Kota</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="text" id="kabupaten_kota" name="kabupaten_kota"  class="form-control @error('kabupaten_kota') is-invalid @enderror" >
+                                                    @error('kabupaten_kota')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                                 </div>
-                                                <div class="form-group row left-items-center">
-                                                    <label for="provinsi" class="form-control-label col-sm-3 text-md-right">Provinsi</label>
-                                                    <div class="col-sm-6 col-md-9">
-                                                        <input type="text" id="provinsi" name="provinsi[]"  class="form-control @error('provinsi') is-invalid @enderror" >
-                                                        @error('provinsi')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror
-                                                    </div>
+                                            </div>
+                                            <div class="form-group row left-items-center">
+                                                <label for="provinsi" class="form-control-label col-sm-3 text-md-right">Provinsi</label>
+                                                <div class="col-sm-6 col-md-9">
+                                                    <input type="text" id="provinsi" name="provinsi"  class="form-control @error('provinsi') is-invalid @enderror" >
+                                                    @error('provinsi')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                                 </div>
-                                                <div class="form-group text-right">
-                                                    <a href="#" class="tambahalamat btn bt-sm btn-primary text-right"><i class="fa fa-plus"></i></a>
-                                                </div>
-                                                <div class="alamatt"></div>
-                                                <button type="submit" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
-                                            </form> 
+                                            </div>
+                                            <button type="submit" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                                        </form> 
                                         @endif
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -1503,17 +1532,17 @@
         })
 
     //javascript untuk tambah alamat
-    $('.tambahalamat').on('click',function(e){
-            tambahAlamat();
-            e.preventDefault();
-        });
-        function tambahAlamat(){
-            var alamatt = '<div class="dataalamat"><div class="form-group row left-items-center"><label for="jalan" class="form-control-label col-sm-3 text-md-right">Jalan</label><div class="col-sm-6 col-md-9"><input type="text" id="jalan" name="jalan[]"  class="form-control @error('jalan') is-invalid @enderror" > @error('jalan')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group row left-items-center"><label for="kelurahan_desa" class="form-control-label col-sm-3 text-md-right">Kelurahan / Desa</label><div class="col-sm-6 col-md-9"><input type="text" id="kelurahan_desa" name="kelurahan_desa[]"  class="form-control @error('kelurahan_desa') is-invalid @enderror" >@error('kelurahan_desa')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group row left-items-center"><label for="kecamatan" class="form-control-label col-sm-3 text-md-right">Kecamatan</label><div class="col-sm-6 col-md-9"><input type="text" id="kecamatan" name="kecamatan[]"  class="form-control @error('kecamatan') is-invalid @enderror" >@error('kecamatan')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group row left-items-center"><label for="kabupaten_kota" class="form-control-label col-sm-3 text-md-right">Kabupaten / Kota</label><div class="col-sm-6 col-md-9"><input type="text" id="kabupaten_kota" name="kabupaten_kota[]"  class="form-control @error('kabupaten_kota') is-invalid @enderror" >@error('kabupaten_kota')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group row left-items-center"><label for="provinsi" class="form-control-label col-sm-3 text-md-right">Provinsi</label><div class="col-sm-6 col-md-9"><input type="text" id="provinsi" name="provinsi[]"  class="form-control @error('provinsi') is-invalid @enderror" >@error('provinsi')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group text-right"><a href="#" class="hapusalamat btn bt-sm btn-warning text-right"><i class="fa fa-minus"></i></a></div></div>';
-            $('.alamatt').append(alamatt);
-        };
-        $(document).on('click', '.hapusalamat', function(e) {
-            e.preventDefault();
-            $(this).parent().parent().remove();
-        })
+    // $('.tambahalamat').on('click',function(e){
+    //         tambahAlamat();
+    //         e.preventDefault();
+    //     });
+    //     function tambahAlamat(){
+    //         var alamatt = '<div class="dataalamat"><div class="form-group row left-items-center"><label for="jalan" class="form-control-label col-sm-3 text-md-right">Jalan</label><div class="col-sm-6 col-md-9"><input type="text" id="jalan" name="jalan[]"  class="form-control @error('jalan') is-invalid @enderror" > @error('jalan')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group row left-items-center"><label for="kelurahan_desa" class="form-control-label col-sm-3 text-md-right">Kelurahan / Desa</label><div class="col-sm-6 col-md-9"><input type="text" id="kelurahan_desa" name="kelurahan_desa[]"  class="form-control @error('kelurahan_desa') is-invalid @enderror" >@error('kelurahan_desa')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group row left-items-center"><label for="kecamatan" class="form-control-label col-sm-3 text-md-right">Kecamatan</label><div class="col-sm-6 col-md-9"><input type="text" id="kecamatan" name="kecamatan[]"  class="form-control @error('kecamatan') is-invalid @enderror" >@error('kecamatan')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group row left-items-center"><label for="kabupaten_kota" class="form-control-label col-sm-3 text-md-right">Kabupaten / Kota</label><div class="col-sm-6 col-md-9"><input type="text" id="kabupaten_kota" name="kabupaten_kota[]"  class="form-control @error('kabupaten_kota') is-invalid @enderror" >@error('kabupaten_kota')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group row left-items-center"><label for="provinsi" class="form-control-label col-sm-3 text-md-right">Provinsi</label><div class="col-sm-6 col-md-9"><input type="text" id="provinsi" name="provinsi[]"  class="form-control @error('provinsi') is-invalid @enderror" >@error('provinsi')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></div><div class="form-group text-right"><a href="#" class="hapusalamat btn bt-sm btn-warning text-right"><i class="fa fa-minus"></i></a></div></div>';
+    //         $('.alamatt').append(alamatt);
+    //     };
+    //     $(document).on('click', '.hapusalamat', function(e) {
+    //         e.preventDefault();
+    //         $(this).parent().parent().remove();
+    //     })
     </script>
 @endpush

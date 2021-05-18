@@ -62,10 +62,10 @@ class Pegawai extends Model
     {
         return $this->hasMany(Hobi::class,'nip_pegawai','nip_pegawai');
     }
-    //table pegawai memiliki banyak alamat yang dikirim ketabel alamat dengan relasi one to many
+    //table pegawai memiliki 1 relasi yang dikirim ketabel alamat dengan relasi one to one
     public function alamat()
     {
-        return $this->hasMany(Alamat::class,'nip_pegawai','nip_pegawai');
+        return $this->hasOne(Alamat::class,'nip_pegawai','nip_pegawai');
     }
     //table pegawai memiliki 1 relasi yang dikirim ke tabel keterangan badan dengan relasi one to one
     public function keterangan_badan()

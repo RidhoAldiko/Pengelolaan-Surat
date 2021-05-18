@@ -138,7 +138,8 @@
                     </div>
                     <div class="tab-pane fade" id="alamat" role="tabpanel" aria-labelledby="alamat-tab">
                         <div class="row justify-content-center">
-                            @if ($pegawai->alamat->count() > 0)
+                            
+                            @if ($pegawai->alamat !=null)
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <Label>Alamat Rumah - <code>{{ $pegawai->nama_pegawai }}</code></Label>
@@ -154,15 +155,14 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($pegawai->alamat as $item)
+                                                    
                                                         <tr class="text-center">
-                                                            <td>{{ $item->jalan }}</td>
-                                                            <td>{{ $item->kelurahan_desa }}</td>
-                                                            <td>{{ $item->kecamatan }}</td>
-                                                            <td>{{ $item->kabupaten_kota }}</td>
-                                                            <td>{{ $item->provinsi }}</td>
+                                                            <td>{{ $pegawai->alamat->jalan }}</td>
+                                                            <td>{{ $pegawai->alamat->kelurahan_desa }}</td>
+                                                            <td>{{ $pegawai->alamat->kecamatan }}</td>
+                                                            <td>{{ $pegawai->alamat->kabupaten_kota }}</td>
+                                                            <td>{{ $pegawai->alamat->provinsi }}</td>
                                                         </tr>
-                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

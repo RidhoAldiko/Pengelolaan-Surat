@@ -19,6 +19,9 @@ class CreateRiwayatKgbTable extends Migration
             $table->smallInteger('id_gaji')->unsigned();
             $table->date('mulai_berlaku');
             $table->date('batas_berlaku');
+            $table->string('penjabat',60);
+            $table->string('nomor',60);
+            $table->date('tanggal');
             $table->tinyInteger('status');//0=aktif 1 = nonaktif
             
             // foreign key dari tabel golongan
