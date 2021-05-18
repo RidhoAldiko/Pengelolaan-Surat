@@ -15,6 +15,9 @@ class RiwayatKGB extends Model
         'nip_pegawai',
         'mulai_berlaku',
         'batas_berlaku',
+        'penjabat',
+        'nomor',
+        'tanggal',
         'id_gaji',
         'status'
     ];

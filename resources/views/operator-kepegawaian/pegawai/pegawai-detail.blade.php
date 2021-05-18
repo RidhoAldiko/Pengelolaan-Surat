@@ -909,21 +909,21 @@
                                             <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                                                 <thead>
                                                         <tr class="text-center">
-                                                            <th scope="col">Golongan</th>
                                                             <th scope="col">Gaji</th>
-                                                            <th scope="col">Mulai Berlaku</th>
-                                                            <th scope="col">Berlaku Hingga</th>
+                                                            <th scope="col">Dari-Sampai</th>
+                                                            <th scope="col">Penjabat</th>
+                                                            <th scope="col">Nomor</th>
+                                                            <th scope="col">Tanggal</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($kgb as $item)
                                                         <tr class="text-center">
-                                                            <td>@if ($pegawai->golongan->id_golongan == $item->gaji->id_golongan)
-                                                                {{ $pegawai->golongan->nama_golongan }}
-                                                            @endif</td>
                                                             <td>{{ $item->gaji->jumlah_gaji }}</td>
-                                                            <td>{{ date('d/m/Y', strtotime($item->mulai_berlaku)) }}</td>
-                                                            <td>{{ date('d/m/Y', strtotime($item->batas_berlaku)) }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->mulai_berlaku)) }} - {{ date('d/m/Y', strtotime($item->batas_berlaku)) }}</td>
+                                                            <td>{{ $item->penjabat }}</td>
+                                                            <td>{{ $item->nomor }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

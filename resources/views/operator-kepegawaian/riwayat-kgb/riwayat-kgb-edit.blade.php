@@ -33,19 +33,58 @@
                     <div class="card-body">
                       <p class="text-muted">Masukan data Kenaikan Gaji Berkala Pegawai dengan benar dan tepat.!</p>
 
-                      <div class="form-group row align-items-center">
                           <input type="hidden" name="nip_pegawai" value="{{ $pegawai->nip_pegawai }}">
-                        <label for="mulai_berlaku" class="form-control-label col-sm-3 text-md-right">Mulai Berlaku</label>
-                        <div class="col-sm-6 col-md-9">
-                            <input type="date" id="mulai_berlaku" name="mulai_berlaku"  class="form-control @error('mulai_berlaku') is-invalid @enderror" value="{{ $pegawai->mulai_berlaku }}" >
-                            @error('mulai_berlaku')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                      </div>
-
+                          <div class="form-group row align-items-center">
+                            <label for="nomor" class="form-control-label col-sm-3 text-md-right">KGB YAD Dari- Sampai</label>
+                            <div class="col-sm-3 col-md-4">
+                              <input type="date" id="mulai_berlaku" name="mulai_berlaku" class="form-control @error('mulai_berlaku') is-invalid @enderror" value="{{$pegawai->mulai_berlaku}}" >
+                                  @error('mulai_berlaku')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                                  @enderror
+                              </div>
+                            <div class="col-sm-3 col-md-4">
+                              <input type="date" id="batas_berlaku" name="batas_berlaku" onfocus="(this.type='date')"  class="form-control @error('batas_berlaku') is-invalid @enderror" value="{{$pegawai->batas_berlaku}}" >
+                                  @error('batas_berlaku')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                                  @enderror
+                              </div>
+                          </div>
+    
+                          <div class="form-group row align-items-center">
+                            <label for="penjabat" class="form-control-label col-sm-3 text-md-right">Penjabat</label>
+                            <div class="col-sm-6 col-md-9">
+                              <input type="text" id="penjabat" name="penjabat"  class="form-control @error('penjabat') is-invalid @enderror" value="{{$pegawai->penjabat}}" >
+                                @error('penjabat')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                          </div>
+    
+                          <div class="form-group row align-items-center">
+                            <label for="nomor" class="form-control-label col-sm-3 text-md-right">Nomor dan Tanggal</label>
+                            <div class="col-sm-3 col-md-5">
+                              <input type="text" id="nomor" name="nomor"  class="form-control @error('nomor') is-invalid @enderror" placeholder="nomor" value="{{$pegawai->nomor}}" >
+                                  @error('nomor')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                                  @enderror
+                            </div>
+                            <div class="col-sm-3 col-md-4">
+                              <input type="text" id="tanggal" name="tanggal" onfocus="(this.type='date')"  class="form-control @error('tanggal') is-invalid @enderror" placeholder="tanggal" value="{{$pegawai->tanggal}}" >
+                                  @error('tanggal')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                                  @enderror
+                              </div>
+                          </div>
                     </div>
                     <div class="card-footer bg-whitesmoke">
                       <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
