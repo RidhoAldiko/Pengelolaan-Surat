@@ -21,7 +21,6 @@ class PenghargaanController extends Controller
         $explode = explode(' - ',$request->nip_pegawai,-1);
         //masukan nip ke variabel data['id]
         $data ['nip_pegawai'] = $explode[0];
-        //timpa nip lama dengan nip baru yang sudah dipisahkan dari nama
 
         Penghargaan::create($data);
         return redirect()->route('pegawai-penghargaan.create')->with('status','Data penghargaan berhasil ditambah');

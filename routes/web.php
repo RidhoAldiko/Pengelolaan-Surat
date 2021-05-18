@@ -23,6 +23,7 @@ use App\Http\Controllers\OperatorSurat\SuratMasukController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
 use App\Http\Controllers\OperatorKepegawaian\OrangtuaKandungController;
 use App\Http\Controllers\OperatorKepegawaian\OrganisasiController;
+use App\Http\Controllers\OperatorKepegawaian\PangkatCPNSController;
 use App\Http\Controllers\OperatorKepegawaian\PengalamanKeluarNegeriController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatKGBController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatPangkatController;
@@ -187,6 +188,8 @@ Route::prefix('operator-kepegawaian')
          Route::resource('pegawai-mutasi',MutasiController::class);
          // -----------------------diklat penjenjangan---------------------------------
          Route::resource('pegawai-diklat-penjenjangan',DiklatPenjenjanganController::class);
+         // -----------------------pangkat cpns---------------------------------
+         Route::resource('pegawai-pangkat-cpns',PangkatCPNSController::class);
          // -----------------------riwayat pangkat---------------------------------
          Route::resource('pegawai-riwayat-pangkat',RiwayatPangkatController::class);
          // -----------------------riwayat KGB---------------------------------

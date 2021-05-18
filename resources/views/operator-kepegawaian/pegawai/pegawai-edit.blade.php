@@ -50,6 +50,9 @@
                         <a class="nav-link" id="dokumen-tab" data-toggle="tab" href="#dokumen" role="tab" aria-controls="dokumen" aria-selected="false">Dokumen Pegawai</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" id="pangkat_cpns-tab" data-toggle="tab" href="#pangkat_cpns" role="tab" aria-controls="pangkat_cpns" aria-selected="false">Pangkat CPNS</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" id="pangkat-tab" data-toggle="tab" href="#pangkat" role="tab" aria-controls="pangkat" aria-selected="false">Pangkat</a>
                     </li>
                     <li class="nav-item">
@@ -1395,6 +1398,61 @@
                             </div>
                             @endif
                         </div>
+                    </div>
+                    <div class="tab-pane fade" id="pangkat_cpns" role="tabpanel" aria-labelledby="pangkat_cpns-tab">
+                        <div class="row justify-content-center">
+                            @if ($pegawai->pangkat_cpns !=null)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Riwayat Pangkat Pegawai CPNS - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Pangkat Golongan</th>
+                                                            <th scope="col">TMT</th>
+                                                            <th scope="col">Gaji Pokok</th>
+                                                            <th scope="col">Penjabat</th>
+                                                            <th scope="col">Nomor</th>
+                                                            <th scope="col">Tanggal</th>
+                                                            <th scope="col">Aksi</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                        <tr class="text-center">
+                                                            <td>{{ $pangkat_cpns->golongan->pangkat }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($pangkat_cpns->tmt)) }}</td>
+                                                            <td>{{ $pangkat_cpns->gaji_pokok }}</td>
+                                                            <td>{{ $pangkat_cpns->penjabat }}</td>
+                                                            <td>{{ $pangkat_cpns->nomor }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($pangkat_cpns->tanggal)) }}</td>
+                                                            <td>
+                                                                <a href="{{ route('pegawai-pangkat-cpns.edit',$pangkat_cpns->id_pangkat_cpns) }}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                </a>
+                                                                <form action="{{ route('pegawai-pangkat-cpns.destroy',$pangkat_cpns->id_pangkat_cpns) }}" method="post" class="d-inline">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data riwayat pangkat cpns ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                </form> 
+                                                            </td>
+                                                        </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Riwayat Pangkat CPNS Pegawai - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                    <p class="border-bottom text-gray-800">
+                                        - Riwayat Pangkat CPNS Pegawai belum diisi, lengkapi dimenu Kepegawaian -
+                                    </p>
+                                </div>
+                            </div>
+                            @endif
+                        </div>   
                     </div>
                     <div class="tab-pane fade" id="pangkat" role="tabpanel" aria-labelledby="pangkat-tab">
                         <div class="row justify-content-center">
