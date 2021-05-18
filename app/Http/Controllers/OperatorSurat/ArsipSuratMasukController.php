@@ -20,7 +20,7 @@ class ArsipSuratMasukController extends Controller
         return view('operator-surat.arsip.arsip-surat-masuk');
     }
     public function arsip_surat_serverside(){
-        $data = SuratMasuk::where('status','2')->orWhere('status','3')->get();
+        $data = SuratMasuk::where('status','1')->orWhere('status','3')->get();
         return DataTables::of($data)
                 ->addIndexColumn()
                 ->editColumn('pengirim', function($data){ 
@@ -33,10 +33,10 @@ class ArsipSuratMasukController extends Controller
                     return date("d/m/Y", strtotime($data->tanggal_surat));
                 })
                 ->addColumn('status', function($data) {
-                    if ($data->status == 1) {
+                    if ($data->status == 0) {
                         return "didisposisi";
                     }else
-                    if ($data->status == 2) {
+                    if ($data->status == 1) {
                         return "Tidak didisposisi";
                     }else
                     if ($data->status == 3) {

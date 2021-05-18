@@ -15,7 +15,6 @@ class DisposisiSuratMasuk extends Model
         'id_surat_masuk',
         'indeks',
         'tanggal_disposisi',
-        'status',
     ];
 
     

@@ -165,12 +165,15 @@ gtag('config', 'UA-94034622-3');
 @stack('search-pegawai-page_tambah-pengguna')
 {{-- script pegawai --}}
 @stack('script-server-side_pegawai')
+@stack('script-server-side_admin-pegawai')
 @stack('script-surat-masuk')
 @stack('script-disposisi-surat-masuk')
 @stack('script-server-side_arsip-surat-masuk')
 @stack('script-delete-pegawai')
 {{-- script master --}}
 @stack('script-delete-golongan')
+@stack('script-delete-disposisi')
+@stack('script-delete-button')
 @stack('script-delete-jabatan')
 @stack('script-delete-unit_kerja')
 @stack('script-delete-level_surat')

@@ -28,7 +28,6 @@
                                 <th scope="col">Pengirim</th>
                                 <th scope="col">No Surat</th>
                                 <th scope="col">Tgl Surat</th>
-                                <th scope="col">FIle</th>
                                 <th scope="col">Disposisi</th>
                                 <th scope="col">Aksi</th>
                             </tr>
@@ -41,9 +40,6 @@
                                     <td>{{$result->nomor_surat}}</td>
                                     <td>{{date("d/m/Y", strtotime($result->tanggal_surat))}}</td>
                                     <td>
-                                        <a href="{{Storage::url($result->file_surat)}}" target="_blank"> <i class="fa fa-file-pdf fa-2x"></i></a>
-                                    </td>
-                                    <td>
                                         <a href="{{route('disposisi-surat-masuk.ignore',$result->id_surat_masuk)}}" class="btn btn-danger btn-sm" >
                                             <i class="fas fa-times"></i>
                                         </a>
@@ -52,13 +48,13 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="#" class="btn btn-success text-white btn-sm" title="Edit">
+                                        <a href="{{route('surat-masuk.show',$result->id_surat_masuk)}}" class="btn btn-success text-white btn-sm" title="Edit">
                                         <i class="fas fa-info"></i> Detail
                                             </a>
-                                        <a href="#" class="btn btn-warning text-white btn-sm" title="Edit">
+                                        <a href="{{route('surat-masuk.edit',$result->id_surat_masuk)}}" class="btn btn-warning text-white btn-sm" title="Edit">
                                             <i class="fas fa-pencil-alt"></i> Edit
                                         </a>
-                                        <a href="#" class="btn btn-danger btn-sm getIdSurat" data-toggle="modal" data-target="#deleteSurat" data-id="'.$data->id_surat.'" >
+                                        <a href="#" class="btn btn-danger btn-sm getIdSuratMasuk" data-toggle="modal" data-target="#deleteSurat" data-id="{{$result->id_surat_masuk}}" >
                                             <i class="fas fa-trash fa-sm"></i> Hapus
                                         </a>
                                     </td>
@@ -71,6 +67,32 @@
         </div>
     </div>
 </section>
+
+<!-- delete Modal-->
+<div class="modal fade" id="deleteSurat" tabindex="-1" role="dialog" aria-labelledby="deleteSuratLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header justify-content-center">
+            <h4 class="modal-title h4" id="deleteSuratLabel">Ingin menghapus data ?</h4>
+            {{-- <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            </button> --}}
+        </div>
+        <div class="modal-body">
+            <h5 class="h5 text-center alert-text">Tekan "hapus" untuk menghapus.</h5> 
+            <div class="modal-footer d-flex justify-content-center">        
+                <form action="" method="post"  class="d-inline">
+                    @csrf
+                    @method('delete')
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button class="btn btn-danger" type="submit">Hapus</button>
+                </form> </td>
+                
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
 @endsection
 @push('script-surat-masuk')
     <script>
@@ -78,4 +100,13 @@
             $('#surat-masuk').DataTable();
         } );
     </script>
+@endpush
+@push('script-delete-button')
+<script>
+    //delete data unit kerja
+    $('.getIdSuratMasuk').on('click',function(){
+        var _id = $(this).data("id");
+        $('.modal-footer form[action]').attr('action', 'surat-masuk'+'/'+_id);
+    })
+</script>
 @endpush

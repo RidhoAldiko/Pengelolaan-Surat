@@ -29,7 +29,7 @@ class SuratMasukRequest extends FormRequest
             'tanggal_surat' => ['required','string'],
             'perihal' => ['required','string'],
             'isi_ringkasan' => ['required','string'],
-            'file_surat' => ['required', 'file','mimes:pdf','max:512'],
+            'file_surat' => ['file','mimes:pdf','max:512'],
         ];
     }
     public function messages()
@@ -40,7 +40,6 @@ class SuratMasukRequest extends FormRequest
             'tanggal_surat.required'  => 'Tanggal tidak boleh kosong',
             'perihal.required'  => 'Perihal tidak boleh kosong',
             'isi_ringkasan.required'  => 'Isi Ringkasan tidak boleh kosong',
-            'file_surat.required'  => 'File Surat tidak boleh kosong',
             'file_surat.mimes'  => 'File Surat harus berupa PDF',
             'file_surat.max'  => 'File Surat maksimal berukan 512kb',
         ];
