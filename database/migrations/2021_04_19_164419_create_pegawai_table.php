@@ -23,7 +23,6 @@ class CreatePegawaiTable extends Migration
             $table->string('agama',30);
             $table->string('status_perkawinan',30);
             $table->smallInteger('id_unit')->unsigned();
-            $table->smallInteger('id_golongan')->unsigned();
             $table->smallInteger('id_jabatan')->unsigned();
             $table->string('foto')->nullable();
             $table->tinyInteger('status');//0=aktif 1 = nonaktif
@@ -31,8 +30,6 @@ class CreatePegawaiTable extends Migration
 
             // foreign key dari tabel unit_kerja
             $table->foreign('id_unit')->references('id_unit')->on('unit_kerja')->onUpdate('cascade');
-            // foreign key dari tabel golongan
-            $table->foreign('id_golongan')->references('id_golongan')->on('golongan')->onUpdate('cascade');
             // foreign key dari tabel jabatan
             $table->foreign('id_jabatan')->references('id_jabatan')->on('jabatan')->onUpdate('cascade');
         });

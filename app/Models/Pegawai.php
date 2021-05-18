@@ -33,7 +33,6 @@ class Pegawai extends Model
         'status_perkawinan',
         'nomor_karpeg',
         'id_unit',
-        'id_golongan',
         'id_jabatan',
         'foto',
         'status'
@@ -53,11 +52,6 @@ class Pegawai extends Model
     {
         return $this->belongsTo(Unit_kerja::class,'id_unit','id_unit');
     }
-    //table pegawai memiliki 1 relasi yang dikirim ke tabel golongan dengan relasi one to one
-    public function golongan()
-    {
-        return $this->belongsTo(Golongan::class,'id_golongan','id_golongan');
-    }
     //table pegawai memiliki 1 relasi yang dikirim ke tabel jabatan dengan relasi one to one
     public function jabatan()
     {
@@ -68,10 +62,10 @@ class Pegawai extends Model
     {
         return $this->hasMany(Hobi::class,'nip_pegawai','nip_pegawai');
     }
-    //table pegawai memiliki banyak alamat yang dikirim ketabel alamat dengan relasi one to many
+    //table pegawai memiliki 1 relasi yang dikirim ketabel alamat dengan relasi one to one
     public function alamat()
     {
-        return $this->hasMany(Alamat::class,'nip_pegawai','nip_pegawai');
+        return $this->hasOne(Alamat::class,'nip_pegawai','nip_pegawai');
     }
     //table pegawai memiliki 1 relasi yang dikirim ke tabel keterangan badan dengan relasi one to one
     public function keterangan_badan()

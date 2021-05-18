@@ -12,7 +12,7 @@ class Golongan extends Model
     public $timestamps = false;
     protected $primaryKey = 'id_golongan';
     protected $fillable = [
-        'nama_golongan','status'
+        'pangkat','nama_golongan','status'
     ];
     //tabel golongan terhubung dengan tabel pegawai dengan relasi one to one
     public function pegawai()

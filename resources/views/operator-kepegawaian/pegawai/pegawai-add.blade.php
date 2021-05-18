@@ -122,19 +122,6 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <select class="form-control @error('id_golongan') is-invalid @enderror" id="id_golongan" name="id_golongan">
-                                    <option selected disabled> --Pilih Golongan-- </option>
-                                    @foreach ($golongan as $gl)
-                                    <option value="{{$gl->id_golongan}}">{{$gl->nama_golongan}}</option>
-                                    @endforeach
-                                </select>
-                                @error('id_golongan')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
                                 <select class="form-control @error('id_jabatan') is-invalid @enderror" id="id_jabatan" name="id_jabatan">
                                     <option selected disabled> --Pilih Jabatan-- </option>
                                     @foreach ($jabatan as $jb)

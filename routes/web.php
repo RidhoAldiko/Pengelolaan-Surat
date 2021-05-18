@@ -153,6 +153,8 @@ Route::prefix('operator-kepegawaian')
         Route::get('/', [OperatorKepegawaianController::class,'index'])->name('operator-kepegawaian.index');
         //operator-kepegawaian: table data pegawai
         Route::get('data-pegawai', [OperatorKepegawaianController::class,'data_pegawai'])->name('data-pegawai.index');
+        //operator-kepegawaian: table data pegawai
+        Route::get('cetak-pegawai-per-orangan/{data_pegawai}', [OperatorKepegawaianController::class,'cetak_perorangan'])->name('data-pegawai.cetakperorangan');
         //operator-kepegawaian: get server side data pegawai
         Route::get('serverside-pegawai',[OperatorKepegawaianController::class,'pegawai_serverSide'])->name('pegawai.serverside');
         //operator-kepegawaian: form data pegawai

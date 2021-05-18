@@ -42,6 +42,9 @@
                         <a class="nav-link" id="dokumen-tab" data-toggle="tab" href="#dokumen" role="tab" aria-controls="dokumen" aria-selected="false">Dokumen Pegawi</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" id="pangkat-tab" data-toggle="tab" href="#pangkat" role="tab" aria-controls="pangkat" aria-selected="false">Pangkat</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" id="kgb-tab" data-toggle="tab" href="#kgb" role="tab" aria-controls="kgb" aria-selected="false">Kenaikan Gaji Berkala</a>
                     </li>
                 </ul>
@@ -109,7 +112,7 @@
                                         <div class="form-group">
                                             <label>Golongan</label>
                                             <p class="border-bottom text-gray-800">
-                                                {{ $pegawai->golongan->nama_golongan }}
+                                               
                                             </p>
                                         </div>
                                 </div>
@@ -135,7 +138,8 @@
                     </div>
                     <div class="tab-pane fade" id="alamat" role="tabpanel" aria-labelledby="alamat-tab">
                         <div class="row justify-content-center">
-                            @if ($pegawai->alamat->count() > 0)
+                            
+                            @if ($pegawai->alamat !=null)
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <Label>Alamat Rumah - <code>{{ $pegawai->nama_pegawai }}</code></Label>
@@ -151,15 +155,14 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($pegawai->alamat as $item)
+                                                    
                                                         <tr class="text-center">
-                                                            <td>{{ $item->jalan }}</td>
-                                                            <td>{{ $item->kelurahan_desa }}</td>
-                                                            <td>{{ $item->kecamatan }}</td>
-                                                            <td>{{ $item->kabupaten_kota }}</td>
-                                                            <td>{{ $item->provinsi }}</td>
+                                                            <td>{{ $pegawai->alamat->jalan }}</td>
+                                                            <td>{{ $pegawai->alamat->kelurahan_desa }}</td>
+                                                            <td>{{ $pegawai->alamat->kecamatan }}</td>
+                                                            <td>{{ $pegawai->alamat->kabupaten_kota }}</td>
+                                                            <td>{{ $pegawai->alamat->provinsi }}</td>
                                                         </tr>
-                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -612,48 +615,6 @@
                     </div>
                     <div class="tab-pane fade" id="kepegawaian" role="tabpanel" aria-labelledby="kepegawaian-tab">
                         <div class="row justify-content-center">
-                            @if ($pegawai->riwayat_pangkat->count() > 0)
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Riwayat Pangkat Pegawai - <code>{{ $pegawai->nama_pegawai }}</code></label>
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
-                                                <thead>
-                                                        <tr class="text-center">
-                                                            <th scope="col">Golongan</th>
-                                                            <th scope="col">TMT</th>
-                                                            <th scope="col">Penjabat</th>
-                                                            <th scope="col">Nomor</th>
-                                                            <th scope="col">Tanggal</th>
-                                                        </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($pegawai->riwayat_pangkat as $item)
-                                                        <tr class="text-center">
-                                                            <td>{{ $item->golongan->nama_golongan }}</td>
-                                                            <td>{{ $item->tmt }}</td>
-                                                            <td>{{ $item->penjabat }}</td>
-                                                            <td>{{ $item->nomor }}</td>
-                                                            <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            @else
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label>Riwayat Pangkat Pegawai - <code>{{ $pegawai->nama_pegawai }}</code></label>
-                                    <p class="border-bottom text-gray-800">
-                                        - Riwayat Pangkat Pegawai belum diisi, lengkapi dimenu Kepegawaian -
-                                    </p>
-                                </div>
-                            </div>
-                            @endif
-                        </div>
-                        <div class="row justify-content-center">
                             @if ($pegawai->diklat_penjenjangan->count() > 0)
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -894,6 +855,50 @@
                             @endif
                         </div>
                     </div>
+                    <div class="tab-pane fade" id="pangkat" role="tabpanel" aria-labelledby="pangkat-tab">
+                        <div class="row justify-content-center">
+                            @if ($pegawai->riwayat_pangkat->count() > 0)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Riwayat Pangkat Pegawai - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Golongan</th>
+                                                            <th scope="col">TMT</th>
+                                                            <th scope="col">Penjabat</th>
+                                                            <th scope="col">Nomor</th>
+                                                            <th scope="col">Tanggal</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($pegawai->riwayat_pangkat as $item)
+                                                        <tr class="text-center">
+                                                            <td>{{ $item->golongan->nama_golongan }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->tmt)) }}</td>
+                                                            <td>{{ $item->penjabat }}</td>
+                                                            <td>{{ $item->nomor }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Riwayat Pangkat Pegawai - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                    <p class="border-bottom text-gray-800">
+                                        - Riwayat Pangkat Pegawai belum diisi, lengkapi dimenu Kepegawaian -
+                                    </p>
+                                </div>
+                            </div>
+                            @endif
+                        </div>   
+                    </div>
                     <div class="tab-pane fade" id="kgb" role="tabpanel" aria-labelledby="kgb-tab">
                         <div class="row justify-content-center">
                             @if ($pegawai->riwayat_kgb->count() > 0)
@@ -904,19 +909,21 @@
                                             <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                                                 <thead>
                                                         <tr class="text-center">
-                                                            <th scope="col">Golongan</th>
                                                             <th scope="col">Gaji</th>
-                                                            <th scope="col">Mulai Berlaku</th>
+                                                            <th scope="col">Dari-Sampai</th>
+                                                            <th scope="col">Penjabat</th>
+                                                            <th scope="col">Nomor</th>
+                                                            <th scope="col">Tanggal</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($kgb as $item)
                                                         <tr class="text-center">
-                                                            <td>@if ($pegawai->golongan->id_golongan == $item->gaji->id_golongan)
-                                                                {{ $pegawai->golongan->nama_golongan }}
-                                                            @endif</td>
                                                             <td>{{ $item->gaji->jumlah_gaji }}</td>
-                                                            <td>{{ date('d/m/Y', strtotime($item->mulai_berlaku)) }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->mulai_berlaku)) }} - {{ date('d/m/Y', strtotime($item->batas_berlaku)) }}</td>
+                                                            <td>{{ $item->penjabat }}</td>
+                                                            <td>{{ $item->nomor }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

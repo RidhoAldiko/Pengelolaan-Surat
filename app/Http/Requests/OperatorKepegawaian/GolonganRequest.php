@@ -24,7 +24,8 @@ class GolonganRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama_golongan' => 'required|max:70'
+            'nama_golongan' => 'required|max:70',
+            'pangkat' => 'required|max:70'
         ];
     }
     /**
@@ -36,7 +37,9 @@ class GolonganRequest extends FormRequest
     {
         return [
             'nama_golongan.required'   => 'Nama golongan tidak boleh kosong',
-            'nama_golongan.max'        => 'Maksimal Nama golongan 70 karakter'
+            'nama_golongan.max'        => 'Maksimal Nama golongan 70 karakter',
+            'pangkat.required'   => 'Nama pangkat tidak boleh kosong',
+            'pangkat.max'        => 'Maksimal Nama pangkat 70 karakter'
         ];
     }
 }

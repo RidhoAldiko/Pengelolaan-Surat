@@ -22,18 +22,28 @@ class RiwayatKGBController extends Controller
         //pisahkan dan ambil nip pegawai saja
         $explode = explode(' - ',$request->nip_pegawai,-1);
         //timpa nip lama dengan nip baru yang sudah dipisahkan dari nama
-        $data ['nip_pegawai'] = $explode[0];
+        $data['nip_pegawai'] = $explode[0];
+       
+        $pangkatPegawai   = RiwayatPangkat::where('nip_pegawai',$data['nip_pegawai'])->orderBy('id_riwayat_pangkat', 'desc')->first();
+        $selisihTahun     = floor((strtotime($data['mulai_berlaku'])-strtotime($pangkatPegawai->tmt))/(60 * 60 * 24 * 365));
+        $tahun            = (int)$selisihTahun;
+        $gaji             = Gaji::where('id_golongan',$pangkatPegawai->id_golongan)->where('mkg',$tahun)->first();
         
-        $pangkatPegawai = RiwayatPangkat::where('nip_pegawai',$data['nip_pegawai'])->orderBy('id_riwayat_pangkat', 'desc')->first();
-        $selisihTahun = floor((strtotime($pangkatPegawai->tmt)-strtotime($data['mulai_berlaku']))/(60 * 60 * 24 * 365));
-        $tahun =abs((int)$selisihTahun);
-
-        $gaji  = Gaji::where('id_golongan',$pangkatPegawai->id_golongan)->where('mkg',$tahun)->first();
-         
         //kriteria pegawai tidak ada di tabel gaji
             if ($gaji == null) {
                 return redirect()->route('pegawai-riwayat-kgb.create')->with('status','Data Gaji Master tidak ada dengan kriteria pegawai');
             }
+        
+        //cek data riwayatKGB, jika ada data lama statusnya nonaktifkan 
+        $data_riwayatkgb = RiwayatKGB::where('nip_pegawai',$data['nip_pegawai'])->orderBy('id_riwayat_kgb','desc')->first();
+                if ($data_riwayatkgb != null) {
+                    //update status data sebelmunya dengan nonaktif
+                    $data['status']=1;
+                    $data_riwayatkgb->update([
+                        'status' => $data['status']
+                    ]);
+                }
+        $data['status']  = 0;
         $data['id_gaji'] = $gaji->id_gaji;  
 
         RiwayatKGB::create($data);
@@ -49,21 +59,18 @@ class RiwayatKGBController extends Controller
     public function update(RiwayatKGBRequest $request, $id)
     {
         $data           = $request->all();
-        
-            $pangkatPegawai = RiwayatPangkat::where('nip_pegawai',$data['nip_pegawai'])->orderBy('id_riwayat_pangkat', 'desc')->first();
-            $selisihTahun = floor((strtotime($pangkatPegawai->tmt)-strtotime($data['mulai_berlaku']))/(60 * 60 * 24 * 365));
-            $tahun =abs((int)$selisihTahun);
+            $pangkatPegawai     = RiwayatPangkat::where('nip_pegawai',$data['nip_pegawai'])->orderBy('id_riwayat_pangkat', 'desc')->first();
+            $selisihTahun     = floor((strtotime($data['mulai_berlaku'])-strtotime($pangkatPegawai->tmt))/(60 * 60 * 24 * 365));
+            $tahun            = (int)$selisihTahun;
            
-            $gaji  = Gaji::where('id_golongan',$pangkatPegawai->id_golongan)->where('mkg',$tahun)->first();
-
+            $gaji               = Gaji::where('id_golongan',$pangkatPegawai->id_golongan)->where('mkg',$tahun)->first();
             //kriteria pegawai tidak ada di tabel gaji
                 if ($gaji == null) {
                     return redirect()->route('data-pegawai.edit',$data['nip_pegawai'])->with('status','Data Gaji Master tidak ada dengan kriteria pegawai');
-                }
-
-        $data['id_gaji'] = $gaji->id_gaji;
-        $item           = RiwayatKGB::findOrFail($id);
-
+                } 
+        $data['id_gaji']    = $gaji->id_gaji; 
+        $item               = RiwayatKGB::findOrFail($id);
+        $data['status']     = $item->status;
         $item->update($data);
         return redirect()->route('data-pegawai.edit',$data['nip_pegawai'])->with('status',"Data riwayat Kenaikan gaji berkala berhasil diedit");
     }

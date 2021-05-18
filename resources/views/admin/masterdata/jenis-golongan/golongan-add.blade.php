@@ -20,6 +20,14 @@
                         <form action="{{ route('data-golongan.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
+                                <input type="text" id="pangkat" name="pangkat"  class="form-control @error('pangkat') is-invalid @enderror" placeholder="Masukan Nama Pankat" value="{{old('pangkat')}}" >
+                                @error('pangkat')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <input type="text" id="nama_golongan" name="nama_golongan"  class="form-control @error('nama_golongan') is-invalid @enderror" placeholder="Masukan Nama Golongan" value="{{old('nama_golongan')}}" >
                                 @error('nama_golongan')
                                 <span class="invalid-feedback" role="alert">

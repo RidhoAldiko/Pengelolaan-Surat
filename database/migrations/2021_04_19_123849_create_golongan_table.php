@@ -15,6 +15,7 @@ class CreateGolonganTable extends Migration
     {
         Schema::create('golongan', function (Blueprint $table) {
             $table->smallIncrements('id_golongan');
+            $table->string('pangkat',70);
             $table->string('nama_golongan',70)->unique();
             $table->tinyInteger('status');//0=aktif 1 = nonaktif
         });

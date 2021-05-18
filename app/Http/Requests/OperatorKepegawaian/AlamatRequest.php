@@ -24,11 +24,11 @@ class AlamatRequest extends FormRequest
     public function rules()
     {
         return [
-            'jalan.*'         => 'required|max:60',
-            'kelurahan_desa.*'=> 'required|max:50',
-            'kecamatan.*'     => 'required|max:60',
-            'kabupaten_kota.*'=> 'required|max:50',
-            'provinsi.*'      => 'required|max:50'
+            'jalan'         => 'required|max:60',
+            'kelurahan_desa'=> 'required|max:50',
+            'kecamatan'     => 'required|max:60',
+            'kabupaten_kota'=> 'required|max:50',
+            'provinsi'      => 'required|max:50'
         ];
     }
     /**

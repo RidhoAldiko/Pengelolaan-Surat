@@ -24,7 +24,8 @@
                     <table  class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                         <thead>
                             <tr class="text-center">
-                                <th scope="col">Unit Golongan</th>
+                                <th scope="col">Pangkat</th>
+                                <th scope="col">Golongan Ruang</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
                             </tr>                            
@@ -33,6 +34,7 @@
                             @forelse ($items as $item)
                             <tr class="text-center">
                             <td>{{ $item->nama_golongan }}</td>
+                            <td>{{ $item->pangkat }}</td>
                             <td>{{ $item->status == '0' ? 'Aktif' : 'Nonaktif' }}</td>
                             <td><a href="{{ route('data-golongan.edit',$item->id_golongan) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit fa-sm"></i> <span>Ubah</span></a>
                                 
