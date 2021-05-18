@@ -52,4 +52,12 @@ class PangkatCPNSController extends Controller
         $item->update($data);
         return redirect()->route('data-pegawai.edit',$data['nip_pegawai'])->with('status',"Data riwayat Pangkat CPNS berhasil diedit");
     }
+
+    public function destroy($id)
+    {
+        $data   = PangkatCPNS::findOrFail($id);
+        $data->delete();
+        
+        return redirect()->route('data-pegawai.edit',$data->nip_pegawai)->with('status',"Data Pangkat CPNS pegawai berhasil dihapus");
+    }
 }

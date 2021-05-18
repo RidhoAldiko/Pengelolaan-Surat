@@ -147,5 +147,10 @@ class Pegawai extends Model
     {
         return $this->hasOne(PangkatCPNS::class,'nip_pegawai','nip_pegawai');
     }
+    //table pegawai memiliki 1 relasi yang dikirim ketabel pangkat_cpns dengan relasi one to one
+    public function pangkat_pns()
+    {
+        return $this->hasOne(PangkatPNS::class,'nip_pegawai','nip_pegawai');
+    }
 
 }

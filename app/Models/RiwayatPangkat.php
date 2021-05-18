@@ -18,12 +18,14 @@ class RiwayatPangkat extends Model
         'tmt',
         'penjabat',
         'nomor',
-        'tanggal'
+        'tanggal',
+        'batas_berlaku',
+        'status'
     ];
 
     public function pegawai()
     {
-        return $this->belongsTo(Pegawai::class, 'nip_pegawai','id_riwayat_pangkat');
+        return $this->belongsTo(Pegawai::class, 'nip_pegawai','nip_pegawai');
     }
 
     //table pangkat memiliki 1 relasi yang dikirim ke tabel golongan dengan relasi one to one
