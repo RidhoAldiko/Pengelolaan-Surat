@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-//Mendefinisikan controller yang digunakan
+//Admin Controller
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PegawaiController;
 use App\Http\Controllers\Admin\GajiController;
@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\GolonganController;
 use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\UnitKerjaController;
 use App\Http\Controllers\Admin\LevelSuratController;
+//Opertor Kepegawaian Controller
 use App\Http\Controllers\OperatorKepegawaian\PenghargaanController;
 use App\Http\Controllers\OperatorKepegawaian\AlamatController;
 use App\Http\Controllers\OperatorKepegawaian\DiklatPenjenjanganController;
@@ -19,10 +20,6 @@ use App\Http\Controllers\OperatorKepegawaian\KeteranganKeluargaController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganLainController;
 use App\Http\Controllers\OperatorKepegawaian\MertuaController;
 use App\Http\Controllers\OperatorKepegawaian\MutasiController;
-use App\Http\Controllers\OperatorSurat\OperatorSuratController;
-use App\Http\Controllers\OperatorSurat\SuratMasukController;
-use App\Http\Controllers\OperatorSurat\DisposisiMasukController;
-use App\Http\Controllers\OperatorSurat\ArsipSuratMasukController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
 use App\Http\Controllers\OperatorKepegawaian\OrangtuaKandungController;
 use App\Http\Controllers\OperatorKepegawaian\OrganisasiController;
@@ -31,6 +28,11 @@ use App\Http\Controllers\OperatorKepegawaian\RiwayatKGBController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatPangkatController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatPendidikanController;
 use App\Http\Controllers\OperatorKepegawaian\SaudaraKandungController;
+//Operator Surat Controller
+use App\Http\Controllers\OperatorSurat\OperatorSuratController;
+use App\Http\Controllers\OperatorSurat\SuratMasukController;
+use App\Http\Controllers\OperatorSurat\DisposisiMasukController;
+use App\Http\Controllers\OperatorSurat\ArsipSuratMasukController;
 use Illuminate\Support\Facades\Auth;
 
 /*
