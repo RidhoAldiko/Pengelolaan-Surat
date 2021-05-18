@@ -113,7 +113,6 @@ Route::prefix('operator-surat')
         
 
     //----Disposisi Surat Masuk----
-        
         // operator-surat store disposisi surat masuk
         Route::post('disposisi-surat-masuk',[DisposisiMasukController::class,'store'])->name('disposisi-surat-masuk.store');
         // operator-surat tabel disposisi surat masuk 
