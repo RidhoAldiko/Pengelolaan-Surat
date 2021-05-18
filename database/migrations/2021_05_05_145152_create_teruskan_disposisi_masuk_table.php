@@ -15,7 +15,7 @@ class CreateTeruskanDisposisiMasukTable extends Migration
     {
         Schema::create('teruskan_disposisi_masuk', function (Blueprint $table) {
             $table->id('id_teruskan_surat_masuk');
-            $table->char('id')->unique();
+            $table->char('id');
             $table->smallInteger('id_disposisi_surat_masuk')->unsigned();
             $table->text('instruksi');
             $table->timestamps();

@@ -89,8 +89,9 @@ class AdminController extends Controller
         $data ['id'] = $explode[0];
         //cari tanggal lahir berdasarkan nip
         $result = Pegawai::where('nip_pegawai',$data['id'])->first('tanggal_lahir');
+        $date = date('d-m-Y', strtotime($result->tanggal_lahir));
         //bersihkan  dash (-) pada tanggal lahir
-        $tanggal_lahir = str_replace("-", "", $result->tanggal_lahir);
+        $tanggal_lahir = str_replace("-", "", $date);
         //set nilai flag=0 (aktif)
         $data['flag'] = '0';
         //buat password dari tanggal lahir

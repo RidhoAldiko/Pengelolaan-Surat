@@ -18,7 +18,6 @@ class CreateDisposisiSuratMasukTable extends Migration
             $table->smallInteger('id_surat_masuk')->unsigned();
             $table->char('indeks',100);
             $table->date('tanggal_disposisi');
-            $table->tinyInteger('status');
             $table->timestamps();
 
             $table->foreign('id_surat_masuk')->references('id_surat_masuk')->on('surat_masuk')->onUpdate('cascade');

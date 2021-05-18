@@ -20,11 +20,10 @@ class CreateSuratMasukTable extends Migration
             $table->date('tanggal_surat');
             $table->text('perihal');
             $table->text('isi_ringkasan');
-            $table->char('hubungan_nomor_surat',100);
+            $table->char('hubungan_nomor_surat',100)->nullable();
             $table->string('file_surat');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
-            
         });
     }
 

@@ -16,6 +16,9 @@
         <li class="{{set_active(['data-pengguna.index','data-pengguna.add'])}}"><a class="nav-link" href="{{route('data-pengguna.index')}}">
             <i class="fas fa-users"></i> <span>Pengguna</span></a>
         </li>
+        <li class="{{set_active(['admin-pegawai.index','admin-pegawai.create'])}}"><a class="nav-link" href="{{route('admin-pegawai.index')}}">
+            <i class="fas fa-address-card"></i> <span>Pegawai</span></a>
+        </li>
         
 
         <li class="menu-header">Master Data</li>
