@@ -3,10 +3,10 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Disposisi</h1>
+        <h1>Effort Surat Keluar</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{route('disposisi-surat-masuk.index')}}">Disposisi Surat Masuk</a></div>
-            <div class="breadcrumb-item">Ubah Disposisi Surat Masuk</div>
+            <div class="breadcrumb-item active"><a href="{{route('effort-surat.index')}}">Effort Surat Keluar</a></div>
+            <div class="breadcrumb-item">Ubah Effort Surat Keluar</div>
         </div>
     </div>
     <div class="section-body ">
@@ -14,22 +14,12 @@
             <div class="col-md-8">
                 <div class="card shadow ">
                     <div class="card-header">
-                        <h4>Ubah Disposisi Surat masuk</h4>
+                        <h4>Ubah Effort Surat Keluar</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('disposisi-surat-masuk.update',$result->id_surat_masuk)}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('effort-surat.update',$result->id_surat_keluar)}}" method="POST" enctype="multipart/form-data">
                             @method('put')
                             @csrf
-                            <div class="form-group">
-                                <label for="pengirim">Pengirim Surat</label>
-                                <input type="text" id="pengirim" name="pengirim"  class="form-control @error('pengirim') is-invalid @enderror" placeholder="Masukan pengirim surat" value="{{$result->pengirim}}" >
-                                @error('pengirim')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-
                             <div class="form-group">
                                 <label for="nomor_surat">Nomor Surat</label>
                                 <input type="text" id="nomor_surat" name="nomor_surat"  class="form-control @error('nomor_surat') is-invalid @enderror" placeholder="Masukan nomor surat" value="{{$result->nomor_surat}}" >
@@ -61,9 +51,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="tanggal_disposisi">Tanggal Disposisi</label>
-                                <input type="text" id="tanggal_disposisi" name="tanggal_disposisi" onfocus="(this.type='date')"  class="form-control @error('tanggal_disposisi') is-invalid @enderror" placeholder="Masukan tanggal disposisi" value="{{$result->tanggal_disposisi}}" >
-                                @error('tanggal_disposisi')
+                                <label for="tanggal_effort">Tanggal Effort</label>
+                                <input type="text" id="tanggal_effort" name="tanggal_effort" onfocus="(this.type='date')"  class="form-control @error('tanggal_effort') is-invalid @enderror" placeholder="Masukan tanggal disposisi" value="{{$result->tanggal_effort}}" >
+                                @error('tanggal_effort')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -84,6 +74,26 @@
                                 <label for="isi_ringkasan">Isi Ringkasan</label>
                                 <textarea class="form-control @error('isi_ringkasan') is-invalid @enderror" id="isi_ringkasan" name="isi_ringkasan" rows="3">{{$result->isi_ringkasan}}</textarea>
                                 @error('isi_ringkasan')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="alamat">Alamat</label>
+                                <textarea class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" rows="3">{{$result->alamat}}</textarea>
+                                @error('alamat')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="keterangan">Keterangan</label>
+                                <textarea class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" name="keterangan" rows="3">{{$result->keterangan}}</textarea>
+                                @error('keterangan')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -117,7 +127,7 @@
                                 </div>
                             </div>
 
-                            <a href="{{ route('disposisi-surat-masuk.index') }}" class="btn btn-warning">
+                            <a href="{{ route('effort-surat.index') }}" class="btn btn-warning">
                                 <i class="fas fa-chevron-left"></i> <span>Kembali</span>
                             </a>
                             <button type="submit" class="btn btn-primary">

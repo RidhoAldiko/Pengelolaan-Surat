@@ -1,12 +1,12 @@
 @extends('layouts.main')
-@section('title','Disposisi Surat masuk - Edit')
+@section('title','Surat masuk - Edit')
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Disposisi</h1>
+        <h1>Surat Keluar</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{route('disposisi-surat-masuk.index')}}">Disposisi Surat Masuk</a></div>
-            <div class="breadcrumb-item">Ubah Disposisi Surat Masuk</div>
+            <div class="breadcrumb-item active"><a href="{{route('surat-keluar.index')}}">Surat Keluar</a></div>
+            <div class="breadcrumb-item">Ubah Surat Keluar</div>
         </div>
     </div>
     <div class="section-body ">
@@ -14,22 +14,12 @@
             <div class="col-md-8">
                 <div class="card shadow ">
                     <div class="card-header">
-                        <h4>Ubah Disposisi Surat masuk</h4>
+                        <h4>Ubah Surat Keluar</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('disposisi-surat-masuk.update',$result->id_surat_masuk)}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('surat-keluar.update',$result->id_surat_keluar)}}" method="POST" enctype="multipart/form-data">
                             @method('put')
                             @csrf
-                            <div class="form-group">
-                                <label for="pengirim">Pengirim Surat</label>
-                                <input type="text" id="pengirim" name="pengirim"  class="form-control @error('pengirim') is-invalid @enderror" placeholder="Masukan pengirim surat" value="{{$result->pengirim}}" >
-                                @error('pengirim')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-
                             <div class="form-group">
                                 <label for="nomor_surat">Nomor Surat</label>
                                 <input type="text" id="nomor_surat" name="nomor_surat"  class="form-control @error('nomor_surat') is-invalid @enderror" placeholder="Masukan nomor surat" value="{{$result->nomor_surat}}" >
@@ -44,26 +34,6 @@
                                 <label for="tanggal_surat">Tanggal Surat</label>
                                 <input type="text" id="tanggal_surat" name="tanggal_surat" onfocus="(this.type='date')"  class="form-control @error('tanggal_surat') is-invalid @enderror" placeholder="Masukan tanggal surat" value="{{$result->tanggal_surat}}" >
                                 @error('tanggal_surat')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="indeks">indeks</label>
-                                <input type="text" id="indeks" name="indeks"  class="form-control @error('indeks') is-invalid @enderror" placeholder="Masukan indeks" value="{{$result->indeks}}" >
-                                @error('indeks')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="tanggal_disposisi">Tanggal Disposisi</label>
-                                <input type="text" id="tanggal_disposisi" name="tanggal_disposisi" onfocus="(this.type='date')"  class="form-control @error('tanggal_disposisi') is-invalid @enderror" placeholder="Masukan tanggal disposisi" value="{{$result->tanggal_disposisi}}" >
-                                @error('tanggal_disposisi')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -102,6 +72,26 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="alamat">Alamat</label>
+                                <textarea class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" rows="3">{{$result->alamat}}</textarea>
+                                @error('alamat')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="keterangan">Keterangan</label>
+                                <textarea class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" name="keterangan" rows="3">{{$result->keterangan}}</textarea>
+                                @error('keterangan')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
                                 <label for="file_surat">File Surat</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input @error('file_surat') is-invalid @enderror" id="validatedCustomFile" name="file_surat" value="{{$result->file_surat}}">
@@ -117,7 +107,7 @@
                                 </div>
                             </div>
 
-                            <a href="{{ route('disposisi-surat-masuk.index') }}" class="btn btn-warning">
+                            <a href="{{ route('surat-keluar.index') }}" class="btn btn-warning">
                                 <i class="fas fa-chevron-left"></i> <span>Kembali</span>
                             </a>
                             <button type="submit" class="btn btn-primary">
