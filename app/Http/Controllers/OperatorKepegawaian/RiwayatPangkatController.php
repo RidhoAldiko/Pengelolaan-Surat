@@ -26,7 +26,18 @@ class RiwayatPangkatController extends Controller
         $explode = explode(' - ',$request->nip_pegawai,-1);
         //timpa nip lama dengan nip baru yang sudah dipisahkan dari nama
         $data ['nip_pegawai'] = $explode[0];
-        
+        //cek data riwayatpangkat, jika ada data lama statusnya nonaktifkan 
+        $data['batas_berlaku'] = date('Y-m-d',strtotime('+4 year', strtotime( $data['tmt'] )));
+        $data_riwayat_pangkat = RiwayatPangkat::where('nip_pegawai',$data['nip_pegawai'])->where('status', 0)->orderBy('id_riwayat_pangkat','desc')->first();
+                if ($data_riwayat_pangkat != null) {
+                    //update status data sebelmunya dengan nonaktif
+                    $data['status']=1;
+                    $data_riwayat_pangkat->update([
+                        'status' => $data['status']
+                    ]);
+                }
+                
+        $data ['status'] = 0;
         RiwayatPangkat::create($data);
         return redirect()->route('pegawai-riwayat-pangkat.create')->with('status','Data riwayat pangkat berhasil ditambah');
     }
@@ -43,7 +54,7 @@ class RiwayatPangkatController extends Controller
     {
         $data           = $request->all();
         $item           = RiwayatPangkat::findOrFail($id);
-
+        $data['status'] = $item->status;
         $item->update($data);
         return redirect()->route('data-pegawai.edit',$data['nip_pegawai'])->with('status',"Data riwayat pangkat berhasil diedit");
     }

@@ -23,6 +23,8 @@ use App\Http\Controllers\OperatorKepegawaian\MutasiController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
 use App\Http\Controllers\OperatorKepegawaian\OrangtuaKandungController;
 use App\Http\Controllers\OperatorKepegawaian\OrganisasiController;
+use App\Http\Controllers\OperatorKepegawaian\PangkatCPNSController;
+use App\Http\Controllers\OperatorKepegawaian\PangkatPNSController;
 use App\Http\Controllers\OperatorKepegawaian\PengalamanKeluarNegeriController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatKGBController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatPangkatController;
@@ -244,19 +246,23 @@ Route::prefix('operator-kepegawaian')
         Route::resource('pegawai-pengalaman-keluar-negeri',PengalamanKeluarNegeriController::class);
         // -----------------------organisasi---------------------------------
         Route::resource('pegawai-organisasi',OrganisasiController::class);
-        // -----------------------keterangan lain---------------------------------
-        Route::resource('pegawai-keterangan-lain',KeteranganLainController::class);
-        // -----------------------mutasi---------------------------------       
-        Route::resource('pegawai-mutasi',MutasiController::class);
-        // -----------------------diklat penjenjangan---------------------------------
-        Route::resource('pegawai-diklat-penjenjangan',DiklatPenjenjanganController::class);
-        // -----------------------riwayat pangkat---------------------------------
-        Route::resource('pegawai-riwayat-pangkat',RiwayatPangkatController::class);
-        // -----------------------riwayat KGB---------------------------------
-        Route::resource('pegawai-riwayat-kgb',RiwayatKGBController::class);
-        // -----------------------dokumen pegawai---------------------------------
-        Route::resource('dokumen-pegawai',DokumenPegawaiController::class);
-        
+         // -----------------------keterangan lain---------------------------------
+         Route::resource('pegawai-keterangan-lain',KeteranganLainController::class);
+         // -----------------------mutasi---------------------------------
+         Route::resource('pegawai-mutasi',MutasiController::class);
+         // -----------------------diklat penjenjangan---------------------------------
+         Route::resource('pegawai-diklat-penjenjangan',DiklatPenjenjanganController::class);
+         // -----------------------pangkat cpns---------------------------------
+         Route::resource('pegawai-pangkat-cpns',PangkatCPNSController::class);
+          // -----------------------pangkat pns---------------------------------
+          Route::resource('pegawai-pangkat-pns',PangkatPNSController::class);
+         // -----------------------riwayat pangkat---------------------------------
+         Route::resource('pegawai-riwayat-pangkat',RiwayatPangkatController::class);
+         // -----------------------riwayat KGB---------------------------------
+         Route::resource('pegawai-riwayat-kgb',RiwayatKGBController::class);
+         // -----------------------dokumen pegawai---------------------------------
+         Route::resource('dokumen-pegawai',DokumenPegawaiController::class);
+
     });
 
 

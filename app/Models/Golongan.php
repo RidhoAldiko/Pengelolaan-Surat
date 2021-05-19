@@ -25,4 +25,14 @@ class Golongan extends Model
     {
         return $this->hasOne(RiwayatPangkat::class,'id_golongan','id_golongan');
     }
+
+    public function pangkat_cpns()
+    {
+        return $this->hasOne(PangkatCPNS::class,'id_golongan','id_golongan');
+    }
+
+    public function pangkat_pns()
+    {
+        return $this->hasOne(PangkatPNS::class,'id_golongan','id_golongan');
+    }
 }
