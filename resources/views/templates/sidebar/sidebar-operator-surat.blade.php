@@ -16,6 +16,8 @@
             <li class="dropdown {{set_active([
                 'surat-masuk.index',
                 'surat-masuk.create',
+                'surat-masuk.show',
+                'surat-masuk.edit',
                 'disposisi-surat-masuk.create',
                 'disposisi-surat-masuk.index',
                 'disposisi-surat-masuk.show',
@@ -25,7 +27,7 @@
             ])}}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-copy"></i> <span>Surat Masuk</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{set_active(['surat-masuk.index','surat-masuk.create','disposisi-surat-masuk.create'])}}">
+                    <li class="{{set_active(['surat-masuk.index','surat-masuk.create','surat-masuk.show','surat-masuk.edit','disposisi-surat-masuk.create'])}}">
                         <a class="nav-link " href="{{route('surat-masuk.index')}}">Tabel Surat</a>
                     </li>
                     <li class="{{set_active(['disposisi-surat-masuk.index','disposisi-surat-masuk.show','disposisi_surat_masuk.edit','disposisi-surat-masuk.forward'])}}">
@@ -36,6 +38,42 @@
                     </li>
                 </ul>
             <li>
+            
+                <li class="dropdown {{set_active([
+                    'surat-keluar.index',
+                    'surat-keluar.create',
+                    'surat-keluar.show',
+                    'surat-keluar.edit',
+                    'effort-surat.index',
+                    'effort-surat.create',
+                    'effort-surat.show',
+                    'effort-surat.edit',
+                    'effort-surat.forward',
+                ])}}">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-copy"></i> <span>Surat Keluar</span></a>
+                    <ul class="dropdown-menu">
+                        <li class="{{set_active([
+                            'surat-keluar.index',
+                            'surat-keluar.create',
+                            'surat-keluar.show',
+                            'surat-keluar.edit'
+                        ])}}">
+                            <a class="nav-link " href="{{route('surat-keluar.index')}}">Tabel Surat</a>
+                        </li>
+                        <li class="{{set_active([
+                            'effort-surat.index',
+                            'effort-surat.create',
+                            'effort-surat.show',
+                            'effort-surat.edit',
+                            'effort-surat.forward',
+                        ])}}">
+                            <a class="nav-link " href="{{route('effort-surat.index')}}">Effort Surat</a>
+                        </li>
+                        <li class="#">
+                            <a class="nav-link " href="">Arsip Surat</a>
+                        </li>
+                    </ul>
+                <li>
         </ul>
     </aside>
     </div>

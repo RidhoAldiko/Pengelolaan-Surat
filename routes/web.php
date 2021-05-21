@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-//Mendefinisikan controller yang digunakan
+//Admin Controller
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PegawaiController;
 use App\Http\Controllers\Admin\GajiController;
@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\GolonganController;
 use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\UnitKerjaController;
 use App\Http\Controllers\Admin\LevelSuratController;
+//Opertor Kepegawaian Controller
 use App\Http\Controllers\OperatorKepegawaian\PenghargaanController;
 use App\Http\Controllers\OperatorKepegawaian\AlamatController;
 use App\Http\Controllers\OperatorKepegawaian\DiklatPenjenjanganController;
@@ -19,10 +20,6 @@ use App\Http\Controllers\OperatorKepegawaian\KeteranganKeluargaController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganLainController;
 use App\Http\Controllers\OperatorKepegawaian\MertuaController;
 use App\Http\Controllers\OperatorKepegawaian\MutasiController;
-use App\Http\Controllers\OperatorSurat\OperatorSuratController;
-use App\Http\Controllers\OperatorSurat\SuratMasukController;
-use App\Http\Controllers\OperatorSurat\DisposisiMasukController;
-use App\Http\Controllers\OperatorSurat\ArsipSuratMasukController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
 use App\Http\Controllers\OperatorKepegawaian\OrangtuaKandungController;
 use App\Http\Controllers\OperatorKepegawaian\OrganisasiController;
@@ -33,6 +30,13 @@ use App\Http\Controllers\OperatorKepegawaian\RiwayatKGBController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatPangkatController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatPendidikanController;
 use App\Http\Controllers\OperatorKepegawaian\SaudaraKandungController;
+//Operator Surat Controller
+use App\Http\Controllers\OperatorSurat\OperatorSuratController;
+use App\Http\Controllers\OperatorSurat\SuratMasukController;
+use App\Http\Controllers\OperatorSurat\SuratKeluarController;
+use App\Http\Controllers\OperatorSurat\DisposisiMasukController;
+use App\Http\Controllers\OperatorSurat\ArsipSuratMasukController;
+use App\Http\Controllers\OperatorSurat\EffortSuratController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -115,7 +119,6 @@ Route::prefix('operator-surat')
         
 
     //----Disposisi Surat Masuk----
-        
         // operator-surat store disposisi surat masuk
         Route::post('disposisi-surat-masuk',[DisposisiMasukController::class,'store'])->name('disposisi-surat-masuk.store');
         // operator-surat tabel disposisi surat masuk 
@@ -136,12 +139,48 @@ Route::prefix('operator-surat')
         Route::get('disposisi-surat-masuk/{id}/forward',[DisposisiMasukController::class,'forward'])->name('disposisi-surat-masuk.forward');
         // operator-surat store teruskan disposisi surat masuk 
         Route::post('disposisi-surat-masuk/forward/store',[DisposisiMasukController::class,'store_forward'])->name('disposisi-surat-masuk.store-forward');
-    
+
     //----Arsip surat Masuk----
         // operator-surat arsip surat
         Route::get('arsip-surat-masuk', [ArsipSuratMasukController::class,'index'])->name('arsip-surat-masuk.index');
         // operator-surat serverside arsip surat
-        Route::get('arsip-surat-masuk-serverside', [ArsipSuratMasukController::class,'arsip_surat_serverside'])->name('arsip-surat-masuk.serverside');
+        Route::get('arsip-surat-masuk/server-side', [ArsipSuratMasukController::class,'arsip_surat_serverside'])->name('arsip-surat-masuk.serverside');
+
+    //----Surat Keluar----
+        // operator-surat store surat keluar 
+        Route::post('surat-keluar', [SuratKeluarController::class,'store'])->name('surat-keluar.store');
+        // operator-surat data surat keluar 
+        Route::get('surat-keluar', [SuratKeluarController::class,'index'])->name('surat-keluar.index');
+        // operator-surat form surat keluar 
+        Route::get('surat-keluar/create', [SuratKeluarController::class,'create'])->name('surat-keluar.create');
+        // operator-surat hapus surat keluar 
+        Route::delete('surat-keluar/{data}', [SuratKeluarController::class,'destroy'])->name('surat-keluar.destroy');
+        // operator-surat update surat keluar 
+        Route::put('surat-keluar/{id}',[SuratKeluarController::class,'update'])->name('surat-keluar.update');
+        // operator-surat detail surat keluar 
+        Route::get('surat-keluar/{id}', [SuratKeluarController::class,'show'])->name('surat-keluar.show');
+        // operator-surat edit surat keluar 
+        Route::get('surat-keluar/{id}/edit',[SuratKeluarController::class,'edit'])->name('surat-keluar.edit');
+        
+    //----Effort Surat Keluar----
+        // operator-surat store effort surat keluar 
+        Route::post('effort-surat',[EffortSuratController::class,'store'])->name('effort-surat.store');
+        // operator-surat data effort surat keluar 
+        Route::get('effort-surat',[EffortSuratController::class,'index'])->name('effort-surat.index');
+        // operator-surat create effort surat keluar 
+        Route::get('effort-surat/{id}/create',[EffortSuratController::class,'create'])->name('effort-surat.create');
+        // operator-surat hapus effort surat keluar 
+        Route::delete('effort-surat/{data}', [EffortSuratController::class,'destroy'])->name('effort-surat.destroy');
+        // operator-surat update effort surat keluar 
+        Route::put('effort-surat/{id}', [EffortSuratController::class,'update'])->name('effort-surat.update');
+        // operator-surat detail effort surat keluar 
+        Route::get('effort-surat/{id}', [EffortSuratController::class,'show'])->name('effort-surat.show');
+        // operator-surat edit effort surat keluar 
+        Route::get('effort-surat/{id}/edit', [EffortSuratController::class,'edit'])->name('effort-surat.edit');
+        // operator-surat detail effort surat keluar 
+        Route::get('effort-surat/{id}/forward', [EffortSuratController::class,'forward'])->name('effort-surat.forward');
+        // operator-surat detail effort surat keluar 
+        Route::post('effort-surat/forward/store', [EffortSuratController::class,'store_forward'])->name('effort-surat.store-forward');
     
     });
 
