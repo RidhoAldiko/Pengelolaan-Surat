@@ -102,11 +102,9 @@ class OperatorKepegawaianController extends Controller
     }
     //method form data pegawai
     public function add_pegawai(){
-        //get data unit kerja
-        $unit = Unit::where('status','=',0)->get();
         //get data jabatan
         $jabatan = Jabatan::where('status','=',0)->get();
-        return view('operator-kepegawaian.pegawai.pegawai-add',\compact('unit','jabatan'));
+        return view('operator-kepegawaian.pegawai.pegawai-add',\compact('jabatan'));
     }
 
     //method store data pegawai
@@ -166,8 +164,6 @@ class OperatorKepegawaianController extends Controller
     //method edit data
     public function edit($id)
     {
-        //get data unit kerja
-        $unit = Unit::where('status','=',0)->get();
         //get data jabatan
         $jabatan = Jabatan::where('status','=',0)->get();
         //untuk mendapatkan data pegawai dan data milik pegawai
@@ -194,7 +190,7 @@ class OperatorKepegawaianController extends Controller
         $pangkat_cpns        = PangkatCPNS::with(['golongan'])->where('nip_pegawai',$id)->first();
         $pangkat_pns         = PangkatPNS::with(['golongan'])->where('nip_pegawai',$id)->first();
         
-        return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('unit','jabatan','pegawai','organisasi1','organisasi2','organisasi3','kgb','pangkat_cpns','pangkat_pns'));
+        return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('jabatan','pegawai','organisasi1','organisasi2','organisasi3','kgb','pangkat_cpns','pangkat_pns'));
     }
 
     public function update(PegawaiRequest $request, $id)

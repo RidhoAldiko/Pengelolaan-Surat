@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\OperatorKepegawaian;
 
 use App\Http\Controllers\Controller;
+use App\Models\Golongan;
 use App\Models\Pegawai;
 use App\Models\RiwayatKGB;
 use App\Models\RiwayatPangkat;
@@ -33,5 +34,16 @@ class PrintPegawaiController extends Controller
         $pangkatgolongan = RiwayatPangkat::with(['golongan'])->where('nip_pegawai',$id)->where('status',0)->first();
          
             return view('operator-kepegawaian.pegawai.cetak_perorangan',compact('pegawai','pangkatgolongan','pendidikan','riwayat_kenaikan_gaji'));
+    }
+
+    public function cetakdata()
+    {
+        $pegawai        = Pegawai::with('pangkat_cpns','pangkat_pns','jabatan','riwayat_pangkat',
+        'riwayat_kgb','diklat_penjenjangan','riwayat_pendidikan')->get();
+        $gol            = Golongan::where('status',0)->get();
+        $pangkatgolongan = RiwayatPangkat::with(['pegawai','golongan'])->where('status',0)->orderBy('tmt','asc')->get();
+        $riwayatkgb      = RiwayatKGB::with('pegawai')->where('status',0)->get();
+       
+        return view('operator-kepegawaian.pegawai.cetak_data_pegawai',compact('pangkatgolongan','pegawai','gol','riwayatkgb'));
     }
 }

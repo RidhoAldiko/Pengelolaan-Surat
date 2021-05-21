@@ -7,7 +7,7 @@
             <li class="breadcrumb-item active text-bold" aria-current="page">Pegawai</li>
         </ol>
     </div>
-    
+    <a href="{{ route('print-pegawai.cetakdata') }}" target="_blank" class="btn btn-primary mb-3"><i class="fas fa-print"></i> Print Data Pegawai</a>
     @if (session('status'))
     <div class="alert shadow alert-success alert-dismissible fade show" role="alert">
         {{ session('status') }}

@@ -262,9 +262,10 @@ Route::prefix('operator-kepegawaian')
          // -----------------------dokumen pegawai---------------------------------
          Route::resource('dokumen-pegawai',DokumenPegawaiController::class);
          
-          //operator-kepegawaian: table data pegawai
-        Route::get('cetak-pegawai-per-orangan/{data_pegawai}', [PrintPegawaiController::class,'cetak_perorangan'])->name('print-pegawai.cetakperorangan');
-
+          //operator-kepegawaian: print data perorangan
+         Route::get('cetak-pegawai-per-orangan/{data_pegawai}', [PrintPegawaiController::class,'cetak_perorangan'])->name('print-pegawai.cetakperorangan');
+         //operator-kepegawaian: print semua data pegawai
+         Route::get('cetak-pegawai', [PrintPegawaiController::class,'cetakdata'])->name('print-pegawai.cetakdata');
     });
 
 
