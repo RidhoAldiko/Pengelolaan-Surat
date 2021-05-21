@@ -797,12 +797,12 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td style="padding:0px;padding-left:10px"><u>Nama</u></td>
-                    <td style="padding:0px;padding-left:10px"><u>Nama</u> {{ $pegawai->nama_pegawai }}</td>
+                    <td style="padding:0px;padding-left:10px"><u>Nama:</u></td>
+                    <td style="padding:0px;padding-left:10px"><u>Nama:</u> {{ $pegawai->nama_pegawai }}</td>
                 </tr>
                 <tr>
-                    <td style="padding:0px;padding-left:10px">NIP</td>
-                    <td style="padding:0px;padding-left:10px">NIP {{ $pegawai->nip_pegawai }}</td>
+                    <td style="padding:0px;padding-left:10px">NIP:</td>
+                    <td style="padding:0px;padding-left:10px">NIP: {{ $pegawai->nip_pegawai }}</td>
                 </tr>
             </table>
         </div>

@@ -91,7 +91,7 @@ class OperatorKepegawaianController extends Controller
                                 <a href="#" class="btn btn-danger btn-sm getIdPegawai" data-toggle="modal" data-target="#deletePegawai" data-id="'.$data->nip_pegawai.'" >
                                     <i class="fas fa-trash fa-sm"></i> Hapus
                                 </a>
-                                <a href="'.route('data-pegawai.cetakperorangan',$data->nip_pegawai).'"  target="_blank" class="btn btn-primary text-white btn-sm" title="Edit">
+                                <a href="'.route('print-pegawai.cetakperorangan',$data->nip_pegawai).'"  target="_blank" class="btn btn-primary text-white btn-sm" title="Edit">
                                 <i class="fas fa-print"></i> Print
                                 </a>
                                 ';
@@ -234,30 +234,6 @@ class OperatorKepegawaianController extends Controller
             }
                 
         return redirect()->route('data-pegawai.index')->with('status',"Data Berhasil Edit");
-    }
-
-    //metod untuk cetak pegawai perorangan
-    public function cetak_perorangan($id)
-    {
-        
-        $pegawai = Pegawai::with([
-            'jabatan','hobi',
-            'alamat','keterangan_badan',
-            'riwayat_pendidikan',
-            'keterangan_keluarga',
-            'orangtua_kandung',
-            'mertua','saudara_kandung',
-            'penghargaan','pengalaman_keluar_negeri',
-            'organisasi','keterangan_lain',
-            'mutasi','diklat_penjenjangan',
-            'dokumen_pegawai','riwayat_pangkat',
-            'riwayat_kgb'])->where('nip_pegawai',$id)->findOrFail($id);
-
-        $riwayat_kenaikan_gaji = RiwayatKGB::with(['gaji'])->where('nip_pegawai',$id)->orderBy('id_riwayat_kgb','asc')->get();
-        $pendidikan = RiwayatPendidikan::where('nip_pegawai',$id)->orderBy('sampai','asc')->get();
-        $pangkatgolongan = RiwayatPangkat::with(['golongan'])->where('nip_pegawai',$id)->where('status',0)->first();
-         
-            return view('operator-kepegawaian.pegawai.cetak_perorangan',compact('pegawai','pangkatgolongan','pendidikan','riwayat_kenaikan_gaji'));
     }
 
     //metod untuk menghapus data pegawai serta data yang berhubungan dengan pegawai
