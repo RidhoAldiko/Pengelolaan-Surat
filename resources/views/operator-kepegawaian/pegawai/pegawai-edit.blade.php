@@ -189,22 +189,6 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row left-items-center">
-                                                <label for="id_unit" class="form-control-label col-sm-3 text-md-right">Unit Kerja</label>
-                                                <div class="col-sm-6 col-md-9">
-                                                    <select class="form-control @error('id_unit') is-invalid @enderror" id="id_unit" name="id_unit">
-                                                        <option value="{{$pegawai->id_unit}}">{{$pegawai->unit_kerja->nama_unit}}</option>
-                                                        @foreach ($unit as $un)
-                                                        <option value="{{$un->id_unit}}">{{$un->nama_unit}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('id_unit')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="form-group row left-items-center">
                                                 <label for="id_jabatan" class="form-control-label col-sm-3 text-md-right">Jabatan</label>
                                                 <div class="col-sm-6 col-md-9">
                                                     <select class="form-control @error('id_jabatan') is-invalid @enderror" id="id_jabatan" name="id_jabatan">
@@ -888,6 +872,7 @@
                                                             <th scope="col">Tanggal Lahir</th>
                                                             <th scope="col">Tanggal Nikah</th>
                                                             <th scope="col">Pekerjaan</th>
+                                                            <th scope="col">Keterangan</th>
                                                             <th scope="col">Aksi</th>
                                                         </tr>
                                                 </thead>
@@ -899,6 +884,7 @@
                                                             <td>{{ $item->jenis_kelamin }}</td>
                                                             <td>{{ $item->tempat_lahir }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($item->tgl_lahir)) }}</td>
+                                                            <td>{{ $item->keterangan }}</td>
                                                             <td>@if ($item->tgl_nikah == null)
                                                                 -
                                                                 @else
@@ -1580,6 +1566,7 @@
                                                             <th scope="col">Penjabat</th>
                                                             <th scope="col">Nomor</th>
                                                             <th scope="col">Tanggal</th>
+                                                            <th scope="col">Peraturan yang dijadikan dasar</th>
                                                             <th scope="col">Aksi</th>
                                                         </tr>
                                                 </thead>
@@ -1591,6 +1578,7 @@
                                                             <td>{{ $item->penjabat }}</td>
                                                             <td>{{ $item->nomor }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
+                                                            <td>{{ $item->peraturan }}</td>
                                                             <td>
                                                                 <a href="{{ route('pegawai-riwayat-kgb.edit',$item->id_riwayat_kgb) }}" class="btn btn-warning text-white btn-sm" title="Edit">
                                                                     <i class="fas fa-pencil-alt"></i>

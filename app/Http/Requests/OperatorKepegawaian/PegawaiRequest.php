@@ -32,7 +32,6 @@ class PegawaiRequest extends FormRequest
             'jenis_kelamin' => ['required','string'],
             'agama' => ['required','string'],
             'status_perkawinan' => ['required','string'],
-            'id_unit' => ['required', 'string'],
             'id_jabatan' => ['required', 'string'],
         ];
     }
@@ -61,7 +60,6 @@ class PegawaiRequest extends FormRequest
             'jenis_kelamin.required' => 'Jenis kelamin tidak boleh kosong',
             'agama.required'       => 'Agama wajib diisi',
             'status_perkawinan.required'       => 'Status Perkawinan wajib diisi',
-            'id_unit.required'       => 'Unit wajib diisi',
             'id_jabatan.required'    => 'Jabatan wajib diisi',
         ];
     }

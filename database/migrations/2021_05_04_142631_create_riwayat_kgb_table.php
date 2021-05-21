@@ -22,6 +22,7 @@ class CreateRiwayatKgbTable extends Migration
             $table->string('penjabat',60);
             $table->string('nomor',60);
             $table->date('tanggal');
+            $table->string('peraturan',100);
             $table->tinyInteger('status');//0=aktif 1 = nonaktif
             
             // foreign key dari tabel golongan

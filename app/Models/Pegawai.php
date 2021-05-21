@@ -32,7 +32,6 @@ class Pegawai extends Model
         'agama',
         'status_perkawinan',
         'nomor_karpeg',
-        'id_unit',
         'id_jabatan',
         'foto',
         'status'
@@ -46,11 +45,6 @@ class Pegawai extends Model
     public function user()
     {
         return $this->hasOne(User::class,'id','nip_pegawai');
-    }
-    //table pegawai memiliki 1 relasi yang dikirim ke tabel unit_kerja dengan relasi one to one
-    public function unit_kerja()
-    {
-        return $this->belongsTo(Unit_kerja::class,'id_unit','id_unit');
     }
     //table pegawai memiliki 1 relasi yang dikirim ke tabel jabatan dengan relasi one to one
     public function jabatan()

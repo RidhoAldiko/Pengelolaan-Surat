@@ -64,8 +64,7 @@ class OperatorKepegawaianController extends Controller
     // method get server side data pegawai
     public function pegawai_serverSide(){
         //get data pegawai 
-        $data = Pegawai::select('pegawai.*','nama_unit','nama_jabatan')
-                ->join('unit_kerja', 'unit_kerja.id_unit', '=', 'pegawai.id_unit')
+        $data = Pegawai::select('pegawai.*','nama_jabatan')
                 ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
                 ->get();
         return DataTables::of($data)
@@ -74,9 +73,6 @@ class OperatorKepegawaianController extends Controller
                 })
                 ->editColumn('nama', function($data){ 
                     return $data->nama_pegawai; 
-                })
-                ->editColumn('unit', function($data){ 
-                    return $data->nama_unit; 
                 })
                 ->editColumn('jabatan', function($data){ 
                     return $data->nama_jabatan; 
@@ -95,7 +91,9 @@ class OperatorKepegawaianController extends Controller
                                 <a href="#" class="btn btn-danger btn-sm getIdPegawai" data-toggle="modal" data-target="#deletePegawai" data-id="'.$data->nip_pegawai.'" >
                                     <i class="fas fa-trash fa-sm"></i> Hapus
                                 </a>
-                                
+                                <a href="'.route('data-pegawai.cetakperorangan',$data->nip_pegawai).'"  target="_blank" class="btn btn-primary text-white btn-sm" title="Edit">
+                                <i class="fas fa-print"></i> Print
+                                </a>
                                 ';
                     return $button;
                 })
@@ -131,8 +129,7 @@ class OperatorKepegawaianController extends Controller
     public function show($id)
     {
         $datapegawai        = Pegawai::with([
-                                'jabatan',
-                                'unit_kerja','hobi',
+                                'jabatan','hobi',
                                 'alamat','keterangan_badan',
                                 'riwayat_pendidikan',
                                 'keterangan_keluarga',
@@ -175,8 +172,7 @@ class OperatorKepegawaianController extends Controller
         $jabatan = Jabatan::where('status','=',0)->get();
         //untuk mendapatkan data pegawai dan data milik pegawai
         $pegawai = Pegawai::with([
-                        'jabatan',
-                        'unit_kerja','hobi',
+                        'jabatan','hobi',
                         'alamat','keterangan_badan',
                         'riwayat_pendidikan',
                         'keterangan_keluarga',
@@ -243,10 +239,9 @@ class OperatorKepegawaianController extends Controller
     //metod untuk cetak pegawai perorangan
     public function cetak_perorangan($id)
     {
-        dd($id);
+        
         $pegawai = Pegawai::with([
-            'jabatan',
-            'unit_kerja','hobi',
+            'jabatan','hobi',
             'alamat','keterangan_badan',
             'riwayat_pendidikan',
             'keterangan_keluarga',
@@ -257,8 +252,12 @@ class OperatorKepegawaianController extends Controller
             'mutasi','diklat_penjenjangan',
             'dokumen_pegawai','riwayat_pangkat',
             'riwayat_kgb'])->where('nip_pegawai',$id)->findOrFail($id);
-            
-            return view('operator-kepegawaian.pegawai.cetak_perorangan',compact('pegawai'));
+
+        $riwayat_kenaikan_gaji = RiwayatKGB::with(['gaji'])->where('nip_pegawai',$id)->orderBy('id_riwayat_kgb','asc')->get();
+        $pendidikan = RiwayatPendidikan::where('nip_pegawai',$id)->orderBy('sampai','asc')->get();
+        $pangkatgolongan = RiwayatPangkat::with(['golongan'])->where('nip_pegawai',$id)->where('status',0)->first();
+         
+            return view('operator-kepegawaian.pegawai.cetak_perorangan',compact('pegawai','pangkatgolongan','pendidikan','riwayat_kenaikan_gaji'));
     }
 
     //metod untuk menghapus data pegawai serta data yang berhubungan dengan pegawai

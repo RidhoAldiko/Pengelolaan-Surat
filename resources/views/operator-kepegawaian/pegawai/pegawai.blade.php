@@ -28,7 +28,6 @@
                             <tr>
                                 <th scope="col">NIP</th>
                                 <th scope="col">Nama</th>
-                                <th scope="col">Unit Kerja</th>
                                 <th scope="col">Jabatan</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
@@ -93,10 +92,6 @@
                 {
                     data: 'nama',
                     name: 'nama',
-                },
-                {
-                    data: 'unit',
-                    name: 'unit',
                 },
                 {
                     data: 'jabatan',

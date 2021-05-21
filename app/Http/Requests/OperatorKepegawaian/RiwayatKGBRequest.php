@@ -29,7 +29,8 @@ class RiwayatKGBRequest extends FormRequest
             'batas_berlaku' => 'required',
             'penjabat'    => 'required|max:60|string',
             'nomor'       => 'required|max:60',
-            'tanggal'     => 'required'
+            'tanggal'     => 'required',
+            'peraturan'    => 'required|max:100|string',
         ];
     }
     /**
@@ -47,7 +48,10 @@ class RiwayatKGBRequest extends FormRequest
             'penjabat.string'            => 'Inputan berupa huruf',
             'nomor.required'  => 'Nomor tidak boleh kosong',
             'nomor.max'       => 'Maksimal Nomor 60 karakter',
-            'tanggal.required'              => 'Tanggal tidak boleh kosong'
+            'tanggal.required'              => 'Tanggal tidak boleh kosong',
+            'peraturan.required'         => 'Peraturan tidak boleh kosong',
+            'peraturan.max'              => 'Maksimal peraturan 60 karakter',
+            'peraturan.string'            => 'Inputan berupa huruf'
         ];
     }
 }

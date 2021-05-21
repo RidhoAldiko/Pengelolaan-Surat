@@ -112,6 +112,18 @@
                           </div>
                       </div>
 
+                      <div class="form-group row align-items-center">
+                        <label for="peraturan" class="form-control-label col-sm-3 text-md-right">Peraturan yang dijadikan dasar</label>
+                        <div class="col-sm-6 col-md-9">
+                          <input type="text" id="peraturan" name="peraturan"  class="form-control @error('peraturan') is-invalid @enderror" value="{{old('peraturan')}}" >
+                            @error('peraturan')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                      </div>
+
                     </div>
                     <div class="card-footer bg-whitesmoke">
                       <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
