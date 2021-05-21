@@ -38,6 +38,7 @@ use App\Http\Controllers\OperatorSurat\SuratKeluarController;
 use App\Http\Controllers\OperatorSurat\DisposisiMasukController;
 use App\Http\Controllers\OperatorSurat\ArsipSuratMasukController;
 use App\Http\Controllers\OperatorSurat\EffortSuratController;
+use App\Http\Controllers\UpdateProfileController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -58,6 +59,9 @@ Auth::routes([
     //register dimatikan
     'register' => false
 ]);
+
+Route::get('update-profile-pegawai', [UpdateProfileController::class,'form_edit_profile'])->name('edit_profil.form');
+Route::patch('update-profile-pegawai', [UpdateProfileController::class,'update_profile'])->name('edit_profil.update');
 
 //route role 0 = admin
 Route::prefix('admin')
