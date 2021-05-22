@@ -73,24 +73,29 @@
                               @if ($data_kgb->count() > 0)
                                   @foreach ($data_kgb as $key => $value)
                                   @php
+                                      $datakgb = [];
                                       $akhir =strtotime(now());
                                       $awal = strtotime($value->batas_berlaku); 
                                       $selisih =floor(($akhir - $awal) / (60 * 60 * 24 * 30));
                                   @endphp
                                       {{-- jika tanggal batas berlaku <= 2 bulan maka tampilkan siapa saja --}}
                                       @if ($selisih <= 2 && $selisih >= 0)
+                                      @php
+                                        $datakgb[] = $value->pegawai->nip_pegawai;
+                                      @endphp
                                       <tr>
                                         <td>{{ $value->pegawai->nama_pegawai }}</td>
                                         <td>{{ $value->pegawai->nip_pegawai }}</td>
                                         <td>{{ date('d/m/Y',strtotime($value->mulai_berlaku)) }}</td>
                                         <td>{{ date('d/m/Y',strtotime($value->batas_berlaku)) }}</td>
                                       </tr>
-                                      @else
-                                          <tr>
-                                            <td colspan="4" class="text-center">--Tidak Ada--</td>
-                                          </tr>
                                       @endif
                                   @endforeach
+                                      @if (count($datakgb) < 1)
+                                      <tr>
+                                        <td colspan="4" class="text-center">--Tidak Ada--</td>
+                                      </tr> 
+                                      @endif
                               @else
                               <tr>
                                 <td colspan="4" class="text-center">--Data KGB Pegawai Belum Ada Dinputkan--</td>
@@ -125,12 +130,16 @@
                               @if ($data_pangkat->count() > 0)
                                 @foreach ($data_pangkat as $key => $value)
                                 @php
+                                    $datapangkat = [];
                                     $akhir =strtotime(now());
                                     $awal = strtotime($value->batas_berlaku); 
                                     $selisih =floor(($akhir - $awal) / (60 * 60 * 24 * 30));
                                 @endphp
                                     {{-- jika tanggal batas berlaku <= 2 bulan maka tampilkan siapa saja --}}
                                     @if ($selisih <= 2 && $selisih >= 0)
+                                    @php
+                                        $datapangkat[] = $value->pegawai->nama_pegawai;
+                                    @endphp
                                     <tr>
                                       <td>{{ $value->pegawai->nama_pegawai }}</td>
                                       <td>{{ $value->pegawai->nip_pegawai }}</td>
@@ -138,12 +147,13 @@
                                       <td>{{ $value->nomor }}</td>
                                       <td>{{ date('d/m/Y',strtotime($value->batas_berlaku)) }}</td>
                                     </tr>
-                                    @else
-                                        <tr>
-                                          <td colspan="4" class="text-center">--Tidak Ada--</td>
-                                        </tr>
                                     @endif
                                 @endforeach
+                                    @if (count($datapangkat) < 1)
+                                    <tr>
+                                      <td colspan="4" class="text-center">--Tidak Ada--</td>
+                                    </tr>
+                                    @endif
                               @else
                               <tr>
                                 <td colspan="4" class="text-center">--Data Pangkat Pegawai Belum Ada Dinputkan--</td>
