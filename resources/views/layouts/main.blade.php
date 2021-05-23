@@ -40,6 +40,9 @@ gtag('config', 'UA-94034622-3');
         @if (Auth::user()->role==2)
             @include('templates.sidebar.sidebar-operator-kepegawaian')
         @endif
+        @if (Auth::user()->role==3)
+            @include('templates.sidebar.sidebar-user-disposisi')
+        @endif
         <!-- endsidebar -->
 
         <!-- Main Content -->
@@ -156,6 +159,35 @@ gtag('config', 'UA-94034622-3');
                 });    
             } else {
                 $('.search-result').fadeOut();
+            }
+        });
+</script>
+{{-- global script untuk search nip/nama pegawai middleware operator surat --}}
+<script>
+    $('.search-input-surat-user').on('keyup',function(){
+            
+            var _data = $(this).val();
+            if (_data.length > 3) {
+                
+                $.ajax({
+                        url: '{{route('user-disposisi.search')}}',
+                        data:{
+                            data:_data
+                        },
+                        method : 'GET',
+                        beforeSend:function(){
+                            $('.search-result-surat-user').html('mohon tunggu');
+                        },
+                        success:function(res){
+                            $('.search-result-surat-user').html(res).fadeIn();
+                        },
+                    });
+                    $(document).on('click','a',function(){
+                    $('#id').val($(this).text());
+                    $('.search-result-surat-user').fadeOut();
+                });    
+            } else {
+                $('.search-result-surat-user').fadeOut();
             }
         });
 </script>

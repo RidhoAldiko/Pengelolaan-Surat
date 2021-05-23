@@ -13,6 +13,7 @@ use App\Http\Requests\OperatorSurat\DisposisiMasukRequest;
 use App\Http\Requests\OperatorSurat\TeruskanDisposisiMasukRequest;
 use App\Models\DisposisiSuratMasuk as DisposisiMasuk;
 use App\Models\TeruskanDisposisiMasuk;
+use App\Models\Notifikasi;
 
 class DisposisiMasukController extends Controller
 {
@@ -57,6 +58,12 @@ class DisposisiMasukController extends Controller
         $explode = explode(' - ',$request->id,-1);
         //masukan nip ke variabel data['id]
         $data ['id'] = $explode[0];
+        Notifikasi::create($notif = [
+            'judul' => 'Disposisi Surat Masuk',
+            'pesan' =>'Disposisi surat belum diteruskan',
+            'id_user' => $explode[0],
+            'status' => '0',
+        ]);
         $result = SuratMasuk::join('disposisi_surat_masuk', 'disposisi_surat_masuk.id_surat_masuk', '=', 'surat_masuk.id_surat_masuk')
                 ->where('id_disposisi_surat_masuk',$request->id_disposisi_surat_masuk)
                 ->first('surat_masuk.id_surat_masuk');

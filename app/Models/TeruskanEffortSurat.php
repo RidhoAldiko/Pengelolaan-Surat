@@ -17,6 +17,7 @@ class TeruskanEffortSurat extends Model
         'id_effort_surat',
         'instruksi',
         'paraf',
+        'status',
     ];
 
     public function user()

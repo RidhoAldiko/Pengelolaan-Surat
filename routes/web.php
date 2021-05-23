@@ -37,6 +37,8 @@ use App\Http\Controllers\OperatorSurat\SuratKeluarController;
 use App\Http\Controllers\OperatorSurat\DisposisiMasukController;
 use App\Http\Controllers\OperatorSurat\ArsipSuratMasukController;
 use App\Http\Controllers\OperatorSurat\EffortSuratController;
+use App\Http\Controllers\UserDisposisi\UserDisposisiController;
+use App\Http\Controllers\UserDisposisi\DataDisposisiController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -263,6 +265,23 @@ Route::prefix('operator-kepegawaian')
          // -----------------------dokumen pegawai---------------------------------
          Route::resource('dokumen-pegawai',DokumenPegawaiController::class);
 
+    });
+
+//route role 0 = admin
+Route::prefix('user-disposisi')
+    ->middleware('auth','role:3')
+    ->group(function(){
+         //----User Disposisi----
+            //user-disposisi search pegawai
+            Route::get('search-pengguna', [UserDisposisiController::class,'search_pengguna'])->name('user-disposisi.search');
+            //admin dashboard
+            Route::get('/', [UserDisposisiController::class,'index'])->name('user-disposisi.index');
+            // data disposisi
+            Route::get('data-disposisi', [DataDisposisiController::class,'index'])->name('data-disposisi.index');
+            //disposisi forward
+            Route::get('data-disposisi/{id}/forward', [DataDisposisiController::class,'create'])->name('data-disposisi.forward');
+            Route::post('data-disposisi', [DataDisposisiController::class,'store'])->name('data-disposisi.store-forward');
+        
     });
 
 
