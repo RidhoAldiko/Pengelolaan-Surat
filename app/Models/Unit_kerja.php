@@ -14,9 +14,4 @@ class Unit_kerja extends Model
     protected $fillable = [
         'nama_unit','status'
     ];
-    //tabel Jabatan terhubung dengan tabel unit_kerja dengan relasi one to one
-    public function pegawai()
-    {
-        return $this->hasOne(Pegawai::class,'id_unit','id_unit');
-    }
 }

@@ -21,6 +21,7 @@ class KeteranganKeluarga extends Model
         'tgl_lahir',
         'tgl_nikah',
         'pekerjaan',
+        'keterangan'
     ];
 
     public function pegawai()

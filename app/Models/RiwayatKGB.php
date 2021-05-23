@@ -19,6 +19,7 @@ class RiwayatKGB extends Model
         'nomor',
         'tanggal',
         'id_gaji',
+        'peraturan',
         'status'
     ];
 

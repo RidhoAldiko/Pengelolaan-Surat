@@ -7,7 +7,7 @@
             <li class="breadcrumb-item active text-bold" aria-current="page">Pegawai</li>
         </ol>
     </div>
-    
+    <a href="{{ route('print-pegawai.cetakdata') }}" target="_blank" class="btn btn-primary mb-3"><i class="fas fa-print"></i> Print Data Pegawai</a>
     @if (session('status'))
     <div class="alert shadow alert-success alert-dismissible fade show" role="alert">
         {{ session('status') }}
@@ -28,7 +28,6 @@
                             <tr>
                                 <th scope="col">NIP</th>
                                 <th scope="col">Nama</th>
-                                <th scope="col">Unit Kerja</th>
                                 <th scope="col">Jabatan</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
@@ -93,10 +92,6 @@
                 {
                     data: 'nama',
                     name: 'nama',
-                },
-                {
-                    data: 'unit',
-                    name: 'unit',
                 },
                 {
                     data: 'jabatan',

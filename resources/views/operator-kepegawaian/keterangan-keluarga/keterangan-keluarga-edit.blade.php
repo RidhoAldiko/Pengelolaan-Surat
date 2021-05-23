@@ -29,7 +29,7 @@
                           <select class="form-control selectric @error('status') is-invalid @enderror" id="status" name="status">
                             <option value="{{ $pegawai->status }}">{{ $pegawai->status }}</option>
                             <option value="Suami">Suami</option>
-                            <option value="Istri">Istri</option>
+                            <option value="Istri">Isteri</option>
                             <option value="Anak">Anak</option>
                           </select>
                           @error('status')
@@ -109,6 +109,13 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
+                        </div>
+                      </div>
+
+                      <div class="form-group row align-items-center">
+                        <label for="keterangan" class="form-control-label col-sm-3 text-md-right">Keterangan</label>
+                        <div class="col-sm-6 col-md-9">
+                          <textarea name="keterangan"  class="form-control" id="" cols="30" rows="10">{{$pegawai->keterangan}}</textarea>
                         </div>
                       </div>
 

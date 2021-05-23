@@ -104,12 +104,6 @@
                                             </p>
                                         </div>
                                         <div class="form-group">
-                                            <label>Unit Kerja</label>
-                                            <p class="border-bottom text-gray-800">
-                                                {{ $pegawai->unit_kerja->nama_unit }}
-                                            </p>
-                                        </div>
-                                        <div class="form-group">
                                             <label>Jabatan</label>
                                             <p class="border-bottom text-gray-800">
                                                 {{ $pegawai->jabatan->nama_jabatan }}
@@ -452,6 +446,7 @@
                                                             <th scope="col">Tanggal Lahir</th>
                                                             <th scope="col">Tanggal Nikah</th>
                                                             <th scope="col">Pekerjaan</th>
+                                                            <th scope="col">Keterangan</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
@@ -468,6 +463,7 @@
                                                                    {{ date('d/m/Y', strtotime($item->tgl_nikah)) }} 
                                                                 @endif</td>
                                                             <td>{{ $item->pekerjaan }}</td>
+                                                            <td>{{ $item->keterangan }}</td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -1000,6 +996,7 @@
                                                             <th scope="col">Penjabat</th>
                                                             <th scope="col">Nomor</th>
                                                             <th scope="col">Tanggal</th>
+                                                            <th scope="col">Peraturan yang dijadikan dasar</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
@@ -1010,6 +1007,7 @@
                                                             <td>{{ $item->penjabat }}</td>
                                                             <td>{{ $item->nomor }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
+                                                            <td>{{ $item->peraturan }}</td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

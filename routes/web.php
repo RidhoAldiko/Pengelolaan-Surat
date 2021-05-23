@@ -26,6 +26,7 @@ use App\Http\Controllers\OperatorKepegawaian\OrganisasiController;
 use App\Http\Controllers\OperatorKepegawaian\PangkatCPNSController;
 use App\Http\Controllers\OperatorKepegawaian\PangkatPNSController;
 use App\Http\Controllers\OperatorKepegawaian\PengalamanKeluarNegeriController;
+use App\Http\Controllers\OperatorKepegawaian\PrintPegawaiController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatKGBController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatPangkatController;
 use App\Http\Controllers\OperatorKepegawaian\RiwayatPendidikanController;
@@ -39,6 +40,7 @@ use App\Http\Controllers\OperatorSurat\ArsipSuratMasukController;
 use App\Http\Controllers\OperatorSurat\EffortSuratController;
 use App\Http\Controllers\UserDisposisi\UserDisposisiController;
 use App\Http\Controllers\UserDisposisi\DataDisposisiController;
+use App\Http\Controllers\UpdateProfileController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -59,6 +61,9 @@ Auth::routes([
     //register dimatikan
     'register' => false
 ]);
+
+Route::get('update-profile-pegawai', [UpdateProfileController::class,'form_edit_profile'])->name('edit_profil.form');
+Route::patch('update-profile-pegawai', [UpdateProfileController::class,'update_profile'])->name('edit_profil.update');
 
 //route role 0 = admin
 Route::prefix('admin')
@@ -196,8 +201,6 @@ Route::prefix('operator-kepegawaian')
         Route::get('/', [OperatorKepegawaianController::class,'index'])->name('operator-kepegawaian.index');
         //operator-kepegawaian: table data pegawai
         Route::get('data-pegawai', [OperatorKepegawaianController::class,'data_pegawai'])->name('data-pegawai.index');
-        //operator-kepegawaian: table data pegawai
-        Route::get('cetak-pegawai-per-orangan/{data_pegawai}', [OperatorKepegawaianController::class,'cetak_perorangan'])->name('data-pegawai.cetakperorangan');
         //operator-kepegawaian: get server side data pegawai
         Route::get('serverside-pegawai',[OperatorKepegawaianController::class,'pegawai_serverSide'])->name('pegawai.serverside');
         //operator-kepegawaian: form data pegawai
@@ -264,7 +267,11 @@ Route::prefix('operator-kepegawaian')
          Route::resource('pegawai-riwayat-kgb',RiwayatKGBController::class);
          // -----------------------dokumen pegawai---------------------------------
          Route::resource('dokumen-pegawai',DokumenPegawaiController::class);
-
+         
+          //operator-kepegawaian: print data perorangan
+         Route::get('cetak-pegawai-per-orangan/{data_pegawai}', [PrintPegawaiController::class,'cetak_perorangan'])->name('print-pegawai.cetakperorangan');
+         //operator-kepegawaian: print semua data pegawai
+         Route::get('cetak-pegawai', [PrintPegawaiController::class,'cetakdata'])->name('print-pegawai.cetakdata');
     });
 
 //route role 0 = admin

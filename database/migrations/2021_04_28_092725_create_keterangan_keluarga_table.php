@@ -23,6 +23,7 @@ class CreateKeteranganKeluargaTable extends Migration
             $table->date('tgl_lahir');
             $table->date('tgl_nikah')->nullable();
             $table->string('pekerjaan',50);
+            $table->text('keterangan')->default('-');
 
 
             // foreign key dari tabel pegawai
