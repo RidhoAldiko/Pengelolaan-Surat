@@ -99,7 +99,7 @@
                                             <div class="form-group row left-items-center">
                                                 <label for="nomor_karpeg" class="form-control-label col-sm-3 text-md-right">Nomor kartu pegawai</label>
                                                 <div class="col-sm-6 col-md-9">
-                                                    <input type="number" id="nomor_karpeg" name="nomor_karpeg"  class="form-control @error('nomor_karpeg') is-invalid @enderror" placeholder="Masukan Nomor kartu Pegawai" value="{{ $pegawai->nomor_karpeg}}" >
+                                                    <input type="text" id="nomor_karpeg" name="nomor_karpeg"  class="form-control @error('nomor_karpeg') is-invalid @enderror" placeholder="Masukan Nomor kartu Pegawai" value="{{ $pegawai->nomor_karpeg}}" >
                                                     @error('nomor_karpeg')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
