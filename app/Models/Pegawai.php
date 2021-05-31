@@ -33,6 +33,7 @@ class Pegawai extends Model
         'status_perkawinan',
         'nomor_karpeg',
         'id_jabatan',
+        'id_unit',
         'foto',
         'status'
     ];

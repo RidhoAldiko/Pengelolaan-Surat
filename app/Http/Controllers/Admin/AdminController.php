@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Admin\PenggunaRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PenggunaSistem;
 use Illuminate\Http\Request;
 use App\Models\Pegawai;
 use App\Models\User;
@@ -24,13 +26,13 @@ class AdminController extends Controller
 
     //function halaman data pengguna
     public function data_pengguna(){
-        $data = User::select('users.*','nama_pegawai','pegawai.id_jabatan','nama_jabatan','unit_kerja.id_unit','nama_unit')
+        $results = User::select('users.*','nama_pegawai','pegawai.id_jabatan','nama_jabatan','unit_kerja.id_unit','nama_unit')
                 ->join('pegawai', 'nip_pegawai', '=', 'users.id')
                 ->join('unit_kerja', 'unit_kerja.id_unit', '=', 'pegawai.id_unit')
                 ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
                 ->get();
-        // dd($data);
-        return view('admin.pengguna.pengguna');
+        // dd($results);
+        return view('admin.pengguna.pengguna',\compact('results'));
     }
 
     //function search nip pegawai
@@ -88,7 +90,7 @@ class AdminController extends Controller
         //masukan nip ke variabel data['id]
         $data ['id'] = $explode[0];
         //cari tanggal lahir berdasarkan nip
-        $result = Pegawai::where('nip_pegawai',$data['id'])->first('tanggal_lahir');
+        $result = Pegawai::where('nip_pegawai',$data['id'])->first();
         $date = date('d-m-Y', strtotime($result->tanggal_lahir));
         //bersihkan  dash (-) pada tanggal lahir
         $tanggal_lahir = str_replace("-", "", $date);
@@ -96,8 +98,13 @@ class AdminController extends Controller
         $data['flag'] = '0';
         //buat password dari tanggal lahir
         $data['password'] = Hash::make($tanggal_lahir);
+        $data['role'] = '3';
+        $data['id_level_surat'] = $result->id_jabatan;
         //create data ke database user
+
+        // dd($data);
         $user = User::create($data);
+        Mail::to($data['email'])->send(new PenggunaSistem());
         //arahkan ke halaman tabel data pengguna
         return redirect()->route('data-pengguna.index')->with('status','Pengguna Berhasil Ditambah');
     }

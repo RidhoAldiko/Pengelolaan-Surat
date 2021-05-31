@@ -43,25 +43,6 @@
                                 </span>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label for="email">Role Akses</label>
-                                <select class="form-control role-user @error('role') is-invalid @enderror" id="role" name="role">
-                                    <option selected disabled> --Pilih Role Akses-- </option>
-                                    <option value="0"> Super Admin</option>
-                                    <option value="1"> Operator Surat</option>
-                                    <option value="2"> Operator Pegawai</option>
-                                    <option value="3"> User Disposisi</option>
-                                </select>
-                                @error('role')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group level-surat">
-                                
-                            </div>
                             <a href="{{ route('data-pengguna.index') }}" class="btn btn-warning"><i class="fas fa-chevron-left"></i> Kembali</a>
                             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i><span> Simpan</span></button>
                         </form> 
@@ -72,28 +53,4 @@
     </div>
 </section>
 @endsection
-
-@push('script-menampilan-level-surat')
-<script>
-//menampilkan input level surat jika role = 3
-$('.role-user').on('change',function(){
-    var _id = $(this).val();
-    if (_id == 3) {
-        $.ajax({
-                url: '{{route('data-level_surat.level')}}',
-                method : 'GET',
-                beforeSend:function(){
-                    $('.level-surat').html('mohon tunggu');
-                },
-                success:function(res){
-                    $('.level-surat').html(res).fadeIn();
-                },
-            })
-
-    } else {
-        $('.level-surat').fadeOut();
-    }
-})
-</script>
-@endpush
 

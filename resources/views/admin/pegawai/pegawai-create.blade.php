@@ -17,7 +17,7 @@
                         <h4>Form Tambah Data Pegawai</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('data-pegawai.store')}}" method="POST">
+                        <form action="{{route('admin-pegawai.store')}}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="nip_pegawai">NIP Pegawai</label>
@@ -60,7 +60,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="ttanggal_lahir">Tanggal Lahir</label>
+                                <label for="tanggal_lahir">Tanggal Lahir</label>
                                 <input type="text" id="tanggal_lahir" name="tanggal_lahir" onfocus="(this.type='date')"  class="form-control @error('tanggal_lahir') is-invalid @enderror" placeholder="Masukan Tanggal Lahir" value="{{old('tanggal_lahir')}}" >
                                 @error('tanggal_lahir')
                                 <span class="invalid-feedback" role="alert">
@@ -117,37 +117,10 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
-                                <label for="id_unit">Unit Kerja</label>
-                                <select class="form-control @error('id_unit') is-invalid @enderror" id="id_unit" name="id_unit">
-                                    <option selected disabled> --Pilih Unit Kerja-- </option>
-                                    @foreach ($unit as $un)
-                                    <option value="{{$un->id_unit}}">{{$un->nama_unit}}</option>
-                                    @endforeach
-                                </select>
-                                @error('id_unit')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="id_golongan">Golongan</label>
-                                <select class="form-control @error('id_golongan') is-invalid @enderror" id="id_golongan" name="id_golongan">
-                                    <option selected disabled> --Pilih Golongan-- </option>
-                                    @foreach ($golongan as $gl)
-                                    <option value="{{$gl->id_golongan}}">{{$gl->nama_golongan}}</option>
-                                    @endforeach
-                                </select>
-                                @error('id_golongan')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+                            
                             <div class="form-group">
                                 <label for="jabatan">Jabatan</label>
-                                <select class="form-control @error('id_jabatan') is-invalid @enderror" id="id_jabatan" name="id_jabatan">
+                                <select class="form-control data-jabatan @error('id_jabatan') is-invalid @enderror" id="id_jabatan" name="id_jabatan">
                                     <option selected disabled> --Pilih Jabatan-- </option>
                                     @foreach ($jabatan as $jb)
                                     <option value="{{$jb->id_jabatan}}">{{$jb->nama_jabatan}}</option>
@@ -159,6 +132,10 @@
                                 </span>
                                 @enderror
                             </div>
+
+                            <div class="form-group unit-kerja">
+                                
+                            </div>
                             <a href="{{ route('admin-pegawai.index') }}" class="btn btn-warning"><i class="fas fa-chevron-left"></i> Kembali</a>
                             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
                         </form> 
@@ -169,3 +146,24 @@
     </div>
 </section>
 @endsection
+@push('script-menampilan-unit')
+<script>
+//menampilkan input level surat jika role = 3
+$('.data-jabatan').on('change',function(){
+    var _id = $(this).val();
+        $.ajax({
+                url: '{{route('data-unit_kerja.get')}}',
+                data:{
+                    data:_id
+                },
+                method : 'GET',
+                beforeSend:function(){
+                    $('.unit-kerja').html('mohon tunggu');
+                },
+                success:function(res){
+                    $('.unit-kerja').html(res).fadeIn();
+                },
+            })
+})
+</script>
+@endpush

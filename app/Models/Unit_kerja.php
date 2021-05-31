@@ -12,6 +12,6 @@ class Unit_kerja extends Model
     public $timestamps = false;
     protected $primaryKey = 'id_unit';
     protected $fillable = [
-        'nama_unit','status'
+        'id_jabatan','nama_unit','status'
     ];
 }

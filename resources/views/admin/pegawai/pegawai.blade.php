@@ -24,11 +24,11 @@
                     <table  class="table table-bordered table-hover table-striped" id="dataAdminPegawai" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th scope="col">No</th>
                                 <th scope="col">NIP</th>
                                 <th scope="col">Nama</th>
-                                <th scope="col">Unit Kerja</th>
-                                <th scope="col">Golongan</th>
                                 <th scope="col">Jabatan</th>
+                                <th scope="col">Unit Kerja</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
                             </tr>
@@ -77,6 +77,8 @@
 </script>
 @endpush
 
+
+
 @push('script-server-side_admin-pegawai')
 <script>
     $(function() {
@@ -86,6 +88,10 @@
             ajax: "{{route('admin-pegawai.serverside')}}",
             columns: [
                 {
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
                     data: 'nip',
                     name: 'nip',
                 },
@@ -94,16 +100,12 @@
                     name: 'nama',
                 },
                 {
-                    data: 'unit',
-                    name: 'unit',
-                },
-                {
-                    data: 'golongan',
-                    name: 'golongan',
-                },
-                {
                     data: 'jabatan',
                     name: 'jabatan',
+                },
+                {
+                    data: 'unit',
+                    name: 'unit',
                 },
                 {
                     data: 'status',

@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Storage;
-use App\Models\SuratMasuk;
+use App\Models\SuratKeluar;
 
-class ArsipSuratMasukController extends Controller
+class ArsipSuratKeluarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,14 +17,21 @@ class ArsipSuratMasukController extends Controller
      */
     public function index()
     {
-        return view('operator-surat.arsip.arsip-surat-masuk');
+        return view('operator-surat.arsip.arsip-surat-keluar');
     }
-    public function arsip_surat_serverside(){
-        $data = SuratMasuk::where('status','1')->orWhere('status','3')->get();
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function arsip_surat_serverside()
+    {
+        $data = SuratKeluar::Where('status','3')->get();
         return DataTables::of($data)
                 ->addIndexColumn()
-                ->editColumn('pengirim', function($data){ 
-                    return $data->pengirim; 
+                ->editColumn('alamat', function($data){ 
+                    return $data->alamat; 
                 })
                 ->editColumn('nomor_surat', function($data){ 
                     return $data->nomor_surat; 
@@ -33,14 +40,8 @@ class ArsipSuratMasukController extends Controller
                     return date("d/m/Y", strtotime($data->tanggal_surat));
                 })
                 ->addColumn('status', function($data) {
-                    if ($data->status == 0) {
-                        return "didisposisi";
-                    }else
-                    if ($data->status == 1) {
-                        return "Tidak didisposisi";
-                    }else
                     if ($data->status == 3) {
-                        return "Selesai didisposisi";
+                        return "Selesai dieffort";
                     }
                 })
                 ->addColumn('aksi', function($data) {

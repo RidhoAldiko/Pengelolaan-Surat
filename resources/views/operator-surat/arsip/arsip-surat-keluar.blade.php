@@ -24,7 +24,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">No.</th>
-                                <th scope="col">Pengirim</th>
+                                <th scope="col">Alamat</th>
                                 <th scope="col">No Surat</th>
                                 <th scope="col">Tgl Surat</th>
                                 <th scope="col">Status</th>
@@ -44,15 +44,15 @@
         $('#dataArsipSuratMasuk').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{route('arsip-surat-masuk.serverside')}}",
+            ajax: "{{route('arsip-surat-keluar.serverside')}}",
             columns: [
                 {
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
                 },
                 {
-                    data: 'pengirim',
-                    name: 'pengirim'
+                    data: 'alamat',
+                    name: 'alamat'
                 },
                 {
                     data: 'nomor_surat',

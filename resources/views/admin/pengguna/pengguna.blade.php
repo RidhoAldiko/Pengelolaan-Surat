@@ -6,7 +6,14 @@
         <h1>Pengguna Sistem</h1>
     </div>
     <a href="{{ route('data-pengguna.add') }}" class="btn btn-primary mb-3"><i class="fas fa-plus"></i> Tambah Pengguna Sistem</a>
-
+    @if (session('status'))
+    <div class="alert shadow alert-success alert-dismissible fade show" role="alert">
+        {{ session('status') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     <div class="section-body">
         <div class="card">
             <div class="card-header">
@@ -14,28 +21,46 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                    <table class="table table-bordered table-hover table-striped" id="data-pengguna" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">NIP</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Role</th>
+                                <th scope="col">Jabatan</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($results as $result)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$result->id}}</td>
+                                <td>{{$result->nama_pegawai}}</td>
+                                <td>{{$result->email}}</td>
+                                <td>{{$result->nama_jabatan}}</td>
+                                <td>
+                                    @if ($result->status == 0)
+                                        {{'Aktif'}}
+                                    @else
+                                        {{'Tidak Aktif'}}
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-success text-white btn-sm" title="Edit">
+                                        <i class="fas fa-info"></i> Detail
+                                            </a>
+                                        <a href="#" class="btn btn-warning text-white btn-sm" title="Edit">
+                                            <i class="fas fa-pencil-alt"></i> Edit
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-sm getIdSuratMasuk" data-toggle="modal" data-target="#deleteSurat" data-id="{{$result->id_surat_masuk}}" >
+                                            <i class="fas fa-trash fa-sm"></i> Hapus
+                                        </a>
+                                </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -44,3 +69,10 @@
     </div>
 </section>
 @endsection
+@push('script-pengguna')
+    <script>
+        $(document).ready( function () {
+            $('#data-pengguna').DataTable();
+        } );
+    </script>
+@endpush

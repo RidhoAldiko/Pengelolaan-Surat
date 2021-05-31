@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\OperatorKepegawaian\UnitKerjaRequest;
 use App\Models\Unit_kerja;
+use App\Models\Jabatan;
 
 class UnitKerjaController extends Controller
 {
@@ -25,7 +26,8 @@ class UnitKerjaController extends Controller
     //metod untuk menampilkan form tambah unit kerja
     public function create()
     {
-        return view('admin.masterdata.unit-kerja.unit-kerja-add');      
+        $results = Jabatan::all();
+        return view('admin.masterdata.unit-kerja.unit-kerja-add',\compact('results'));      
     }
 
     //method untuk menyinpan data unit kerja
@@ -33,10 +35,22 @@ class UnitKerjaController extends Controller
     {
         $data           = $request->all();
         $data['status'] = 0;
-
+        // dd($data);
         Unit_kerja::create($data);
         
         return redirect()->route('data-unit_kerja.index')->with('status','Data Berhasil Ditambah');
+    }
+
+    public function get_unit(Request $request){
+        $data = $request->data;
+        $results = Unit_kerja::where('id_jabatan',$data)->get();
+        $output = '<label for="id_unit">Pilih Unit Kerja</label>';
+        $output .= '<select class="form-control" id="id_unit" name="id_unit">">';
+        foreach ($results as $result) {
+            $output .= ' <option value="'.$result->id_unit.'">'.$result->nama_unit.'</option>';
+        }
+        $output .= '</select>';
+        echo $output;
     }
 
     //method untuk menampikan form edit data

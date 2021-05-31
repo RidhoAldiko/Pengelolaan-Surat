@@ -64,9 +64,10 @@ class OperatorKepegawaianController extends Controller
     // method get server side data pegawai
     public function pegawai_serverSide(){
         //get data pegawai 
-        $data = Pegawai::select('pegawai.*','nama_jabatan')
-                ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
-                ->get();
+        $data = Pegawai::select('pegawai.*','nama_jabatan','nama_unit')
+        ->join('unit_kerja','unit_kerja.id_unit','=','pegawai.id_unit' )
+        ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+        ->get();
         return DataTables::of($data)
                 ->editColumn('nip', function($data){ 
                     return $data->nip_pegawai; 
@@ -76,6 +77,10 @@ class OperatorKepegawaianController extends Controller
                 })
                 ->editColumn('jabatan', function($data){ 
                     return $data->nama_jabatan; 
+                })
+
+                ->editColumn('unit', function($data){ 
+                    return $data->nama_unit; 
                 })
                 ->editColumn('status', function($data){ 
                     return ($data->status == 0) ? 'Aktif' : 'Nonaktif';
@@ -108,7 +113,7 @@ class OperatorKepegawaianController extends Controller
     }
 
     //method store data pegawai
-    public function store_pegawai(PegawaiRequest $request){
+    public function store_pegawai(Request $request){
         
         $this->validate($request,[
             'nip_pegawai' => 'unique:pegawai'

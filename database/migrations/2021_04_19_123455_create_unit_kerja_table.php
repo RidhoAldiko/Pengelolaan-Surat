@@ -14,9 +14,14 @@ class CreateUnitKerjaTable extends Migration
     public function up()
     {
         Schema::create('unit_kerja', function (Blueprint $table) {
+            $table->smallInteger('id_jabatan')->unsigned();
             $table->smallIncrements('id_unit');
             $table->string('nama_unit',70)->unique();
             $table->tinyInteger('status');//0=aktif 1 = nonaktif
+
+            // foreign key dari tabel jabatan
+            $table->foreign('id_jabatan')->references('id_jabatan')->on('jabatan')->onUpdate('cascade');
+
         });
     }
 

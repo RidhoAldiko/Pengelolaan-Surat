@@ -22,6 +22,20 @@
                         <form action="{{ route('data-unit_kerja.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
+                                <label for="id_jabatan">Jabatan</label>
+                                <select class="form-control @error('id_jabatan') is-invalid @enderror" id="id_jabatan" name="id_jabatan">
+                                    <option selected disabled> --Pilih Jabatan Pegawai-- </option>
+                                    @foreach ($results as $result)
+                                    <option value="{{$result->id_jabatan}}">{{$result->nama_jabatan}}</option>
+                                    @endforeach
+                                </select>
+                                @error('id_jabatan')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <input type="text" id="nama_unit" name="nama_unit"  class="form-control @error('nama_unit') is-invalid @enderror" placeholder="Masukan Nama Unit Kerja" value="{{old('nama_unit')}}" >
                                 @error('nama_unit')
                                 <span class="invalid-feedback" role="alert">

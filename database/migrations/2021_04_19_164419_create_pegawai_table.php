@@ -23,12 +23,15 @@ class CreatePegawaiTable extends Migration
             $table->string('agama',30);
             $table->string('status_perkawinan',30);
             $table->smallInteger('id_jabatan')->unsigned();
+            $table->smallInteger('id_unit')->unsigned()->nullable();
             $table->string('foto')->nullable();
             $table->tinyInteger('status');//0=aktif 1 = nonaktif
             $table->timestamps();
 
             // foreign key dari tabel jabatan
             $table->foreign('id_jabatan')->references('id_jabatan')->on('jabatan')->onUpdate('cascade');
+            // foreign key dari tabel jabatan
+            $table->foreign('id_unit')->references('id_unit')->on('unit_kerja')->onUpdate('cascade');
         });
     }
 

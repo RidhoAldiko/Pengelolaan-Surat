@@ -26,9 +26,11 @@
                     <table  class="table table-bordered table-hover table-striped" id="dataPegawai" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                
                                 <th scope="col">NIP</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Jabatan</th>
+                                <th scope="col">Unit</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
                             </tr>
@@ -96,6 +98,10 @@
                 {
                     data: 'jabatan',
                     name: 'jabatan',
+                },
+                {
+                    data: 'unit',
+                    name: 'unit',
                 },
                 {
                     data: 'status',

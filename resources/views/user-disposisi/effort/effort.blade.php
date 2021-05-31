@@ -3,7 +3,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Disposisi</h1>
+        <h1>Effort Surat</h1>
     </div>
     @if (session('status'))
     <div class="alert shadow alert-success alert-dismissible fade show" role="alert">
@@ -16,18 +16,17 @@
     <div class="section-body">
         <div class="card">
             <div class="card-header">
-                <h4>Data Disposisi Surat Masuk</h4>
+                <h4>Data Effort</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped" id="disposisi-surat-masuk" width="100%" cellspacing="0">
+                    <table class="table table-bordered table-hover table-striped" id="disposisi-surat-keluar" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th scope="col">No.</th>
-                                <th scope="col">Pengirim</th>
                                 <th scope="col">No Surat</th>
                                 <th scope="col">Tgl Surat</th>
-                                <th scope="col">Tgl Disposisi</th>
+                                <th scope="col">Tgl Effort</th>
                                 <th scope="col">status</th>
                                 <th scope="col">Aksi</th>
                             </tr>
@@ -37,10 +36,9 @@
                                 @if ($result->status_teruskan == '0')
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$result->pengirim}}</td>
                                     <td>{{$result->nomor_surat}}</td>
                                     <td>{{date('d-m-Y',strtotime($result->tanggal_surat))}}</td>
-                                    <td>{{date('d-m-Y',strtotime($result->tanggal_disposisi))}}</td>
+                                    <td>{{date('d-m-Y',strtotime($result->tanggal_effort))}}</td>
                                     <td>
                                         @if ($result->status == 0)
                                             {{ 'Terdaftar' }} 
@@ -49,13 +47,13 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{route('data-disposisi.show',$result->id_disposisi_surat_masuk)}}" class="btn btn-success text-white btn-sm">
+                                        <a href="{{route('data-effort.show',$result->id_effort_surat)}}" class="btn btn-success text-white btn-sm">
                                             <i class="fas fa-info"></i> Detail
                                         </a>
-                                        <a href="{{route('data-disposisi.forward',$result->id_disposisi_surat_masuk)}}" class="btn btn-primary btn-sm" >
+                                        <a href="{{route('data-effort.forward',$result->id_effort_surat)}}" class="btn btn-primary btn-sm" >
                                             <i class="fas fa-angle-right"></i> Teruskan
                                         </a>
-                                        <a href="{{route('data-disposisi.finish',$result->id_surat_masuk)}}" class="btn btn-warning btn-sm" >
+                                        <a href="{{route('data-effort.finish',$result->id_surat_keluar)}}" class="btn btn-warning btn-sm" >
                                             <i class="fas fa-angle-right"></i> Selesaikan
                                         </a>
                                     </td>
@@ -97,20 +95,10 @@
     </div>
 </div>
 @endsection
-@push('script-disposisi-surat-masuk')
+@push('script-disposisi-surat-keluar')
 <script>
     $(document).ready( function () {
-        $('#disposisi-surat-masuk').DataTable();
+        $('#disposisi-surat-keluar').DataTable();
     } );
-</script>
-@endpush
-
-@push('script-delete-disposisi')
-<script>
-    //delete data unit kerja
-    $('.getIdSurat').on('click',function(){
-        var _id = $(this).data("id");
-        $('.modal-footer form[action]').attr('action', 'disposisi-surat-masuk'+'/'+_id);
-    })
 </script>
 @endpush

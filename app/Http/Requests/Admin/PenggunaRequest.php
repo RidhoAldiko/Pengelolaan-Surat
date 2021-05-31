@@ -26,7 +26,6 @@ class PenggunaRequest extends FormRequest
         return [
             'nip_pegawai' => ['required','string', 'max:60'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'role' => ['required', 'string'],
         ];
     }
 
@@ -39,8 +38,6 @@ class PenggunaRequest extends FormRequest
             'email.required'  => 'Email tidak boleh kosong',
             'email.string'  => 'Email harus berupa string',
             'email.unique'  => 'Email sudah terdaftar',
-            'role.required'   => 'Role tidak boleh kosong',
-            
         ];
     }
 }

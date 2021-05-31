@@ -19,31 +19,34 @@ class PegawaiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        // $data = Pegawai::select('pegawai.*','nama_jabatan','nama_unit')
+        // ->join('unit_kerja','unit_kerja.id_unit','=','pegawai.id_unit' )
+        // ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+        // ->get();
+        // dd($data);
         return view('admin.pegawai.pegawai');
     }
     public function pegawai_serverSide(){
         //get data pegawai 
-        $data = Pegawai::select('pegawai.*','nama_unit','nama_golongan','nama_jabatan')
-                ->join('unit_kerja', 'unit_kerja.id_unit', '=', 'pegawai.id_unit')
-                ->join('golongan', 'golongan.id_golongan', '=', 'pegawai.id_golongan')
-                ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
-                ->get();
+        $data = Pegawai::select('pegawai.*','nama_jabatan','nama_unit')
+        ->join('unit_kerja','unit_kerja.id_unit','=','pegawai.id_unit' )
+        ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+        ->get();
         return DataTables::of($data)
+                ->addIndexColumn()
                 ->editColumn('nip', function($data){ 
                     return $data->nip_pegawai; 
                 })
                 ->editColumn('nama', function($data){ 
                     return $data->nama_pegawai; 
                 })
-                ->editColumn('unit', function($data){ 
-                    return $data->nama_unit; 
-                })
-                ->editColumn('golongan', function($data){ 
-                    return $data->nama_golongan; 
-                })
                 ->editColumn('jabatan', function($data){ 
                     return $data->nama_jabatan; 
+                })
+
+                ->editColumn('unit', function($data){ 
+                    return $data->nama_unit; 
                 })
                 ->editColumn('status', function($data){ 
                     return ($data->status == 0) ? 'Aktif' : 'Nonaktif';
@@ -66,7 +69,7 @@ class PegawaiController extends Controller
                 ->make(true);
     }
     
-    public function pegawai_create(){
+    public function create(){
         //get data unit kerja
         $unit = Unit::where('status','=',0)->get();
         //get data golongan
@@ -76,7 +79,16 @@ class PegawaiController extends Controller
         return view('admin.pegawai.pegawai-create',\compact('unit','jabatan','golongan'));
     }
 
-    public function pegawai_store(PegawaiRequest $request){
-
+    public function store(PegawaiRequest $request){
+        $this->validate($request,[
+            'nip_pegawai' => 'unique:pegawai'
+        ],[
+            'nip_pegawai.unique' => 'Nip pegawai tidak boleh sama',
+        ]);
+        $data = $request->all();
+        $data['status'] = 0;
+        // dd($data);
+        $store = Pegawai::create($data);
+        return redirect()->route('admin-pegawai.index')->with('status',"Data Berhasil Ditambah");
     }
 }

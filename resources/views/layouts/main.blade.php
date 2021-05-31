@@ -193,6 +193,8 @@ gtag('config', 'UA-94034622-3');
 </script>
 {{-- script pengguna --}}
 @stack('script-menampilan-level-surat')
+@stack('script-menampilan-unit')
+@stack('script-pengguna')
 @stack('script-custom-file')
 @stack('search-pegawai-page_tambah-pengguna')
 {{-- script pegawai --}}
@@ -200,6 +202,7 @@ gtag('config', 'UA-94034622-3');
 @stack('script-server-side_admin-pegawai')
 @stack('script-surat-masuk')
 @stack('script-disposisi-surat-masuk')
+@stack('script-disposisi-surat-keluar')
 @stack('script-server-side_arsip-surat-masuk')
 @stack('script-delete-pegawai')
 {{-- script master --}}

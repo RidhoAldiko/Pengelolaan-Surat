@@ -5,6 +5,8 @@ namespace App\Http\Controllers\UserDisposisi;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Notifikasi;
+use Illuminate\Support\Facades\Auth;
 
 class UserDisposisiController extends Controller
 {
@@ -24,6 +26,23 @@ class UserDisposisiController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    // public function notifikasi(){
+    //     $id = Auth::user()->id;
+    //     $results = Notifikasi::where('id_user',$id)->get();
+        
+    //     foreach ($results as $result) {
+    //         $output = ' <div class="dropdown-list-content dropdown-list-message">
+    //                     <a href="#" class="dropdown-item dropdown-item-unread">
+    //                     <div class="dropdown-item">';
+    //         $output .= '<b>'.$result->judul.'</b>';
+    //         $output .= '<p>'.$result->pesan.'</p>';
+    //         $output .= '</div>
+    //             </a>
+    //         </div>';
+    //     }    
+        
+    //     echo $output;
+    // }
     function search_pengguna(Request $request)
     {
         if ($request->has('data')) {
