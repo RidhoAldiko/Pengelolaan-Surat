@@ -61,23 +61,20 @@
                       </div>
 
                       <div class="form-group row align-items-center">
-                        <label for="nomor" class="form-control-label col-sm-3 text-md-right">KGB YAD</label>
-                        <div class="col-sm-3 col-md-4">
-                          <input type="text" id="mulai_berlaku" name="mulai_berlaku" onfocus="(this.type='date')"  class="form-control @error('mulai_berlaku') is-invalid @enderror" placeholder="Dari" value="{{old('mulai_berlaku')}}" >
-                              @error('mulai_berlaku')
-                              <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $message }}</strong>
-                              </span>
-                              @enderror
-                          </div>
-                        <div class="col-sm-3 col-md-4">
-                          <input type="text" id="batas_berlaku" name="batas_berlaku" onfocus="(this.type='date')"  class="form-control @error('batas_berlaku') is-invalid @enderror" placeholder="Sampai" value="{{old('batas_berlaku')}}" >
-                              @error('batas_berlaku')
-                              <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $message }}</strong>
-                              </span>
-                              @enderror
-                          </div>
+                        <label for="id_golongan" class="form-control-label col-sm-3 text-md-right">Golongan</label>
+                        <div class="col-sm-6 col-md-9">
+                            <select class="form-control @error('id_golongan') is-invalid @enderror" id="id_golongan" name="id_golongan">
+                                <option selected disabled> --Pilih Golongan-- </option>
+                                @foreach ($golongan as $gl)
+                                <option value="{{$gl->id_golongan}}">{{$gl->nama_golongan}}</option>
+                                @endforeach
+                            </select>
+                            @error('id_golongan')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
                       </div>
 
                       <div class="form-group row align-items-center">
@@ -92,7 +89,7 @@
                         </div>
                       </div>
 
-                      <div class="form-group row align-items-center">
+                       <div class="form-group row align-items-center">
                         <label for="nomor" class="form-control-label col-sm-3 text-md-right">Nomor dan Tanggal</label>
                         <div class="col-sm-3 col-md-5">
                           <input type="text" id="nomor" name="nomor"  class="form-control @error('nomor') is-invalid @enderror" placeholder="nomor" value="{{old('nomor')}}" >
@@ -105,6 +102,55 @@
                         <div class="col-sm-3 col-md-4">
                           <input type="text" id="tanggal" name="tanggal" onfocus="(this.type='date')"  class="form-control @error('tanggal') is-invalid @enderror" placeholder="tanggal" value="{{old('tanggal')}}" >
                               @error('tanggal')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                              @enderror
+                          </div>
+                      </div>
+
+                      <div class="form-group row align-items-center">
+                        <label for="jumlah_gaji" class="form-control-label col-sm-3 text-md-right">Jumlah Gaji</label>
+                        <div class="col-sm-6 col-md-9">
+                          <input type="text" id="jumlah_gaji" name="jumlah_gaji"  class="form-control @error('jumlah_gaji') is-invalid @enderror" placeholder="Rp." value="{{old('jumlah_gaji')}}" >
+                            @error('jumlah_gaji')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                      </div>
+
+                      <div class="form-group row align-items-center">
+                        <label for="mkg" class="form-control-label col-sm-3 text-md-right">Masa Kerja Golongan</label>
+                        <div class="col-sm-6 col-md-9">
+                            <select class="form-control @error('mkg') is-invalid @enderror" id="mkg" name="mkg">
+                                <option selected disabled> --Pilih-- </option>
+                                @for ($i = 0; $i <= 33; $i++)
+                                <option value="{{ $i }}">{{ $i }}</option>
+                                @endfor
+                            </select>
+                            @error('mkg')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                      </div>
+
+                      <div class="form-group row align-items-center">
+                        <label for="nomor" class="form-control-label col-sm-3 text-md-right">KGB YAD</label>
+                        <div class="col-sm-3 col-md-4">
+                          <input type="text" id="mulai_berlaku" name="mulai_berlaku" onfocus="(this.type='date')"  class="form-control @error('mulai_berlaku') is-invalid @enderror" placeholder="Dari" value="{{old('mulai_berlaku')}}" >
+                              @error('mulai_berlaku')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                              @enderror
+                          </div>
+                        <div class="col-sm-3 col-md-4">
+                          <input type="text" id="batas_berlaku" name="batas_berlaku" onfocus="(this.type='date')"  class="form-control @error('batas_berlaku') is-invalid @enderror" placeholder="Sampai" value="{{old('batas_berlaku')}}" >
+                              @error('batas_berlaku')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>
                               </span>

@@ -23,8 +23,8 @@ class CreateRiwayatPendidikanTable extends Migration
             $table->date('tgl_sttb');
             $table->text('tempat');
             $table->string('nama_kepsek',50);
-            $table->date('mulai');
-            $table->date('sampai');
+            $table->date('mulai')->nullable();;
+            $table->date('sampai')->nullable();;
             $table->string('tanda_lulus',50);
 
 

@@ -24,7 +24,7 @@ class RiwayatPendidikanRequest extends FormRequest
     public function rules()
     {
         return [
-        'nip_pegawai' => 'required|max:18|string',
+        'nip_pegawai' => 'required',
         'jenis_pendidikan' => 'required|max:30',
         'nama_pendidikan' => 'required|max:60',
         'jurusan' => 'required|max:60' ,

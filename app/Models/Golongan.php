@@ -35,4 +35,9 @@ class Golongan extends Model
     {
         return $this->hasOne(PangkatPNS::class,'id_golongan','id_golongan');
     }
+    //tabel golongan terhubung dengan tabel pegawai dengan relasi one to one
+    public function riwayat_kgb()
+    {
+        return $this->hasOne(RiwayatKGB::class,'id_golongan','id_golongan');
+    }
 }
