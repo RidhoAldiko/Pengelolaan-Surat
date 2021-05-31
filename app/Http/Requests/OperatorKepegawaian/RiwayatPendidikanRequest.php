@@ -32,8 +32,6 @@ class RiwayatPendidikanRequest extends FormRequest
         'tgl_sttb' => 'required',
         'tempat' => 'required',
         'nama_kepsek' => 'required|max:50',
-        'mulai' => 'required',
-        'sampai' => 'required',
         'tanda_lulus' => 'required|max:50'
         ];
     }
@@ -59,8 +57,6 @@ class RiwayatPendidikanRequest extends FormRequest
             'tempat.required'         => 'Temapat tidak boleh kosong',
             'nama_kepsek.required'      => 'Nama Kepala sekolah / Rektor tidak boleh kosong',
             'nama_kepsek.max'           => 'Maksimal Nama Kepala sekolah / Rektor 50 karakter',
-            'mulai.required'         => 'Tanggal mulai tidak boleh kosong',
-            'sampai.required'         => 'Tanggal Selesai tidak boleh kosong',
             'tanda_lulus.required'      => 'Tanda Lulus tidak boleh kosong',
             'tanda_lulus.max'           => 'Maksimal Tanda Lulus 50 karakter',
         ];

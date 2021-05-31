@@ -29,7 +29,7 @@ class PrintPegawaiController extends Controller
             'dokumen_pegawai','riwayat_pangkat',
             'riwayat_kgb'])->where('nip_pegawai',$id)->findOrFail($id);
 
-        $riwayat_kenaikan_gaji = RiwayatKGB::with(['gaji'])->where('nip_pegawai',$id)->orderBy('id_riwayat_kgb','asc')->get();
+        $riwayat_kenaikan_gaji = RiwayatKGB::with(['golongan'])->where('nip_pegawai',$id)->orderBy('id_riwayat_kgb','asc')->get();
         $pendidikan = RiwayatPendidikan::where('nip_pegawai',$id)->orderBy('sampai','asc')->get();
         $pangkatgolongan = RiwayatPangkat::with(['golongan'])->where('nip_pegawai',$id)->where('status',0)->first();
          

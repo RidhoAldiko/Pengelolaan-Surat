@@ -39,7 +39,7 @@
                         <a class="nav-link" id="mutasi-tab" data-toggle="tab" href="#mutasi" role="tab" aria-controls="mutasi" aria-selected="false">Mutasi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="dokumen-tab" data-toggle="tab" href="#dokumen" role="tab" aria-controls="dokumen" aria-selected="false">Dokumen Pegawi</a>
+                        <a class="nav-link" id="dokumen-tab" data-toggle="tab" href="#dokumen" role="tab" aria-controls="dokumen" aria-selected="false">Dokumen Pegawai</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="pangkat_cpns-tab" data-toggle="tab" href="#pangkat_cpns" role="tab" aria-controls="pangkat_cpns" aria-selected="false">Pangkat CPNS</a>
@@ -266,8 +266,8 @@
                                                             <td>{{ date('d/m/Y', strtotime($item->tgl_sttb)) }}</td>
                                                             <td>{{ $item->tempat }}</td>
                                                             <td>{{ $item->nama_kepsek }}</td>
-                                                            <td>{{ date('d/m/Y', strtotime($item->mulai)) }}</td>
-                                                            <td>{{ date('d/m/Y', strtotime($item->sampai)) }}</td>
+                                                            <td> {{ $item->mulai == null ? '-' : date('d/m/Y', strtotime($item->mulai)) }}</td>
+                                                            <td> {{ $item->sampai == null ? '-' : date('d/m/Y', strtotime($item->sampai)) }}</td>
                                                             <td>{{ $item->tanda_lulus }}</td>
                                                         </tr>
                                                     @endforeach

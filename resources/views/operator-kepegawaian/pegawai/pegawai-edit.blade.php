@@ -649,8 +649,8 @@
                                                                     <td>{{ date('d/m/Y', strtotime($item->tgl_sttb)) }}</td>
                                                                     <td>{{ $item->tempat }}</td>
                                                                     <td>{{ $item->nama_kepsek }}</td>
-                                                                    <td>{{ date('d/m/Y', strtotime($item->mulai)) }}</td>
-                                                                    <td>{{ date('d/m/Y', strtotime($item->sampai)) }}</td>
+                                                                    <td> {{ $item->mulai == null ? '-' : date('d/m/Y', strtotime($item->mulai)) }}</td>
+                                                                    <td> {{ $item->sampai == null ? '-' : date('d/m/Y', strtotime($item->sampai)) }}</td>
                                                                     <td>{{ $item->tanda_lulus }}</td>
                                                                     <td>
                                                                         <a href="{{ route('riwayat-pendidikan.edit',$item->id_riwayatpendidikan) }}" class="btn btn-warning text-white btn-sm" title="Edit">
