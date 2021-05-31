@@ -71,10 +71,12 @@
                               </thead>
                               <tbody>
                               @if ($data_kgb->count() > 0)
+                                @php
+                                    $datakgb = [];
+                                    $akhir =strtotime(now());
+                                @endphp
                                   @foreach ($data_kgb as $key => $value)
                                   @php
-                                      $datakgb = [];
-                                      $akhir =strtotime(now());
                                       $awal = strtotime($value->batas_berlaku); 
                                       $selisih =floor(($akhir - $awal) / (60 * 60 * 24 * 30));
                                   @endphp
@@ -91,9 +93,10 @@
                                       </tr>
                                       @endif
                                   @endforeach
+
                                       @if (count($datakgb) < 1)
                                       <tr>
-                                        <td colspan="4" class="text-center">--Tidak Ada--</td>
+                                        <td colspan="4" class="text-center">-Tidak Ada-</td>
                                       </tr> 
                                       @endif
                               @else
@@ -111,10 +114,10 @@
               <div class="col-md-6">
                 <div class="card shadow">
                   <div class="card-header">
-                      <h4>Pemberitahuan Kenaikan Pangkat 2 Bulan Kedepan</h4>
+                      <h4>Pemberitahuan Kenaikan Pangkat 4 Bulan Kedepan</h4>
                   </div>
                   <div class="card-body">
-                    <p>Berikut daftar pegawai yang harus mengurus kenaikan pangkat pada 2 bulan ini </p>
+                    <p>Berikut daftar pegawai yang harus mengurus kenaikan pangkat pada 4 bulan ini </p>
                       <div class="table-responsive">
                           <table  class="table table-bordered table-hover table-striped" id="dataPegawai" width="100%" cellspacing="0">
                               <thead>
@@ -128,15 +131,17 @@
                               </thead>
                               <tbody>
                               @if ($data_pangkat->count() > 0)
-                                @foreach ($data_pangkat as $key => $value)
                                 @php
                                     $datapangkat = [];
                                     $akhir =strtotime(now());
+                                @endphp
+                                @foreach ($data_pangkat as $key => $value)
+                                @php
                                     $awal = strtotime($value->batas_berlaku); 
                                     $selisih =floor(($akhir - $awal) / (60 * 60 * 24 * 30));
                                 @endphp
                                     {{-- jika tanggal batas berlaku <= 2 bulan maka tampilkan siapa saja --}}
-                                    @if ($selisih <= 2 && $selisih >= 0)
+                                    @if ($selisih <= 4 && $selisih >= 0)
                                     @php
                                         $datapangkat[] = $value->pegawai->nama_pegawai;
                                     @endphp

@@ -45,7 +45,7 @@ class OperatorKepegawaianController extends Controller
     public function index()
     {   
 
-        $dataKGB             = RiwayatKGB::with(['pegawai','gaji'])->where('status',0)->orderBy('id_riwayat_kgb','desc')->get();
+        $dataKGB             = RiwayatKGB::with(['pegawai','golongan'])->where('status',0)->orderBy('id_riwayat_kgb','desc')->get();
         $datakenaikanpangkat = RiwayatPangkat::with(['pegawai'])->where('status',0)->orderBy('id_riwayat_pangkat','desc')->get();
         
         return view('operator-kepegawaian.dashboard',[
