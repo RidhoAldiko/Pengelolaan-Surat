@@ -99,7 +99,7 @@
                                             <div class="form-group row left-items-center">
                                                 <label for="nomor_karpeg" class="form-control-label col-sm-3 text-md-right">Nomor kartu pegawai</label>
                                                 <div class="col-sm-6 col-md-9">
-                                                    <input type="number" id="nomor_karpeg" name="nomor_karpeg"  class="form-control @error('nomor_karpeg') is-invalid @enderror" placeholder="Masukan Nomor kartu Pegawai" value="{{ $pegawai->nomor_karpeg}}" >
+                                                    <input type="text" id="nomor_karpeg" name="nomor_karpeg"  class="form-control @error('nomor_karpeg') is-invalid @enderror" placeholder="Masukan Nomor kartu Pegawai" value="{{ $pegawai->nomor_karpeg}}" >
                                                     @error('nomor_karpeg')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -649,8 +649,8 @@
                                                                     <td>{{ date('d/m/Y', strtotime($item->tgl_sttb)) }}</td>
                                                                     <td>{{ $item->tempat }}</td>
                                                                     <td>{{ $item->nama_kepsek }}</td>
-                                                                    <td>{{ date('d/m/Y', strtotime($item->mulai)) }}</td>
-                                                                    <td>{{ date('d/m/Y', strtotime($item->sampai)) }}</td>
+                                                                    <td> {{ $item->mulai == null ? '-' : date('d/m/Y', strtotime($item->mulai)) }}</td>
+                                                                    <td> {{ $item->sampai == null ? '-' : date('d/m/Y', strtotime($item->sampai)) }}</td>
                                                                     <td>{{ $item->tanda_lulus }}</td>
                                                                     <td>
                                                                         <a href="{{ route('riwayat-pendidikan.edit',$item->id_riwayatpendidikan) }}" class="btn btn-warning text-white btn-sm" title="Edit">
@@ -1561,24 +1561,28 @@
                                             <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                                                 <thead>
                                                         <tr class="text-center">
+                                                            <th scope="col">Gol</th>
                                                             <th scope="col">Gaji</th>
                                                             <th scope="col">Dari-Sampai</th>
                                                             <th scope="col">Penjabat</th>
                                                             <th scope="col">Nomor</th>
                                                             <th scope="col">Tanggal</th>
-                                                            <th scope="col">Peraturan yang dijadikan dasar</th>
+                                                            <th scope="col">Peraturan</th>
+                                                            <th scope="col">Status</th>
                                                             <th scope="col">Aksi</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($kgb as $item)
                                                         <tr class="text-center">
-                                                            <td>{{ $item->gaji->jumlah_gaji }}</td>
+                                                            <td>{{ $item->golongan->nama_golongan }}</td>
+                                                            <td>{{ $item->jumlah_gaji }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($item->mulai_berlaku)) }} - {{ date('d/m/Y', strtotime($item->batas_berlaku)) }}</td>
                                                             <td>{{ $item->penjabat }}</td>
                                                             <td>{{ $item->nomor }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
                                                             <td>{{ $item->peraturan }}</td>
+                                                            <td> {{ $item->status == '0' ? 'Aktif' : 'Nonaktif' }}</td>
                                                             <td>
                                                                 <a href="{{ route('pegawai-riwayat-kgb.edit',$item->id_riwayat_kgb) }}" class="btn btn-warning text-white btn-sm" title="Edit">
                                                                     <i class="fas fa-pencil-alt"></i>

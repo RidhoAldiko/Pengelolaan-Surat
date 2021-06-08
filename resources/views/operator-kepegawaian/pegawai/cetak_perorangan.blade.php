@@ -294,17 +294,9 @@
                     @foreach ($riwayat_kenaikan_gaji as $item)
                     <tr>
                         <td>{{ $no_pangkat++ }}</td>
-                        <td>
-                            @if ($item->gaji->id_golongan == $pangkatgolongan->golongan->id_golongan)
-                                {{ $pangkatgolongan->golongan->pangkat }}
-                            @endif
-                        </td>
-                        <td>
-                            @if ($item->gaji->id_golongan == $pangkatgolongan->golongan->id_golongan)
-                                {{ $pangkatgolongan->golongan->nama_golongan }}
-                            @endif
-                        </td>
-                        <td>{{ $item->gaji->jumlah_gaji }}</td>
+                        <td>{{ $item->golongan->pangkat }}</td>
+                        <td>{{ $item->golongan->nama_golongan }}</td>
+                        <td>{{ $item->jumlah_gaji }}</td>
                         <td>{{ $item->penjabat }}</td>
                         <td>{{ $item->nomor }}</td>
                         <td>{{ date('d m Y', strtotime($item->tanggal)) }}</td>

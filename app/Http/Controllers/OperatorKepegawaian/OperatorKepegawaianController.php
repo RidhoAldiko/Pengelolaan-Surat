@@ -45,7 +45,7 @@ class OperatorKepegawaianController extends Controller
     public function index()
     {   
 
-        $dataKGB             = RiwayatKGB::with(['pegawai','gaji'])->where('status',0)->orderBy('id_riwayat_kgb','desc')->get();
+        $dataKGB             = RiwayatKGB::with(['pegawai','golongan'])->where('status',0)->orderBy('id_riwayat_kgb','desc')->get();
         $datakenaikanpangkat = RiwayatPangkat::with(['pegawai'])->where('status',0)->orderBy('id_riwayat_pangkat','desc')->get();
         
         return view('operator-kepegawaian.dashboard',[
@@ -151,7 +151,7 @@ class OperatorKepegawaianController extends Controller
         $organisasi2        = Organisasi::where('waktu','Semasa Perguruan Tinggi')->where('nip_pegawai',$id)->get();
         //untuk mengambil data organisasi pada waktu Selesai Pendidikan atau Selama Menjadi PNS                      
         $organisasi3        = Organisasi::where('waktu','Selesai Pendidikan atau Selama Menjadi PNS')->where('nip_pegawai',$id)->get();
-        $kgb                = RiwayatKGB::with(['gaji'])->where('nip_pegawai',$id)->orderBy('id_riwayat_kgb','desc')->get();
+        $kgb                = RiwayatKGB::with(['golongan'])->where('nip_pegawai',$id)->orderBy('id_riwayat_kgb','desc')->get();
         $pangkatcpns        = PangkatCPNS::with(['golongan'])->where('nip_pegawai',$id)->first();
         $pangkatpns         = PangkatPNS::with(['golongan'])->where('nip_pegawai',$id)->first();
 
@@ -191,7 +191,7 @@ class OperatorKepegawaianController extends Controller
         $organisasi2        = Organisasi::where('waktu','Semasa Perguruan Tinggi')->where('nip_pegawai',$id)->get();
         //untuk mengambil data organisasi pada waktu Selesai Pendidikan atau Selama Menjadi PNS                      
         $organisasi3        = Organisasi::where('waktu','Selesai Pendidikan atau Selama Menjadi PNS')->where('nip_pegawai',$id)->get();
-        $kgb                = RiwayatKGB::with(['gaji'])->where('nip_pegawai',$id)->orderBy('id_riwayat_kgb','desc')->get();
+        $kgb                = RiwayatKGB::with(['golongan'])->where('nip_pegawai',$id)->orderBy('id_riwayat_kgb','desc')->get();
         $pangkat_cpns        = PangkatCPNS::with(['golongan'])->where('nip_pegawai',$id)->first();
         $pangkat_pns         = PangkatPNS::with(['golongan'])->where('nip_pegawai',$id)->first();
         

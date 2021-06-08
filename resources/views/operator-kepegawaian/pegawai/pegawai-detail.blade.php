@@ -39,7 +39,7 @@
                         <a class="nav-link" id="mutasi-tab" data-toggle="tab" href="#mutasi" role="tab" aria-controls="mutasi" aria-selected="false">Mutasi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="dokumen-tab" data-toggle="tab" href="#dokumen" role="tab" aria-controls="dokumen" aria-selected="false">Dokumen Pegawi</a>
+                        <a class="nav-link" id="dokumen-tab" data-toggle="tab" href="#dokumen" role="tab" aria-controls="dokumen" aria-selected="false">Dokumen Pegawai</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="pangkat_cpns-tab" data-toggle="tab" href="#pangkat_cpns" role="tab" aria-controls="pangkat_cpns" aria-selected="false">Pangkat CPNS</a>
@@ -266,8 +266,8 @@
                                                             <td>{{ date('d/m/Y', strtotime($item->tgl_sttb)) }}</td>
                                                             <td>{{ $item->tempat }}</td>
                                                             <td>{{ $item->nama_kepsek }}</td>
-                                                            <td>{{ date('d/m/Y', strtotime($item->mulai)) }}</td>
-                                                            <td>{{ date('d/m/Y', strtotime($item->sampai)) }}</td>
+                                                            <td> {{ $item->mulai == null ? '-' : date('d/m/Y', strtotime($item->mulai)) }}</td>
+                                                            <td> {{ $item->sampai == null ? '-' : date('d/m/Y', strtotime($item->sampai)) }}</td>
                                                             <td>{{ $item->tanda_lulus }}</td>
                                                         </tr>
                                                     @endforeach
@@ -991,23 +991,27 @@
                                             <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                                                 <thead>
                                                         <tr class="text-center">
+                                                            <th scope="col">Gol</th>
                                                             <th scope="col">Gaji</th>
                                                             <th scope="col">Dari-Sampai</th>
                                                             <th scope="col">Penjabat</th>
                                                             <th scope="col">Nomor</th>
                                                             <th scope="col">Tanggal</th>
-                                                            <th scope="col">Peraturan yang dijadikan dasar</th>
+                                                            <th scope="col">Peraturan</th>
+                                                            <th scope="col">Status</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($kgb as $item)
                                                         <tr class="text-center">
-                                                            <td>{{ $item->gaji->jumlah_gaji }}</td>
+                                                            <td>{{ $item->golongan->nama_golongan }}</td>
+                                                            <td>{{ $item->jumlah_gaji }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($item->mulai_berlaku)) }} - {{ date('d/m/Y', strtotime($item->batas_berlaku)) }}</td>
                                                             <td>{{ $item->penjabat }}</td>
                                                             <td>{{ $item->nomor }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
                                                             <td>{{ $item->peraturan }}</td>
+                                                            <td> {{ $item->status == '0' ? 'Aktif' : 'Nonaktif' }}</td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

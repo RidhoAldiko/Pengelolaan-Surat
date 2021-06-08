@@ -102,8 +102,6 @@ Route::prefix('admin')
             Route::resource('data-golongan', GolonganController::class);
             //JABATAN
             Route::resource('data-jabatan', JabatanController::class);
-            //GAJI
-            Route::resource('data-gaji', GajiController::class);
         
     });
 

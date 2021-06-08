@@ -25,8 +25,11 @@ class RiwayatKGBRequest extends FormRequest
     {
         return [
             'nip_pegawai'   => 'required',
+            'id_golongan'  => 'required',
             'mulai_berlaku' => 'required',
             'batas_berlaku' => 'required',
+            'mkg'          => 'required',
+            'jumlah_gaji'  => 'required|integer',
             'penjabat'    => 'required|max:60|string',
             'nomor'       => 'required|max:60',
             'tanggal'     => 'required',
@@ -42,7 +45,8 @@ class RiwayatKGBRequest extends FormRequest
     {
         return [
             'nip.required'              => 'NIP tidak boleh kosong',
-            'mulai_berlaku.required'      => 'Mulai berlaku tidak boleh kosong',
+            'mulai_berlaku.required'      => 'Dari tidak boleh kosong',
+            'batas_berlaku.required'      => 'Sampai tidak boleh kosong',
             'penjabat.required'         => 'Penjabat tidak boleh kosong',
             'penjabat.max'              => 'Maksimal Penjabat 60 karakter',
             'penjabat.string'            => 'Inputan berupa huruf',
@@ -51,7 +55,11 @@ class RiwayatKGBRequest extends FormRequest
             'tanggal.required'              => 'Tanggal tidak boleh kosong',
             'peraturan.required'         => 'Peraturan tidak boleh kosong',
             'peraturan.max'              => 'Maksimal peraturan 60 karakter',
-            'peraturan.string'            => 'Inputan berupa huruf'
+            'peraturan.string'            => 'Inputan berupa huruf',
+            'id_golongan.required'      => 'Golongan tidak boleh kosong',
+            'mkg.required'               => 'MKG tidak boleh kosong',
+            'jumlah_gaji.required'         => 'Jumlah gaji tidak boleh kosong',
+            'jumlah_gaji.integer'            => 'Inputan berupa angka',
         ];
     }
 }

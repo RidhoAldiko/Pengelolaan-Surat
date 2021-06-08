@@ -13,12 +13,14 @@ class RiwayatKGB extends Model
     protected $primaryKey   = 'id_riwayat_kgb';
     protected $fillable     = [
         'nip_pegawai',
-        'mulai_berlaku',
-        'batas_berlaku',
+        'id_golongan',
         'penjabat',
         'nomor',
         'tanggal',
-        'id_gaji',
+        'jumlah_gaji',
+        'mkg',
+        'mulai_berlaku',
+        'batas_berlaku',
         'peraturan',
         'status'
     ];
@@ -28,9 +30,9 @@ class RiwayatKGB extends Model
         return $this->belongsTo(Pegawai::class, 'nip_pegawai','nip_pegawai');
     }
 
-    //tabel Jabatan terhubung dengan tabel gaji dengan relasi one to one
-    public function gaji()
+    //table pangkat memiliki 1 relasi yang dikirim ke tabel golongan dengan relasi one to one
+    public function golongan()
     {
-        return $this->hasOne(Gaji::class,'id_gaji','id_gaji');
+        return $this->belongsTo(Golongan::class,'id_golongan','id_golongan');
     }
 }

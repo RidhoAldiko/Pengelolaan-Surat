@@ -35,9 +35,87 @@
 
                           <input type="hidden" name="nip_pegawai" value="{{ $pegawai->nip_pegawai }}">
                           <div class="form-group row align-items-center">
-                            <label for="nomor" class="form-control-label col-sm-3 text-md-right">KGB YAD Dari- Sampai</label>
+                            <label for="id_golongan" class="form-control-label col-sm-3 text-md-right">Golongan</label>
+                            <div class="col-sm-6 col-md-9">
+                              <select class="form-control @error('id_golongan') is-invalid @enderror" id="id_golongan" name="id_golongan">
+                                  <option value="{{ $pegawai->golongan->id_golongan }}"> {{ $pegawai->golongan->nama_golongan }} </option>
+                                  @foreach ($golongan as $gl)
+                                  <option value="{{$gl->id_golongan}}">{{$gl->nama_golongan}}</option>
+                                  @endforeach
+                              </select>
+                                @error('id_golongan')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                          </div>
+    
+                          <div class="form-group row align-items-center">
+                            <label for="penjabat" class="form-control-label col-sm-3 text-md-right">Penjabat</label>
+                            <div class="col-sm-6 col-md-9">
+                              <input type="text" id="penjabat" name="penjabat"  class="form-control @error('penjabat') is-invalid @enderror" value="{{ $pegawai->penjabat }}" >
+                                @error('penjabat')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                          </div>
+    
+                           <div class="form-group row align-items-center">
+                            <label for="nomor" class="form-control-label col-sm-3 text-md-right">Nomor dan Tanggal</label>
+                            <div class="col-sm-3 col-md-5">
+                              <input type="text" id="nomor" name="nomor"  class="form-control @error('nomor') is-invalid @enderror" value="{{ $pegawai->nomor}}" >
+                                  @error('nomor')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                                  @enderror
+                            </div>
                             <div class="col-sm-3 col-md-4">
-                              <input type="date" id="mulai_berlaku" name="mulai_berlaku" class="form-control @error('mulai_berlaku') is-invalid @enderror" value="{{$pegawai->mulai_berlaku}}" >
+                              <input type="date" id="tanggal" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror" value="{{ $pegawai->tanggal }}" >
+                                  @error('tanggal')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                                  @enderror
+                              </div>
+                          </div>
+    
+                          <div class="form-group row align-items-center">
+                            <label for="jumlah_gaji" class="form-control-label col-sm-3 text-md-right">Jumlah Gaji</label>
+                            <div class="col-sm-6 col-md-9">
+                              <input type="text" id="jumlah_gaji" name="jumlah_gaji"  class="form-control @error('jumlah_gaji') is-invalid @enderror" value="{{ $pegawai->jumlah_gaji }}" >
+                                @error('jumlah_gaji')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                          </div>
+    
+                          <div class="form-group row align-items-center">
+                            <label for="mkg" class="form-control-label col-sm-3 text-md-right">Masa Kerja Golongan</label>
+                            <div class="col-sm-6 col-md-9">
+                                <select class="form-control @error('mkg') is-invalid @enderror" id="mkg" name="mkg">
+                                    <option value="{{ $pegawai->mkg }}"> {{ $pegawai->mkg }} </option>
+                                    @for ($i = 0; $i <= 33; $i++)
+                                    <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
+                                </select>
+                                @error('mkg')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                          </div>
+    
+                          <div class="form-group row align-items-center">
+                            <label for="nomor" class="form-control-label col-sm-3 text-md-right">KGB YAD</label>
+                            <div class="col-sm-3 col-md-4">
+                              <input type="date" id="mulai_berlaku" name="mulai_berlaku" class="form-control @error('mulai_berlaku') is-invalid @enderror" value="{{ $pegawai->mulai_berlaku }}" >
                                   @error('mulai_berlaku')
                                   <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>
@@ -45,7 +123,7 @@
                                   @enderror
                               </div>
                             <div class="col-sm-3 col-md-4">
-                              <input type="date" id="batas_berlaku" name="batas_berlaku" onfocus="(this.type='date')"  class="form-control @error('batas_berlaku') is-invalid @enderror" value="{{$pegawai->batas_berlaku}}" >
+                              <input type="date" id="batas_berlaku" name="batas_berlaku" class="form-control @error('batas_berlaku') is-invalid @enderror" value="{{ $pegawai->batas_berlaku }}" >
                                   @error('batas_berlaku')
                                   <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>
@@ -55,41 +133,9 @@
                           </div>
     
                           <div class="form-group row align-items-center">
-                            <label for="penjabat" class="form-control-label col-sm-3 text-md-right">Penjabat</label>
-                            <div class="col-sm-6 col-md-9">
-                              <input type="text" id="penjabat" name="penjabat"  class="form-control @error('penjabat') is-invalid @enderror" value="{{$pegawai->penjabat}}" >
-                                @error('penjabat')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                          </div>
-    
-                          <div class="form-group row align-items-center">
-                            <label for="nomor" class="form-control-label col-sm-3 text-md-right">Nomor dan Tanggal</label>
-                            <div class="col-sm-3 col-md-5">
-                              <input type="text" id="nomor" name="nomor"  class="form-control @error('nomor') is-invalid @enderror" placeholder="nomor" value="{{$pegawai->nomor}}" >
-                                  @error('nomor')
-                                  <span class="invalid-feedback" role="alert">
-                                      <strong>{{ $message }}</strong>
-                                  </span>
-                                  @enderror
-                            </div>
-                            <div class="col-sm-3 col-md-4">
-                              <input type="text" id="tanggal" name="tanggal" onfocus="(this.type='date')"  class="form-control @error('tanggal') is-invalid @enderror" placeholder="tanggal" value="{{$pegawai->tanggal}}" >
-                                  @error('tanggal')
-                                  <span class="invalid-feedback" role="alert">
-                                      <strong>{{ $message }}</strong>
-                                  </span>
-                                  @enderror
-                              </div>
-                          </div>
-
-                          <div class="form-group row align-items-center">
                             <label for="peraturan" class="form-control-label col-sm-3 text-md-right">Peraturan yang dijadikan dasar</label>
                             <div class="col-sm-6 col-md-9">
-                              <input type="text" id="peraturan" name="peraturan"  class="form-control @error('peraturan') is-invalid @enderror" value="{{$pegawai->peraturan}}" >
+                              <input type="text" id="peraturan" name="peraturan"  class="form-control @error('peraturan') is-invalid @enderror" value="{{ $pegawai->peraturan }}" >
                                 @error('peraturan')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
