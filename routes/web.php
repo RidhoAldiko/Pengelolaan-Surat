@@ -94,7 +94,10 @@ Route::prefix('admin')
             Route::get('get-level_surat', [LevelSuratController::class,'data_level_surat'])->name('data-level_surat.level');
             //UNIT KERJA
             Route::resource('data-unit_kerja', UnitKerjaController::class);
-            Route::get('get-unit', [UnitKerjaController::class,'get_unit'])->name('data-unit_kerja.get');
+            Route::get('get-staf', [UnitKerjaController::class,'get_staf'])->name('data-unit_kerja.staf-ahli');
+            Route::get('get-asisten', [UnitKerjaController::class,'get_asisten'])->name('data-unit_kerja.asisten');
+            Route::get('get-bagian', [UnitKerjaController::class,'get_bagian'])->name('data-unit_kerja.bagian');
+            Route::get('get-sub-bagian', [UnitKerjaController::class,'get_sub_bagian'])->name('data-unit_kerja.sub-bagian');
             //GOLONGAN
             Route::resource('data-golongan', GolonganController::class);
             //JABATAN

@@ -9,7 +9,10 @@ use Yajra\DataTables\DataTables;
 use App\Models\Pegawai;
 use App\Models\Unit_kerja as Unit;
 use App\Models\Jabatan;
-use App\Models\Golongan;
+use App\Models\Asisten;
+use App\Models\Bagian;
+use App\Models\SubBagian;
+use App\Models\Staf_ahli as Staf;
 
 class PegawaiController extends Controller
 {
@@ -20,18 +23,26 @@ class PegawaiController extends Controller
      */
     public function index()
     {   
-        // $data = Pegawai::select('pegawai.*','nama_jabatan','nama_unit')
-        // ->join('unit_kerja','unit_kerja.id_unit','=','pegawai.id_unit' )
+        // $data = Pegawai::select('pegawai.*','nama_jabatan','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian')
         // ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+        // ->join('unit_kerja', 'unit_kerja.nip_pegawai', '=', 'pegawai.nip_pegawai')
+        // ->join('staf_ahli', 'staf_ahli.id_staf_ahli', '=', 'unit_kerja.id_staf_ahli')
+        // ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
+        // ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
+        // ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
         // ->get();
-        // dd($data);
+        // return $data;
         return view('admin.pegawai.pegawai');
     }
     public function pegawai_serverSide(){
         //get data pegawai 
-        $data = Pegawai::select('pegawai.*','nama_jabatan','nama_unit')
-        ->join('unit_kerja','unit_kerja.id_unit','=','pegawai.id_unit' )
+        $data = Pegawai::select('pegawai.*','nama_jabatan','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian')
         ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+        ->join('unit_kerja', 'unit_kerja.nip_pegawai', '=', 'pegawai.nip_pegawai')
+        ->join('staf_ahli', 'staf_ahli.id_staf_ahli', '=', 'unit_kerja.id_staf_ahli')
+        ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
+        ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
+        ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
         ->get();
         return DataTables::of($data)
                 ->addIndexColumn()
@@ -46,7 +57,22 @@ class PegawaiController extends Controller
                 })
 
                 ->editColumn('unit', function($data){ 
-                    return $data->nama_unit; 
+                    
+                    if($data->id_jabatan < 3) {
+                        return '-';
+                    } else 
+                    if($data->id_jabatan == 3) {
+                        return $data->nama_staf_ahli;
+                    } else 
+                    if($data->id_jabatan == 4) {
+                        return $data->nama_asisten;
+                    } else 
+                    if($data->id_jabatan == 5) {
+                        return $data->nama_bagian;
+                    } else 
+                    if($data->id_jabatan >= 6) {
+                        return $data->nama_sub_bagian;
+                    }
                 })
                 ->editColumn('status', function($data){ 
                     return ($data->status == 0) ? 'Aktif' : 'Nonaktif';
@@ -70,25 +96,81 @@ class PegawaiController extends Controller
     }
     
     public function create(){
-        //get data unit kerja
-        $unit = Unit::where('status','=',0)->get();
-        //get data golongan
-        $golongan = Golongan::where('status','=',0)->get();
-        //get data jabatan
         $jabatan = Jabatan::where('status','=',0)->get();
-        return view('admin.pegawai.pegawai-create',\compact('unit','jabatan','golongan'));
+        return view('admin.pegawai.pegawai-create',\compact('jabatan'));
     }
 
-    public function store(PegawaiRequest $request){
-        $this->validate($request,[
-            'nip_pegawai' => 'unique:pegawai'
-        ],[
-            'nip_pegawai.unique' => 'Nip pegawai tidak boleh sama',
-        ]);
+    public function store(Request $request){
+        // $this->validate($request,[
+        //     'nip_pegawai' => 'unique:pegawai'
+        // ],[
+        //     'nip_pegawai.unique' => 'Nip pegawai tidak boleh sama',
+        // ]);
         $data = $request->all();
         $data['status'] = 0;
-        // dd($data);
         $store = Pegawai::create($data);
+
+        if ($data['id_jabatan'] < 3) {
+            $staf_ahli = Staf::Where('nama_staf_ahli','-')->first('id_staf_ahli');
+            $asisten = Asisten::Where('nama_asisten','-')->first('id_asisten');
+            $bagian = Bagian::Where('nama_bagian','-')->first('id_bagian');
+            $sub_bagian = SubBagian::Where('nama_sub_bagian','-')->first('id_sub_bagian');
+            $unit_kerja = Unit::create([
+                'nip_pegawai' => $data['nip_pegawai'],
+                'id_staf_ahli' => $staf_ahli['id_staf_ahli'],
+                'id_asisten' => $asisten['id_asisten'],
+                'id_bagian' => $bagian['id_bagian'],
+                'id_sub_bagian' => $sub_bagian['id_sub_bagian'],
+            ]);
+        } else 
+        if ($data['id_jabatan'] == 3){
+            $asisten = Asisten::Where('nama_asisten','-')->first('id_asisten');
+            $bagian = Bagian::Where('nama_bagian','-')->first('id_bagian');
+            $sub_bagian = SubBagian::Where('nama_sub_bagian','-')->first('id_sub_bagian');
+            $unit_kerja = Unit::create([
+                'nip_pegawai' => $data['nip_pegawai'],
+                'id_staf_ahli' => $data['id_staf_ahli'],
+                'id_asisten' => $asisten['id_asisten'],
+                'id_bagian' => $bagian['id_bagian'],
+                'id_sub_bagian' => $sub_bagian['id_sub_bagian'],
+            ]);
+        } else 
+        if ($data['id_jabatan'] == 4) {
+            $staf_ahli = Staf::Where('nama_staf_ahli','-')->first('id_staf_ahli');
+            $bagian = Bagian::Where('nama_bagian','-')->first('id_bagian');
+            $sub_bagian = SubBagian::Where('nama_sub_bagian','-')->first('id_sub_bagian');
+            $unit_kerja = Unit::create([
+                'nip_pegawai' => $data['nip_pegawai'],
+                'id_staf_ahli' => $staf_ahli['id_staf_ahli'],
+                'id_asisten' => $data['id_asisten'],
+                'id_bagian' => $bagian['id_bagian'],
+                'id_sub_bagian' => $sub_bagian['id_sub_bagian'],
+            ]);
+        } else 
+        if ($data['id_jabatan'] == 5) {
+            $staf_ahli = Staf::Where('nama_staf_ahli','-')->first('id_staf_ahli');
+            $sub_bagian = SubBagian::Where('nama_sub_bagian','-')->first('id_sub_bagian');
+            $unit_kerja = Unit::create([
+                'nip_pegawai' => $data['nip_pegawai'],
+                'id_staf_ahli' => $staf_ahli['id_staf_ahli'],
+                'id_asisten' => $data['id_asisten'],
+                'id_bagian' => $data['id_bagian'],
+                'id_sub_bagian' => $sub_bagian['id_sub_bagian'],
+            ]);
+        }else 
+        if ($data['id_jabatan'] > 5) {
+            $staf_ahli = Staf::Where('nama_staf_ahli','-')->first('id_staf_ahli');
+            $unit_kerja = Unit::create([
+                'nip_pegawai' => $data['nip_pegawai'],
+                'id_staf_ahli' => $staf_ahli['id_staf_ahli'],
+                'id_asisten' => $data['id_asisten'],
+                'id_bagian' => $data['id_bagian'],
+                'id_sub_bagian' => $data['id_sub_bagian'],
+            ]);
+        }
+        
+        
+        
         return redirect()->route('admin-pegawai.index')->with('status',"Data Berhasil Ditambah");
     }
 }

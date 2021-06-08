@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests\OperatorKepegawaian\UnitKerjaRequest;
 use App\Models\Unit_kerja;
 use App\Models\Jabatan;
+use App\Models\Asisten;
+use App\Models\Bagian;
+use App\Models\SubBagian;
+use App\Models\Staf_ahli as Staf;
 
 class UnitKerjaController extends Controller
 {
@@ -41,18 +45,59 @@ class UnitKerjaController extends Controller
         return redirect()->route('data-unit_kerja.index')->with('status','Data Berhasil Ditambah');
     }
 
-    public function get_unit(Request $request){
+    public function get_staf(Request $request){
         $data = $request->data;
-        $results = Unit_kerja::where('id_jabatan',$data)->get();
-        $output = '<label for="id_unit">Pilih Unit Kerja</label>';
-        $output .= '<select class="form-control" id="id_unit" name="id_unit">">';
-        foreach ($results as $result) {
-            $output .= ' <option value="'.$result->id_unit.'">'.$result->nama_unit.'</option>';
-        }
-        $output .= '</select>';
+        if ($data == 3) {
+            $results = Staf::all();
+            $output = '<option selected disabled> --Pilih Staf Ahli-- </option>';
+            foreach ($results as $result) {
+                if ($result->nama_staf_ahli != '-' ) {
+                    $output .= ' <option value="'.$result->id_staf_ahli.'">'.$result->nama_staf_ahli.'</option>';
+                }
+            }
+        } 
         echo $output;
     }
 
+    public function get_asisten(Request $request){
+        $data = $request->data;
+        if ($data == 4) {
+            $results = asisten::all();
+            $output = '<option selected disabled> --Pilih Asisten-- </option>';
+            foreach ($results as $result) {
+                if ($result->nama_asisten != '-' ) {
+                    $output .= ' <option value="'.$result->id_asisten.'">'.$result->nama_asisten.'</option>';
+                }
+            }
+        } 
+        echo $output;
+    }
+
+    public function get_bagian(Request $request){
+        $data = $request->data;
+        
+            $results = Bagian::Where('id_asisten',$data)->get();
+            $output = '<option selected disabled> --Pilih Bagian-- </option>';
+            foreach ($results as $result) {
+                if ($result->nama_bagian != '-' ) {
+                    $output .= ' <option value="'.$result->id_bagian.'">'.$result->nama_bagian.'</option>';
+                }
+            }
+        echo $output;
+    }
+
+    public function get_sub_bagian(Request $request){
+        $data = $request->data;
+        
+            $results = SubBagian::Where('id_bagian',$data)->get();
+            $output = '<option selected disabled> --Pilih Sub bagian-- </option>';
+            foreach ($results as $result) {
+                if ($result->nama_sub_bagian != '-' ) {
+                    $output .= ' <option value="'.$result->id_sub_bagian.'">'.$result->nama_sub_bagian.'</option>';
+                }
+            }
+        echo $output;
+    }
     //method untuk menampikan form edit data
     public function edit($id)
     {
