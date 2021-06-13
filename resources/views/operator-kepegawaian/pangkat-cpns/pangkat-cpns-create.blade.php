@@ -92,7 +92,7 @@
                       <div class="form-group row align-items-center">
                         <label for="gaji_pokok" class="form-control-label col-sm-3 text-md-right">Gaji Pokok</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" id="gaji_pokok" name="gaji_pokok"  class="form-control @error('gaji_pokok') is-invalid @enderror" value="{{old('gaji_pokok')}}" >
+                          <input type="text" id="gaji_pokok" name="gaji_pokok"  class="form-control @error('gaji_pokok') is-invalid @enderror" placeholder="Rp." value="{{old('gaji_pokok')}}" >
                             @error('gaji_pokok')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -102,9 +102,9 @@
                       </div>
 
                       <div class="form-group row align-items-center">
-                        <label for="penjabat" class="form-control-label col-sm-3 text-md-right">Penjabat</label>
+                        <label for="penjabat" class="form-control-label col-sm-3 text-md-right">Pejabat yang Mengesahkan</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" id="penjabat" name="penjabat"  class="form-control @error('penjabat') is-invalid @enderror" value="{{old('penjabat')}}" >
+                          <input type="text" id="penjabat" name="penjabat" class="form-control @error('penjabat') is-invalid @enderror" value="{{old('penjabat')}}" >
                             @error('penjabat')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -139,7 +139,7 @@
 
                     </div>
                     <div class="card-footer bg-whitesmoke">
-                      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                      <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah data ini ingin disimpan?')"><i class="fas fa-save"></i> Simpan</button>
                     </div>
                   </div>
                 </form>

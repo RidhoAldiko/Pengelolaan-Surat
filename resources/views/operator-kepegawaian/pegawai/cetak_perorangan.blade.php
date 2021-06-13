@@ -412,6 +412,16 @@
                             <td>{{ $item->pekerjaan }}</td>
                             <td>{{ $item->keterangan }}</td>
                          </tr>
+                         @else
+                         <tr>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
                         @endif
                     @endforeach
                 @else
@@ -454,6 +464,16 @@
                             <td>{{ $item->pekerjaan }}</td>
                             <td>{{ $item->keterangan }}</td>
                          </tr>
+                         @else
+                         <tr>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr> 
                         @endif
                     @endforeach
                 @else
@@ -690,6 +710,7 @@
             </table>
         </div>
     </div>
+    
     <div class="jarak">
         <div class="form-group">
             <p style="margin-left:10%;margin-top:20px">3. Sesudah selesai pendidikan atau selama menjadi pegawai</p>

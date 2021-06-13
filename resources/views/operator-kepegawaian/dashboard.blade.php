@@ -58,7 +58,7 @@
                       <h4>Pemberitahuan KGB 2 Bulan Kedepan</h4>
                   </div>
                   <div class="card-body">
-                    <p>Berikut daftar pegawai yang harus mengurus KGB pada 2 bulan ini </p>
+                    <p style="font-size: 11px">Berikut daftar pegawai yang harus mengurus KGB pada 2 bulan ini.</p>
                       <div class="table-responsive">
                           <table  class="table table-bordered table-hover table-striped" id="dataPegawai" width="100%" cellspacing="0">
                               <thead>
@@ -96,12 +96,12 @@
 
                                       @if (count($datakgb) < 1)
                                       <tr>
-                                        <td colspan="4" class="text-center">-Tidak Ada-</td>
+                                        <td colspan="4" class="text-center" style="font-size: 11px">-Tidak Ada-</td>
                                       </tr> 
                                       @endif
                               @else
                               <tr>
-                                <td colspan="4" class="text-center">--Data KGB Pegawai Belum Ada Dinputkan--</td>
+                                <td colspan="4" class="text-center" style="font-size: 11px">--Data KGB Pegawai Belum Ada Dinputkan--</td>
                               </tr>
                               @endif
                               </tbody>
@@ -117,7 +117,7 @@
                       <h4>Pemberitahuan Kenaikan Pangkat 4 Bulan Kedepan</h4>
                   </div>
                   <div class="card-body">
-                    <p>Berikut daftar pegawai yang harus mengurus kenaikan pangkat pada 4 bulan ini </p>
+                    <p style="font-size: 11px">Berikut daftar pegawai yang harus mengurus kenaikan pangkat pada 4 bulan ini.</p>
                       <div class="table-responsive">
                           <table  class="table table-bordered table-hover table-striped" id="dataPegawai" width="100%" cellspacing="0">
                               <thead>
@@ -156,12 +156,12 @@
                                 @endforeach
                                     @if (count($datapangkat) < 1)
                                     <tr>
-                                      <td colspan="4" class="text-center">--Tidak Ada--</td>
+                                      <td colspan="5" class="text-center" style="font-size: 11px">--Tidak Ada--</td>
                                     </tr>
                                     @endif
                               @else
                               <tr>
-                                <td colspan="4" class="text-center">--Data Pangkat Pegawai Belum Ada Dinputkan--</td>
+                                <td colspan="5" class="text-center" style="font-size: 11px">--Data Pangkat Pegawai Belum Ada Dinputkan--</td>
                               </tr>
                               @endif
                               </tbody>

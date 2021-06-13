@@ -74,7 +74,7 @@
                       </div>
 
                       <div class="form-group row align-items-center">
-                        <label for="nama_pendidikan" class="form-control-label col-sm-3 text-md-right">Nama Sekolah/Universitas</label>
+                        <label for="nama_pendidikan" class="form-control-label col-sm-3 text-md-right">Nama Sekolah/ Universitas</label>
                         <div class="col-sm-6 col-md-9">
                           <input type="text" id="nama_pendidikan" name="nama_pendidikan"  class="form-control @error('nama_pendidikan') is-invalid @enderror" value="{{old('nama_pendidikan')}}" >
                             @error('nama_pendidikan')
@@ -136,7 +136,7 @@
                       </div>
 
                       <div class="form-group row align-items-center">
-                        <label for="nama_kepsek" class="form-control-label col-sm-3 text-md-right">Nama Kepsek / Rektor</label>
+                        <label for="nama_kepsek" class="form-control-label col-sm-3 text-md-right">Nama Kepsek/ Rektor</label>
                         <div class="col-sm-6 col-md-9">
                           <input type="text" id="nama_kepsek" name="nama_kepsek"  class="form-control @error('nama_kepsek') is-invalid @enderror" value="{{old('nama_kepsek')}}" >
                             @error('nama_kepsek')
@@ -180,7 +180,7 @@
                       </div>                        
                     </div>
                     <div class="card-footer bg-whitesmoke">
-                      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                      <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah data ini ingin disimpan?')"><i class="fas fa-save"></i> Simpan</button>
                     </div>
                   </div>
                 </form>

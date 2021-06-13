@@ -20,7 +20,7 @@ class CreateSaudaraKandungTable extends Migration
             $table->string('jenis_kelamin',10);
             $table->date('tgl_lahir');
             $table->string('pekerjaan',50);
-            $table->text('keterangan')->default('-');
+            $table->text('keterangan')->nullable();
 
 
             // foreign key dari tabel pegawai

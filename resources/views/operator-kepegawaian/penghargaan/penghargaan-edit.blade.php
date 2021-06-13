@@ -61,7 +61,7 @@
 
                     </div>
                     <div class="card-footer bg-whitesmoke">
-                      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                      <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah data ini ingin diubah?')"><i class="fas fa-save"></i> Simpan</button>
                     </div>
                   </div>
                 </form>

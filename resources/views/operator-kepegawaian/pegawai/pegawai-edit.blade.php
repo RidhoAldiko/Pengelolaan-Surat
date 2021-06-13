@@ -47,7 +47,7 @@
                         <a class="nav-link" id="mutasi-tab" data-toggle="tab" href="#mutasi" role="tab" aria-controls="mutasi" aria-selected="false">Mutasi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="dokumen-tab" data-toggle="tab" href="#dokumen" role="tab" aria-controls="dokumen" aria-selected="false">Dokumen Pegawai</a>
+                        <a class="nav-link" id="dokumen-tab" data-toggle="tab" href="#dokumen" role="tab" aria-controls="dokumen" aria-selected="false">Dokumen</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="pangkat_cpns-tab" data-toggle="tab" href="#pangkat_cpns" role="tab" aria-controls="pangkat_cpns" aria-selected="false">Pangkat CPNS</a>
@@ -695,7 +695,7 @@
                                                                 <th scope="col">Tahun Mulai</th>
                                                                 <th scope="col">Tahun Selesai</th>
                                                                 <th scope="col">Tempat</th>
-                                                                <th scope="col">Peimpinan Organisasi</th>
+                                                                <th scope="col">Pimpinan Organisasi</th>
                                                                 <th scope="col">Aksi</th>
                                                             </tr>
                                                     </thead>
@@ -749,7 +749,7 @@
                                                                 <th scope="col">Tahun Mulai</th>
                                                                 <th scope="col">Tahun Selesai</th>
                                                                 <th scope="col">Tempat</th>
-                                                                <th scope="col">Peimpinan Organisasi</th>
+                                                                <th scope="col">Pimpinan Organisasi</th>
                                                                 <th scope="col">Aksi</th>
                                                             </tr>
                                                     </thead>
@@ -803,7 +803,7 @@
                                                                 <th scope="col">Tahun Mulai</th>
                                                                 <th scope="col">Tahun Selesai</th>
                                                                 <th scope="col">Tempat</th>
-                                                                <th scope="col">Peimpinan Organisasi</th>
+                                                                <th scope="col">Pimpinan Organisasi</th>
                                                                 <th scope="col">Aksi</th>
                                                             </tr>
                                                     </thead>
@@ -884,14 +884,13 @@
                                                             <td>{{ $item->jenis_kelamin }}</td>
                                                             <td>{{ $item->tempat_lahir }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($item->tgl_lahir)) }}</td>
-                                                            <td>{{ $item->keterangan }}</td>
-                                                            <td>@if ($item->tgl_nikah == null)
-                                                                -
-                                                                @else
-                                                                   {{ date('d/m/Y', strtotime($item->tgl_nikah)) }} 
-                                                                @endif
-                                                            </td>
+                                                            @if ($item->tgl_nikah == null)
+                                                                <td>-</td>
+                                                            @else
+                                                                <td>{{ date('d/m/Y', strtotime($item->tgl_nikah)) }}</td> 
+                                                            @endif
                                                             <td>{{ $item->pekerjaan }}</td>
+                                                            <td>{{ $item->keterangan }}</td>
                                                             <td>
                                                                 <a href="{{ route('pegawai-keterangan-keluarga.edit',$item->id_ketKeluarga) }}" class="btn btn-warning text-white btn-sm" title="Edit">
                                                                     <i class="fas fa-pencil-alt"></i>
@@ -1242,7 +1241,7 @@
                                                 <thead>
                                                         <tr class="text-center">
                                                             <th scope="col">Jenis</th>
-                                                            <th scope="col">Penjabat</th>
+                                                            <th scope="col">Pejabat</th>
                                                             <th scope="col">Nomor</th>
                                                             <th scope="col">Tanggal</th>
                                                             <th scope="col">Aksi</th>
@@ -1347,7 +1346,7 @@
                                             <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                                                 <thead>
                                                         <tr class="text-center">
-                                                            <th scope="col">Nama Pegawai</th>
+                                                            <th scope="col">Nama File</th>
                                                             <th scope="col">Keterangan</th>
                                                             <th scope="col">File Dokumen</th>
                                                             <th scope="col">Aksi</th>
@@ -1358,7 +1357,7 @@
                                                         <tr class="text-center">
                                                             <td>{{ $item->nama_dokumen }}</td>
                                                             <td>{{ $item->keterangan }}</td>
-                                                            <td><a href='{{ asset('/storage/file_dokumen/'.$item->file_dokumen)}}' target='_blank' title='download'><i class='fa fa-file'></i></a></td>
+                                                            <td><a href='{{ asset('/storage/file_dokumen/'.$item->file_dokumen)}}' target='_blank' title='download'><h4><i class='fa fa-file'></i></h4></a></td>
                                                             <td>
                                                                 <a href="{{ route('dokumen-pegawai.edit',$item->id_dokpegawai) }}" class="btn btn-warning text-white btn-sm" title="Edit">
                                                                     <i class="fas fa-pencil-alt"></i>
@@ -1393,7 +1392,7 @@
                             @if ($pegawai->pangkat_cpns !=null)
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Riwayat Pangkat Pegawai CPNS - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <label>Riwayat Pangkat CPNS Pegawai - <code>{{ $pegawai->nama_pegawai }}</code></label>
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                                                 <thead>
@@ -1401,7 +1400,7 @@
                                                             <th scope="col">Pangkat Golongan</th>
                                                             <th scope="col">TMT</th>
                                                             <th scope="col">Gaji Pokok</th>
-                                                            <th scope="col">Penjabat</th>
+                                                            <th scope="col">Pejabat</th>
                                                             <th scope="col">Nomor</th>
                                                             <th scope="col">Tanggal</th>
                                                             <th scope="col">Aksi</th>
@@ -1448,14 +1447,14 @@
                             @if ($pegawai->pangkat_pns !=null)
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Riwayat Pangkat Pegawai PNS - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <label>Riwayat Pangkat PNS Pegawai - <code>{{ $pegawai->nama_pegawai }}</code></label>
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                                                 <thead>
                                                         <tr class="text-center">
                                                             <th scope="col">Pangkat Golongan</th>
                                                             <th scope="col">TMT</th>
-                                                            <th scope="col">Penjabat</th>
+                                                            <th scope="col">Pejabat</th>
                                                             <th scope="col">Nomor</th>
                                                             <th scope="col">Tanggal</th>
                                                             <th scope="col">Aksi</th>
@@ -1508,7 +1507,7 @@
                                                         <tr class="text-center">
                                                             <th scope="col">Golongan</th>
                                                             <th scope="col">TMT</th>
-                                                            <th scope="col">Penjabat</th>
+                                                            <th scope="col">Pejabat</th>
                                                             <th scope="col">Nomor</th>
                                                             <th scope="col">Tanggal</th>
                                                             <th scope="col">Aksi</th>
@@ -1564,7 +1563,7 @@
                                                             <th scope="col">Gol</th>
                                                             <th scope="col">Gaji</th>
                                                             <th scope="col">Dari-Sampai</th>
-                                                            <th scope="col">Penjabat</th>
+                                                            <th scope="col">Pejabat</th>
                                                             <th scope="col">Nomor</th>
                                                             <th scope="col">Tanggal</th>
                                                             <th scope="col">Peraturan</th>
@@ -1624,7 +1623,6 @@
     <script type="text/javascript">
     //javascript untuk tambah hobi
         $('.tambahhobi').on('click',function(e){
-            console.log('ok');
             tambahHobi();
             e.preventDefault();
         });
