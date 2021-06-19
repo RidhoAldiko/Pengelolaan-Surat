@@ -126,6 +126,8 @@ Route::prefix('operator-surat')
         Route::post('disposisi-surat-masuk',[DisposisiMasukController::class,'store'])->name('disposisi-surat-masuk.store');
         // operator-surat tabel disposisi surat masuk 
         Route::get('disposisi-surat-masuk', [DisposisiMasukController::class,'index'])->name('disposisi-surat-masuk.index');
+        // operator-surat tabel disposisi surat masuk 
+        Route::get('disposisi-surat-masuk/cetak_disposisi', [DisposisiMasukController::class,'cetak_disposisi'])->name('disposisi-surat-masuk.cetak');
         // operator-surat form disposisi surat masuk 
         Route::get('disposisi-surat-masuk/{id}/create',[DisposisiMasukController::class,'create'])->name('disposisi-surat-masuk.create');
         // operator-surat destroy disposisi surat masuk
