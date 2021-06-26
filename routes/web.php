@@ -107,6 +107,8 @@ Route::prefix('operator-surat')
     //----Surat masuk----
         // operator-surat store surat masuk 
         Route::post('surat-masuk', [SuratMasukController::class,'store'])->name('surat-masuk.store');
+        
+        Route::get('surat-masuk/cetak_surat_masuk', [SuratMasukController::class,'cetak_laporan_surat_masuk'])->name('surat-masuk.cetak_laporan_surat_masuk');
         // operator-surat data surat masuk 
         Route::get('surat-masuk', [SuratMasukController::class,'index'])->name('surat-masuk.index');
         // operator-surat form surat masuk 

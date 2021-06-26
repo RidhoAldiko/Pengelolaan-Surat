@@ -81,4 +81,9 @@ class SuratMasukController extends Controller
         Storage::delete('public/'.$data->file_surat);
         return redirect()->route('surat-masuk.index')->with('status','Data Surat Masuk Berhasil Dihapus');
     }
+    
+    public function cetak_laporan_surat_masuk()
+    {
+        return view('operator-surat.surat-masuk.cetak_surat_masuk');
+    }
 }

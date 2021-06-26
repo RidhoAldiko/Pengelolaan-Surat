@@ -12,7 +12,7 @@
     td {
         padding: 10px;
         text-align: left;
-        font-size: 10px;
+        font-size: 12px;
     }
     </style>
     <title>Cetak Disposisi</title>
@@ -20,6 +20,7 @@
 <body>
     <center>
         <p style="font-size: 14px"><strong><u>LEMBARAN DISPOSISI</u></strong></p>
+    </center>
         <table class="static" align="center" rules="all" style="width:98%;">
             <tr>
                 <td width="70%"><p>INDEKS:</p></td>
