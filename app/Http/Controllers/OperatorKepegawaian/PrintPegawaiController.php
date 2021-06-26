@@ -27,8 +27,8 @@ class PrintPegawaiController extends Controller
             'organisasi','keterangan_lain',
             'mutasi','diklat_penjenjangan',
             'dokumen_pegawai','riwayat_pangkat',
-            'riwayat_kgb'])->where('nip_pegawai',$id)->findOrFail($id);
-
+            'riwayat_kgb','kursusataupelatihan'])->where('nip_pegawai',$id)->findOrFail($id);
+            
         $riwayat_kenaikan_gaji = RiwayatKGB::with(['golongan'])->where('nip_pegawai',$id)->orderBy('id_riwayat_kgb','asc')->get();
         $pendidikan = RiwayatPendidikan::where('nip_pegawai',$id)->orderBy('sampai','asc')->get();
         $pangkatgolongan = RiwayatPangkat::with(['golongan'])->where('nip_pegawai',$id)->where('status',0)->first();

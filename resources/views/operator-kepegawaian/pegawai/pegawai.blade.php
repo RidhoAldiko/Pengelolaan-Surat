@@ -30,7 +30,7 @@
                                 <th scope="col">Nama</th>
                                 <th scope="col">Jabatan</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Aksi</th>
+                                <th scope="col" class="text-center">Aksi</th>
                             </tr>
                             {{-- js ajax get data pegawai ada di view/layouts/main.blade.php --}}
                         </thead>

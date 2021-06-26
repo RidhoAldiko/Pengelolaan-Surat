@@ -18,6 +18,7 @@ use App\Http\Controllers\OperatorKepegawaian\HobiController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganBadanController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganKeluargaController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganLainController;
+use App\Http\Controllers\OperatorKepegawaian\KursusAtauPelatihanController;
 use App\Http\Controllers\OperatorKepegawaian\MertuaController;
 use App\Http\Controllers\OperatorKepegawaian\MutasiController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
@@ -267,7 +268,10 @@ Route::prefix('operator-kepegawaian')
          Route::resource('pegawai-riwayat-kgb',RiwayatKGBController::class);
          // -----------------------dokumen pegawai---------------------------------
          Route::resource('dokumen-pegawai',DokumenPegawaiController::class);
-         
+         // -----------------------kursus atau pelatihan---------------------------------
+         Route::resource('kursus-atau-pelatihan',KursusAtauPelatihanController::class);
+
+
           //operator-kepegawaian: print data perorangan
          Route::get('cetak-pegawai-per-orangan/{data_pegawai}', [PrintPegawaiController::class,'cetak_perorangan'])->name('print-pegawai.cetakperorangan');
          //operator-kepegawaian: print semua data pegawai

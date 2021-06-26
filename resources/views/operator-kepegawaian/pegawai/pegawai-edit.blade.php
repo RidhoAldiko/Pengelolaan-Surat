@@ -681,6 +681,59 @@
                                     @endif
                         </div>
                         <div class="row justify-content-center">
+                            @if ($pegawai->kursusataupelatihan->count() > 0)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Riwayat Kursus/ Pelatihan - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Nama Kursus/Pelatihan</th>
+                                                            <th scope="col">Mulai s/d Selesai</th>
+                                                            <th scope="col">Tanda Lulus</th>
+                                                            <th scope="col">Tempat</th>
+                                                            <th scope="col">Keterangan</th>
+                                                            <th scope="col">Aksi</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($pegawai->kursusataupelatihan as $item)
+                                                        <tr class="text-center">
+                                                            <td>{{ $item->nama_kursus }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->mulai)) }} s/d {{ date('d/m/Y', strtotime($item->selesai)) }}</td>
+                                                            <td>{{ $item->tanda_lulus }}</td>
+                                                            <td>{{ $item->tempat }}</td>
+                                                            <td>{{ $item->keterangan }}</td>
+                                                            <td>
+                                                                <a href="{{ route('kursus-atau-pelatihan.edit',$item->id_kursus) }}" class="btn btn-warning text-white btn-sm " title="Edit">
+                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                </a>
+                                                                <form action="{{ route('kursus-atau-pelatihan.destroy',$item->id_kursus) }}" method="post" class="d-inline">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus riwayat kursus/pelatihan ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                </form> 
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Riwayat Kursus/ Pelatihan - <code> {{ $pegawai->nama_pegawai }}</code></label>
+                                    <p class="border-bottom text-gray-800">
+                                        - Riwayat Kursus/ Pelatihan belum diisi, lengkapi di menu Riwayat Kursus/ Pelatihan -
+                                    </p>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="row justify-content-center">
                             @if ($pegawai->organisasi->count() > 0)
                                 @if ($organisasi1->count() > 0)
                                     <div class="col-md-12">

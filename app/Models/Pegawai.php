@@ -146,5 +146,10 @@ class Pegawai extends Model
     {
         return $this->hasOne(PangkatPNS::class,'nip_pegawai','nip_pegawai');
     }
+    //table pegawai memiliki banyak saudara kandung yang dikirim ketabel saudara kandung dengan relasi one to many
+    public function kursusataupelatihan()
+    {
+        return $this->hasMany(KursusAtauPelatihan::class,'nip_pegawai','nip_pegawai');
+    }
 
 }

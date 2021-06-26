@@ -258,14 +258,31 @@
                     <td>TEMPAT</td>
                     <td>KET</td>
                 </tr>
+                @if ($pegawai->kursusataupelatihan->count() > 0)
+                @php
+                    $nok=1;
+                @endphp
+                    @foreach ($pegawai->kursusataupelatihan as $item)
+                        <tr>
+                            <td>{{ $nok++ }}</td>
+                            <td>{{ $item->nama_kursus }}</td>
+                            <td>{{ date('d/m/Y', strtotime($item->mulai)) }} s/d {{ date('d/m/Y', strtotime($item->selesai)) }}</td>
+                            <td>{{ $item->tanda_lulus }}</td>
+                            <td>{{ $item->tempat }}</td>
+                            <td>{{ $item->keterangan }}</td>
+                        </tr>
+                    @endforeach
+                @else 
                 <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                </tr> 
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                @endif
+                 
             </table>
         </div>
     </div>
@@ -629,12 +646,12 @@
                     @endphp
 
                     @foreach ($pegawai->organisasi as $item)
-                        @if ($pegawai->organisasi->waktu == 'Semasa SLTA ke bawah')
+                        @if ($item->waktu=="Semasa SLTA ke bawah")
                         <tr>
                             <td>{{ $no_organisasi++ }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->kedudukan }}</td>
-                            <td>{{ $item->tahun_mulai }} s/d {{ $tahun_selesai }}</td>
+                            <td>{{ $item->tahun_mulai }} s/d {{ $item->tahun_selesai }}</td>
                             <td>{{ $item->tempat }}</td>
                             <td>{{ $item->pimpinan }}</td>
                          </tr>
@@ -677,12 +694,12 @@
                     @endphp
 
                     @foreach ($pegawai->organisasi as $item)
-                        @if ($pegawai->organisasi->waktu == 'Semasa Perguruan Tinggi')
+                        @if ($item->waktu=="Semasa Perguruan Tinggi")
                         <tr>
                             <td>{{ $no_organisasii++ }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->kedudukan }}</td>
-                            <td>{{ $item->tahun_mulai }} s/d {{ $tahun_selesai }}</td>
+                            <td>{{ $item->tahun_mulai }} s/d {{ $item->tahun_selesai }}</td>
                             <td>{{ $item->tempat }}</td>
                             <td>{{ $item->pimpinan }}</td>
                          </tr>
@@ -729,7 +746,7 @@
                     @endphp
 
                     @foreach ($pegawai->organisasi as $item)
-                        @if ($pegawai->organisasi->waktu == 'Selesai Pendidikan atau Selama Menjadi PNS')
+                        @if ($item->waktu=="Selesai Pendidikan atau Selama Menjadi PNS")
                         <tr>
                             <td>{{ $no_organisasiii++ }}</td>
                             <td>{{ $item->nama }}</td>
