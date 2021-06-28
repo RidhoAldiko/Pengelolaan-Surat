@@ -95,7 +95,7 @@
     </div>
 </section>
 @endsection
-@push('script-disposisi-surat-masuk')
+@push('custom-js')
 <script>
     $(document).ready( function () {
         $('#disposisi-surat-masuk').DataTable();

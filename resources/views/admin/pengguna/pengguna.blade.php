@@ -69,7 +69,7 @@
     </div>
 </section>
 @endsection
-@push('script-pengguna')
+@push('custom-js')
     <script>
         $(document).ready( function () {
             $('#data-pengguna').DataTable();

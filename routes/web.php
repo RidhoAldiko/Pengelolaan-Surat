@@ -87,17 +87,70 @@ Route::prefix('admin')
             Route::get('admin-pegawai', [PegawaiController::class,'index'])->name('admin-pegawai.index');
             Route::get('admin-pegawai/serverside', [PegawaiController::class,'pegawai_serverSide'])->name('admin-pegawai.serverside');
             Route::get('admin-pegawai/create', [PegawaiController::class,'create'])->name('admin-pegawai.create');
+            Route::get('admin-pegawai/{id}', [PegawaiController::class,'show'])->name('admin-pegawai.show');
             Route::post('admin-pegawai', [PegawaiController::class,'store'])->name('admin-pegawai.store');
+            Route::get('admin-pegawai/{id}/edit', [PegawaiController::class,'edit'])->name('admin-pegawai.edit');
+            Route::put('admin-pegawai/{id}', [PegawaiController::class,'update'])->name('admin-pegawai.update');
+            Route::delete('admin-pegawai/{data_pegawai}',[PegawaiController::class,'destroy'])->name('admin-pegawai.destroy');
         //----Data Master----
             //LEVEL SURAT
             Route::resource('data-level_surat', LevelSuratController::class);
+            //get level surat
             Route::get('get-level_surat', [LevelSuratController::class,'data_level_surat'])->name('data-level_surat.level');
             //UNIT KERJA
-            Route::resource('data-unit_kerja', UnitKerjaController::class);
-            Route::get('get-staf', [UnitKerjaController::class,'get_staf'])->name('data-unit_kerja.staf-ahli');
-            Route::get('get-asisten', [UnitKerjaController::class,'get_asisten'])->name('data-unit_kerja.asisten');
-            Route::get('get-bagian', [UnitKerjaController::class,'get_bagian'])->name('data-unit_kerja.bagian');
-            Route::get('get-sub-bagian', [UnitKerjaController::class,'get_sub_bagian'])->name('data-unit_kerja.sub-bagian');
+            Route::get('data-unit-kerja', [UnitKerjaController::class,'index'])->name('data-unit_kerja.index');
+            //Staf Ahli create 
+            Route::get('data-unit-kerja/staf-ahli/create', [UnitKerjaController::class,'create_staf_ahli'])->name('staf-ahli.create');
+            //Staf Ahli store 
+            Route::post('data-unit-kerja/staf-ahli', [UnitKerjaController::class,'store_staf_ahli'])->name('staf-ahli.store');
+            //Staf Ahli edit
+            Route::get('data-unit-kerja/staf-ahli/{id}/edit', [UnitKerjaController::class,'edit_staf_ahli'])->name('staf-ahli.edit');
+            //Staf Ahli update
+            Route::put('data-unit-kerja/staf-ahli/{id}', [UnitKerjaController::class,'update_staf_ahli'])->name('staf-ahli.update');
+            //Staf Ahli destroy
+            Route::delete('data-unit-kerja/staf-ahli/{id}', [UnitKerjaController::class,'destroy_staf_ahli'])->name('staf-ahli.delete');
+
+            //asisten
+            Route::get('data-unit-kerja/asisten/create', [UnitKerjaController::class,'create_asisten'])->name('asisten.create');
+            //Staf Ahli store 
+            Route::post('data-unit-kerja/asisten', [UnitKerjaController::class,'store_asisten'])->name('asisten.store');
+            //Staf Ahli edit
+            Route::get('data-unit-kerja/asisten/{id}/edit', [UnitKerjaController::class,'edit_asisten'])->name('asisten.edit');
+            //Staf Ahli update
+            Route::put('data-unit-kerja/asisten/{id}', [UnitKerjaController::class,'update_asisten'])->name('asisten.update');
+            //Staf Ahli destroy
+            Route::delete('data-unit-kerja/asisten/{id}', [UnitKerjaController::class,'destroy_asisten'])->name('asisten.delete');
+
+            //bagian
+            Route::get('data-unit-kerja/bagian/create', [UnitKerjaController::class,'create_bagian'])->name('bagian.create');
+            //Staf Ahli store 
+            Route::post('data-unit-kerja/bagian', [UnitKerjaController::class,'store_bagian'])->name('bagian.store');
+            //Staf Ahli edit
+            Route::get('data-unit-kerja/bagian/{id}/edit', [UnitKerjaController::class,'edit_bagian'])->name('bagian.edit');
+            //Staf Ahli update
+            Route::put('data-unit-kerja/bagian/{id}', [UnitKerjaController::class,'update_bagian'])->name('bagian.update');
+            //Staf Ahli destroy
+            Route::delete('data-unit-kerja/bagian/{id}', [UnitKerjaController::class,'destroy_bagian'])->name('bagian.delete');
+
+            //sub bagian
+            Route::get('data-unit-kerja/sub-bagian/create', [UnitKerjaController::class,'create_sub_bagian'])->name('sub-bagian.create');
+            //Staf Ahli store 
+            Route::post('data-unit-kerja/sub-bagian', [UnitKerjaController::class,'store_sub_bagian'])->name('sub-bagian.store');
+            //Staf Ahli edit
+            Route::get('data-unit-kerja/sub-bagian/{id}/edit', [UnitKerjaController::class,'edit_sub_bagian'])->name('sub-bagian.edit');
+            //Staf Ahli update
+            Route::put('data-unit-kerja/sub-bagian/{id}', [UnitKerjaController::class,'update_sub_bagian'])->name('sub-bagian.update');
+            //Staf Ahli destroy
+            Route::delete('data-unit-kerja/sub-bagian/{id}', [UnitKerjaController::class,'destroy_sub_bagian'])->name('sub_bagian.delete');
+
+            //get data staf ahli
+            Route::get('data-unit-kerja/staf-ahli', [UnitKerjaController::class,'get_staf'])->name('data-unit_kerja.staf-ahli');
+            //get data asisten
+            Route::get('data-unit-kerja/asisten', [UnitKerjaController::class,'get_asisten'])->name('data-unit_kerja.asisten');
+            //get data bagian
+            Route::get('data-unit-kerja/bagian', [UnitKerjaController::class,'get_bagian'])->name('data-unit_kerja.bagian');
+            //get sub bagian
+            Route::get('data-unit-kerja/sub-bagian', [UnitKerjaController::class,'get_sub_bagian'])->name('data-unit_kerja.sub-bagian');
             //GOLONGAN
             Route::resource('data-golongan', GolonganController::class);
             //JABATAN
@@ -207,6 +260,13 @@ Route::prefix('operator-surat')
 Route::prefix('operator-kepegawaian')
     ->middleware('auth','role:2')
     ->group(function(){
+        Route::get('data-unit-kerja/staf-ahli', [UnitKerjaController::class,'get_staf'])->name('op-unit_kerja.staf-ahli');
+        //get data asisten
+        Route::get('data-unit-kerja/asisten', [UnitKerjaController::class,'get_asisten'])->name('op-unit_kerja.asisten');
+        //get data bagian
+        Route::get('data-unit-kerja/bagian', [UnitKerjaController::class,'get_bagian'])->name('op-unit_kerja.bagian');
+        //get sub bagian
+        Route::get('data-unit-kerja/sub-bagian', [UnitKerjaController::class,'get_sub_bagian'])->name('op-unit_kerja.sub-bagian');
         //admin: search pegawai
         Route::get('search-pegawai', [AdminController::class,'search_pegawai'])->name('operator-kepegawaian.search');
         //operator-kepegawaian dashboard

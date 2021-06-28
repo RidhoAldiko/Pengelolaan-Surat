@@ -3,7 +3,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Effort Surat</h1>
+        <h1>Approval Surat</h1>
     </div>
     @if (session('status'))
     <div class="alert shadow alert-success alert-dismissible fade show" role="alert">
@@ -16,7 +16,7 @@
     <div class="section-body">
         <div class="card">
             <div class="card-header">
-                <h4>Data Effort</h4>
+                <h4>Data Approval</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -26,7 +26,7 @@
                                 <th scope="col">No.</th>
                                 <th scope="col">No Surat</th>
                                 <th scope="col">Tgl Surat</th>
-                                <th scope="col">Tgl Effort</th>
+                                <th scope="col">Tgl Approval</th>
                                 <th scope="col">status</th>
                                 <th scope="col">Aksi</th>
                             </tr>
@@ -95,7 +95,7 @@
     </div>
 </div>
 @endsection
-@push('script-disposisi-surat-keluar')
+@push('custom-js')
 <script>
     $(document).ready( function () {
         $('#disposisi-surat-keluar').DataTable();

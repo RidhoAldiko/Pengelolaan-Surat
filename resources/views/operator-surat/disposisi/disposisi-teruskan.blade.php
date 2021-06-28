@@ -21,7 +21,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="id_disposisi_surat_masuk">Tujuan Disposisi</label>
-                                <input type="text" name="id" id="id" class="form-control search-input-surat @error('id') is-invalid @enderror" placeholder="Masukan Nama / Unit Kerja" value="{{old('id')}}">
+                                <input type="text" name="id" id="id" class="form-control search-input-surat @error('id') is-invalid @enderror" placeholder="Masukan Nama / Jabatan / Unit Kerja" value="{{old('id')}}">
                                 <div class="row">
                                     <div class="col-md-8 search-result-surat">
                                     </div>

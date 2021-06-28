@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title','Unit Kerja | Edit')
+@section('title','Unit Kerja | Tambah Staf Ahli')
 @section('content')
 <section class="section">
     <div class="section-header">
@@ -8,7 +8,7 @@
             <div class="breadcrumb-item active">
                 <a href="{{route('data-unit_kerja.index')}}">Data Unit Kerja</a>
             </div>
-            <div class="breadcrumb-item">Ubah Data Unit Kerja</div>
+            <div class="breadcrumb-item">Tambah Data Asisten</div>
         </div>
     </div>
     <div class="section-body ">
@@ -16,27 +16,14 @@
             <div class="col-md-8">
                 <div class="card shadow ">
                     <div class="card-header">
-                        <h4>Ubah Data Unit Kerja</h4>
+                        <h4>Tambah Data Unit Kerja Asisten</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('data-unit_kerja.update',$item->id_unit) }}" method="POST">
-                            @method('PUT')
+                        <form action="{{ route('asisten.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <input type="text" id="nama_unit" name="nama_unit"  class="form-control @error('nama_unit') is-invalid @enderror" placeholder="Masukan Nama Unit Kerja" value="{{ $item->nama_unit }}" >
-                                @error('nama_unit')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control @error('status') is-invalid @enderror" id="status" name="status">
-                                    <option value="{{ $item->status }}"> {{ $item->status == '0' ? 'Aktif' : 'Nonaktif' }} </option>
-                                    <option value="0"> Aktif </option>
-                                    <option value="1"> Nonaktif </option>
-                                </select>
-                                @error('status')
+                                <input type="text" id="nama_asisten" name="nama_asisten"  class="form-control @error('nama_asisten') is-invalid @enderror" placeholder="Masukan Unit Kerja Asisten" value="{{old('nama_asisten')}}" >
+                                @error('nama_asisten')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

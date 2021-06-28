@@ -38,7 +38,7 @@
     </div>
 </section>
 @endsection
-@push('script-server-side_arsip-surat-masuk')
+@push('custom-js')
 <script>
     $(function() {
         $('#dataArsipSuratMasuk').DataTable({

@@ -31,7 +31,7 @@
 
                             <div class="form-group">
                                 <label for="nomor_karpeg">Nomor Kartu Pegawai</label>
-                                <input type="number" id="nomor_karpeg" name="nomor_karpeg"  class="form-control @error('nomor_karpeg') is-invalid @enderror" placeholder="Masukan Nomor kartu Pegawai" value="{{old('nomor_karpeg')}}" >
+                                <input type="text" id="nomor_karpeg" name="nomor_karpeg"  class="form-control @error('nomor_karpeg') is-invalid @enderror" placeholder="Masukan Nomor kartu Pegawai" value="{{old('nomor_karpeg')}}" >
                                 @error('nomor_karpeg')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -171,7 +171,7 @@
 </section>
 @endsection
 
-@push('script-menampilan-unit')
+@push('custom-js')
 <script>
 //menampilkan field sesuai dengan jabatan
 $('.data-jabatan').on('change',function(){

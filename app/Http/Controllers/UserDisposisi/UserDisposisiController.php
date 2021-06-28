@@ -45,27 +45,84 @@ class UserDisposisiController extends Controller
     // }
     function search_pengguna(Request $request)
     {
+        
         if ($request->has('data')) {
             $data = $request->data;
-            $results = User::select('users.*','nama_pegawai','pegawai.id_jabatan','nama_jabatan','unit_kerja.id_unit','nama_unit')
+            //cek level surat user login
+            $level = Auth::user()->id_level_surat;
+            //jika level pengguna kepala bagian
+            if ($level == 5) {
+                //cari tujuan approve (staf ahli atau asisten)
+                $results = User::select('users.*','nama_pegawai','jabatan.id_jabatan','nama_jabatan','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian')
                 ->join('pegawai', 'nip_pegawai', '=', 'users.id')
-                ->join('unit_kerja', 'unit_kerja.id_unit', '=', 'pegawai.id_unit')
                 ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+                ->join('unit_kerja', 'unit_kerja.nip_pegawai', '=', 'pegawai.nip_pegawai')
+                ->join('staf_ahli', 'staf_ahli.id_staf_ahli', '=', 'unit_kerja.id_staf_ahli')
+                ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
+                ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
+                ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
+                ->where(function($q) {
+                    $q->where('jabatan.id_jabatan',3)
+                    ->orWhere('jabatan.id_jabatan',4);
+                })
                 ->where('nama_pegawai', 'LIKE' ,'%' . $data . '%')
-                ->orWhere('nama_unit', 'LIKE' ,'%' . $data . '%')
+                ->orWhere('nama_staf_ahli', 'LIKE' ,'%' . $data . '%')
+                ->orWhere('nama_asisten', 'LIKE' ,'%' . $data . '%')
                 ->get();
+            } else 
+            //jika level pengguna kepala sub bagian
+            if($level == 6) {
+                 //cari tujuan approve (kepala bagian)
+                $results = User::select('users.*','nama_pegawai','jabatan.id_jabatan','nama_jabatan','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian')
+                ->join('pegawai', 'nip_pegawai', '=', 'users.id')
+                ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+                ->join('unit_kerja', 'unit_kerja.nip_pegawai', '=', 'pegawai.nip_pegawai')
+                ->join('staf_ahli', 'staf_ahli.id_staf_ahli', '=', 'unit_kerja.id_staf_ahli')
+                ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
+                ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
+                ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
+                ->where('jabatan.id_jabatan',5)
+                ->where(function($q) use ($data) {
+                    $q->where('nama_pegawai', 'LIKE' ,'%' . $data . '%')
+                    ->orWhere('nama_bagian', 'LIKE' ,'%' . $data . '%');
+                })
+                ->get();
+            }
             //make output
             $output = '<div class="list-group  mt-2">';
             //cek jika data tersedia
             if ($results->count() >= 1) {
-                //looping data
-                foreach ($results as $result) {
-                    //concat output untuk menampilkan data
-                    $output .= '
-                        <a href="#" class="list-group-item list-group-item-action">'
-                            .$result->id. ' - '. $result->nama_jabatan .' - '. $result->nama_unit . '  
-                        </a>
-                    ';
+                //jika level pengguna kepala bagaian
+                if ($level == 5) {
+                    //tampilkan data dari database
+                    foreach ($results as $result) {
+                        //jika hasil pencarian jabatan adalah staf ahli
+                        if ($result->id_jabatan == 3) {
+                            //tampilkan data staf ahli
+                            $output .= '
+                            <a href="#" class="list-group-item list-group-item-action">'
+                            .$result->id. ' - ' .$result->nama_jabatan. ' '. $result->nama_staf_ahli . '
+                            </a>
+                        ';
+                        }
+                        //jika tidak tampilkan data asisten 
+                        else {
+                            $output .= '
+                            <a href="#" class="list-group-item list-group-item-action">'
+                            .$result->id. ' - ' .$result->nama_jabatan. ' '. $result->nama_asisten . '
+                            </a>
+                        ';
+                        }
+                    }
+                } else 
+                if($level == 6){
+                    foreach ($results as $result) {
+                        $output .= '
+                            <a href="#" class="list-group-item list-group-item-action">'
+                            .$result->id. ' - ' .$result->nama_jabatan. ' '. $result->nama_bagian . '
+                            </a>
+                        ';
+                    }
                 }
             }
             //jika data tidak tersedia

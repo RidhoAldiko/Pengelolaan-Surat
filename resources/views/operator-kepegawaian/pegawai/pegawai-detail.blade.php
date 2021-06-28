@@ -103,12 +103,14 @@
                                                 {{ $pegawai->status_perkawinan }}
                                             </p>
                                         </div>
+                                        
                                         <div class="form-group">
                                             <label>Jabatan</label>
                                             <p class="border-bottom text-gray-800">
                                                 {{ $pegawai->jabatan->nama_jabatan }}
                                             </p>
                                         </div>
+                                        
                                 </div>
                             </div>
                     </div>

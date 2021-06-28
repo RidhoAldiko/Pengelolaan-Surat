@@ -94,15 +94,12 @@
     </div>
 </div>
 @endsection
-@push('script-surat-masuk')
-    <script>
-        $(document).ready( function () {
-            $('#surat-masuk').DataTable();
-        } );
-    </script>
-@endpush
-@push('script-delete-button')
+
+@push('custom-js')
 <script>
+    $(document).ready( function () {
+            $('#surat-masuk').DataTable();
+    } );
     //delete data unit kerja
     $('.getIdSuratMasuk').on('click',function(){
         var _id = $(this).data("id");

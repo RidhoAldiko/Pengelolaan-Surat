@@ -30,6 +30,7 @@ class EffortSuratController extends Controller
                 ->orWhere('status','2')//berjalan
                 ->get();
         // dd($results);
+        
         return view('operator-surat.effort.effort-surat',\compact('results'));
     }
 
@@ -142,10 +143,12 @@ class EffortSuratController extends Controller
 
     public function store_forward(TeruskanEffortSuratRequest $request){
         $data = $request->all();
+       
         $explode = explode(' - ',$request->id,-1);
         //masukan nip ke variabel data['id]
         $data ['id'] = $explode[0];
         $data ['status'] = '0';
+        // dd($data);
         $result = SuratKeluar::join('effort_surat_keluar', 'effort_surat_keluar.id_surat_keluar', '=', 'surat_keluar.id_surat_keluar')
                 ->where('id_effort_surat',$request->id_effort_surat)
                 ->first('surat_keluar.id_surat_keluar');

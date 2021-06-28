@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\SuratKeluar;
 use App\Models\TeruskanEffortSurat;
 use App\Models\User;
+use App\Models\Pegawai;
 
 class DataEffortController extends Controller
 {
@@ -48,7 +49,12 @@ class DataEffortController extends Controller
      */
     public function create($id)
     {
-        return view('user-disposisi.effort.effort-forward',['id'=>$id]);
+        $result = Pegawai::select('pegawai.*','nama_jabatan')
+                            ->join('jabatan','jabatan.id_jabatan','=' , 'pegawai.id_jabatan')
+                            ->where('jabatan.id_jabatan',1)
+                            ->orWhere('jabatan.id_jabatan',2)
+                            ->get();
+        return view('user-disposisi.effort.effort-forward',['id'=>$id],\compact('result'));
     }
 
     /**
@@ -59,12 +65,19 @@ class DataEffortController extends Controller
      */
     public function store(Request $request)
     {
+        $level = Auth::user()->id_level_surat;
         $data = $request->all();
-        $explode = explode(' - ',$request->id,-1);
-        //masukan nip ke variabel data['id]
-        $data ['id'] = $explode[0];
+        
+        if ($level > 4 ) {
+            $explode = explode(' - ',$request->id,-1);
+            //masukan nip ke variabel data['id]
+            $data ['id'] = $explode[0];
+        } else {
+            $explode = $data['id'];
+        }
         $data ['status'] = '0';
         $user = User::where('id',$explode)->first();
+        // dd($data);
         $result = SuratKeluar::join('effort_surat_keluar', 'effort_surat_keluar.id_surat_keluar', '=', 'surat_keluar.id_surat_keluar')
                 ->where('id_effort_surat',$request->id_effort_surat)
                 ->first('surat_keluar.id_surat_keluar');

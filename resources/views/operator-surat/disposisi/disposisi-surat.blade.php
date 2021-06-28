@@ -103,16 +103,12 @@
     </div>
 </div>
 @endsection
-@push('script-disposisi-surat-masuk')
+
+@push('custom-js')
 <script>
     $(document).ready( function () {
         $('#disposisi-surat-masuk').DataTable();
     } );
-</script>
-@endpush
-
-@push('script-delete-disposisi')
-<script>
     //delete data unit kerja
     $('.getIdSurat').on('click',function(){
         var _id = $(this).data("id");

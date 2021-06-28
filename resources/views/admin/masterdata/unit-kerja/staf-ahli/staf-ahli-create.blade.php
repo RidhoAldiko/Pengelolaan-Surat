@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title','Unit Kerja | Tambah')
+@section('title','Unit Kerja | Tambah Staf Ahli')
 @section('content')
 <section class="section">
     <div class="section-header">
@@ -8,7 +8,7 @@
             <div class="breadcrumb-item active">
                 <a href="{{route('data-unit_kerja.index')}}">Data Unit Kerja</a>
             </div>
-            <div class="breadcrumb-item">Tambah Data Unit Kerja</div>
+            <div class="breadcrumb-item">Tambah Data Staf Ahli</div>
         </div>
     </div>
     <div class="section-body ">
@@ -16,28 +16,14 @@
             <div class="col-md-8">
                 <div class="card shadow ">
                     <div class="card-header">
-                        <h4>Tambah Data Unit Kerja</h4>
+                        <h4>Tambah Data Staf Ahli</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('data-unit_kerja.store') }}" method="POST">
+                        <form action="{{ route('staf-ahli.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="id_jabatan">Jabatan</label>
-                                <select class="form-control @error('id_jabatan') is-invalid @enderror" id="id_jabatan" name="id_jabatan">
-                                    <option selected disabled> --Pilih Jabatan Pegawai-- </option>
-                                    @foreach ($results as $result)
-                                    <option value="{{$result->id_jabatan}}">{{$result->nama_jabatan}}</option>
-                                    @endforeach
-                                </select>
-                                @error('id_jabatan')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="nama_unit" name="nama_unit"  class="form-control @error('nama_unit') is-invalid @enderror" placeholder="Masukan Nama Unit Kerja" value="{{old('nama_unit')}}" >
-                                @error('nama_unit')
+                                <input type="text" id="nama_staf_ahli" name="nama_staf_ahli"  class="form-control @error('nama_staf_ahli') is-invalid @enderror" placeholder="Masukan Nama Staf Ahli" value="{{old('nama_staf_ahli')}}" >
+                                @error('nama_staf_ahli')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

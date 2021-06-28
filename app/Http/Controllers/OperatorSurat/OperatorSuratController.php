@@ -15,7 +15,25 @@ class OperatorSuratController extends Controller
      */
     public function index()
     {
+        // $nama = 'Ridho';
+        // $results = User::select('users.*','nama_pegawai','jabatan.id_jabatan','nama_jabatan','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian')
+        //         ->join('pegawai', 'nip_pegawai', '=', 'users.id')
+        //         ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+        //         ->join('unit_kerja', 'unit_kerja.nip_pegawai', '=', 'pegawai.nip_pegawai')
+        //         ->join('staf_ahli', 'staf_ahli.id_staf_ahli', '=', 'unit_kerja.id_staf_ahli')
+        //         ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
+        //         ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
+        //         ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
+        //         ->where('jabatan.id_jabatan',6)
+        //         ->where(function($q) use ($nama) {
+        //             $q->where('nama_pegawai', 'LIKE' ,'%' . $nama . '%');
+        //         })
+        //         ->get();
+        // dd($results);
+        // $coba = $results->Where('id_jabatan',6)->get();
+        // dd($coba);
         return view('operator-surat.dashboard');
+
     }
 
     //method search pengguna untuk tujuan disposisi surat masuk
@@ -23,12 +41,19 @@ class OperatorSuratController extends Controller
     {
         if ($request->has('data')) {
             $data = $request->data;
-            $results = User::select('users.*','nama_pegawai','pegawai.id_jabatan','nama_jabatan','unit_kerja.id_unit','nama_unit')
+            $results = User::select('users.*','nama_pegawai','jabatan.id_jabatan','nama_jabatan','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian')
                 ->join('pegawai', 'nip_pegawai', '=', 'users.id')
-                ->join('unit_kerja', 'unit_kerja.id_unit', '=', 'pegawai.id_unit')
                 ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
-                ->where('nama_pegawai', 'LIKE' ,'%' . $data . '%')
-                ->orWhere('nama_unit', 'LIKE' ,'%' . $data . '%')
+                ->join('unit_kerja', 'unit_kerja.nip_pegawai', '=', 'pegawai.nip_pegawai')
+                ->join('staf_ahli', 'staf_ahli.id_staf_ahli', '=', 'unit_kerja.id_staf_ahli')
+                ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
+                ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
+                ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
+                ->where('jabatan.id_jabatan',6)
+                ->where(function($q) use ($data) {
+                    $q->where('nama_pegawai', 'LIKE' ,'%' . $data . '%')
+                    ->orWhere('nama_sub_bagian', 'LIKE' ,'%' . $data . '%');
+                })
                 ->get();
             //make output
             $output = '<div class="list-group  mt-2">';
@@ -39,7 +64,7 @@ class OperatorSuratController extends Controller
                     //concat output untuk menampilkan data
                     $output .= '
                         <a href="#" class="list-group-item list-group-item-action">'
-                            .$result->id. ' - '. $result->nama_jabatan .' - '. $result->nama_unit . '  
+                            .$result->id. ' - Sub Bagian '. $result->nama_sub_bagian . '  
                         </a>
                     ';
                 }

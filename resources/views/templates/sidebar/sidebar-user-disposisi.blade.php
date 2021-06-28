@@ -19,7 +19,7 @@
             </li>
 
             <li class=active><a class="nav-link" href="{{route('data-effort.index')}}">
-                <i class="fas fa-copy"></i><span>Effort Surat</span></a>
+                <i class="fas fa-copy"></i><span>Approval Surat</span></a>
             </li>
                 
         </ul>

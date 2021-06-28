@@ -3,10 +3,10 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Effort Surat Keluar</h1>
+        <h1>Approval Surat Keluar</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{route('data-effort.index')}}">Effort Surat Keluar</a></div>
-            <div class="breadcrumb-item">Detail Effort Surat keluar</div>
+            <div class="breadcrumb-item active"><a href="{{route('data-effort.index')}}">Approval Surat Keluar</a></div>
+            <div class="breadcrumb-item">Detail Approval Surat keluar</div>
         </div>
     </div>
     @if (session('status'))
@@ -20,7 +20,7 @@
     <div class="section-body">
         <div class="card shadow">
             <div class="card-header">
-                <h4>Detail Effort Surat Keluar</h4>
+                <h4>Detail Approval Surat Keluar</h4>
             </div>
             <div class="card-body">
                 <div class="row ">
@@ -44,7 +44,7 @@
                                 </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticEmail" class="col-sm-3 col-form-label">Tanggal Effort Surat</label>
+                            <label for="staticEmail" class="col-sm-3 col-form-label">Tanggal Approval Surat</label>
                                 <div class="col-sm-9">
                                     <p class="border-bottom text-gray-800"> {{ $result->tanggal_effort }}</p>
                                 </div>
@@ -108,7 +108,7 @@
     </div>
 </section>
 @endsection
-@push('script-disposisi-surat-masuk')
+@push('custom-js')
 <script>
     $(document).ready( function () {
         $('#disposisi-surat-masuk').DataTable();

@@ -83,7 +83,7 @@
 </div>
 @endsection
 
-@push('script-delete-golongan')
+@push('custom-js')
 <script>
     //delete data golongan
     $('.getIdGolongan').on('click',function(){

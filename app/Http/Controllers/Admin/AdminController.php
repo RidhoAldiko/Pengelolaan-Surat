@@ -26,11 +26,21 @@ class AdminController extends Controller
 
     //function halaman data pengguna
     public function data_pengguna(){
-        $results = User::select('users.*','nama_pegawai','pegawai.id_jabatan','nama_jabatan','unit_kerja.id_unit','nama_unit')
-                ->join('pegawai', 'nip_pegawai', '=', 'users.id')
-                ->join('unit_kerja', 'unit_kerja.id_unit', '=', 'pegawai.id_unit')
-                ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
-                ->get();
+        $results = User::select('users.*','nama_pegawai','nama_jabatan','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian')
+        ->join('pegawai', 'nip_pegawai', '=', 'users.id')
+        ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+        ->join('unit_kerja', 'unit_kerja.nip_pegawai', '=', 'pegawai.nip_pegawai')
+        ->join('staf_ahli', 'staf_ahli.id_staf_ahli', '=', 'unit_kerja.id_staf_ahli')
+        ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
+        ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
+        ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
+        ->get();
+
+        // $results = User::select('users.*','nama_pegawai','pegawai.id_jabatan','nama_jabatan','unit_kerja.id_unit','nama_unit')
+        //         ->join('pegawai', 'nip_pegawai', '=', 'users.id')
+        //         ->join('unit_kerja', 'unit_kerja.id_unit', '=', 'pegawai.id_unit')
+        //         ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+        //         ->get();
         // dd($results);
         return view('admin.pengguna.pengguna',\compact('results'));
     }

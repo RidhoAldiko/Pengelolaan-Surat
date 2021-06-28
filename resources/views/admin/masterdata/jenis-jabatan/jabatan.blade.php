@@ -35,9 +35,9 @@
                                 <td>{{ $item->nama_jabatan }}</td>
                                 <td>{{ $item->status == '0' ? 'Aktif' : 'Nonaktif' }}</td>
                                 <td><a href="{{ route('data-jabatan.edit',$item->id_jabatan) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit fa-sm"></i> <span>Ubah</span></a>
-                                    <a href="#" class="btn btn-danger btn-sm getIdJabatan" data-toggle="modal" data-target="#deleteJabatan" data-id="{{$item->id_jabatan}}" >
+                                    {{-- <a href="#" class="btn btn-danger btn-sm getIdJabatan" data-toggle="modal" data-target="#deleteJabatan" data-id="{{$item->id_jabatan}}" >
                                         <i class="fas fa-trash fa-sm"> <span>Hapus</span></i>
-                                    </a> </td>
+                                    </a> </td> --}}
                             </tr>
                             @empty
                                 <tr class="text-center">
@@ -78,7 +78,7 @@
     </div>
 </div>
 @endsection
-@push('script-delete-jabatan')
+@push('custom-js')
 <script>
     //delete data jabatan
     $('.getIdJabatan').on('click',function(){
