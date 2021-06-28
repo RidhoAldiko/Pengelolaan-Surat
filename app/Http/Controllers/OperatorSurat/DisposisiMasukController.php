@@ -167,4 +167,8 @@ class DisposisiMasukController extends Controller
         SuratMasuk::destroy($data->id_surat_masuk);
         return redirect()->route('disposisi-surat-masuk.index')->with('status',"Data Disposisi Surat Masuk berhasil dihapus");
     }
+
+    public function cetak_disposisi(){
+        return view('operator-surat.disposisi.cetak_disposisi');
+    }
 }

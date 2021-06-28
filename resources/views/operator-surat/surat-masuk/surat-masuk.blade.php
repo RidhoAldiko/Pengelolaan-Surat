@@ -6,6 +6,7 @@
         <h1>Surat Masuk</h1>
     </div>
     <a href="{{ route('surat-masuk.create') }}" class="btn btn-primary mb-3"><i class="fas fa-plus"></i> Tambah Data Surat Masuk</a>
+    <a href="{{ route('surat-masuk.cetak_laporan_surat_masuk') }}" target="_blank" class="btn btn-primary mb-3"><i class="fas fa-print"></i> Cetak Surat Masuk</a>
     @if (session('status'))
     <div class="alert shadow alert-success alert-dismissible fade show" role="alert">
         {{ session('status') }}

@@ -24,7 +24,7 @@ class OrganisasiController extends Controller
         $data ['nip_pegawai'] = $explode[0];
         //timpa nip lama dengan nip baru yang sudah dipisahkan dari nama
         Organisasi::create($data);
-        return redirect()->route('pegawai-pengalaman-keluar-negeri.create')->with('status','Data organisasi berhasil ditambah');
+        return redirect()->route('pegawai-organisasi.create')->with('status','Data organisasi berhasil ditambah');
 
     }
 

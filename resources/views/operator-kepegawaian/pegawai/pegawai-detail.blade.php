@@ -39,7 +39,7 @@
                         <a class="nav-link" id="mutasi-tab" data-toggle="tab" href="#mutasi" role="tab" aria-controls="mutasi" aria-selected="false">Mutasi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="dokumen-tab" data-toggle="tab" href="#dokumen" role="tab" aria-controls="dokumen" aria-selected="false">Dokumen Pegawai</a>
+                        <a class="nav-link" id="dokumen-tab" data-toggle="tab" href="#dokumen" role="tab" aria-controls="dokumen" aria-selected="false">Dokumen</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="pangkat_cpns-tab" data-toggle="tab" href="#pangkat_cpns" role="tab" aria-controls="pangkat_cpns" aria-selected="false">Pangkat CPNS</a>
@@ -290,6 +290,48 @@
                             @endif
                         </div>
                         <div class="row justify-content-center">
+                            @if ($pegawai->kursusataupelatihan->count() > 0)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Riwayat Kursus/ Pelatihan - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
+                                                <thead>
+                                                        <tr class="text-center">
+                                                            <th scope="col">Nama Kursus/Pelatihan</th>
+                                                            <th scope="col">Mulai s/d Selesai</th>
+                                                            <th scope="col">Tanda Lulus</th>
+                                                            <th scope="col">Tempat</th>
+                                                            <th scope="col">Keterangan</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($pegawai->kursusataupelatihan as $item)
+                                                        <tr class="text-center">
+                                                            <td>{{ $item->nama_kursus }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($item->mulai)) }} s/d {{ date('d/m/Y', strtotime($item->selesai)) }}</td>
+                                                            <td>{{ $item->tanda_lulus }}</td>
+                                                            <td>{{ $item->tempat }}</td>
+                                                            <td>{{ $item->keterangan }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Riwayat Kursus/ Pelatihan - <code> {{ $pegawai->nama_pegawai }}</code></label>
+                                    <p class="border-bottom text-gray-800">
+                                        - Riwayat Kursus/ Pelatihan belum diisi, lengkapi di menu Riwayat Kursus/ Pelatihan -
+                                    </p>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="row justify-content-center">
                             @if ($pegawai->organisasi->count() > 0)
                                 @if ($organisasi1->count() > 0)
                                     <div class="col-md-12">
@@ -304,7 +346,7 @@
                                                                 <th scope="col">Tahun Mulai</th>
                                                                 <th scope="col">Tahun Selesai</th>
                                                                 <th scope="col">Tempat</th>
-                                                                <th scope="col">Peimpinan Organisasi</th>
+                                                                <th scope="col">Pimpinan Organisasi</th>
                                                             </tr>
                                                     </thead>
                                                     <tbody>
@@ -347,7 +389,7 @@
                                                                 <th scope="col">Tahun Mulai</th>
                                                                 <th scope="col">Tahun Selesai</th>
                                                                 <th scope="col">Tempat</th>
-                                                                <th scope="col">Peimpinan Organisasi</th>
+                                                                <th scope="col">Pimpinan Organisasi</th>
                                                             </tr>
                                                     </thead>
                                                     <tbody>
@@ -390,7 +432,7 @@
                                                                 <th scope="col">Tahun Mulai</th>
                                                                 <th scope="col">Tahun Selesai</th>
                                                                 <th scope="col">Tempat</th>
-                                                                <th scope="col">Peimpinan Organisasi</th>
+                                                                <th scope="col">Pimpinan Organisasi</th>
                                                             </tr>
                                                     </thead>
                                                     <tbody>
@@ -740,7 +782,7 @@
                                                 <thead>
                                                         <tr class="text-center">
                                                             <th scope="col">Jenis</th>
-                                                            <th scope="col">Penjabat</th>
+                                                            <th scope="col">Pejabat</th>
                                                             <th scope="col">Nomor</th>
                                                             <th scope="col">Tanggal</th>
                                                         </tr>
@@ -833,7 +875,7 @@
                                                         <tr class="text-center">
                                                             <td>{{ $item->nama_dokumen }}</td>
                                                             <td>{{ $item->keterangan }}</td>
-                                                            <td><a href='{{ asset('/storage/file_dokumen/'.$item->file_dokumen)}}' target='_blank' title='download'><i class='fa fa-file'></i></a></td>
+                                                            <td><a href='{{ asset('/storage/file_dokumen/'.$item->file_dokumen)}}' target='_blank' title='download'><h4><i class='fa fa-file'></i></h4></a></td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -858,7 +900,7 @@
                             @if ($pegawai->pangkat_cpns !=null)
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Riwayat Pangkat Pegawai CPNS - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <label>Riwayat Pangkat CPNS Pegawai - <code>{{ $pegawai->nama_pegawai }}</code></label>
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                                                 <thead>
@@ -866,7 +908,7 @@
                                                             <th scope="col">Pangkat Golongan</th>
                                                             <th scope="col">TMT</th>
                                                             <th scope="col">Gaji Pokok</th>
-                                                            <th scope="col">Penjabat</th>
+                                                            <th scope="col">Pejabat</th>
                                                             <th scope="col">Nomor</th>
                                                             <th scope="col">Tanggal</th>
                                                         </tr>
@@ -902,14 +944,14 @@
                             @if ($pegawai->pangkat_pns !=null)
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Riwayat Pangkat Pegawai PNS - <code>{{ $pegawai->nama_pegawai }}</code></label>
+                                        <label>Riwayat Pangkat PNS Pegawai - <code>{{ $pegawai->nama_pegawai }}</code></label>
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                                                 <thead>
                                                         <tr class="text-center">
                                                             <th scope="col">Pangkat Golongan</th>
                                                             <th scope="col">TMT</th>
-                                                            <th scope="col">Penjabat</th>
+                                                            <th scope="col">Pejabat</th>
                                                             <th scope="col">Nomor</th>
                                                             <th scope="col">Tanggal</th>
                                                         </tr>
@@ -951,7 +993,7 @@
                                                         <tr class="text-center">
                                                             <th scope="col">Pangkat Golongan</th>
                                                             <th scope="col">TMT</th>
-                                                            <th scope="col">Penjabat</th>
+                                                            <th scope="col">Pejabat</th>
                                                             <th scope="col">Nomor</th>
                                                             <th scope="col">Tanggal</th>
                                                         </tr>
@@ -996,7 +1038,7 @@
                                                             <th scope="col">Gol</th>
                                                             <th scope="col">Gaji</th>
                                                             <th scope="col">Dari-Sampai</th>
-                                                            <th scope="col">Penjabat</th>
+                                                            <th scope="col">Pejabat</th>
                                                             <th scope="col">Nomor</th>
                                                             <th scope="col">Tanggal</th>
                                                             <th scope="col">Peraturan</th>

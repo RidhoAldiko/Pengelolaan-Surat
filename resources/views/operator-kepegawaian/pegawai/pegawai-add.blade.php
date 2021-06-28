@@ -132,6 +132,7 @@
                                 </span>
                                 @enderror
                             </div>
+                            
                             <div id="field-staf" class="form-group d-none">
                                 <label for="staf_ahli">Staf Ahli</label>
                                 <select class="form-control data-staf" id="id_staf_ahli" name="id_staf_ahli">
@@ -161,7 +162,10 @@
                             </div>
                             
                             <a href="{{ route('admin-pegawai.index') }}" class="btn btn-warning"><i class="fas fa-chevron-left"></i> Kembali</a>
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                            
+=======
+                            <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah data ini ingin disimpan?')"><i class="fas fa-save"></i> Simpan</button>
+
                         </form> 
                     </div>
                 </div>

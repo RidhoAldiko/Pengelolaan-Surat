@@ -78,7 +78,7 @@
                       </div>
 
                       <div class="form-group row align-items-center">
-                        <label for="penjabat" class="form-control-label col-sm-3 text-md-right">Penjabat</label>
+                        <label for="penjabat" class="form-control-label col-sm-3 text-md-right">Pejabat yang Mengesahkan</label>
                         <div class="col-sm-6 col-md-9">
                           <input type="text" id="penjabat" name="penjabat"  class="form-control @error('penjabat') is-invalid @enderror" value="{{old('penjabat')}}" >
                             @error('penjabat')
@@ -172,7 +172,7 @@
 
                     </div>
                     <div class="card-footer bg-whitesmoke">
-                      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                      <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah data ini ingin disimpan?')"><i class="fas fa-save"></i> Simpan</button>
                     </div>
                   </div>
                 </form>

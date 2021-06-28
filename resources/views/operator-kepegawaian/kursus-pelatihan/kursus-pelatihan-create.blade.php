@@ -1,11 +1,11 @@
 @extends('layouts.main')
-@section('title','Tambah Pangkat PNS Pegawai')
+@section('title','Kursus Atau Pelatihan di dalam dan Luar Negeri')
 @section('content')
 <section class="section">
     <div class="section-header">
         <ol class="breadcrumb justify-content-end h4">
             <li class="breadcrumb-item"><a href="">Pegawai</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Tambah data Pangkat PNS Pegawai</li>
+            <li class="breadcrumb-item active" aria-current="page">Tambah data Kursus atau pelatiahn di dalam dan luar negeri</li>
         </ol>
     </div>
     @if (session('status'))
@@ -20,29 +20,17 @@
       </div>
     </div>
     @endif
-    @if (session('status_gagal'))
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="alert shadow alert-warning alert-dismissible fade show" role="alert">
-          {{ session('status_gagal') }}
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-          </button>
-      </div>
-      </div>
-    </div>
-    @endif
     <div class="section-body">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <form id="setting-form" method="POST" action="{{ route('pegawai-pangkat-pns.store') }}">
+                <form id="setting-form" method="POST" action="{{ route('kursus-atau-pelatihan.store') }}">
                   @csrf
                   <div class="card shadow" id="settings-card">
                     <div class="card-header">
-                      <h4>Riwayat Pangkat PNS Pegawai</h4>
+                      <h4>Kursus/ Latihan di dalam dan luar negeri</h4>
                     </div>
                     <div class="card-body">
-                      <p class="text-muted">Masukan data Pangkat PNS pegawai dengan benar dan tepat.!</p>
+                      <p class="text-muted">Masukan data kursus atau latihan di dalam dan luar negeri pegawai dengan benar dan tepat.!</p>
                      
                       <div class="form-group row align-items-center">
                         <label for="nip_pegawai" class="form-control-label col-sm-3 text-md-right">Pegawai</label>
@@ -61,15 +49,10 @@
                       </div>
 
                       <div class="form-group row align-items-center">
-                        <label for="id_golongan" class="form-control-label col-sm-3 text-md-right">Pangkat Golongan</label>
+                        <label for="nama_kursus" class="form-control-label col-sm-3 text-md-right">Nama Kursus/ Pelatihan</label>
                         <div class="col-sm-6 col-md-9">
-                            <select class="form-control @error('id_golongan') is-invalid @enderror" id="id_golongan" name="id_golongan">
-                                <option selected disabled> --Pilih-- </option>
-                                @foreach ($golongan as $gl)
-                                <option value="{{$gl->id_golongan}}"> {{ $gl->pangkat }} - {{$gl->nama_golongan}}</option>
-                                @endforeach
-                            </select>
-                            @error('id_golongan')
+                          <input type="text" id="nama_kursus" name="nama_kursus"  class="form-control @error('nama_kursus') is-invalid @enderror" value="{{old('nama_kursus')}}" >
+                            @error('nama_kursus')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -78,10 +61,30 @@
                       </div>
 
                       <div class="form-group row align-items-center">
-                        <label for="tmt" class="form-control-label col-sm-3 text-md-right">TMT</label>
+                        <label for="mulai" class="form-control-label col-sm-3 text-md-right">Mulai s/d Selesai</label>
+                        <div class="col-sm-3 col-md-4">
+                          <input type="text" id="mulai" name="mulai" onfocus="(this.type='date')"  class="form-control @error('mulai') is-invalid @enderror" placeholder="Mulai" value="{{old('mulai')}}" >
+                              @error('mulai')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                              @enderror
+                        </div>
+                        <div class="col-sm-3 col-md-4">
+                          <input type="text" id="selesai" name="selesai" onfocus="(this.type='date')"  class="form-control @error('selesai') is-invalid @enderror" placeholder="selesai" value="{{old('selesai')}}" >
+                              @error('selesai')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                              @enderror
+                          </div>
+                      </div>
+
+                      <div class="form-group row align-items-center">
+                        <label for="tanda_lulus" class="form-control-label col-sm-3 text-md-right">Tanda Lulus</label>
                         <div class="col-sm-6 col-md-9">
-                            <input type="date" id="tmt" name="tmt"  class="form-control @error('tmt') is-invalid @enderror" value="{{ old('tmt') }}" >
-                            @error('tmt')
+                          <input type="text" id="tanda_lulus" name="tanda_lulus"  class="form-control @error('tanda_lulus') is-invalid @enderror" value="{{old('tanda_lulus')}}" >
+                            @error('tanda_lulus')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -90,38 +93,26 @@
                       </div>
 
                       <div class="form-group row align-items-center">
-                        <label for="penjabat" class="form-control-label col-sm-3 text-md-right">Pejabat yang Mengesahkan</label>
+                        <label for="tempat" class="form-control-label col-sm-3 text-md-right">Tempat</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" id="penjabat" name="penjabat"  class="form-control @error('penjabat') is-invalid @enderror" value="{{old('penjabat')}}" >
-                            @error('penjabat')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                          <textarea name="tempat"  class="form-control" id="" cols="30" rows="10">{{old('tempat')}}</textarea>
+                          @error('tempat')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                          @enderror
                         </div>
                       </div>
 
                       <div class="form-group row align-items-center">
-                        <label for="nomor" class="form-control-label col-sm-3 text-md-right">Nomor</label>
+                        <label for="keterangan" class="form-control-label col-sm-3 text-md-right">Keteranga</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" id="nomor" name="nomor"  class="form-control @error('nomor') is-invalid @enderror" value="{{old('nomor')}}" >
-                            @error('nomor')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                      </div>
-
-                      <div class="form-group row align-items-center">
-                        <label for="tanggal" class="form-control-label col-sm-3 text-md-right">Tanggal</label>
-                        <div class="col-sm-6 col-md-9">
-                            <input type="date" id="tanggal" name="tanggal"  class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal') }}" >
-                            @error('tanggal')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                          <textarea name="keterangan"  class="form-control" id="" cols="30" rows="10">{{old('keterangan')}}</textarea>
+                          @error('keterangan')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                          @enderror
                         </div>
                       </div>
 

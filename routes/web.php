@@ -18,6 +18,7 @@ use App\Http\Controllers\OperatorKepegawaian\HobiController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganBadanController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganKeluargaController;
 use App\Http\Controllers\OperatorKepegawaian\KeteranganLainController;
+use App\Http\Controllers\OperatorKepegawaian\KursusAtauPelatihanController;
 use App\Http\Controllers\OperatorKepegawaian\MertuaController;
 use App\Http\Controllers\OperatorKepegawaian\MutasiController;
 use App\Http\Controllers\OperatorKepegawaian\OperatorKepegawaianController;
@@ -170,6 +171,8 @@ Route::prefix('operator-surat')
     //----Surat masuk----
         // operator-surat store surat masuk 
         Route::post('surat-masuk', [SuratMasukController::class,'store'])->name('surat-masuk.store');
+        
+        Route::get('surat-masuk/cetak_surat_masuk', [SuratMasukController::class,'cetak_laporan_surat_masuk'])->name('surat-masuk.cetak_laporan_surat_masuk');
         // operator-surat data surat masuk 
         Route::get('surat-masuk', [SuratMasukController::class,'index'])->name('surat-masuk.index');
         // operator-surat form surat masuk 
@@ -189,6 +192,8 @@ Route::prefix('operator-surat')
         Route::post('disposisi-surat-masuk',[DisposisiMasukController::class,'store'])->name('disposisi-surat-masuk.store');
         // operator-surat tabel disposisi surat masuk 
         Route::get('disposisi-surat-masuk', [DisposisiMasukController::class,'index'])->name('disposisi-surat-masuk.index');
+        // operator-surat tabel disposisi surat masuk 
+        Route::get('disposisi-surat-masuk/cetak_disposisi', [DisposisiMasukController::class,'cetak_disposisi'])->name('disposisi-surat-masuk.cetak');
         // operator-surat form disposisi surat masuk 
         Route::get('disposisi-surat-masuk/{id}/create',[DisposisiMasukController::class,'create'])->name('disposisi-surat-masuk.create');
         // operator-surat destroy disposisi surat masuk
@@ -338,10 +343,12 @@ Route::prefix('operator-kepegawaian')
          // -----------------------riwayat KGB---------------------------------
         Route::resource('pegawai-riwayat-kgb',RiwayatKGBController::class);
          // -----------------------dokumen pegawai---------------------------------
-        Route::resource('dokumen-pegawai',DokumenPegawaiController::class);
-        
-        //operator-kepegawaian: print data perorangan
-        Route::get('cetak-pegawai-per-orangan/{data_pegawai}', [PrintPegawaiController::class,'cetak_perorangan'])->name('print-pegawai.cetakperorangan');
+
+         Route::resource('dokumen-pegawai',DokumenPegawaiController::class);
+         // -----------------------kursus atau pelatihan---------------------------------
+         Route::resource('kursus-atau-pelatihan',KursusAtauPelatihanController::class);
+          //operator-kepegawaian: print data perorangan
+         Route::get('cetak-pegawai-per-orangan/{data_pegawai}', [PrintPegawaiController::class,'cetak_perorangan'])->name('print-pegawai.cetakperorangan');
          //operator-kepegawaian: print semua data pegawai
         Route::get('cetak-pegawai', [PrintPegawaiController::class,'cetakdata'])->name('print-pegawai.cetakdata');
     });

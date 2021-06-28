@@ -5,6 +5,7 @@
     <div class="section-header">
         <h1>Disposisi</h1>
     </div>
+    <a href="{{ route('disposisi-surat-masuk.cetak') }}" target="_blank" class="btn btn-primary mb-3"><i class="fas fa-print"></i> Print Disposisi</a>
     @if (session('status'))
     <div class="alert shadow alert-success alert-dismissible fade show" role="alert">
         {{ session('status') }}

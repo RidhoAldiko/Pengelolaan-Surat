@@ -40,7 +40,7 @@
                       </div>
 
                       <div class="form-group row align-items-center">
-                        <label for="penjabat" class="form-control-label col-sm-3 text-md-right">Penjabat</label>
+                        <label for="penjabat" class="form-control-label col-sm-3 text-md-right">Pejabat yang Mengesahkan</label>
                         <div class="col-sm-6 col-md-9">
                           <input type="text" id="penjabat" name="penjabat"  class="form-control @error('penjabat') is-invalid @enderror" value="{{ $pegawai->penjabat }}" >
                             @error('penjabat')

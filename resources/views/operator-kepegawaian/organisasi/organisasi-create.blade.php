@@ -90,7 +90,7 @@
                       </div>
 
                       <div class="form-group row align-items-center">
-                        <label for="tahun_mulai" class="form-control-label col-sm-3 text-md-right">Tahun tahun_mulai s/d Tahun Selesai</label>
+                        <label for="tahun_mulai" class="form-control-label col-sm-3 text-md-right">Tahun Mulai s/d Tahun Selesai</label>
                         <div class="col-sm-3 col-md-4">
                           <input type="number" id="tahun_mulai" name="tahun_mulai"  class="form-control @error('tahun_mulai') is-invalid @enderror" placeholder="tahun mulai" value="{{old('tahun_mulai')}}" >
                               @error('tahun_mulai')
@@ -130,7 +130,7 @@
 
                     </div>
                     <div class="card-footer bg-whitesmoke">
-                      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                      <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah data ini ingin disimpan?')"><i class="fas fa-save"></i> Simpan</button>
                     </div>
                   </div>
                 </form>

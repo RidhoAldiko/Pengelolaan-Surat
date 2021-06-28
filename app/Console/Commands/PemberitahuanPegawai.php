@@ -59,17 +59,17 @@ class PemberitahuanPegawai extends Command
             if (count($dkgb) > 0) {
                //kirim email pemberitahuan ke operator
                     foreach ($users as $user) {
-                        Mail::raw('Pada bulan ini ADA pegawai yang Kenaikan Gaji Berkali (KGB) berakhir pada bulan ini. Silahkan cek ke sistem',function($message) use($user){
+                        Mail::raw('Pada bulan ini ADA pegawai yang Kenaikan Gaji Berkali (KGB) harus diurus segera. Silahkan cek ke sistem',function($message) use($user){
                             $message->to($user->email);
-                            $message->subject('Pada bulan ini ADA pegawai yang Kenaikan Gaji Berkali (KGB) berakhir pada bulan ini. Silahkan cek ke sistem');
+                            $message->subject('Pada bulan ini ADA pegawai yang Kenaikan Gaji Berkali (KGB) harus diurus segera. Silahkan cek ke sistem');
                         });
                     }
             }else{
                //kirim email pemberitahuan ke operator
                foreach ($users as $user) {
-                    Mail::raw('Pada bulan ini TIDAK ADA pegawai yang Kenaikan Gaji Berkali (KGB) berakhir pada bulan ini.',function($message) use($user){
+                    Mail::raw('Pada bulan ini TIDAK ADA pegawai yang Kenaikan Gaji Berkali (KGB) harus diurus segera.',function($message) use($user){
                         $message->to($user->email);
-                        $message->subject('Pada bulan ini TIDAK ADA pegawai yang Kenaikan Gaji Berkali (KGB) berakhir pada bulan ini.');
+                        $message->subject('Pada bulan ini TIDAK ADA pegawai yang Kenaikan Gaji Berkali (KGB) harus diurus segera.');
                     });
                 } 
             }
@@ -90,17 +90,17 @@ class PemberitahuanPegawai extends Command
             if (count($datapangkat) > 0) {
                 //kirim email pemberitahuan ke operator
                      foreach ($users as $user) {
-                         Mail::raw('Pada bulan ini ADA pegawai yang Pangkat Golongan akan berakhir pada bulan ini. Silahkan cek ke sistem',function($message) use($user){
+                         Mail::raw('Pada bulan ini ADA pegawai yang Pangkat Golongan harus diurus segera. Silahkan cek ke sistem',function($message) use($user){
                              $message->to($user->email);
-                             $message->subject('Pada bulan ini ADA pegawai yang Pangkat Golongan akan berakhir pada bulan ini. Silahkan cek ke sistem');
+                             $message->subject('Pada bulan ini ADA pegawai yang Pangkat Golongan harus diurus segera. Silahkan cek ke sistem');
                          });
                      }
              }else{
                 //kirim email pemberitahuan ke operator
                 foreach ($users as $user) {
-                     Mail::raw('Pada bulan ini TIDAK ADA pegawai yang Pangkat Golongan akan berakhir pada bulan ini.',function($message) use($user){
+                     Mail::raw('Pada bulan ini TIDAK ADA pegawai yang Pangkat Golongan harus diurus segera.',function($message) use($user){
                          $message->to($user->email);
-                         $message->subject('Pada bulan ini TIDAK ADA pegawai yang Pangkat Golongan akan berakhir pada bulan ini.');
+                         $message->subject('Pada bulan ini TIDAK ADA pegawai yang Pangkat Golongan harus diurus segera.');
                      });
                  } 
              }
