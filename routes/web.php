@@ -164,15 +164,14 @@ Route::prefix('operator-surat')
     ->middleware('auth','role:1')
     ->group(function(){
         //operator-surat search pegawai
-        Route::get('search-pengguna', [OperatorSuratController::class,'search_pengguna'])->name('operator-surat.search');
+        Route::get('search-pengguna', [SuratMasukController::class,'search_pengguna'])->name('operator-surat.search');
+        Route::get('search-approve', [OperatorSuratController::class,'search_pengguna'])->name('operator-surat-keluar.search');
         //operator-surat dashboard
         Route::get('/', [OperatorSuratController::class,'index'])->name('operator-surat.index');
 
     //----Surat masuk----
         // operator-surat store surat masuk 
         Route::post('surat-masuk', [SuratMasukController::class,'store'])->name('surat-masuk.store');
-        
-        Route::get('surat-masuk/cetak_surat_masuk', [SuratMasukController::class,'cetak_laporan_surat_masuk'])->name('surat-masuk.cetak_laporan_surat_masuk');
         // operator-surat data surat masuk 
         Route::get('surat-masuk', [SuratMasukController::class,'index'])->name('surat-masuk.index');
         // operator-surat form surat masuk 
@@ -193,7 +192,9 @@ Route::prefix('operator-surat')
         // operator-surat tabel disposisi surat masuk 
         Route::get('disposisi-surat-masuk', [DisposisiMasukController::class,'index'])->name('disposisi-surat-masuk.index');
         // operator-surat tabel disposisi surat masuk 
-        Route::get('disposisi-surat-masuk/cetak_disposisi', [DisposisiMasukController::class,'cetak_disposisi'])->name('disposisi-surat-masuk.cetak');
+        Route::get('disposisi-surat-masuk/{id}/cetak_disposisi', [DisposisiMasukController::class,'cetak_disposisi'])->name('disposisi-surat-masuk.cetak');
+        //
+        Route::get('disposisi-surat-masuk/{id}/arsip', [DisposisiMasukController::class,'arsip'])->name('disposisi-surat-masuk.arsip');
         // operator-surat form disposisi surat masuk 
         Route::get('disposisi-surat-masuk/{id}/create',[DisposisiMasukController::class,'create'])->name('disposisi-surat-masuk.create');
         // operator-surat destroy disposisi surat masuk
@@ -252,10 +253,16 @@ Route::prefix('operator-surat')
         Route::get('effort-surat/{id}/forward', [EffortSuratController::class,'forward'])->name('effort-surat.forward');
         // operator-surat detail effort surat keluar 
         Route::post('effort-surat/forward/store', [EffortSuratController::class,'store_forward'])->name('effort-surat.store-forward');
+        //
+        Route::get('effort-surat/{id}/arsipkan', [EffortSuratController::class,'arsipkan'])->name('effort-surat.arsipkan');
+        //
+        Route::get('effort-surat/{id}/cetak', [EffortSuratController::class,'cetak'])->name('effort-surat.cetak');
 
         //----Arsip surat Keluar----
         // operator-surat arsip surat
         Route::get('arsip-surat-Keluar', [ArsipSuratKeluarController::class,'index'])->name('arsip-surat-keluar.index');
+        //
+        Route::get('arsip-surat-Keluar/{id}', [ArsipSuratKeluarController::class,'show'])->name('arsip-surat-keluar.show');
         // operator-surat serverside arsip surat
         Route::get('arsip-surat-keluar/server-side', [ArsipSuratKeluarController::class,'arsip_surat_serverside'])->name('arsip-surat-keluar.serverside');
     
@@ -384,6 +391,8 @@ Route::prefix('user-disposisi')
             Route::post('data-effort', [DataEffortController::class,'store'])->name('data-effort.store-forward');
             //disposisi selesikan disposisi
             Route::get('data-effort/{id}/finish', [DataEffortController::class,'finish'])->name('data-effort.finish');
+            //
+            Route::get('data-effort/{id}/ignore', [DataEffortController::class,'ignore'])->name('data-effort.ignore');
         
     });
 

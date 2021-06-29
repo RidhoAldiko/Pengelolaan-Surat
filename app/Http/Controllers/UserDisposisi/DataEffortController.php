@@ -109,6 +109,13 @@ class DataEffortController extends Controller
     public function finish($id){
         // dd($id);
         $update=SuratKeluar::where('id_surat_keluar', $id)->update(['status' => '3']);
-        return redirect()->route('data-effort.index')->with('status',"Data Disposisi Surat Masuk berhasil di selesaikan");
+        return redirect()->route('data-effort.index')->with('status',"Approval Surat Masuk berhasil di selesaikan");
     }
+
+    public function ignore($id){
+        $update=SuratKeluar::where('id_surat_keluar', $id)->update(['status' => '4']);
+        return redirect()->route('data-effort.index')->with('status',"Approval Surat Masuk berhasil ditolak");
+    }
+
+    
 }

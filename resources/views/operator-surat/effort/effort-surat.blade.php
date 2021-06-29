@@ -41,7 +41,11 @@
                                     <td>{{date('d-m-Y',strtotime($result->tanggal_effort))}}</td>
                                     <td>
                                         @if ($result->status == 0)
-                                            {{ 'Terdaftar' }} 
+                                            {{ 'Terdaftar' }}
+                                        @elseif ($result->status == 3)
+                                            {{ 'Selesai' }}
+                                        @elseif ($result->status == 4)
+                                            {{ 'Ditolak' }}
                                         @else
                                             {{ 'Berjalan' }}
                                         @endif
@@ -62,20 +66,24 @@
                                             ->orderBy('id_teruskan_effort_surat','DESC')
                                             ->take(1)
                                             ->get();
-                                        foreach ($user as $usr) {
-                                            if ( $usr->id_jabatan == 1) {
-                                                echo  $usr->nama_jabatan;
-                                            } elseif ( $usr->id_jabatan == 2) {
-                                                echo  $usr->nama_jabatan;
-                                            } elseif ( $usr->id_jabatan == 3) {
-                                                echo $usr->nama_staf_ahli;
-                                            } elseif ( $usr->id_jabatan == 4) {
-                                                echo  $usr->nama_jabatan. ' ' .$usr->nama_asisten;
-                                            } elseif ( $usr->id_jabatan == 5) {
-                                                echo  $usr->nama_jabatan. ' ' .$usr->nama_bagian;
-                                            } elseif ( $usr->id_jabatan == 6) {
-                                                echo  $usr->nama_jabatan. ' ' .$usr->nama_sub_bagian;
+                                        if ($user->count() == 1) {
+                                            foreach ($user as $usr) {
+                                                if ( $usr->id_jabatan == 1) {
+                                                    echo  $usr->nama_jabatan;
+                                                } elseif ( $usr->id_jabatan == 2) {
+                                                    echo  $usr->nama_jabatan;
+                                                } elseif ( $usr->id_jabatan == 3) {
+                                                    echo $usr->nama_staf_ahli;
+                                                } elseif ( $usr->id_jabatan == 4) {
+                                                    echo  $usr->nama_jabatan. ' ' .$usr->nama_asisten;
+                                                } elseif ( $usr->id_jabatan == 5) {
+                                                    echo  $usr->nama_jabatan. ' ' .$usr->nama_bagian;
+                                                } elseif ( $usr->id_jabatan == 6) {
+                                                    echo  $usr->nama_jabatan. ' ' .$usr->nama_sub_bagian;
+                                                } 
                                             }
+                                        } else {
+                                            echo '-';
                                         }
                                         @endphp
                                     </td>
@@ -97,6 +105,19 @@
                                             <a href="{{route('effort-surat.show',$result->id_effort_surat)}}" class="btn btn-success text-white btn-sm" title="Edit">
                                                 <i class="fas fa-info"></i> Detail
                                             </a>
+                                            @if ($result->status == 4)
+                                                <a href="#" class="btn btn-danger btn-sm getIdSuratKeluar" data-toggle="modal" data-target="#deleteEffort" data-id="{{$result->id_surat_keluar}}" >
+                                                    <i class="fas fa-trash fa-sm"></i> Hapus
+                                                </a>
+                                            @endif
+                                            @if ($result->status == 3)
+                                                <a href="{{route('effort-surat.arsipkan',$result->id_effort_surat)}}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                    <i class="fas fa-archive"></i> Arsipkan
+                                                </a>
+                                                <a target="_blank" href="{{route('effort-surat.cetak',$result->id_effort_surat)}}" class="btn btn-primary btn-sm" >
+                                                    <i class="fas fa-print"></i> Print
+                                                </a>
+                                            @endif
                                         @endif
                                     </td>
                                 </tr>

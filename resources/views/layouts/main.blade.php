@@ -133,6 +133,35 @@ gtag('config', 'UA-94034622-3');
         });
 </script>
 
+<script>
+    $('.search-input-surat-keluar').on('keyup',function(){
+            
+            var _data = $(this).val();
+            if (_data.length > 3) {
+                
+                $.ajax({
+                        url: '{{route('operator-surat-keluar.search')}}',
+                        data:{
+                            data:_data
+                        },
+                        method : 'GET',
+                        beforeSend:function(){
+                            $('.search-result-surat').html('mohon tunggu');
+                        },
+                        success:function(res){
+                            $('.search-result-surat').html(res).fadeIn();
+                        },
+                    });
+                    $(document).on('click','a',function(){
+                    $('#id').val($(this).text());
+                    $('.search-result-surat').fadeOut();
+                });    
+            } else {
+                $('.search-result-surat').fadeOut();
+            }
+        });
+</script>
+
 {{--global script untuk search nip/nama pegawai middleware operator kepegawaian --}}
 <script>
     $('.search-input').on('keyup',function(){

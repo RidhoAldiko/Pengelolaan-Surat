@@ -20,7 +20,7 @@ class ArsipSuratMasukController extends Controller
         return view('operator-surat.arsip.arsip-surat-masuk');
     }
     public function arsip_surat_serverside(){
-        $data = SuratMasuk::where('status','1')->orWhere('status','3')->get();
+        $data = SuratMasuk::where('status','1')->orWhere('status','4')->get();
         return DataTables::of($data)
                 ->addIndexColumn()
                 ->editColumn('pengirim', function($data){ 
@@ -39,12 +39,12 @@ class ArsipSuratMasukController extends Controller
                     if ($data->status == 1) {
                         return "Tidak didisposisi";
                     }else
-                    if ($data->status == 3) {
+                    if ($data->status == 4) {
                         return "Selesai didisposisi";
                     }
                 })
                 ->addColumn('aksi', function($data) {
-                    $button = '<a href="#" class="btn btn-success text-white btn-sm" title="Edit">
+                    $button = '<a href="'.route('surat-masuk.show',$data->id_surat_masuk).'" class="btn btn-success text-white btn-sm" title="Edit">
                                     <i class="fas fa-info"></i> Detail
                                 </a>
                             ';
