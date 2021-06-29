@@ -21,7 +21,7 @@ class PemberitahuanPegawai extends Command
      *
      * @var string
      */
-    protected $description = 'Pemberitahuan bulanan pegawai apakah ada KGB dan Pangkat berakhir pada setiap bulan';
+    protected $description = 'Pemberitahuan bulanan pegawai apakah ada kenaikan KGB dan Pangkat pada setiap bulan';
 
     /**
      * Create a new command instance.
