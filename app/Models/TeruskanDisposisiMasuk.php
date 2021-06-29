@@ -16,6 +16,7 @@ class TeruskanDisposisiMasuk extends Model
         'id',
         'id_disposisi_surat_masuk',
         'instruksi',
+        'status',
     ];
 
     public function user()

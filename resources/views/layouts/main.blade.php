@@ -40,6 +40,9 @@ gtag('config', 'UA-94034622-3');
         @if (Auth::user()->role==2)
             @include('templates.sidebar.sidebar-operator-kepegawaian')
         @endif
+        @if (Auth::user()->role==3)
+            @include('templates.sidebar.sidebar-user-disposisi')
+        @endif
         <!-- endsidebar -->
 
         <!-- Main Content -->
@@ -159,25 +162,37 @@ gtag('config', 'UA-94034622-3');
             }
         });
 </script>
-{{-- script pengguna --}}
-@stack('script-menampilan-level-surat')
-@stack('script-custom-file')
-@stack('search-pegawai-page_tambah-pengguna')
-{{-- script pegawai --}}
-@stack('script-server-side_pegawai')
-@stack('script-server-side_admin-pegawai')
-@stack('script-surat-masuk')
-@stack('script-disposisi-surat-masuk')
-@stack('script-server-side_arsip-surat-masuk')
-@stack('script-delete-pegawai')
-{{-- script master --}}
-@stack('script-delete-golongan')
-@stack('script-delete-disposisi')
-@stack('script-delete-button')
-@stack('script-delete-jabatan')
-@stack('script-delete-unit_kerja')
-@stack('script-delete-level_surat')
-@stack('script-delete-gaji')
+{{-- global script untuk search nip/nama pegawai middleware operator surat --}}
+<script>
+    $('.search-input-surat-user').on('keyup',function(){
+            
+            var _data = $(this).val();
+            if (_data.length > 3) {
+                
+                $.ajax({
+                        url: '{{route('user-disposisi.search')}}',
+                        data:{
+                            data:_data
+                        },
+                        method : 'GET',
+                        beforeSend:function(){
+                            $('.search-result-surat-user').html('mohon tunggu');
+                        },
+                        success:function(res){
+                            $('.search-result-surat-user').html(res).fadeIn();
+                        },
+                    });
+                    $(document).on('click','a',function(){
+                    $('#id').val($(this).text());
+                    $('.search-result-surat-user').fadeOut();
+                });    
+            } else {
+                $('.search-result-surat-user').fadeOut();
+            }
+        });
+</script>
+@stack('custom-js')
+@stack('script-tambahanakhir')
 
 </body>
 </html>

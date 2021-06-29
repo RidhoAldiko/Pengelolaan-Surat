@@ -46,6 +46,11 @@ class Pegawai extends Model
     {
         return $this->hasOne(User::class,'id','nip_pegawai');
     }
+
+    public function unit_kerja()
+    {
+        return $this->hasMany(Unit_kerja::class,'nip_pegawai','nip_pegawai');
+    }
     //table pegawai memiliki 1 relasi yang dikirim ke tabel jabatan dengan relasi one to one
     public function jabatan()
     {

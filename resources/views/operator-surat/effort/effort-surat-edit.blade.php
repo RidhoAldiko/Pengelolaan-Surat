@@ -3,10 +3,10 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Effort Surat Keluar</h1>
+        <h1>Approval Surat Keluar</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{route('effort-surat.index')}}">Effort Surat Keluar</a></div>
-            <div class="breadcrumb-item">Ubah Effort Surat Keluar</div>
+            <div class="breadcrumb-item active"><a href="{{route('effort-surat.index')}}">Approval Surat Keluar</a></div>
+            <div class="breadcrumb-item">Approval Surat Keluar</div>
         </div>
     </div>
     <div class="section-body ">
@@ -14,7 +14,7 @@
             <div class="col-md-8">
                 <div class="card shadow ">
                     <div class="card-header">
-                        <h4>Ubah Effort Surat Keluar</h4>
+                        <h4>Ubah Approval Surat Keluar</h4>
                     </div>
                     <div class="card-body">
                         <form action="{{route('effort-surat.update',$result->id_surat_keluar)}}" method="POST" enctype="multipart/form-data">
@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="tanggal_effort">Tanggal Effort</label>
+                                <label for="tanggal_effort">Tanggal Approval</label>
                                 <input type="text" id="tanggal_effort" name="tanggal_effort" onfocus="(this.type='date')"  class="form-control @error('tanggal_effort') is-invalid @enderror" placeholder="Masukan tanggal disposisi" value="{{$result->tanggal_effort}}" >
                                 @error('tanggal_effort')
                                 <span class="invalid-feedback" role="alert">
@@ -141,7 +141,7 @@
     </div>
 </section>
 @endsection
-@push('script-custom-file')
+@push('custom-js')
     <script>
         $(document).on('change', '.custom-file-input', function (event) {
         $(this).next('.custom-file-label').html(event.target.files[0].name);

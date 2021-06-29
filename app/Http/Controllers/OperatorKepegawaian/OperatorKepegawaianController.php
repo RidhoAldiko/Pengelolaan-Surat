@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 //inisialisasi model yang digunakan
 use App\Models\Pegawai;
+use App\Models\Asisten;
+use App\Models\Bagian;
+use App\Models\SubBagian;
+use App\Models\Staf_ahli as Staf;
 use App\Models\Unit_kerja as Unit;
 use App\Models\Hobi;
 use App\Models\Jabatan;
@@ -60,15 +64,22 @@ class OperatorKepegawaianController extends Controller
     }
     // method form data pegawai
     public function data_pegawai(){
+        
         return view('operator-kepegawaian.pegawai.pegawai');
     }
-    // method get server side data pegawai
+
     public function pegawai_serverSide(){
         //get data pegawai 
-        $data = Pegawai::select('pegawai.*','nama_jabatan')
-                ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
-                ->get();
+        $data = Pegawai::select('pegawai.*','nama_jabatan','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian')
+        ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+        ->join('unit_kerja', 'unit_kerja.nip_pegawai', '=', 'pegawai.nip_pegawai')
+        ->join('staf_ahli', 'staf_ahli.id_staf_ahli', '=', 'unit_kerja.id_staf_ahli')
+        ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
+        ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
+        ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
+        ->get();
         return DataTables::of($data)
+                ->addIndexColumn()
                 ->editColumn('nip', function($data){ 
                     return $data->nip_pegawai; 
                 })
@@ -77,6 +88,25 @@ class OperatorKepegawaianController extends Controller
                 })
                 ->editColumn('jabatan', function($data){ 
                     return $data->nama_jabatan; 
+                })
+
+                ->editColumn('unit', function($data){ 
+                    
+                    if($data->id_jabatan < 3) {
+                        return '-';
+                    } else 
+                    if($data->id_jabatan == 3) {
+                        return $data->nama_staf_ahli;
+                    } else 
+                    if($data->id_jabatan == 4) {
+                        return $data->nama_asisten;
+                    } else 
+                    if($data->id_jabatan == 5) {
+                        return $data->nama_bagian;
+                    } else 
+                    if($data->id_jabatan >= 6) {
+                        return $data->nama_sub_bagian;
+                    }
                 })
                 ->editColumn('status', function($data){ 
                     return ($data->status == 0) ? 'Aktif' : 'Nonaktif';
@@ -101,6 +131,7 @@ class OperatorKepegawaianController extends Controller
                 ->rawColumns(['aksi'])
                 ->make(true);
     }
+    
     //method form data pegawai
     public function add_pegawai(){
         //get data jabatan
@@ -110,7 +141,6 @@ class OperatorKepegawaianController extends Controller
 
     //method store data pegawai
     public function store_pegawai(PegawaiRequest $request){
-        
         $this->validate($request,[
             'nip_pegawai' => 'unique:pegawai'
         ],[
@@ -118,9 +148,69 @@ class OperatorKepegawaianController extends Controller
         ]);
         $data = $request->all();
         $data['status'] = 0;
-        // dd($data);
-        //store data pegawai
         $store = Pegawai::create($data);
+
+        if ($data['id_jabatan'] < 3) {
+            $staf_ahli = Staf::Where('nama_staf_ahli','-')->first('id_staf_ahli');
+            $asisten = Asisten::Where('nama_asisten','-')->first('id_asisten');
+            $bagian = Bagian::Where('nama_bagian','-')->first('id_bagian');
+            $sub_bagian = SubBagian::Where('nama_sub_bagian','-')->first('id_sub_bagian');
+            $unit_kerja = Unit::create([
+                'nip_pegawai' => $data['nip_pegawai'],
+                'id_staf_ahli' => $staf_ahli['id_staf_ahli'],
+                'id_asisten' => $asisten['id_asisten'],
+                'id_bagian' => $bagian['id_bagian'],
+                'id_sub_bagian' => $sub_bagian['id_sub_bagian'],
+            ]);
+        } else 
+        if ($data['id_jabatan'] == 3){
+            $asisten = Asisten::Where('nama_asisten','-')->first('id_asisten');
+            $bagian = Bagian::Where('nama_bagian','-')->first('id_bagian');
+            $sub_bagian = SubBagian::Where('nama_sub_bagian','-')->first('id_sub_bagian');
+            $unit_kerja = Unit::create([
+                'nip_pegawai' => $data['nip_pegawai'],
+                'id_staf_ahli' => $data['id_staf_ahli'],
+                'id_asisten' => $asisten['id_asisten'],
+                'id_bagian' => $bagian['id_bagian'],
+                'id_sub_bagian' => $sub_bagian['id_sub_bagian'],
+            ]);
+        } else 
+        if ($data['id_jabatan'] == 4) {
+            $staf_ahli = Staf::Where('nama_staf_ahli','-')->first('id_staf_ahli');
+            $bagian = Bagian::Where('nama_bagian','-')->first('id_bagian');
+            $sub_bagian = SubBagian::Where('nama_sub_bagian','-')->first('id_sub_bagian');
+            $unit_kerja = Unit::create([
+                'nip_pegawai' => $data['nip_pegawai'],
+                'id_staf_ahli' => $staf_ahli['id_staf_ahli'],
+                'id_asisten' => $data['id_asisten'],
+                'id_bagian' => $bagian['id_bagian'],
+                'id_sub_bagian' => $sub_bagian['id_sub_bagian'],
+            ]);
+        } else 
+        if ($data['id_jabatan'] == 5) {
+            $staf_ahli = Staf::Where('nama_staf_ahli','-')->first('id_staf_ahli');
+            $sub_bagian = SubBagian::Where('nama_sub_bagian','-')->first('id_sub_bagian');
+            $unit_kerja = Unit::create([
+                'nip_pegawai' => $data['nip_pegawai'],
+                'id_staf_ahli' => $staf_ahli['id_staf_ahli'],
+                'id_asisten' => $data['id_asisten'],
+                'id_bagian' => $data['id_bagian'],
+                'id_sub_bagian' => $sub_bagian['id_sub_bagian'],
+            ]);
+        }else 
+        if ($data['id_jabatan'] > 5) {
+            $staf_ahli = Staf::Where('nama_staf_ahli','-')->first('id_staf_ahli');
+            $unit_kerja = Unit::create([
+                'nip_pegawai' => $data['nip_pegawai'],
+                'id_staf_ahli' => $staf_ahli['id_staf_ahli'],
+                'id_asisten' => $data['id_asisten'],
+                'id_bagian' => $data['id_bagian'],
+                'id_sub_bagian' => $data['id_sub_bagian'],
+            ]);
+        }
+        
+        
+        
         return redirect()->route('data-pegawai.index')->with('status',"Data Berhasil Ditambah");
     }
 
@@ -165,8 +255,23 @@ class OperatorKepegawaianController extends Controller
     //method edit data
     public function edit($id)
     {
+        
         //get data jabatan
         $jabatan = Jabatan::where('status','=',0)->get();
+        $result = Pegawai::select('pegawai.*','nama_jabatan','unit_kerja.id_staf_ahli','unit_kerja.id_asisten','unit_kerja.id_bagian','unit_kerja.id_sub_bagian','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian')
+        ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+        ->join('unit_kerja', 'unit_kerja.nip_pegawai', '=', 'pegawai.nip_pegawai')
+        ->join('staf_ahli', 'staf_ahli.id_staf_ahli', '=', 'unit_kerja.id_staf_ahli')
+        ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
+        ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
+        ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
+        ->Where('pegawai.nip_pegawai',$id)
+        ->first();
+
+        $staf_ahli = Staf::all();
+        $asisten = Asisten::all();
+        $bagian = Bagian::Where('id_asisten',$result->id_asisten)->get();
+        $sub_bagian = SubBagian::Where('id_bagian',$result->id_bagian)->get();
         //untuk mendapatkan data pegawai dan data milik pegawai
         $pegawai = Pegawai::with([
                         'jabatan','hobi',
@@ -191,44 +296,72 @@ class OperatorKepegawaianController extends Controller
         $pangkat_cpns        = PangkatCPNS::with(['golongan'])->where('nip_pegawai',$id)->first();
         $pangkat_pns         = PangkatPNS::with(['golongan'])->where('nip_pegawai',$id)->first();
         
-        return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('jabatan','pegawai','organisasi1','organisasi2','organisasi3','kgb','pangkat_cpns','pangkat_pns'));
+        return view('operator-kepegawaian.pegawai.pegawai-edit',\compact('jabatan','result','staf_ahli','asisten','bagian','sub_bagian','pegawai','organisasi1','organisasi2','organisasi3','kgb','pangkat_cpns','pangkat_pns'));
     }
 
     public function update(PegawaiRequest $request, $id)
     {
         $data = $request->all();
-        $item = Pegawai::findOrFail($id);
-        $image = $item->foto;
-        $this->validate($request,[
-            'foto' => 'image|mimes:jpg,jpeg,png|max:2048'
-        ],[
-            'foto.mimes' => 'Format harus PNG/jpg/jpeg',
-            'foto.image' => 'Data yang di upload berbentuk foto',
-            'foto.max'   => 'Foto maksimal berukuran 2MB'
-        ]);
-            //cek apakah ada foto yang diupload
-            if ($request->hasFile('foto')) {
-                    //mengecek apakah yang dinputkan sudah pernah inputkan atau belum
-                    if ($image) {
-                        //hapus foto yang sudah ada
-                        Storage::delete('/public/foto/'.$image);
-                    }
-                    //simpan foto yang baru distorege
-                    $filenameWithExt    = $request->file('foto')->getClientOriginalName();
-                    $filename           = pathinfo($filenameWithExt,PATHINFO_FILENAME);
-                    $extension          = $request->file('foto')->getClientOriginalExtension();
-                    $filenameSimpan     = $filename.'_'.time().'.'.$extension;
-                    $path               = $request->file('foto')->storeAs('public/foto',$filenameSimpan);
-                    
-                    $data['foto']          = $filenameSimpan;
-                    $data['tanggal_lahir'] = date('Y-m-d', strtotime($data['tanggal_lahir']));
-                    $item->update($data);
-                
-            }else{
-                //jika tidak ada foto simpan data yang ada saja
-                $data['tanggal_lahir'] = date('Y-m-d', strtotime($data['tanggal_lahir']));
-                $item->update($data);
-            }
+        $item   = Pegawai::findOrFail($id);
+        $item->update($data);
+        if ($data['id_jabatan'] < 3) {
+            $staf_ahli = Staf::Where('nama_staf_ahli','-')->first('id_staf_ahli');
+            $asisten = Asisten::Where('nama_asisten','-')->first('id_asisten');
+            $bagian = Bagian::Where('nama_bagian','-')->first('id_bagian');
+            $sub_bagian = SubBagian::Where('nama_sub_bagian','-')->first('id_sub_bagian');
+            $unit_kerja = Unit::where('nip_pegawai', $data['nip_pegawai'])->update([
+                'nip_pegawai' => $data['nip_pegawai'],
+                'id_staf_ahli' => $staf_ahli['id_staf_ahli'],
+                'id_asisten' => $asisten['id_asisten'],
+                'id_bagian' => $bagian['id_bagian'],
+                'id_sub_bagian' => $sub_bagian['id_sub_bagian'],
+            ]);
+        } else 
+        if ($data['id_jabatan'] == 3){
+            $asisten = Asisten::Where('nama_asisten','-')->first('id_asisten');
+            $bagian = Bagian::Where('nama_bagian','-')->first('id_bagian');
+            $sub_bagian = SubBagian::Where('nama_sub_bagian','-')->first('id_sub_bagian');
+            $unit_kerja = Unit::where('nip_pegawai', $data['nip_pegawai'])->update([
+                'nip_pegawai' => $data['nip_pegawai'],
+                'id_staf_ahli' => $data['id_staf_ahli'],
+                'id_asisten' => $asisten['id_asisten'],
+                'id_bagian' => $bagian['id_bagian'],
+                'id_sub_bagian' => $sub_bagian['id_sub_bagian'],
+            ]);
+        } else 
+        if ($data['id_jabatan'] == 4) {
+            $staf_ahli = Staf::Where('nama_staf_ahli','-')->first('id_staf_ahli');
+            $bagian = Bagian::Where('nama_bagian','-')->first('id_bagian');
+            $sub_bagian = SubBagian::Where('nama_sub_bagian','-')->first('id_sub_bagian');
+            $unit_kerja = Unit::where('nip_pegawai', $data['nip_pegawai'])->update([
+                'nip_pegawai' => $data['nip_pegawai'],
+                'id_staf_ahli' => $staf_ahli['id_staf_ahli'],
+                'id_asisten' => $data['id_asisten'],
+                'id_bagian' => $bagian['id_bagian'],
+                'id_sub_bagian' => $sub_bagian['id_sub_bagian'],
+            ]);
+        } else 
+        if ($data['id_jabatan'] == 5) {
+            $staf_ahli = Staf::Where('nama_staf_ahli','-')->first('id_staf_ahli');
+            $sub_bagian = SubBagian::Where('nama_sub_bagian','-')->first('id_sub_bagian');
+            $unit_kerja = Unit::where('nip_pegawai', $data['nip_pegawai'])->update([
+                'nip_pegawai' => $data['nip_pegawai'],
+                'id_staf_ahli' => $staf_ahli['id_staf_ahli'],
+                'id_asisten' => $data['id_asisten'],
+                'id_bagian' => $data['id_bagian'],
+                'id_sub_bagian' => $sub_bagian['id_sub_bagian'],
+            ]);
+        }else 
+        if ($data['id_jabatan'] > 5) {
+            $staf_ahli = Staf::Where('nama_staf_ahli','-')->first('id_staf_ahli');
+            $unit_kerja = Unit::where('nip_pegawai', $data['nip_pegawai'])->update([
+                'nip_pegawai' => $data['nip_pegawai'],
+                'id_staf_ahli' => $staf_ahli['id_staf_ahli'],
+                'id_asisten' => $data['id_asisten'],
+                'id_bagian' => $data['id_bagian'],
+                'id_sub_bagian' => $data['id_sub_bagian'],
+            ]);
+        }
                 
         return redirect()->route('data-pegawai.index')->with('status',"Data Berhasil Edit");
     }
@@ -338,7 +471,7 @@ class OperatorKepegawaianController extends Controller
             if ($data->foto) {
                 Storage::delete('/public/foto/'.$data->foto);
             }
-            
+        Unit::where('nip_pegawai',$data_pegawai->nip_pegawai)->delete();
         Pegawai::destroy($data_pegawai->nip_pegawai);
         
         return redirect()->route('data-pegawai.index')->with('status','Data Berhasil Dihapus');

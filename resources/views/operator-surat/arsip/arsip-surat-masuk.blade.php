@@ -28,7 +28,6 @@
                                 <th scope="col">No Surat</th>
                                 <th scope="col">Tgl Surat</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">File</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -39,7 +38,7 @@
     </div>
 </section>
 @endsection
-@push('script-server-side_arsip-surat-masuk')
+@push('custom-js')
 <script>
     $(function() {
         $('#dataArsipSuratMasuk').DataTable({
@@ -66,10 +65,6 @@
                 {
                     data: 'status',
                     name: 'status'
-                },
-                {
-                    data: 'file_surat',
-                    name: 'file_surat'
                 },
                 {
                     data: 'aksi',

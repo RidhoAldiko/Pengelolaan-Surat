@@ -17,7 +17,7 @@
                         <h4>Form Tambah Data Pegawai</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('data-pegawai.store')}}" method="POST">
+                        <form action="{{route('admin-pegawai.store')}}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="nip_pegawai">NIP Pegawai</label>
@@ -31,7 +31,7 @@
 
                             <div class="form-group">
                                 <label for="nomor_karpeg">Nomor Kartu Pegawai</label>
-                                <input type="number" id="nomor_karpeg" name="nomor_karpeg"  class="form-control @error('nomor_karpeg') is-invalid @enderror" placeholder="Masukan Nomor kartu Pegawai" value="{{old('nomor_karpeg')}}" >
+                                <input type="text" id="nomor_karpeg" name="nomor_karpeg"  class="form-control @error('nomor_karpeg') is-invalid @enderror" placeholder="Masukan Nomor kartu Pegawai" value="{{old('nomor_karpeg')}}" >
                                 @error('nomor_karpeg')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -60,7 +60,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="ttanggal_lahir">Tanggal Lahir</label>
+                                <label for="tanggal_lahir">Tanggal Lahir</label>
                                 <input type="text" id="tanggal_lahir" name="tanggal_lahir" onfocus="(this.type='date')"  class="form-control @error('tanggal_lahir') is-invalid @enderror" placeholder="Masukan Tanggal Lahir" value="{{old('tanggal_lahir')}}" >
                                 @error('tanggal_lahir')
                                 <span class="invalid-feedback" role="alert">
@@ -117,37 +117,10 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
-                                <label for="id_unit">Unit Kerja</label>
-                                <select class="form-control @error('id_unit') is-invalid @enderror" id="id_unit" name="id_unit">
-                                    <option selected disabled> --Pilih Unit Kerja-- </option>
-                                    @foreach ($unit as $un)
-                                    <option value="{{$un->id_unit}}">{{$un->nama_unit}}</option>
-                                    @endforeach
-                                </select>
-                                @error('id_unit')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="id_golongan">Golongan</label>
-                                <select class="form-control @error('id_golongan') is-invalid @enderror" id="id_golongan" name="id_golongan">
-                                    <option selected disabled> --Pilih Golongan-- </option>
-                                    @foreach ($golongan as $gl)
-                                    <option value="{{$gl->id_golongan}}">{{$gl->nama_golongan}}</option>
-                                    @endforeach
-                                </select>
-                                @error('id_golongan')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+                            
                             <div class="form-group">
                                 <label for="jabatan">Jabatan</label>
-                                <select class="form-control @error('id_jabatan') is-invalid @enderror" id="id_jabatan" name="id_jabatan">
+                                <select class="form-control data-jabatan @error('id_jabatan') is-invalid @enderror" id="id_jabatan" name="id_jabatan">
                                     <option selected disabled> --Pilih Jabatan-- </option>
                                     @foreach ($jabatan as $jb)
                                     <option value="{{$jb->id_jabatan}}">{{$jb->nama_jabatan}}</option>
@@ -159,6 +132,34 @@
                                 </span>
                                 @enderror
                             </div>
+                            <div id="field-staf" class="form-group d-none">
+                                <label for="staf_ahli">Staf Ahli</label>
+                                <select class="form-control data-staf" id="id_staf_ahli" name="id_staf_ahli">
+                                    <option selected disabled> --Pilih Staf Ahli-- </option>
+                                </select>
+                            </div>
+
+                            <div id="field-asisten" class="form-group d-none">
+                                <label for="asisten">Asisten</label>
+                                <select class="form-control data-asisten" id="id_asisten" name="id_asisten">
+                                    <option selected disabled> --Pilih Asisten-- </option>
+                                </select>
+                            </div>
+
+                            <div id="field-bagian" class="form-group d-none">
+                                <label for="bagian">Bagian</label>
+                                <select class="form-control data-bagian" id="id_bagian" name="id_bagian">
+                                    <option selected disabled> --Pilih Bagian-- </option>
+                                </select>
+                            </div>
+
+                            <div id="field-sub-bagian" class="form-group d-none">
+                                <label for="sub_bagian">Sub Bagian</label>
+                                <select class="form-control data-sub-bagian" id="id_sub_bagian" name="id_sub_bagian">
+                                    <option selected disabled> --Pilih Sub Bagian-- </option>
+                                </select>
+                            </div>
+                            
                             <a href="{{ route('admin-pegawai.index') }}" class="btn btn-warning"><i class="fas fa-chevron-left"></i> Kembali</a>
                             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
                         </form> 
@@ -169,3 +170,139 @@
     </div>
 </section>
 @endsection
+
+@push('custom-js')
+<script>
+//menampilkan field sesuai dengan jabatan
+$('.data-jabatan').on('change',function(){
+    //ambil nilai id jabatan
+    var _id = $(this).val();
+    //sembunyikan field jika id jabatan kecil dari 3
+    if (_id < 3) {
+        $('#field-staf').hide();
+        $('#field-asisten').hide();
+        $('#field-asisten').hide();
+        $('#field-bagian').hide();
+        $('#field-sub-bagian').hide();
+    } else 
+    //jika id jabatan = 3 tampilkan field staf ahli
+    if (_id == 3) {
+        var element = document.getElementById("field-staf");
+        element.classList.remove("d-none");
+        $.ajax({
+                url: '{{route('data-unit_kerja.staf-ahli')}}',
+                data:{
+                    data:_id
+                },
+                method : 'GET',
+                beforeSend:function(){
+                    $('.data-staf').html('mohon tunggu');
+                },
+                success:function(res){
+                    // tampilkan field staf
+                    $('#field-staf').show();
+                    $('.data-staf').html(res);
+                    //sembunyikan field asisten
+                    $('#field-asisten').hide();
+                    //sembunyikan field bagian
+                    $('#field-bagian').hide();
+                    //sembunyikan field sub bagian
+                    $('#field-sub-bagian').hide();
+                    
+                },
+            })
+    } else 
+    //jika id jabatan besar dari 3
+    if(_id > 3){
+        //tampilkan filed asisten
+        var element = document.getElementById("field-asisten");
+        element.classList.remove("d-none");
+        //jika id jabatan 5 tampilkan field bagian
+        if (_id == 6 || _id == 7) {
+            $('#field-bagian').show();
+            var element = document.getElementById("field-bagian");
+            element.classList.remove("d-none");
+            $('#field-sub-bagian').show();
+            var element = document.getElementById("field-sub-bagian");
+            element.classList.remove("d-none");
+        } else 
+        if (_id == 5) {
+            $('#field-sub-bagian').hide();
+            $('#field-bagian').show();
+            var element = document.getElementById("field-bagian");
+            element.classList.remove("d-none");
+
+        } else 
+        if(_id == 4){
+            //sembunyikan field staf bagian
+            $('#field-bagian').hide();
+            //sembunyikan field sub bagian
+            $('#field-sub-bagian').hide();
+        }
+        var _id = 4;
+        $.ajax({
+                url: '{{route('data-unit_kerja.asisten')}}',
+                data:{
+                    data:_id
+                },
+                method : 'GET',
+                beforeSend:function(){
+                    $('.data-asisten').html('mohon tunggu');
+                },
+                success:function(res){
+                    // tampilkan filed asiseten
+                    $('#field-asisten').show();
+                    $('.data-asisten').html(res);
+                    //sembunyikan field staf ahli
+                    $('#field-staf').hide();
+                    
+                },
+            })
+    }
+})
+//tampilkan unit bagian berdasarkan data asisten
+$('.data-asisten').on('change',function(){
+    var element = document.getElementById("field-bagian");
+        element.classList.remove("d-none");
+    var _id = $(this).val();
+    // console.log(_id);
+    $.ajax({
+        url: '{{route('data-unit_kerja.bagian')}}',
+        data:{
+            data:_id
+        },
+        method : 'GET',
+        beforeSend:function(){
+            $('.data-bagian').html('mohon tunggu');
+        },
+        success:function(res){
+            // console.log(res);
+            // $('#field-asisten').fadeIn();
+            $('.data-bagian').html(res);
+            // $('#field-staf').fadeOut();
+        },
+    })
+    
+})
+
+$('.data-bagian').on('change',function(){
+    var _id = $(this).val();
+    $.ajax({
+        url: '{{route('data-unit_kerja.sub-bagian')}}',
+        data:{
+            data:_id
+        },
+        method : 'GET',
+        beforeSend:function(){
+            $('.data-sub-bagian').html('mohon tunggu');
+        },
+        success:function(res){
+            console.log(res);
+            // $('#field-asisten').fadeIn();
+            $('.data-sub-bagian').html(res);
+            // $('#field-staf').fadeOut();
+        },
+    })
+})
+</script>
+@endpush

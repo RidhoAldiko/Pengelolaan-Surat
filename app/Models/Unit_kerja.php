@@ -12,6 +12,11 @@ class Unit_kerja extends Model
     public $timestamps = false;
     protected $primaryKey = 'id_unit';
     protected $fillable = [
-        'nama_unit','status'
+        'nip_pegawai',
+        'id_staf_ahli',
+        'id_asisten',
+        'id_bagian',
+        'id_sub_bagian',
     ];
+
 }

@@ -82,7 +82,7 @@
     </div>
 </div>
 @endsection
-@push('script-delete-level_surat')
+@push('custom-js')
 <script>
     //delete data level surat
     $('.getIdLevelSurat').on('click',function(){

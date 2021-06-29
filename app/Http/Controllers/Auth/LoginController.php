@@ -40,6 +40,10 @@ class LoginController extends Controller
         if (auth()->user()->level == 2) {
             $this->redirectTo = '/operator-kepegawaian';
             return $this->redirectTo;
+        }else 
+        if (auth()->user()->level == 3) {
+            $this->redirectTo = '/user-disposisi';
+            return $this->redirectTo;
         } else{
             $this->redirectTo = '/login';
             return $this->redirectTo;

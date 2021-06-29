@@ -19,6 +19,7 @@ class CreateTeruskanEffortSuratTable extends Migration
             $table->smallInteger('id_effort_surat')->unsigned();
             $table->text('instruksi');
             $table->string('paraf');
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
             $table->foreign('id_effort_surat')->references('id_effort_surat')->on('effort_surat_keluar')->onUpdate('cascade');
         });

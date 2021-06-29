@@ -49,6 +49,7 @@
                     'effort-surat.show',
                     'effort-surat.edit',
                     'effort-surat.forward',
+                    'arsip-surat-keluar.index'
                 ])}}">
                     <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-copy"></i> <span>Surat Keluar</span></a>
                     <ul class="dropdown-menu">
@@ -67,10 +68,10 @@
                             'effort-surat.edit',
                             'effort-surat.forward',
                         ])}}">
-                            <a class="nav-link " href="{{route('effort-surat.index')}}">Effort Surat</a>
+                            <a class="nav-link " href="{{route('effort-surat.index')}}">Approval Surat</a>
                         </li>
-                        <li class="#">
-                            <a class="nav-link " href="">Arsip Surat</a>
+                        <li class="{{set_active(['arsip-surat-keluar.index'])}}">
+                            <a class="nav-link " href="{{route('arsip-surat-keluar.index')}}">Arsip Surat</a>
                         </li>
                     </ul>
                 <li>

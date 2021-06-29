@@ -43,10 +43,6 @@ class ArsipSuratMasukController extends Controller
                         return "Selesai didisposisi";
                     }
                 })
-                ->addColumn('file_surat', function($data) {
-                    $file = '<a href="'.Storage::url($data->file_surat).'" target="_blank"> <i class="fa fa-file-pdf fa-2x"></i></a>';
-                    return $file;
-                })
                 ->addColumn('aksi', function($data) {
                     $button = '<a href="#" class="btn btn-success text-white btn-sm" title="Edit">
                                     <i class="fas fa-info"></i> Detail
@@ -54,7 +50,7 @@ class ArsipSuratMasukController extends Controller
                             ';
                     return $button;
                 })
-                ->rawColumns(['file_surat','aksi'])
+                ->rawColumns(['aksi'])
                 ->make(true);
     }
 }

@@ -40,7 +40,7 @@
                                     <td>{{$result->perihal}}</td>
                                     <td>
                                         <a href="{{route('effort-surat.create',$result->id_surat_keluar)}}" class="btn btn-primary text-white btn-sm" title="Edit">
-                                            <i class="fas fa-angle-right"></i> Effort
+                                            <i class="fas fa-angle-right"></i> Approve
                                             </a>
                                         <a href="{{route('surat-keluar.show',$result->id_surat_keluar)}}" class="btn btn-success text-white btn-sm" title="Edit">
                                         <i class="fas fa-info"></i> Detail
@@ -88,15 +88,11 @@
     </div>
 </div>
 @endsection
-@push('script-surat-masuk')
-    <script>
-        $(document).ready( function () {
-            $('#surat-masuk').DataTable();
-        } );
-    </script>
-@endpush
-@push('script-delete-button')
+@push('custom-js')
 <script>
+    $(document).ready( function () {
+            $('#surat-masuk').DataTable();
+    } );
     //delete data unit kerja
     $('.getIdSuratKeluar').on('click',function(){
         var _id = $(this).data("id");

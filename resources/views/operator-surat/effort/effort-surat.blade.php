@@ -3,7 +3,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Effort Surat</h1>
+        <h1>Approval Surat</h1>
     </div>
     @if (session('status'))
     <div class="alert shadow alert-success alert-dismissible fade show" role="alert">
@@ -16,7 +16,7 @@
     <div class="section-body">
         <div class="card">
             <div class="card-header">
-                <h4>Data Effort Surat</h4>
+                <h4>Data Approval Surat</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -26,8 +26,9 @@
                                 <th scope="col">No.</th>
                                 <th scope="col">No Surat</th>
                                 <th scope="col">Tanggal Surat</th>
-                                <th scope="col">Tanggal Effort</th>
+                                <th scope="col">Tanggal Approval </th>
                                 <th scope="col">status</th>
+                                <th scope="col">Diterima Oleh</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -44,6 +45,39 @@
                                         @else
                                             {{ 'Berjalan' }}
                                         @endif
+                                    </td>
+                                    <td>
+                                        @php
+                                        
+                                        $user = DB::table('teruskan_effort_surat')
+                                            ->select('teruskan_effort_surat.*', 'nama_pegawai','jabatan.id_jabatan','nama_jabatan','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian')
+                                            ->join('pegawai', 'pegawai.nip_pegawai', '=', 'teruskan_effort_surat.id')
+                                            ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+                                            ->join('unit_kerja', 'unit_kerja.nip_pegawai', '=', 'pegawai.nip_pegawai')
+                                            ->join('staf_ahli', 'staf_ahli.id_staf_ahli', '=', 'unit_kerja.id_staf_ahli')
+                                            ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
+                                            ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
+                                            ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
+                                            ->where('id_effort_surat','=',$result->id_effort_surat)
+                                            ->orderBy('id_teruskan_effort_surat','DESC')
+                                            ->take(1)
+                                            ->get();
+                                        foreach ($user as $usr) {
+                                            if ( $usr->id_jabatan == 1) {
+                                                echo  $usr->nama_jabatan;
+                                            } elseif ( $usr->id_jabatan == 2) {
+                                                echo  $usr->nama_jabatan;
+                                            } elseif ( $usr->id_jabatan == 3) {
+                                                echo $usr->nama_staf_ahli;
+                                            } elseif ( $usr->id_jabatan == 4) {
+                                                echo  $usr->nama_jabatan. ' ' .$usr->nama_asisten;
+                                            } elseif ( $usr->id_jabatan == 5) {
+                                                echo  $usr->nama_jabatan. ' ' .$usr->nama_bagian;
+                                            } elseif ( $usr->id_jabatan == 6) {
+                                                echo  $usr->nama_jabatan. ' ' .$usr->nama_sub_bagian;
+                                            }
+                                        }
+                                        @endphp
                                     </td>
                                     <td>
                                         @if ($result->status == 0)
@@ -101,16 +135,12 @@
     </div>
 </div>
 @endsection
-@push('script-disposisi-surat-masuk')
+
+@push('custom-js')
 <script>
     $(document).ready( function () {
         $('#disposisi-surat-masuk').DataTable();
     } );
-</script>
-@endpush
-
-@push('script-delete-button')
-<script>
     //delete data unit kerja
     $('.getIdSuratKeluar').on('click',function(){
         var _id = $(this).data("id");

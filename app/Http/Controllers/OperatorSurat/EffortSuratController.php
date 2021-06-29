@@ -4,12 +4,15 @@ namespace App\Http\Controllers\OperatorSurat;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EffortSuratKeluar;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\OperatorSurat\EffortSuratRequest;
 use App\Http\Requests\OperatorSurat\TeruskanEffortSuratRequest;
 use App\Http\Requests\OperatorSurat\SuratKeluarRequest;
 use App\Models\EffortSuratKeluar as EffortSurat;
 use App\Models\SuratKeluar;
+use App\Models\User;
 use App\Models\TeruskanEffortSurat;
 
 class EffortSuratController extends Controller
@@ -27,6 +30,7 @@ class EffortSuratController extends Controller
                 ->orWhere('status','2')//berjalan
                 ->get();
         // dd($results);
+        
         return view('operator-surat.effort.effort-surat',\compact('results'));
     }
 
@@ -139,12 +143,17 @@ class EffortSuratController extends Controller
 
     public function store_forward(TeruskanEffortSuratRequest $request){
         $data = $request->all();
+       
         $explode = explode(' - ',$request->id,-1);
         //masukan nip ke variabel data['id]
         $data ['id'] = $explode[0];
+        $data ['status'] = '0';
+        // dd($data);
         $result = SuratKeluar::join('effort_surat_keluar', 'effort_surat_keluar.id_surat_keluar', '=', 'surat_keluar.id_surat_keluar')
                 ->where('id_effort_surat',$request->id_effort_surat)
                 ->first('surat_keluar.id_surat_keluar');
+        $user = User::where('id',$explode)->first();
+        Mail::to($user->email)->send(new EffortSuratKeluar());
         $create=TeruskanEffortSurat::create($data);
         $update=SuratKeluar::where('id_surat_keluar', $result->id_surat_keluar)->update(['status' => '2']);
         return redirect()->route('effort-surat.index')->with('status',"Effort Surat Keluar berhasil diteruskan kepada pengguna");

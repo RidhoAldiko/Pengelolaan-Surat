@@ -3,10 +3,10 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Effort Surat</h1>
+        <h1>Approval Surat</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{route('surat-keluar.index')}}">Surat Keluar</a></div>
-            <div class="breadcrumb-item">Effort Surat</div>
+            <div class="breadcrumb-item">Approval Surat</div>
         </div>
     </div>
     <div class="section-body ">
@@ -14,7 +14,7 @@
             <div class="col-md-8">
                 <div class="card shadow ">
                     <div class="card-header">
-                        <h4>Effort Surat Keluar</h4>
+                        <h4>Approval Surat Keluar</h4>
                     </div>
                     <div class="card-body">
                         <form action="{{route('effort-surat.store')}}" method="POST">
@@ -31,7 +31,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="tanggal_effort">Tanggal Effort</label>
+                                <label for="tanggal_effort">Tanggal Approval</label>
                                 <input type="text" id="tanggal_effort" name="tanggal_effort" onfocus="(this.type='date')"  class="form-control @error('tanggal_effort') is-invalid @enderror" placeholder="Masukan tanggal disposisi" value="{{old('tanggal_effort')}}" >
                                 @error('tanggal_effort')
                                 <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
                                 <i class="fas fa-chevron-left"></i> <span>Kembali</span>
                             </a>
                             <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> <span>Effort</span>
+                                <i class="fas fa-save"></i> <span>Approve</span>
                             </button>
                         </form> 
                     </div>

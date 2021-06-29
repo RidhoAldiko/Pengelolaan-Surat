@@ -18,6 +18,7 @@ class CreateTeruskanDisposisiMasukTable extends Migration
             $table->char('id');
             $table->smallInteger('id_disposisi_surat_masuk')->unsigned();
             $table->text('instruksi');
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
             
             $table->foreign('id_disposisi_surat_masuk')->references('id_disposisi_surat_masuk')->on('disposisi_surat_masuk')->onUpdate('cascade');

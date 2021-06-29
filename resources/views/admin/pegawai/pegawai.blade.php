@@ -24,11 +24,11 @@
                     <table  class="table table-bordered table-hover table-striped" id="dataAdminPegawai" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th scope="col">No</th>
                                 <th scope="col">NIP</th>
                                 <th scope="col">Nama</th>
-                                <th scope="col">Unit Kerja</th>
-                                <th scope="col">Golongan</th>
                                 <th scope="col">Jabatan</th>
+                                <th scope="col">Unit Kerja</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
                             </tr>
@@ -40,8 +40,8 @@
         </div>
     </div>
 </section>
- <!-- delete Modal-->
- <div class="modal fade" id="deletePegawai" tabindex="-1" role="dialog" aria-labelledby="deletePegawaiLabel" aria-hidden="true">
+<!-- delete Modal-->
+<div class="modal fade" id="deletePegawai" tabindex="-1" role="dialog" aria-labelledby="deletePegawaiLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header justify-content-center">
@@ -66,25 +66,24 @@
     </div>
 </div>
 @endsection
+@push('custom-js')
 
-@push('script-delete-pegawai')
 <script>
-    //detele untuk data pegawai bagian operator kepegawaian
     $(document).on('click', '.getIdPegawai', function() {
         var _id = $(this).data("id");
-        $('.modal-footer form[action]').attr('action', 'data-pegawai'+'/'+_id);
+        $('.modal-footer form[action]').attr('action', 'admin-pegawai'+'/'+_id);
     })
-</script>
-@endpush
 
-@push('script-server-side_admin-pegawai')
-<script>
     $(function() {
         $('#dataAdminPegawai').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{route('admin-pegawai.serverside')}}",
             columns: [
+                {
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
                 {
                     data: 'nip',
                     name: 'nip',
@@ -94,16 +93,12 @@
                     name: 'nama',
                 },
                 {
-                    data: 'unit',
-                    name: 'unit',
-                },
-                {
-                    data: 'golongan',
-                    name: 'golongan',
-                },
-                {
                     data: 'jabatan',
                     name: 'jabatan',
+                },
+                {
+                    data: 'unit',
+                    name: 'unit',
                 },
                 {
                     data: 'status',
