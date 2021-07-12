@@ -865,7 +865,7 @@
                                             <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                                                 <thead>
                                                         <tr class="text-center">
-                                                            <th scope="col">Nama Pegawai</th>
+                                                            <th scope="col">Nama file</th>
                                                             <th scope="col">Keterangan</th>
                                                             <th scope="col">File Dokumen</th>
                                                         </tr>
