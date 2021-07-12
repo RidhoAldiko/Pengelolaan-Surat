@@ -33,8 +33,8 @@
                         <tbody>
                             @forelse ($items as $item)
                             <tr class="text-center">
-                            <td>{{ $item->nama_golongan }}</td>
                             <td>{{ $item->pangkat }}</td>
+                            <td>{{ $item->nama_golongan }}</td>
                             <td>{{ $item->status == '0' ? 'Aktif' : 'Nonaktif' }}</td>
                             <td><a href="{{ route('data-golongan.edit',$item->id_golongan) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit fa-sm"></i> <span>Ubah</span></a>
                                 

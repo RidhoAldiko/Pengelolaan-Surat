@@ -78,7 +78,7 @@
                                   @foreach ($data_kgb as $key => $value)
                                   @php
                                       $awal = strtotime($value->batas_berlaku); 
-                                      $selisih =floor(($akhir - $awal) / (60 * 60 * 24 * 30));
+                                      $selisih =floor(($awal-$akhir ) / (60 * 60 * 24 * 30));
                                   @endphp
                                       {{-- jika tanggal batas berlaku <= 2 bulan maka tampilkan siapa saja --}}
                                       @if ($selisih <= 2 && $selisih >= 0)
@@ -138,7 +138,7 @@
                                 @foreach ($data_pangkat as $key => $value)
                                 @php
                                     $awal = strtotime($value->batas_berlaku); 
-                                    $selisih =floor(($akhir - $awal) / (60 * 60 * 24 * 30));
+                                    $selisih =floor(($awal-$akhir) / (60 * 60 * 24 * 30));
                                 @endphp
                                     {{-- jika tanggal batas berlaku <= 2 bulan maka tampilkan siapa saja --}}
                                     @if ($selisih <= 4 && $selisih >= 0)

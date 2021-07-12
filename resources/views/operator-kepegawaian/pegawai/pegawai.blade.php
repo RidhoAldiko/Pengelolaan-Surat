@@ -79,7 +79,7 @@
 </script>
 @endpush
 
-@push('script-server-side_pegawai')
+@push('custom-js')
 <script>
     $(function() {
         $('#dataPegawai').DataTable({
