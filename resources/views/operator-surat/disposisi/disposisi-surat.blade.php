@@ -5,7 +5,6 @@
     <div class="section-header">
         <h1>Disposisi</h1>
     </div>
-    <a href="{{ route('disposisi-surat-masuk.cetak') }}" target="_blank" class="btn btn-primary mb-3"><i class="fas fa-print"></i> Print Disposisi</a>
     @if (session('status'))
     <div class="alert shadow alert-success alert-dismissible fade show" role="alert">
         {{ session('status') }}
@@ -43,7 +42,9 @@
                                     <td>{{date('d-m-Y',strtotime($result->tanggal_disposisi))}}</td>
                                     <td>
                                         @if ($result->status == 0)
-                                            {{ 'Terdaftar' }} 
+                                            {{ 'Terdaftar' }}
+                                        @elseif($result->status == 3) 
+                                            {{ 'Selesai' }}
                                         @else
                                             {{ 'Berjalan' }}
                                         @endif
@@ -66,6 +67,14 @@
                                             <a href="{{route('disposisi-surat-masuk.show',$result->id_disposisi_surat_masuk)}}" class="btn btn-success text-white btn-sm" title="Edit">
                                                 <i class="fas fa-info"></i> Detail
                                             </a>
+                                            @if ($result->status == 3)
+                                                <a href="{{route('disposisi-surat-masuk.arsip',$result->id_surat_masuk)}}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                    <i class="fas fa-archive"></i> Arsipkan
+                                                </a>
+                                                <a target="_blank" href="{{route('disposisi-surat-masuk.cetak',$result->id_disposisi_surat_masuk)}}" class="btn btn-primary text-white btn-sm" title="Edit">
+                                                    <i class="fas fa-print"></i> Print
+                                                </a>
+                                            @endif
                                         @endif
                                     </td>
                                 </tr>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\OperatorKepegawaian\PegawaiRequest;
 use Yajra\DataTables\DataTables;
 use App\Models\Pegawai;
+use App\Models\User;
 use App\Models\Unit_kerja as Unit;
 use App\Models\Hobi;
 use App\Models\Alamat;
@@ -235,6 +236,7 @@ class PegawaiController extends Controller
                 'id_bagian' => $bagian['id_bagian'],
                 'id_sub_bagian' => $sub_bagian['id_sub_bagian'],
             ]);
+            User::where('id', $data['nip_pegawai'])->update(['id_level_surat' => $data['id_jabatan']]);
         } else 
         if ($data['id_jabatan'] == 3){
             $asisten = Asisten::Where('nama_asisten','-')->first('id_asisten');
@@ -247,6 +249,7 @@ class PegawaiController extends Controller
                 'id_bagian' => $bagian['id_bagian'],
                 'id_sub_bagian' => $sub_bagian['id_sub_bagian'],
             ]);
+            User::where('id', $data['nip_pegawai'])->update(['id_level_surat' => $data['id_jabatan']]);
         } else 
         if ($data['id_jabatan'] == 4) {
             $staf_ahli = Staf::Where('nama_staf_ahli','-')->first('id_staf_ahli');
@@ -259,6 +262,7 @@ class PegawaiController extends Controller
                 'id_bagian' => $bagian['id_bagian'],
                 'id_sub_bagian' => $sub_bagian['id_sub_bagian'],
             ]);
+            User::where('id', $data['nip_pegawai'])->update(['id_level_surat' => $data['id_jabatan']]);
         } else 
         if ($data['id_jabatan'] == 5) {
             $staf_ahli = Staf::Where('nama_staf_ahli','-')->first('id_staf_ahli');
@@ -270,6 +274,7 @@ class PegawaiController extends Controller
                 'id_bagian' => $data['id_bagian'],
                 'id_sub_bagian' => $sub_bagian['id_sub_bagian'],
             ]);
+            User::where('id', $data['nip_pegawai'])->update(['id_level_surat' => $data['id_jabatan']]);
         }else 
         if ($data['id_jabatan'] > 5) {
             $staf_ahli = Staf::Where('nama_staf_ahli','-')->first('id_staf_ahli');
@@ -280,6 +285,7 @@ class PegawaiController extends Controller
                 'id_bagian' => $data['id_bagian'],
                 'id_sub_bagian' => $data['id_sub_bagian'],
             ]);
+            User::where('id', $data['nip_pegawai'])->update(['id_level_surat' => $data['id_jabatan']]);
         }
         
         return redirect()->route('admin-pegawai.index')->with('status',"Data Berhasil Diubah");

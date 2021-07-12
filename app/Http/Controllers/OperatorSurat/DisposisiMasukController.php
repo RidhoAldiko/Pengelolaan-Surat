@@ -30,6 +30,7 @@ class DisposisiMasukController extends Controller
                 ->join('disposisi_surat_masuk', 'disposisi_surat_masuk.id_surat_masuk', '=', 'surat_masuk.id_surat_masuk')
                 ->where('status','0')//terdaftar
                 ->orWhere('status','2')//berjalan
+                ->orWhere('status','3')//berjalan
                 ->get();
         return view('operator-surat.disposisi.disposisi-surat',\compact('results'));
     }
@@ -168,7 +169,28 @@ class DisposisiMasukController extends Controller
         return redirect()->route('disposisi-surat-masuk.index')->with('status',"Data Disposisi Surat Masuk berhasil dihapus");
     }
 
-    public function cetak_disposisi(){
-        return view('operator-surat.disposisi.cetak_disposisi');
+    public function cetak_disposisi($id){
+        $result = SuratMasuk::select('surat_masuk.*','indeks','id_disposisi_surat_masuk','tanggal_disposisi')
+        ->join('disposisi_surat_masuk', 'disposisi_surat_masuk.id_surat_masuk', '=', 'surat_masuk.id_surat_masuk')
+        ->where('id_disposisi_surat_masuk',$id)
+        ->first();
+        $data = TeruskanDisposisiMasuk::select('teruskan_disposisi_masuk.*', 'nama_pegawai','jabatan.id_jabatan','nama_jabatan','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian')
+        ->join('pegawai', 'pegawai.nip_pegawai', '=', 'teruskan_disposisi_masuk.id')
+        ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+        ->join('unit_kerja', 'unit_kerja.nip_pegawai', '=', 'pegawai.nip_pegawai')
+        ->join('staf_ahli', 'staf_ahli.id_staf_ahli', '=', 'unit_kerja.id_staf_ahli')
+        ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
+        ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
+        ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
+        ->where('id_disposisi_surat_masuk','=',$result->id_disposisi_surat_masuk)
+        ->orderBy('id_teruskan_surat_masuk','ASC')
+        ->get();
+        
+        return view('operator-surat.disposisi.cetak_disposisi',\compact('result','data'));
+    }
+
+    public function arsip($id){
+        $update=SuratMasuk::where('id_surat_masuk', $id)->update(['status' => '4']);
+        return redirect()->route('disposisi-surat-masuk.index')->with('status',"Data Disposisi Surat Masuk berhasil diarsipkan");
     }
 }

@@ -132,7 +132,7 @@
                                 </span>
                                 @enderror
                             </div>
-                            
+
                             <div id="field-staf" class="form-group d-none">
                                 <label for="staf_ahli">Staf Ahli</label>
                                 <select class="form-control data-staf" id="id_staf_ahli" name="id_staf_ahli">
@@ -163,7 +163,6 @@
                             
                             <a href="{{ route('admin-pegawai.index') }}" class="btn btn-warning"><i class="fas fa-chevron-left"></i> Kembali</a>
                             
-=======
                             <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah data ini ingin disimpan?')"><i class="fas fa-save"></i> Simpan</button>
 
                         </form> 
@@ -175,7 +174,7 @@
 </section>
 @endsection
 
-@push('script-menampilan-unit')
+@push('custom-js')
 <script>
 //menampilkan field sesuai dengan jabatan
 $('.data-jabatan').on('change',function(){

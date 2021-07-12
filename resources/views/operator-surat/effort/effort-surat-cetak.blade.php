@@ -30,14 +30,14 @@
     padding: 5px 40px 15px 10px;
     }
     </style>
-    <title>Cetak Surat Masuk</title>
+    <title>Cetak Surat Keluar</title>
 </head>
 <body>
     <div class="bingkai">
         <div class="isi">
             <p class="isi2"><strong><u>Surat Dari</u></strong></p>
             <p style="font-size: 16px;border-bottom-style:solid;border-bottom-width:1px;border-botom-color:black;" class="isi2"><strong>SURAT MASUK</strong></p>
-        <p style="display: inline;">No.Urut: <b>{{$result->id_surat_masuk}}</b></p>
+        <p style="display: inline;">No.Urut: <b>{{$result->id_surat_keluar}}</b></p>
         <p style="display: inline;padding-right: 20px;padding-left:20px"></p>
         <p class="verticalLine"style="display: inline;padding-left:40px;">Tgl Masuk: {{date('d-m-Y',strtotime($result->tanggal_surat))}}</p>
         <p style="display: inline;padding-right: 20px;padding-left:20px"></p>
@@ -45,15 +45,15 @@
 
         <p style="border-bottom-style:solid;border-bottom-width:1px;border-botom-color:black;"></p>
         <p style="border-bottom-style:solid;border-bottom-width:1px;border-botom-color:black;">
-        Isi Ringkas : {{$result->isi_ringkasan}}</p>
+        Isi Ringkas :{{$result->isi_ringkasan}} </p>
         <p style="border-bottom-style:solid;border-bottom-width:1px;border-botom-color:black;">Lampiran: </p>
-    
+       
         <p style="display: inline;">Dari:</p>
         <p style="display: inline;padding-right: 200px;padding-left:20px"></p>
-        <p class="verticalLine"style="display: inline">Kepada:</p>
+        <p class="verticalLine"style="display: inline">Kepada:{{$result->alamat}}</p>
 
         <p style="border-bottom-style:solid;border-bottom-width:1px;border-botom-color:black;"></p>
-        <p style="display: inline;">Tanggal: {{date('d-m-Y')}}</p>
+        <p style="display: inline;">Tanggal:  {{date('d-m-Y')}}</p>
         <p style="display: inline;padding-right: 200px;padding-left:20px"></p>
         <p class="verticalLine"style="display: inline">No.Surat: {{$result->nomor_surat}}</p>
         <p style="border-bottom-style:solid;border-bottom-width:1px;border-botom-color:black;"></p>
@@ -65,7 +65,7 @@
             <p style="font-size: 16px" class="isi2"><strong>LEMBARAN DISPOSISI</strong></p>
             <table class="static" align="center" rules="all" style="width:98%;">
                 <tr>
-                    <td width="40%" style="border-right: 0px; border-left:0px">No.Urut: {{$result->id_surat_masuk}}</td>
+                    <td width="40%" style="border-right: 0px; border-left:0px">No.Urut:{{$result->id_surat_keluar}}</td>
                     <td style="border-right: 0px; border-left:0px">Tgl Diterima: {{date('d-m-Y',strtotime($result->tanggal_surat))}}</td>
                     <td style="border-left:0px">Kode</td>
                     
@@ -99,7 +99,7 @@
                         Tanggal Penyelesaian
                     </td>
                     <td colspan="2" style="border-left:0px">
-                        {{date('d-m-Y',strtotime($result->tanggal_disposisi))}}
+                        {{date('d-m-Y',strtotime($result->tanggal_effort))}}
                     </td>
                 </tr>
                 <tr>

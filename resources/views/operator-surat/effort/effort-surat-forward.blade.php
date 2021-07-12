@@ -35,7 +35,7 @@
 
                             <div class="form-group">
                                 <label for="id_disposisi_surat_masuk">Kepala Sub Bagian</label>
-                                <input type="text" name="id" id="id" class="form-control search-input-surat @error('id') is-invalid @enderror" placeholder="Masukan Nama / Unit Sub Bagian" value="{{old('id')}}">
+                                <input type="text" name="id" id="id" class="form-control search-input-surat-keluar @error('id') is-invalid @enderror" placeholder="Masukan Nama / Unit Sub Bagian" value="{{old('id')}}">
                                 <div class="row">
                                     <div class="col-md-8 search-result-surat">
                                     </div>
