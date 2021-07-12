@@ -19,7 +19,7 @@ class DokumenPegawaiController extends Controller
     {
         $data = $request->all();
         $this->validate($request,[
-            'file_dokumen'   => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048'
+            'file_dokumen'   => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120'
         ],[
             'file_dokumen.required'    => 'Bukti lulus tidak boleh kosong',
             'file_dokumen.mimes'     => 'Format harus PDF,jpg,jpeg,png',

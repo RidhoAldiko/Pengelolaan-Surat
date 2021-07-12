@@ -5,7 +5,7 @@
     <div class="section-header">
         <ol class="breadcrumb justify-content-end h4">
             <li class="breadcrumb-item"><a href="">Pegawai</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Tambah data Kursus atau pelatiahn di dalam dan luar negeri</li>
+            <li class="breadcrumb-item active" aria-current="page">Tambah data Kursus atau pelatihan di dalam dan luar negeri</li>
         </ol>
     </div>
     @if (session('status'))
@@ -105,7 +105,7 @@
                       </div>
 
                       <div class="form-group row align-items-center">
-                        <label for="keterangan" class="form-control-label col-sm-3 text-md-right">Keteranga</label>
+                        <label for="keterangan" class="form-control-label col-sm-3 text-md-right">Keterangan</label>
                         <div class="col-sm-6 col-md-9">
                           <textarea name="keterangan"  class="form-control" id="" cols="30" rows="10">{{old('keterangan')}}</textarea>
                           @error('keterangan')

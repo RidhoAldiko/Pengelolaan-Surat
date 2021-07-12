@@ -43,9 +43,10 @@
                       </div>
 
                       <div class="form-group row align-items-center">
-                        <label for="file_dokumen" class="form-control-label col-sm-3 text-md-right">Bukti Lulus</label>
+                        <label for="file_dokumen" class="form-control-label col-sm-3 text-md-right">Dokumen</label>
                         <div class="col-sm-6 col-md-9">
-                            <input type="file" id="file_dokumen" name="file_dokumen"  class="form-control @error('file_dokumen') is-invalid @enderror" value="{{ $pegawai->file_dokumen }}" >
+                            <input type="file" id="file_dokumen" name="file_dokumen"  class="form-control @error('file_dokumen') is-invalid @enderror" value="{{ old('file_dokumen') }}" >
+                            <span class="text-warning" style="font-size: 11px">*Maksimal file berukuran 2MB.</span>
                             @error('file_dokumen')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

@@ -21,7 +21,7 @@ class PemberitahuanPegawai extends Command
      *
      * @var string
      */
-    protected $description = 'Pemberitahuan bulanan pegawai apakah ada KGB dan Pangkat berakhir pada setiap bulan';
+    protected $description = 'Pemberitahuan bulanan pegawai apakah ada kenaikan KGB dan Pangkat pada setiap bulan';
 
     /**
      * Create a new command instance.
@@ -50,7 +50,7 @@ class PemberitahuanPegawai extends Command
             foreach ($dataKGB as $key => $value) {
                 $akhir =strtotime(now());
                 $awal = strtotime($value->batas_berlaku); 
-                $selisih =floor(($akhir - $awal) / (60 * 60 * 24 * 30));
+                $selisih =floor(($awal-$akhir) / (60 * 60 * 24 * 30));
                 //jika masa aktif 2 bulan lagi maka kirim email ke operator ada pegawai kgb yang mau habis
                 if ($selisih <= 2 && $selisih >= 0) {
                    $dkgb[] = $value->pegawai->nama_pegawai;
@@ -81,7 +81,7 @@ class PemberitahuanPegawai extends Command
                 $datapangkat = [];
                 $akhir =strtotime(now());
                 $awal = strtotime($value->batas_berlaku); 
-                $selisih =floor(($akhir - $awal) / (60 * 60 * 24 * 30));
+                $selisih =floor(($awal-$akhir) / (60 * 60 * 24 * 30));
                 //jika masa aktif 2 bulan lagi maka kirim email ke operator ada pegawai pangkat yang mau habis
                 if ($selisih <= 4 && $selisih >= 0) {
                     $datapangkat[] = $value->pegawai->nama_pegawai;
