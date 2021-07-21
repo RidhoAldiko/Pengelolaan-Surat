@@ -21,7 +21,7 @@
     <div class="form-group" style="padding-top: 0px">
         <center>
             <p><strong>DAFTAR URUT KEPEGAWAIAN (DUK)</strong></p>
-        <p style="line-height: 0px"><strong>SEKRETARIAT DAE RAH KABUPATEN KAMPAR</strong></p>
+        <p style="line-height: 0px"><strong>SEKRETARIAT DAERAH KABUPATEN KAMPAR</strong></p>
         </center>
         <table class="static" align="center" rules="all" border="1px" style="width:95%;">
             <tr>
@@ -49,85 +49,87 @@
                 $no =1;
             @endphp
             @forelse ($pangkatgolongan as $item)
-            <tr>
-                <td>{{ $no++ }}</td>
-                {{-- -----------cpns--------------- --}}
-                <td>{{ $item->pegawai->nama_pegawai }}/ {{ $item->pegawai->nip_pegawai }}/ {{ $item->pegawai->tempat_lahir }}</td>
-                @foreach ($pegawai as $pk)
-                    @if ($item->pegawai->nip_pegawai == $pk->nip_pegawai)
-                        @foreach ($gol as $gl)
-                            @if ($pk->pangkat_cpns->id_golongan == $gl->id_golongan)
-                            <td> {{ $gl->nama_golongan }}</td>
-                            @endif
-                        @endforeach
-
-                        <td>{{ date('d/m/Y',strtotime($pk->pangkat_cpns->tmt)) }}</td>
-                        <td>{{ $pk->pangkat_cpns->nomor }}/ {{ $pk->pangkat_cpns->tanggal }}</td>
-                    @endif
-                @endforeach
-                {{-- ------------pns-------------- --}}
-                @foreach ($pegawai as $pk)
-                    @if ($item->pegawai->nip_pegawai == $pk->nip_pegawai)
-                        <td>{{ date('d/m/Y',strtotime($pk->pangkat_pns->tmt)) }}</td>
-                        <td>{{ $pk->pangkat_pns->nomor }}/ {{ $pk->pangkat_pns->tanggal }}</td>
-                    @endif
-                @endforeach
-                {{-- -------------pangkat golongan------------ --}}
-                <td>{{ $item->golongan->nama_golongan }}/ {{ date('d/m/Y',strtotime($item->tmt))  }}</td>
-                <td>{{ $item->nomor }}/ {{ date('d/m/Y',strtotime($item->tanggal)) }}</td>
-                @foreach ($pegawai as $pk)
-                    @if ($item->pegawai->nip_pegawai == $pk->nip_pegawai)
-                        <td>{{ $pk->jabatan->nama_jabatan }}</td>
-                    @endif
-                @endforeach
-                {{-- -----------diklat--------------- --}}
-                @foreach ($pegawai as $pk)
-                    @if ($item->pegawai->nip_pegawai == $pk->nip_pegawai)
-                        <td>
-                            @foreach ($pk->diklat_penjenjangan as $diklat)
-                            {{ $diklat->tahun }}
+                @if ($item->pegawai->status == 0)
+                <tr>
+                    <td>{{ $no++ }}</td>
+                    {{-- -----------cpns--------------- --}}
+                    <td>{{ $item->pegawai->nama_pegawai }}/ {{ $item->pegawai->nip_pegawai }}/ {{ $item->pegawai->tempat_lahir }}</td>
+                    @foreach ($pegawai as $pk)
+                        @if ($item->pegawai->nip_pegawai == $pk->nip_pegawai)
+                            @foreach ($gol as $gl)
+                                @if ($pk->pangkat_cpns->id_golongan == $gl->id_golongan)
+                                <td> {{ $gl->nama_golongan }}</td>
+                                @endif
                             @endforeach
-                        </td>
-                    @endif
-                @endforeach
-                {{-- ---------------------pendidikan----------------- --}}
-                @foreach ($pegawai as $pk)
-                    @if ($item->pegawai->nip_pegawai == $pk->nip_pegawai)
-                       
-                            @php
-                                $data = [];
-                            @endphp
-                            @foreach ($pk->riwayat_pendidikan as $pendidikan)
+    
+                            <td>{{ date('d/m/Y',strtotime($pk->pangkat_cpns->tmt)) }}</td>
+                            <td>{{ $pk->pangkat_cpns->nomor }}/ {{ date('d/m/Y',strtotime($pk->pangkat_cpns->tanggal)) }}</td>
+                        @endif
+                    @endforeach
+                    {{-- ------------pns-------------- --}}
+                    @foreach ($pegawai as $pk)
+                        @if ($item->pegawai->nip_pegawai == $pk->nip_pegawai)
+                            <td>{{ date('d/m/Y',strtotime($pk->pangkat_pns->tmt)) }}</td>
+                            <td>{{ $pk->pangkat_pns->nomor }}/ {{ date('d/m/Y',strtotime($pk->pangkat_pns->tanggal)) }}</td>
+                        @endif
+                    @endforeach
+                    {{-- -------------pangkat golongan------------ --}}
+                    <td>{{ $item->golongan->nama_golongan }}/ {{ date('d/m/Y',strtotime($item->tmt))  }}</td>
+                    <td>{{ $item->nomor }}/ {{ date('d/m/Y',strtotime($item->tanggal)) }}</td>
+                    @foreach ($pegawai as $pk)
+                        @if ($item->pegawai->nip_pegawai == $pk->nip_pegawai)
+                            <td>{{ $pk->jabatan->nama_jabatan }}</td>
+                        @endif
+                    @endforeach
+                    {{-- -----------diklat--------------- --}}
+                    @foreach ($pegawai as $pk)
+                        @if ($item->pegawai->nip_pegawai == $pk->nip_pegawai)
+                            <td>
+                                @foreach ($pk->diklat_penjenjangan as $diklat)
+                                {{ $diklat->tahun }}
+                                @endforeach
+                            </td>
+                        @endif
+                    @endforeach
+                    {{-- ---------------------pendidikan----------------- --}}
+                    @foreach ($pegawai as $pk)
+                        @if ($item->pegawai->nip_pegawai == $pk->nip_pegawai)
+                           
                                 @php
-                                    $data[]=$pendidikan->id_riwayatpendidikan;
-                                    $id=max($data);
+                                    $data = [];
                                 @endphp
+                                @foreach ($pk->riwayat_pendidikan as $pendidikan)
+                                    @php
+                                        $data[]=$pendidikan->id_riwayatpendidikan;
+                                        $id=max($data);
+                                    @endphp
+                                @endforeach
+                                @forelse ($pk->riwayat_pendidikan as $pd)
+                                    @if ($pd->id_riwayatpendidikan == $id)
+                                        <td>{{ $pd->jenis_pendidikan }}/ {{ $pd->nama_pendidikan }}/ {{ $pd->jurusan }}/ {{ date('Y',strtotime($pd->tgl_sttb)) }}</td> 
+                                    @endif
+                                @empty
+                                    <td>-</td>
+                                @endforelse
+                            
+                        @endif
+                    @endforeach
+    
+                    <td>{{ $item->pegawai->nomor_karpeg }}</td>
+                    {{-- --------------KGB----------- --}}
+                    @foreach ($pegawai as $pk)
+                        @if ($item->pegawai->nip_pegawai == $pk->nip_pegawai)
+                            @foreach ($pk->riwayat_kgb as $pkkgb)
+                                @foreach ($riwayatkgb as $kgb)
+                                    @if ($pkkgb->id_riwayat_kgb == $kgb->id_riwayat_kgb && $kgb->status==0)
+                                    <td> {{ date('d/m/Y', strtotime($kgb->mulai_berlaku)) }}</td>
+                                    @endif
+                                @endforeach
                             @endforeach
-                            @forelse ($pk->riwayat_pendidikan as $pd)
-                                @if ($pd->id_riwayatpendidikan == $id)
-                                    <td>{{ $pd->jenis_pendidikan }}/ {{ $pd->nama_pendidikan }}/ {{ $pd->jurusan }}/ {{ date('Y',strtotime($pd->tgl_sttb)) }}</td> 
-                                @endif
-                            @empty
-                                <td>-</td>
-                            @endforelse
-                        
-                    @endif
-                @endforeach
-
-                <td>{{ $item->pegawai->nomor_karpeg }}</td>
-                {{-- --------------KGB----------- --}}
-                @foreach ($pegawai as $pk)
-                    @if ($item->pegawai->nip_pegawai == $pk->nip_pegawai)
-                        @foreach ($pk->riwayat_kgb as $pkkgb)
-                            @foreach ($riwayatkgb as $kgb)
-                                @if ($pkkgb->id_riwayat_kgb == $kgb->id_riwayat_kgb && $kgb->status==0)
-                                <td> {{ date('d/m/Y', strtotime($kgb->mulai_berlaku)) }}</td>
-                                @endif
-                            @endforeach
-                        @endforeach
-                    @endif
-                @endforeach
-            </tr> 
+                        @endif
+                    @endforeach
+                </tr> 
+                @endif
             @empty
             <tr>
                 <td>-</td>

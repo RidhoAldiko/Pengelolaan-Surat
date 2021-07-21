@@ -10,7 +10,7 @@
 
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-              <div class="card card-statistic-1">
+              <div class="card shadow card-statistic-1">
                   <div class="card-header">
                     <h4>Total Pegawai</h4>
                   </div>
@@ -20,7 +20,7 @@
               </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-              <div class="card card-statistic-1">
+              <div class="card shadow card-statistic-1">
                   <div class="card-header">
                     <h4>Total Dokumen Pegawai</h4>
                   </div>
@@ -30,7 +30,7 @@
               </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-              <div class="card card-statistic-1">
+              <div class="card shadow card-statistic-1">
                   <div class="card-header">
                     <h4>Total Mutasi</h4>
                   </div>
@@ -40,7 +40,7 @@
               </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
+                <div class="card shadow card-statistic-1">
                     <div class="card-header">
                       <h4>Total Penghargaan</h4>
                     </div>
@@ -60,7 +60,7 @@
                   <div class="card-body">
                     <p style="font-size: 11px">Berikut daftar pegawai yang harus mengurus KGB pada 2 bulan ini.</p>
                       <div class="table-responsive">
-                          <table  class="table table-bordered table-hover table-striped" id="dataPegawai" width="100%" cellspacing="0">
+                          <table  class="table table-bordered table-hover table-striped" id="dataPegawai" width="100%" style="font-size: 12px" cellspacing="0">
                               <thead>
                                   <tr>
                                       <th scope="col">Nama</th>
@@ -76,21 +76,23 @@
                                     $akhir =strtotime(now());
                                 @endphp
                                   @foreach ($data_kgb as $key => $value)
-                                  @php
-                                      $awal = strtotime($value->batas_berlaku); 
-                                      $selisih =floor(($awal-$akhir ) / (60 * 60 * 24 * 30));
-                                  @endphp
-                                      {{-- jika tanggal batas berlaku <= 2 bulan maka tampilkan siapa saja --}}
-                                      @if ($selisih <= 2 && $selisih >= 0)
-                                      @php
-                                        $datakgb[] = $value->pegawai->nip_pegawai;
-                                      @endphp
-                                      <tr>
-                                        <td>{{ $value->pegawai->nama_pegawai }}</td>
-                                        <td>{{ $value->pegawai->nip_pegawai }}</td>
-                                        <td>{{ date('d/m/Y',strtotime($value->mulai_berlaku)) }}</td>
-                                        <td>{{ date('d/m/Y',strtotime($value->batas_berlaku)) }}</td>
-                                      </tr>
+                                      @if ($value->pegawai->status == 0)
+                                        @php
+                                        $awal = strtotime($value->batas_berlaku); 
+                                        $selisih =floor(($awal-$akhir ) / (60 * 60 * 24 * 30));
+                                    @endphp
+                                        {{-- jika tanggal batas berlaku <= 2 bulan maka tampilkan siapa saja --}}
+                                        @if ($selisih <= 2 && $selisih >= 0)
+                                        @php
+                                          $datakgb[] = $value->pegawai->nip_pegawai;
+                                        @endphp
+                                        <tr>
+                                          <td>{{ $value->pegawai->nama_pegawai }}</td>
+                                          <td>{{ $value->pegawai->nip_pegawai }}</td>
+                                          <td>{{ date('d/m/Y',strtotime($value->mulai_berlaku)) }}</td>
+                                          <td>{{ date('d/m/Y',strtotime($value->batas_berlaku)) }}</td>
+                                        </tr>
+                                        @endif
                                       @endif
                                   @endforeach
 
@@ -119,7 +121,7 @@
                   <div class="card-body">
                     <p style="font-size: 11px">Berikut daftar pegawai yang harus mengurus kenaikan pangkat pada 4 bulan ini.</p>
                       <div class="table-responsive">
-                          <table  class="table table-bordered table-hover table-striped" id="dataPegawai" width="100%" cellspacing="0">
+                          <table  class="table table-bordered table-hover table-striped" id="dataPegawai" width="100%" cellspacing="0" style="font-size: 12px">
                               <thead>
                                   <tr>
                                       <th scope="col">Nama</th>
@@ -136,22 +138,24 @@
                                     $akhir =strtotime(now());
                                 @endphp
                                 @foreach ($data_pangkat as $key => $value)
-                                @php
-                                    $awal = strtotime($value->batas_berlaku); 
-                                    $selisih =floor(($awal-$akhir) / (60 * 60 * 24 * 30));
-                                @endphp
-                                    {{-- jika tanggal batas berlaku <= 2 bulan maka tampilkan siapa saja --}}
-                                    @if ($selisih <= 4 && $selisih >= 0)
-                                    @php
-                                        $datapangkat[] = $value->pegawai->nama_pegawai;
-                                    @endphp
-                                    <tr>
-                                      <td>{{ $value->pegawai->nama_pegawai }}</td>
-                                      <td>{{ $value->pegawai->nip_pegawai }}</td>
-                                      <td>{{ date('d/m/Y',strtotime($value->tmt)) }}</td>
-                                      <td>{{ $value->nomor }}</td>
-                                      <td>{{ date('d/m/Y',strtotime($value->batas_berlaku)) }}</td>
-                                    </tr>
+                                    @if ($value->pegawai->status == 0)
+                                      @php
+                                          $awal = strtotime($value->batas_berlaku); 
+                                          $selisih =floor(($awal-$akhir) / (60 * 60 * 24 * 30));
+                                      @endphp
+                                      {{-- jika tanggal batas berlaku <= 2 bulan maka tampilkan siapa saja --}}
+                                      @if ($selisih <= 4 && $selisih >= 0)
+                                      @php
+                                          $datapangkat[] = $value->pegawai->nama_pegawai;
+                                      @endphp
+                                      <tr>
+                                        <td>{{ $value->pegawai->nama_pegawai }}</td>
+                                        <td>{{ $value->pegawai->nip_pegawai }}</td>
+                                        <td>{{ date('d/m/Y',strtotime($value->tmt)) }}</td>
+                                        <td>{{ $value->nomor }}</td>
+                                        <td>{{ date('d/m/Y',strtotime($value->batas_berlaku)) }}</td>
+                                      </tr>
+                                      @endif
                                     @endif
                                 @endforeach
                                     @if (count($datapangkat) < 1)

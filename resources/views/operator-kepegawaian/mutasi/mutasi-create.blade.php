@@ -8,6 +8,7 @@
             <li class="breadcrumb-item active" aria-current="page">Tambah data Mutasi Pegawai</li>
         </ol>
     </div>
+    <a href="{{ route('pegawai-mutasi.index') }}" class="btn btn-sm btn-warning ml-4">Kembali</a>
     @if (session('status'))
     <div class="row justify-content-center">
       <div class="col-md-8">

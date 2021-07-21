@@ -339,6 +339,8 @@ Route::prefix('operator-kepegawaian')
         Route::resource('pegawai-organisasi',OrganisasiController::class);
          // -----------------------keterangan lain---------------------------------
         Route::resource('pegawai-keterangan-lain',KeteranganLainController::class);
+         //operator-kepegawaian: get server side data pegawai
+         Route::get('serverside-mutasi',[MutasiController::class,'mutasi_serverSide'])->name('mutasi.serverside');
          // -----------------------mutasi---------------------------------
         Route::resource('pegawai-mutasi',MutasiController::class);
          // -----------------------diklat penjenjangan---------------------------------

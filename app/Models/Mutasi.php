@@ -22,7 +22,7 @@ class Mutasi extends Model
 
     public function pegawai()
     {
-        return $this->belongsTo(Pegawai::class,'nip_pegawai','id_ketlain');
+        return $this->belongsTo(Pegawai::class,'nip_pegawai','nip_pegawai');
     }
     
 }

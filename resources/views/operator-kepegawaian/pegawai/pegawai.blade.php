@@ -26,7 +26,7 @@
                     <table  class="table table-bordered table-hover table-striped" id="dataPegawai" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                
+                                <th scope="col">NO</th>
                                 <th scope="col">NIP</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Jabatan</th>
@@ -85,8 +85,16 @@
         $('#dataPegawai').DataTable({
             processing: true,
             serverSide: true,
+            order: [[ 0, 'ASC' ]],
+            fnCreatedRow: function (row, data, index) {
+                            $('td', row).eq(0).html(index + 1);
+                            },
             ajax: "{{route('pegawai.serverside')}}",
             columns: [
+                {
+                    data: 'urut_jabatan',
+                    name: 'urut_jabatan',
+                },
                 {
                     data: 'nip',
                     name: 'nip',

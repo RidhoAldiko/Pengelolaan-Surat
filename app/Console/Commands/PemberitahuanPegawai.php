@@ -48,59 +48,63 @@ class PemberitahuanPegawai extends Command
         //jika ada data kgb yang masih aktif
         if ($dataKGB->count() > 0) {
             foreach ($dataKGB as $key => $value) {
-                $akhir =strtotime(now());
-                $awal = strtotime($value->batas_berlaku); 
-                $selisih =floor(($awal-$akhir) / (60 * 60 * 24 * 30));
-                //jika masa aktif 2 bulan lagi maka kirim email ke operator ada pegawai kgb yang mau habis
-                if ($selisih <= 2 && $selisih >= 0) {
-                   $dkgb[] = $value->pegawai->nama_pegawai;
+                if ($value->pegawai->status == 0) {
+                    $akhir =strtotime(now());
+                    $awal = strtotime($value->batas_berlaku); 
+                    $selisih =floor(($awal-$akhir) / (60 * 60 * 24 * 30));
+                    //jika masa aktif 2 bulan lagi maka kirim email ke operator ada pegawai kgb yang mau habis
+                    if ($selisih <= 2 && $selisih >= 0) {
+                    $dkgb[] = $value->pegawai->nama_pegawai;
+                    }
                 }
             }
-            if (count($dkgb) > 0) {
-               //kirim email pemberitahuan ke operator
-                    foreach ($users as $user) {
-                        Mail::raw('Pada bulan ini ADA pegawai yang Kenaikan Gaji Berkali (KGB) harus diurus segera. Silahkan cek ke sistem',function($message) use($user){
+
+                if (count($dkgb) > 0) {
+                //kirim email pemberitahuan ke operator
+                        foreach ($users as $user) {
+                            Mail::raw('Pada bulan ini ADA pegawai yang Kenaikan Gaji Berkali (KGB) harus segera diurus. Silahkan cek ke sistem: '.config('app.url'),function($message) use($user){
+                                $message->to($user->email);
+                                $message->subject('Pada bulan ini ADA pegawai yang Kenaikan Gaji Berkali (KGB) harus segera diurus. Silahkan cek ke sistem');
+                            });
+                        }
+                }else{
+                //kirim email pemberitahuan ke operator
+                foreach ($users as $user) {
+                        Mail::raw('Pada bulan ini TIDAK ADA pegawai yang Kenaikan Gaji Berkali (KGB) harus segera diurus.',function($message) use($user){
                             $message->to($user->email);
-                            $message->subject('Pada bulan ini ADA pegawai yang Kenaikan Gaji Berkali (KGB) harus diurus segera. Silahkan cek ke sistem');
+                            $message->subject('Pada bulan ini TIDAK ADA pegawai yang Kenaikan Gaji Berkali (KGB) harus segera diurus.');
                         });
-                    }
-            }else{
-               //kirim email pemberitahuan ke operator
-               foreach ($users as $user) {
-                    Mail::raw('Pada bulan ini TIDAK ADA pegawai yang Kenaikan Gaji Berkali (KGB) harus diurus segera.',function($message) use($user){
-                        $message->to($user->email);
-                        $message->subject('Pada bulan ini TIDAK ADA pegawai yang Kenaikan Gaji Berkali (KGB) harus diurus segera.');
-                    });
-                } 
-            }
+                    } 
+                }
             
         }
         //----------------------pangkat golongan--------------
         if ($datakenaikanpangkat->count() > 0) {
             foreach ($datakenaikanpangkat as $key => $value) {
-                $datapangkat = [];
-                $akhir =strtotime(now());
-                $awal = strtotime($value->batas_berlaku); 
-                $selisih =floor(($awal-$akhir) / (60 * 60 * 24 * 30));
-                //jika masa aktif 2 bulan lagi maka kirim email ke operator ada pegawai pangkat yang mau habis
-                if ($selisih <= 4 && $selisih >= 0) {
-                    $datapangkat[] = $value->pegawai->nama_pegawai;
-                 }
+                if ($value->pegawai->status == 0) {
+                    $akhir =strtotime(now());
+                    $awal = strtotime($value->batas_berlaku); 
+                    $selisih =floor(($awal-$akhir) / (60 * 60 * 24 * 30));
+                    //jika masa aktif 2 bulan lagi maka kirim email ke operator ada pegawai pangkat yang mau habis
+                    if ($selisih <= 4 && $selisih >= 0) {
+                        $datapangkat[] = $value->pegawai->nama_pegawai;
+                    }
+                }
             }
             if (count($datapangkat) > 0) {
                 //kirim email pemberitahuan ke operator
                      foreach ($users as $user) {
-                         Mail::raw('Pada bulan ini ADA pegawai yang Pangkat Golongan harus diurus segera. Silahkan cek ke sistem',function($message) use($user){
+                         Mail::raw('Pada bulan ini ADA pegawai yang Pangkat Golongan harus segera diurus. Silahkan cek ke sistem: '.config('app.url'),function($message) use($user){
                              $message->to($user->email);
-                             $message->subject('Pada bulan ini ADA pegawai yang Pangkat Golongan harus diurus segera. Silahkan cek ke sistem');
+                             $message->subject('Pada bulan ini ADA pegawai yang Pangkat Golongan harus segera diurus. Silahkan cek ke sistem');
                          });
                      }
              }else{
                 //kirim email pemberitahuan ke operator
                 foreach ($users as $user) {
-                     Mail::raw('Pada bulan ini TIDAK ADA pegawai yang Pangkat Golongan harus diurus segera.',function($message) use($user){
+                     Mail::raw('Pada bulan ini TIDAK ADA pegawai yang Pangkat Golongan harus segera diurus.',function($message) use($user){
                          $message->to($user->email);
-                         $message->subject('Pada bulan ini TIDAK ADA pegawai yang Pangkat Golongan harus diurus segera.');
+                         $message->subject('Pada bulan ini TIDAK ADA pegawai yang Pangkat Golongan harus segera diurus.');
                      });
                  } 
              }
