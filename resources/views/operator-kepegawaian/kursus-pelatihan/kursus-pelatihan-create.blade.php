@@ -63,7 +63,7 @@
                       <div class="form-group row align-items-center">
                         <label for="mulai" class="form-control-label col-sm-3 text-md-right">Mulai s/d Selesai</label>
                         <div class="col-sm-3 col-md-4">
-                          <input type="text" id="mulai" name="mulai" onfocus="(this.type='date')"  class="form-control @error('mulai') is-invalid @enderror" placeholder="Mulai" value="{{old('mulai')}}" >
+                          <input type="date" id="mulai" name="mulai" class="form-control @error('mulai') is-invalid @enderror" placeholder="Mulai" value="{{old('mulai')}}" >
                               @error('mulai')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>
@@ -71,7 +71,7 @@
                               @enderror
                         </div>
                         <div class="col-sm-3 col-md-4">
-                          <input type="text" id="selesai" name="selesai" onfocus="(this.type='date')"  class="form-control @error('selesai') is-invalid @enderror" placeholder="selesai" value="{{old('selesai')}}" >
+                          <input type="date" id="selesai" name="selesai"  class="form-control @error('selesai') is-invalid @enderror" placeholder="selesai" value="{{old('selesai')}}" >
                               @error('selesai')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>

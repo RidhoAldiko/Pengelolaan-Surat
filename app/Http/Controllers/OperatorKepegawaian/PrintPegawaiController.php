@@ -39,11 +39,11 @@ class PrintPegawaiController extends Controller
     public function cetakdata()
     {
         $pegawai        = Pegawai::with('pangkat_cpns','pangkat_pns','jabatan','riwayat_pangkat',
-        'riwayat_kgb','diklat_penjenjangan','riwayat_pendidikan')->get();
+        'riwayat_kgb','diklat_penjenjangan','riwayat_pendidikan')->where('status','=','0')->get();
         $gol            = Golongan::where('status',0)->get();
         $pangkatgolongan = RiwayatPangkat::with(['pegawai','golongan'])->where('status',0)->orderBy('tmt','asc')->get();
         $riwayatkgb      = RiwayatKGB::with('pegawai')->where('status',0)->get();
-       
+        
         return view('operator-kepegawaian.pegawai.cetak_data_pegawai',compact('pangkatgolongan','pegawai','gol','riwayatkgb'));
     }
 }

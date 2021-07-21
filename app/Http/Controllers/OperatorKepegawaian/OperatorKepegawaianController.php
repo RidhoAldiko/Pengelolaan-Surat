@@ -77,6 +77,7 @@ class OperatorKepegawaianController extends Controller
         ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
         ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
         ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
+        ->where('pegawai.status','=','0')
         ->orderBy('pegawai.id_jabatan','ASC')->get();
         return DataTables::of($data)
                 ->addIndexColumn()
