@@ -77,9 +77,12 @@ class OperatorKepegawaianController extends Controller
         ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
         ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
         ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
-        ->get();
+        ->orderBy('pegawai.id_jabatan','ASC')->get();
         return DataTables::of($data)
                 ->addIndexColumn()
+                ->editColumn('urut_jabatan', function($data){ 
+                    return $data->id_jabatan; 
+                })
                 ->editColumn('nip', function($data){ 
                     return $data->nip_pegawai; 
                 })
