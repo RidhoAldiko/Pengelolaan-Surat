@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title','Disposisi Surat masuk - Edit')
+@section('title','Approval Surat | Edit')
 @section('content')
 <section class="section">
     <div class="section-header">

@@ -54,7 +54,7 @@
     </div>
     {{-- footer --}}
     <div class="simple-footer">
-        Copyright &copy; Alfazzasoftware 2021
+        Copyright &copy; UMSETKPR 2021
     </div>
     {{-- endfooter --}}
 </div>

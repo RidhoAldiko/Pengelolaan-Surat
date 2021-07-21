@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title','Effort Surat Keluar')
+@section('title','Approval Surat')
 @section('content')
 <section class="section">
     <div class="section-header">
@@ -105,12 +105,23 @@
                                             <a href="{{route('effort-surat.show',$result->id_effort_surat)}}" class="btn btn-success text-white btn-sm" title="Edit">
                                                 <i class="fas fa-info"></i> Detail
                                             </a>
-                                            @if ($result->status == 4)
+                                            @if ($result->status == 2)
+                                            @php
+                                        
+                                            $user = DB::table('teruskan_effort_surat')
+                                                ->where('id_effort_surat','=',$result->id_effort_surat)
+                                                ->orderBy('id_teruskan_effort_surat','DESC')
+                                                ->take(1)
+                                                ->first();
+                                            @endphp
+                                            <a href="{{route('effort-surat.ingatkan',$user->id)}}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                <i class="fa fa-bell" aria-hidden="true"></i> Ingatkan
+                                            </a>
+                                            @elseif ($result->status == 4)
                                                 <a href="#" class="btn btn-danger btn-sm getIdSuratKeluar" data-toggle="modal" data-target="#deleteEffort" data-id="{{$result->id_surat_keluar}}" >
                                                     <i class="fas fa-trash fa-sm"></i> Hapus
                                                 </a>
-                                            @endif
-                                            @if ($result->status == 3)
+                                            @elseif ($result->status == 3)
                                                 <a href="{{route('effort-surat.arsipkan',$result->id_effort_surat)}}" class="btn btn-warning text-white btn-sm" title="Edit">
                                                     <i class="fas fa-archive"></i> Arsipkan
                                                 </a>
@@ -165,7 +176,7 @@
     //delete data unit kerja
     $('.getIdSuratKeluar').on('click',function(){
         var _id = $(this).data("id");
-        $('.modal-footer form[action]').attr('action', 'effort-surat'+'/'+_id);
+        $('.modal-footer form[action]').attr('action', 'approval-surat'+'/'+_id);
     })
 </script>
 @endpush

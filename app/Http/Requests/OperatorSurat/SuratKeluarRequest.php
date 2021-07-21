@@ -30,7 +30,7 @@ class SuratKeluarRequest extends FormRequest
             'isi_ringkasan' => ['required','string'],
             'alamat' => ['required','string'],
             'keterangan' => ['required','string'],
-            'file_surat' => ['file','mimes:pdf','max:512'],
+            'file_surat' => ['file','mimes:pdf','max:5120'],
         ];
     }
 
@@ -44,7 +44,7 @@ class SuratKeluarRequest extends FormRequest
             'alamat.required'  => 'Alamat tidak boleh kosong',
             'keterangan.required'  => 'Keterangan tidak boleh kosong',
             'file_surat.mimes'  => 'File Surat harus berupa PDF',
-            'file_surat.max'  => 'File Surat maksimal berukan 512kb',
+            'file_surat.max'  => 'File Surat maksimal berukan 5MB',
         ];
     }
 }

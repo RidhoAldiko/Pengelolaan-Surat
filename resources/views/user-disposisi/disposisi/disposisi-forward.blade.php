@@ -6,7 +6,7 @@
         <h1>Teruskan Disposisi</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{route('data-disposisi.index')}}">Disposisi Surat Masuk</a></div>
-            <div class="breadcrumb-item">Teruskan Disposisi Surat</div>
+            <div class="breadcrumb-item">Teruskan Disposisi </div>
         </div>
     </div>
     <div class="section-body ">
@@ -20,8 +20,8 @@
                         <form action="{{route('data-disposisi.store-forward')}}" method="POST" >
                             @csrf
                             <div class="form-group">
-                                <label for="id_disposisi_surat_masuk">Tujuan Disposisi</label>
-                                <input type="text" name="id" id="id" class="form-control search-input-surat-user @error('id') is-invalid @enderror" placeholder="Masukan Nama / Unit Kerja" value="{{old('id')}}">
+                                <label for="id_disposisi_surat_masuk">Tujuan </label>
+                                <input type="text" name="id" id="id" class="form-control search-input-user-disposisi-masuk @error('id') is-invalid @enderror" placeholder="Masukan Nama / Unit Kerja" value="{{old('id')}}">
                                 <div class="row">
                                     <div class="col-md-8 search-result-surat-user">
                                     </div>

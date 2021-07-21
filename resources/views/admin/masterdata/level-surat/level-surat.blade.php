@@ -38,9 +38,9 @@
                                     <a href="{{ route('data-level_surat.edit',$item->id_level_surat) }}" class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit fa-sm"></i> <span>Ubah</span>
                                     </a>
-                                    <a href="#" class="btn btn-danger btn-sm getIdLevelSurat" data-toggle="modal" data-target="#deleteLevel" data-id="{{$item->id_level_surat}}" >
+                                    {{-- <a href="#" class="btn btn-danger btn-sm getIdLevelSurat" data-toggle="modal" data-target="#deleteLevel" data-id="{{$item->id_level_surat}}" >
                                         <i class="fas fa-trash fa-sm"> <span>Hapus</span></i>
-                                    </a> 
+                                    </a>  --}}
                                 </td>
                             </tr>
                             @empty

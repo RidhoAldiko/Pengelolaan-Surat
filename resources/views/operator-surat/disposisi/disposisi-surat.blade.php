@@ -28,6 +28,7 @@
                                 <th scope="col">No Surat</th>
                                 <th scope="col">Tgl Surat</th>
                                 <th scope="col">Tgl Disposisi</th>
+                                <th scope="col">Diterima Oleh</th>
                                 <th scope="col">status</th>
                                 <th scope="col">Aksi</th>
                             </tr>
@@ -40,6 +41,43 @@
                                     <td>{{$result->nomor_surat}}</td>
                                     <td>{{date('d-m-Y',strtotime($result->tanggal_surat))}}</td>
                                     <td>{{date('d-m-Y',strtotime($result->tanggal_disposisi))}}</td>
+                                    <td>
+                                        @php
+                                        
+                                        $user = DB::table('teruskan_disposisi_masuk')
+                                            ->select('teruskan_disposisi_masuk.*', 'nama_pegawai','jabatan.id_jabatan','nama_jabatan','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian')
+                                            ->join('pegawai', 'pegawai.nip_pegawai', '=', 'teruskan_disposisi_masuk.id')
+                                            ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+                                            ->join('unit_kerja', 'unit_kerja.nip_pegawai', '=', 'pegawai.nip_pegawai')
+                                            ->join('staf_ahli', 'staf_ahli.id_staf_ahli', '=', 'unit_kerja.id_staf_ahli')
+                                            ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
+                                            ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
+                                            ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
+                                            ->where('id_disposisi_surat_masuk','=',$result->id_disposisi_surat_masuk)
+                                            ->orderBy('id_teruskan_surat_masuk','DESC')
+                                            ->take(1)
+                                            ->get();
+                                        if ($user->count() == 1) {
+                                            foreach ($user as $usr) {
+                                                if ( $usr->id_jabatan == 1) {
+                                                    echo  $usr->nama_jabatan;
+                                                } elseif ( $usr->id_jabatan == 2) {
+                                                    echo  $usr->nama_jabatan;
+                                                } elseif ( $usr->id_jabatan == 3) {
+                                                    echo $usr->nama_staf_ahli;
+                                                } elseif ( $usr->id_jabatan == 4) {
+                                                    echo  $usr->nama_jabatan. ' ' .$usr->nama_asisten;
+                                                } elseif ( $usr->id_jabatan == 5) {
+                                                    echo  $usr->nama_jabatan. ' ' .$usr->nama_bagian;
+                                                } elseif ( $usr->id_jabatan == 6) {
+                                                    echo  $usr->nama_jabatan. ' ' .$usr->nama_sub_bagian;
+                                                } 
+                                            }
+                                        } else {
+                                            echo '-';
+                                        }
+                                        @endphp
+                                    </td>
                                     <td>
                                         @if ($result->status == 0)
                                             {{ 'Terdaftar' }}
@@ -67,7 +105,19 @@
                                             <a href="{{route('disposisi-surat-masuk.show',$result->id_disposisi_surat_masuk)}}" class="btn btn-success text-white btn-sm" title="Edit">
                                                 <i class="fas fa-info"></i> Detail
                                             </a>
-                                            @if ($result->status == 3)
+                                            @if ($result->status == 2)
+                                            @php
+                                        
+                                            $user = DB::table('teruskan_disposisi_masuk')
+                                                ->where('id_disposisi_surat_masuk','=',$result->id_disposisi_surat_masuk)
+                                                ->orderBy('id_teruskan_surat_masuk','DESC')
+                                                ->take(1)
+                                                ->first();
+                                            @endphp
+                                            <a href="{{route('disposisi-surat-masuk.ingatkan',$user->id)}}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                <i class="fa fa-bell" aria-hidden="true"></i> Ingatkan
+                                            </a>
+                                            @elseif ($result->status == 3)
                                                 <a href="{{route('disposisi-surat-masuk.arsip',$result->id_surat_masuk)}}" class="btn btn-warning text-white btn-sm" title="Edit">
                                                     <i class="fas fa-archive"></i> Arsipkan
                                                 </a>

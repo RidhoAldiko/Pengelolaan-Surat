@@ -79,6 +79,23 @@
                                     </p>
                                 </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-3 col-form-label">Instruksi / Informasi</label>
+                                <div class="col-sm-9">
+                                    <p class="border-bottom text-gray-800">
+                                        @php
+                                        
+                                        $user = DB::table('teruskan_disposisi_masuk')
+                                            ->where('id_disposisi_surat_masuk','=',$result->id_disposisi_surat_masuk)
+                                            ->orderBy('id_teruskan_surat_masuk','DESC')
+                                            ->take(1)
+                                            ->first();
+                                        echo $user->instruksi;
+                                        @endphp
+                                    </p>
+                                </div>
+                        </div>
                     </div>
                     <div class="col-md-4 ">
                         <div class="row justify-content-center">

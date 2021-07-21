@@ -35,8 +35,7 @@
 <body>
     <div class="bingkai">
         <div class="isi">
-            <p class="isi2"><strong><u>Surat Dari</u></strong></p>
-            <p style="font-size: 16px;border-bottom-style:solid;border-bottom-width:1px;border-botom-color:black;" class="isi2"><strong>SURAT MASUK</strong></p>
+            <p style="font-size: 16px;border-bottom-style:solid;border-bottom-width:1px;border-botom-color:black;" class="isi2"><strong>SURAT KELUAR</strong></p>
         <p style="display: inline;">No.Urut: <b>{{$result->id_surat_keluar}}</b></p>
         <p style="display: inline;padding-right: 20px;padding-left:20px"></p>
         <p class="verticalLine"style="display: inline;padding-left:40px;">Tgl Masuk: {{date('d-m-Y',strtotime($result->tanggal_surat))}}</p>
@@ -61,8 +60,7 @@
             Catatan : </p>
         <hr style=" border: 4px dashed black;">
 
-        <p class="isi2"><strong><u>Surat Dari instansi mana</u></strong></p>
-            <p style="font-size: 16px" class="isi2"><strong>LEMBARAN DISPOSISI</strong></p>
+            <p style="font-size: 16px" class="isi2"><strong>LEMBARAN APPROVAL</strong></p>
             <table class="static" align="center" rules="all" style="width:98%;">
                 <tr>
                     <td width="40%" style="border-right: 0px; border-left:0px">No.Urut:{{$result->id_surat_keluar}}</td>
@@ -75,7 +73,7 @@
                         Asal :
                     </td>
                     <td colspan="2" style="border-left: 0px;border-top: 0px; border-bottom:0px">
-                        PA bengkayang
+                        
                     </td>
                 </tr>
                 <tr>
@@ -104,7 +102,7 @@
                 </tr>
                 <tr>
                     <td>INSTRUKSI/INFORMASIx)</td>
-                    <td colspan="3">DITERUSKAN KEPADA <br>
+                    <td colspan="3">Dilihat dan Disetujui Oleh <br>
                         @foreach ($data as $item)
                             @if ( $item->id_jabatan == 1) 
                                 {{$loop->iteration}}. {{$item->nama_jabatan}}.

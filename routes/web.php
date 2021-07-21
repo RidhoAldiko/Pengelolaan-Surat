@@ -187,6 +187,7 @@ Route::prefix('operator-surat')
         
 
     //----Disposisi Surat Masuk----
+        Route::get('disposisi-surat-masuk/{id}/ingatkan',[DisposisiMasukController::class,'ingatkan'])->name('disposisi-surat-masuk.ingatkan');
         // operator-surat store disposisi surat masuk
         Route::post('disposisi-surat-masuk',[DisposisiMasukController::class,'store'])->name('disposisi-surat-masuk.store');
         // operator-surat tabel disposisi surat masuk 
@@ -235,28 +236,29 @@ Route::prefix('operator-surat')
         Route::get('surat-keluar/{id}/edit',[SuratKeluarController::class,'edit'])->name('surat-keluar.edit');
         
     //----Effort Surat Keluar----
+        Route::get('approval-surat/{id}/ingatkan',[EffortSuratController::class,'ingatkan'])->name('effort-surat.ingatkan');
         // operator-surat store effort surat keluar 
-        Route::post('effort-surat',[EffortSuratController::class,'store'])->name('effort-surat.store');
+        Route::post('approval-surat',[EffortSuratController::class,'store'])->name('effort-surat.store');
         // operator-surat data effort surat keluar 
-        Route::get('effort-surat',[EffortSuratController::class,'index'])->name('effort-surat.index');
+        Route::get('approval-surat',[EffortSuratController::class,'index'])->name('effort-surat.index');
         // operator-surat create effort surat keluar 
-        Route::get('effort-surat/{id}/create',[EffortSuratController::class,'create'])->name('effort-surat.create');
+        Route::get('approval-surat/{id}/create',[EffortSuratController::class,'create'])->name('effort-surat.create');
         // operator-surat hapus effort surat keluar 
-        Route::delete('effort-surat/{data}', [EffortSuratController::class,'destroy'])->name('effort-surat.destroy');
+        Route::delete('approval-surat/{data}', [EffortSuratController::class,'destroy'])->name('effort-surat.destroy');
         // operator-surat update effort surat keluar 
-        Route::put('effort-surat/{id}', [EffortSuratController::class,'update'])->name('effort-surat.update');
+        Route::put('approval-surat/{id}', [EffortSuratController::class,'update'])->name('effort-surat.update');
         // operator-surat detail effort surat keluar 
-        Route::get('effort-surat/{id}', [EffortSuratController::class,'show'])->name('effort-surat.show');
+        Route::get('approval-surat/{id}', [EffortSuratController::class,'show'])->name('effort-surat.show');
         // operator-surat edit effort surat keluar 
-        Route::get('effort-surat/{id}/edit', [EffortSuratController::class,'edit'])->name('effort-surat.edit');
+        Route::get('approval-surat/{id}/edit', [EffortSuratController::class,'edit'])->name('effort-surat.edit');
         // operator-surat detail effort surat keluar 
-        Route::get('effort-surat/{id}/forward', [EffortSuratController::class,'forward'])->name('effort-surat.forward');
+        Route::get('approval-surat/{id}/forward', [EffortSuratController::class,'forward'])->name('effort-surat.forward');
         // operator-surat detail effort surat keluar 
-        Route::post('effort-surat/forward/store', [EffortSuratController::class,'store_forward'])->name('effort-surat.store-forward');
+        Route::post('approval-surat/forward/store', [EffortSuratController::class,'store_forward'])->name('effort-surat.store-forward');
         //
-        Route::get('effort-surat/{id}/arsipkan', [EffortSuratController::class,'arsipkan'])->name('effort-surat.arsipkan');
+        Route::get('approval-surat/{id}/arsipkan', [EffortSuratController::class,'arsipkan'])->name('effort-surat.arsipkan');
         //
-        Route::get('effort-surat/{id}/cetak', [EffortSuratController::class,'cetak'])->name('effort-surat.cetak');
+        Route::get('approval-surat/{id}/cetak', [EffortSuratController::class,'cetak'])->name('effort-surat.cetak');
 
         //----Arsip surat Keluar----
         // operator-surat arsip surat
@@ -368,6 +370,7 @@ Route::prefix('user-disposisi')
             //user-disposisi search pegawai
             // Route::get('notifikasi', [UserDisposisiController::class,'notifikasi'])->name('user-disposisi.notifikasi');
             Route::get('search-pengguna', [UserDisposisiController::class,'search_pengguna'])->name('user-disposisi.search');
+            Route::get('search-tujuan', [UserDisposisiController::class,'search_tujuan'])->name('user-disposisi-masuk.search');
             //admin dashboard
             Route::get('/', [UserDisposisiController::class,'index'])->name('user-disposisi.index');
             // data disposisi
@@ -382,17 +385,17 @@ Route::prefix('user-disposisi')
             Route::get('data-disposisi/{id}/finish', [DataDisposisiController::class,'finish'])->name('data-disposisi.finish');
 
             // data disposisi
-            Route::get('data-effort', [DataEffortController::class,'index'])->name('data-effort.index');
+            Route::get('data-approval', [DataEffortController::class,'index'])->name('data-effort.index');
             //disposisi forward
-            Route::get('data-effort/{id}', [DataEffortController::class,'show'])->name('data-effort.show');
+            Route::get('data-approval/{id}', [DataEffortController::class,'show'])->name('data-effort.show');
             //disposisi forward
-            Route::get('data-effort/{id}/forward', [DataEffortController::class,'create'])->name('data-effort.forward');
+            Route::get('data-approval/{id}/forward', [DataEffortController::class,'create'])->name('data-effort.forward');
             //disposisi store forward
-            Route::post('data-effort', [DataEffortController::class,'store'])->name('data-effort.store-forward');
+            Route::post('data-approval', [DataEffortController::class,'store'])->name('data-effort.store-forward');
             //disposisi selesikan disposisi
-            Route::get('data-effort/{id}/finish', [DataEffortController::class,'finish'])->name('data-effort.finish');
+            Route::get('data-approvalt/{id}/finish', [DataEffortController::class,'finish'])->name('data-effort.finish');
             //
-            Route::get('data-effort/{id}/ignore', [DataEffortController::class,'ignore'])->name('data-effort.ignore');
+            Route::get('data-approval/{id}/ignore', [DataEffortController::class,'ignore'])->name('data-effort.ignore');
         
     });
 

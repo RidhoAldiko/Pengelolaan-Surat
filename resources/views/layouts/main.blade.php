@@ -220,6 +220,35 @@ gtag('config', 'UA-94034622-3');
             }
         });
 </script>
+
+<script>
+    $('.search-input-user-disposisi-masuk').on('keyup',function(){
+            
+            var _data = $(this).val();
+            if (_data.length > 3) {
+                
+                $.ajax({
+                        url: '{{route('user-disposisi-masuk.search')}}',
+                        data:{
+                            data:_data
+                        },
+                        method : 'GET',
+                        beforeSend:function(){
+                            $('.search-result-surat-user').html('mohon tunggu');
+                        },
+                        success:function(res){
+                            $('.search-result-surat-user').html(res).fadeIn();
+                        },
+                    });
+                    $(document).on('click','a',function(){
+                    $('#id').val($(this).text());
+                    $('.search-result-surat-user').fadeOut();
+                });    
+            } else {
+                $('.search-result-surat-user').fadeOut();
+            }
+        });
+</script>
 @stack('custom-js')
 @stack('script-tambahanakhir')
 

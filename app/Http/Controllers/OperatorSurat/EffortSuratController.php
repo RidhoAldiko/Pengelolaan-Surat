@@ -5,7 +5,7 @@ namespace App\Http\Controllers\OperatorSurat;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\EffortSuratKeluar;
+use App\Mail\ApprovalSuratKeluar;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\OperatorSurat\EffortSuratRequest;
 use App\Http\Requests\OperatorSurat\TeruskanEffortSuratRequest;
@@ -57,7 +57,7 @@ class EffortSuratController extends Controller
         $data = $request->all();
         $create=EffortSurat::create($data);
         $update=SuratKeluar::where('id_surat_keluar', $request->id_surat_keluar)->update(['status' => '0']);
-        return redirect()->route('effort-surat.index')->with('status',"Data Effort Surat Masuk berhasil ditambah");
+        return redirect()->route('effort-surat.index')->with('status',"Data Approval Surat Masuk berhasil ditambah");
     }
 
     /**
@@ -121,8 +121,10 @@ class EffortSuratController extends Controller
             'indeks' => $request->indeks,
             'tanggal_effort' => $request->tanggal_effort,
             ]);
-        return redirect()->route('effort-surat.index')->with('status',"Data Effort Surat Keluar berhasil diubah");
+        return redirect()->route('effort-surat.index')->with('status',"Data Approval Surat Keluar berhasil diubah");
     }
+
+   
 
     /**
      * Remove the specified resource from storage.
@@ -137,7 +139,7 @@ class EffortSuratController extends Controller
         $disposisi->delete();
         Storage::delete('public/'.$data->file_surat);
         SuratKeluar::destroy($data->id_surat_keluar);
-        return redirect()->route('effort-surat.index')->with('status',"Data Effort Surat Keluar berhasil dihapus");
+        return redirect()->route('effort-surat.index')->with('status',"Data Approval Surat Keluar berhasil dihapus");
     }
 
     public function forward($id){
@@ -156,10 +158,10 @@ class EffortSuratController extends Controller
                 ->where('id_effort_surat',$request->id_effort_surat)
                 ->first('surat_keluar.id_surat_keluar');
         $user = User::where('id',$explode)->first();
-        Mail::to($user->email)->send(new EffortSuratKeluar());
+        Mail::to($user->email)->send(new ApprovalSuratKeluar());
         $create=TeruskanEffortSurat::create($data);
         $update=SuratKeluar::where('id_surat_keluar', $result->id_surat_keluar)->update(['status' => '2']);
-        return redirect()->route('effort-surat.index')->with('status',"Effort Surat Keluar berhasil diteruskan kepada pengguna");
+        return redirect()->route('effort-surat.index')->with('status',"Approval Surat Keluar berhasil diteruskan kepada pengguna");
     }
 
     public function arsipkan($id){
@@ -184,5 +186,12 @@ class EffortSuratController extends Controller
         ->orderBy('id_teruskan_effort_surat','ASC')
         ->get();
         return view('operator-surat.effort.effort-surat-cetak', \compact('result','data'));
+    }
+
+    public function ingatkan($id){
+        $user = User::findOrFail($id);
+        // dd($user->email);
+        Mail::to($user->email)->send(new ApprovalSuratKeluar());
+        return redirect()->route('effort-surat.index')->with('status',"Pengingat approval berhasil dikirim kepada pengguna");
     }
 }

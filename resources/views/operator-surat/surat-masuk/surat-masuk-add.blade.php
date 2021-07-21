@@ -81,7 +81,7 @@
                                     <label class="custom-file-label" for="validatedCustomFile">Pilih File Surat
                                     </label>
                                     <span class="text-info">*File Berformat PDF.</span><br>
-                                    <span class="text-info">*Maksimal file berukuran 512 KB.</span>
+                                    <span class="text-info">*Maksimal file berukuran 5MB</span>
                                     @error('file_surat')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

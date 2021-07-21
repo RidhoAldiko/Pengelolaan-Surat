@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title','Disposisi')
+@section('title','Approval Surat | Setail')
 @section('content')
 <section class="section">
     <div class="section-header">
@@ -83,6 +83,22 @@
                             <label for="staticEmail" class="col-sm-3 col-form-label">Keterangan</label>
                                 <div class="col-sm-9">
                                     <p class="border-bottom text-gray-800"> {{ $result->keterangan }}</p>
+                                </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-3 col-form-label">Instruksi / Informasi</label>
+                                <div class="col-sm-9">
+                                    <p class="border-bottom text-gray-800"> 
+                                        @php
+                                        
+                                        $user = DB::table('teruskan_effort_surat')
+                                            ->where('id_effort_surat','=',$result->id_effort_surat)
+                                            ->orderBy('id_teruskan_effort_surat','DESC')
+                                            ->take(1)
+                                            ->first();
+                                        echo $user->instruksi;
+                                        @endphp
+                                    </p>
                                 </div>
                         </div>
                     </div>

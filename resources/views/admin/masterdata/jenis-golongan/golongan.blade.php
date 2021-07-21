@@ -38,9 +38,7 @@
                             <td>{{ $item->status == '0' ? 'Aktif' : 'Nonaktif' }}</td>
                             <td><a href="{{ route('data-golongan.edit',$item->id_golongan) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit fa-sm"></i> <span>Ubah</span></a>
                                 
-                                <a href="#" class="btn btn-danger btn-sm getIdGolongan" data-toggle="modal" data-target="#deleteGolongan" data-id="{{$item->id_golongan}}" >
-                                    <i class="fas fa-trash fa-sm"></i> <span>Hapus</span>
-                                </a>
+                               
                             </td>
                             </tr>
                             @empty

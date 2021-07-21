@@ -109,9 +109,6 @@ class PegawaiController extends Controller
                                 <a href="'.route('admin-pegawai.edit',$data->nip_pegawai).'" class="btn btn-warning text-white btn-sm" title="Edit">
                                     <i class="fas fa-pencil-alt"></i> Edit
                                 </a>
-                                <a href="#" class="btn btn-danger btn-sm getIdPegawai" data-toggle="modal" data-target="#deletePegawai" data-id="'.$data->nip_pegawai.'" >
-                                    <i class="fas fa-trash fa-sm"></i> Hapus
-                                </a>
                                 ';
                     return $button;
                 })

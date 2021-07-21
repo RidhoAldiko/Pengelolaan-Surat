@@ -5,7 +5,7 @@ namespace App\Http\Controllers\UserDisposisi;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\EffortSuratKeluar;
+use App\Mail\ApprovalSuratKeluar;
 use Illuminate\Support\Facades\Auth;
 use App\Models\SuratKeluar;
 use App\Models\TeruskanEffortSurat;
@@ -82,11 +82,11 @@ class DataEffortController extends Controller
                 ->where('id_effort_surat',$request->id_effort_surat)
                 ->first('surat_keluar.id_surat_keluar');
         $user = User::where('id',$explode)->first();
-        Mail::to($user->email)->send(new EffortSuratKeluar());
+        Mail::to($user->email)->send(new ApprovalSuratKeluar());
         $update=TeruskanEffortSurat::where('id_effort_surat', $data['id_effort_surat'])->update(['status' => '1']);
         $create=TeruskanEffortSurat::create($data);
         $update=SuratKeluar::where('id_surat_keluar', $result->id_surat_keluar)->update(['status' => '2']);
-        return redirect()->route('data-effort.index')->with('status',"Effort Surat Keluar berhasil diteruskan kepada pengguna");
+        return redirect()->route('data-effort.index')->with('status',"Approval Surat Keluar berhasil diteruskan kepada pengguna");
     }
 
     /**

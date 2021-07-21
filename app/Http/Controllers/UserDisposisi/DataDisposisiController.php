@@ -52,7 +52,7 @@ class DataDisposisiController extends Controller
      */
     public function create($id)
     {
-        return view('user-disposisi.disposisi.disposisi-teruskan',['id'=>$id]);
+        return view('user-disposisi.disposisi.disposisi-forward',['id'=>$id]);
     }
 
     /**

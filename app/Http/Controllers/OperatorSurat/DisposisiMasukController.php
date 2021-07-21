@@ -35,6 +35,12 @@ class DisposisiMasukController extends Controller
         return view('operator-surat.disposisi.disposisi-surat',\compact('results'));
     }
 
+    public function ingatkan($id){
+        $user = User::findOrFail($id);
+        Mail::to($user->email)->send(new DisposisiSurat());
+        return redirect()->route('disposisi-surat-masuk.index')->with('status',"Pengingat disposisi berhasil dikirim kepada pengguna");
+    }
+
     /**
      * Show the form for creating a new resource.
      *

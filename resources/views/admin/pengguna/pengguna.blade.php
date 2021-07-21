@@ -55,9 +55,6 @@
                                         <a href="#" class="btn btn-warning text-white btn-sm" title="Edit">
                                             <i class="fas fa-pencil-alt"></i> Edit
                                         </a>
-                                        <a href="#" class="btn btn-danger btn-sm getIdSuratMasuk" data-toggle="modal" data-target="#deleteSurat" data-id="{{$result->id_surat_masuk}}" >
-                                            <i class="fas fa-trash fa-sm"></i> Hapus
-                                        </a>
                                 </td>
                             </tr>
                             @endforeach
