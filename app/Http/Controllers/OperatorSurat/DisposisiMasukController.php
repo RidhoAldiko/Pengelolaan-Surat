@@ -68,12 +68,12 @@ class DisposisiMasukController extends Controller
         //masukan nip ke variabel data['id]
         $data ['id'] = $explode[0];
         $data ['status'] = '0';
-        Notifikasi::create($notif = [
-            'judul' => 'Disposisi Surat Masuk',
-            'pesan' =>'Disposisi surat belum diteruskan',
-            'id_user' => $explode[0],
-            'status' => '0',
-        ]);
+        // Notifikasi::create($notif = [
+        //     'judul' => 'Disposisi Surat Masuk',
+        //     'pesan' =>'Disposisi surat belum diteruskan',
+        //     'id_user' => $explode[0],
+        //     'status' => '0',
+        // ]);
         $result = SuratMasuk::join('disposisi_surat_masuk', 'disposisi_surat_masuk.id_surat_masuk', '=', 'surat_masuk.id_surat_masuk')
                 ->where('id_disposisi_surat_masuk',$request->id_disposisi_surat_masuk)
                 ->first('surat_masuk.id_surat_masuk');
@@ -93,6 +93,7 @@ class DisposisiMasukController extends Controller
     public function store(DisposisiMasukRequest $request)
     {
         $data = $request->all();
+        $data['tanggal_disposisi'] = date('Y-m-d H:i:s',strtotime($data['tanggal_disposisi'] ));
         $create=DisposisiMasuk::create($data);
         $update=SuratMasuk::where('id_surat_masuk', $request->id_surat_masuk)->update(['status' => '0']);
         return redirect()->route('disposisi-surat-masuk.index')->with('status',"Data Disposisi Surat Masuk berhasil ditambah");
@@ -138,6 +139,8 @@ class DisposisiMasukController extends Controller
     public function update(SuratMasukRequest $request, $id)
     {
         $data = $request->all();
+        $data['tanggal_surat'] = date('Y-m-d H:i:s',strtotime($data['tanggal_surat'] ));
+        $data['tanggal_disposisi'] = date('Y-m-d H:i:s',strtotime($data['tanggal_disposisi'] ));
         $surat = SuratMasuk::findOrFail($id);
         if ($request->hasFile('file_surat')) {
             // jika file surat ada
@@ -155,7 +158,7 @@ class DisposisiMasukController extends Controller
         //update data disposisi surat
         $update = DisposisiMasuk::where('id_surat_masuk',$id)->update([
             'indeks' => $request->indeks,
-            'tanggal_disposisi' => $request->tanggal_disposisi,
+            'tanggal_disposisi' => date('Y-m-d H:i:s',strtotime($request->tanggal_disposisi)),
             ]);
         return redirect()->route('disposisi-surat-masuk.index')->with('status',"Data Disposisi Surat Masuk berhasil diubah");
     }

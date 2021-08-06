@@ -32,7 +32,7 @@
 
                             <div class="form-group">
                                 <label for="tanggal_surat">Tanggal Surat</label>
-                                <input type="text" id="tanggal_surat" name="tanggal_surat" onfocus="(this.type='date')"  class="form-control @error('tanggal_surat') is-invalid @enderror" placeholder="Masukan tanggal surat" value="{{$result->tanggal_surat}}" >
+                                <input type="text" id="tanggal_surat" name="tanggal_surat"   class="form-control datepicker @error('tanggal_surat') is-invalid @enderror" placeholder="Masukan tanggal surat" value="{{date("d-m-Y", strtotime($result->tanggal_surat))}}" >
                                 @error('tanggal_surat')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -52,7 +52,7 @@
 
                             <div class="form-group">
                                 <label for="tanggal_effort">Tanggal Approval</label>
-                                <input type="text" id="tanggal_effort" name="tanggal_effort" onfocus="(this.type='date')"  class="form-control @error('tanggal_effort') is-invalid @enderror" placeholder="Masukan tanggal disposisi" value="{{$result->tanggal_effort}}" >
+                                <input type="text" id="tanggal_effort" name="tanggal_effort" class="form-control datepicker @error('tanggal_effort') is-invalid @enderror" placeholder="Masukan tanggal disposisi" value="{{date("d-m-Y", strtotime($result->tanggal_effort))}}" >
                                 @error('tanggal_effort')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

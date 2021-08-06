@@ -17,7 +17,7 @@ class RoleAuthenticated
      */
     public function handle($request, Closure $next, ...$role)
     {
-        if (in_array(Auth::user()->role,$role)) {
+        if (in_array(Auth::user()->role,$role) ) {
             return $next($request);
         }
         return redirect()->route('login');

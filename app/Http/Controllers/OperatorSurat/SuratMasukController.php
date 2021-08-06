@@ -40,6 +40,7 @@ class SuratMasukController extends Controller
         $data['file_surat'] = $request->file('file_surat')->store(
             'assets/surat-masuk','public'
         );
+        $data['tanggal_surat'] = date('Y-m-d H:i:s',strtotime($data['tanggal_surat'] ));
         $create=SuratMasuk::create($data);
         return redirect()->route('surat-masuk.index')->with('status',"Data surat masuk berhasil ditambah");
     }
@@ -59,6 +60,7 @@ class SuratMasukController extends Controller
     //method update surat masuk
     public function update(SuratMasukRequest $request,$id){
         $data = $request->all();
+        $data['tanggal_surat'] = date('Y-m-d H:i:s',strtotime($data['tanggal_surat'] ));
         $surat = SuratMasuk::findOrFail($id);
         if ($request->hasFile('file_surat')) {
             // jika file surat ada

@@ -20,6 +20,13 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+    <div class="preloader">
+        <div class="loading">
+            <img src="{{url('img/loading.gif')}}" width="80">
+            <p class="text-center">Loading...</p>
+        </div>
+    </div>
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">

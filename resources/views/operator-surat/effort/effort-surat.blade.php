@@ -37,7 +37,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$result->nomor_surat}}</td>
-                                    <td>{{date('d-m-Y',strtotime($result->tanggal_surat))}}</td>
+                                    <td>{{date('d/m/Y',strtotime($result->tanggal_surat))}}</td>
                                     <td>{{date('d-m-Y',strtotime($result->tanggal_effort))}}</td>
                                     <td>
                                         @if ($result->status == 0)

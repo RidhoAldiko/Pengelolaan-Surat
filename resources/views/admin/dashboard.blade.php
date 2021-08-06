@@ -7,6 +7,29 @@
     </div>
 
     <div class="section-body">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="card shadow card-statistic-1">
+                    <div class="card-header">
+                        <h4>Jumlah Pegawai</h4>
+                    </div>
+                    <div class="card-body mt-1 mb-4">
+                        {{$pegawai}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="card shadow card-statistic-1">
+                    <div class="card-header">
+                        <h4>Jumlah Pengguna</h4>
+                    </div>
+                    <div class="card-body mt-1 mb-4">
+                        {{$pengguna}}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 @endsection

@@ -49,9 +49,6 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-success text-white btn-sm" title="Edit">
-                                        <i class="fas fa-info"></i> Detail
-                                            </a>
                                         <a href="#" class="btn btn-warning text-white btn-sm" title="Edit">
                                             <i class="fas fa-pencil-alt"></i> Edit
                                         </a>

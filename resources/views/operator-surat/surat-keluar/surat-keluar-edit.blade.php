@@ -32,7 +32,7 @@
 
                             <div class="form-group">
                                 <label for="tanggal_surat">Tanggal Surat</label>
-                                <input type="text" id="tanggal_surat" name="tanggal_surat" onfocus="(this.type='date')"  class="form-control @error('tanggal_surat') is-invalid @enderror" placeholder="Masukan tanggal surat" value="{{$result->tanggal_surat}}" >
+                                <input type="text" id="tanggal_surat" name="tanggal_surat" class="form-control datepicker  @error('tanggal_surat') is-invalid @enderror" placeholder="Masukan tanggal surat" value="{{date("d-m-Y", strtotime($result->tanggal_surat))}}" >
                                 @error('tanggal_surat')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

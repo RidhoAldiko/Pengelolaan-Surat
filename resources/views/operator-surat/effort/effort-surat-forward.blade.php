@@ -19,19 +19,7 @@
                     <div class="card-body">
                         <form action="{{route('effort-surat.store-forward')}}" method="POST" >
                             @csrf
-                            {{-- <div class="form-group">
-                                <label for="id_pembuat">Pembuat Surat</label>
-                                <select class="form-control data-pembuat @error('id_pembuat') is-invalid @enderror" id="id_pembuat" name="id_pembuat">
-                                    <option selected disabled> --Pilih Pembuat Surat-- </option>
-                                    <option value="1"> Kepala Sub Bagian </option>
-                                    <option value="2"> Staf Sub Bagian </option>
-                                </select>
-                                @error('id_pembuat')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div> --}}
+                            
 
                             <div class="form-group">
                                 <label for="id_disposisi_surat_masuk">Kepala Sub Bagian</label>

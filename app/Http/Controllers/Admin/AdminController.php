@@ -21,7 +21,14 @@ class AdminController extends Controller
     //function dashboard
     public function index()
     {
-        return view('admin.dashboard');
+        $pengguna = User::select('users.*')
+        ->join('pegawai', 'nip_pegawai', '=', 'users.id')
+        ->count();
+
+        $pegawai = Pegawai::all()->count();
+
+        // dd($pengguna);
+        return view('admin.dashboard',compact('pengguna','pegawai'));
     }
 
     //function halaman data pengguna

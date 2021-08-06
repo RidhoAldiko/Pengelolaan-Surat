@@ -49,6 +49,7 @@ class SuratKeluarController extends Controller
         $data['file_surat'] = $request->file('file_surat')->store(
             'assets/surat-keluar','public'
         );
+        $data['tanggal_surat'] = date('Y-m-d H:i:s',strtotime($data['tanggal_surat'] ));
         $create=SuratKeluar::create($data);
         return redirect()->route('surat-keluar.index')->with('status',"Data surat keluar berhasil ditambah");
     }
@@ -87,6 +88,8 @@ class SuratKeluarController extends Controller
     public function update(SuratKeluarRequest $request, $id)
     {
         $data = $request->all();
+        $data['tanggal_surat'] = date('Y-m-d H:i:s',strtotime($data['tanggal_surat'] ));
+        // dd($data);
         $surat = SuratKeluar::findOrFail($id);
         if ($request->hasFile('file_surat')) {
             // jika file surat ada

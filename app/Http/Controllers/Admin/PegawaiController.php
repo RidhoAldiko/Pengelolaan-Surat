@@ -129,6 +129,7 @@ class PegawaiController extends Controller
         ]);
         $data = $request->all();
         $data['status'] = 0;
+        $data['tanggal_lahir'] = date('Y-m-d H:i:s',strtotime($data['tanggal_lahir'] ));
         $store = Pegawai::create($data);
 
         if ($data['id_jabatan'] < 3) {

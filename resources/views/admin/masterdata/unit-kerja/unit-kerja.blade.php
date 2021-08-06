@@ -48,10 +48,13 @@
                             </tr>                            
                         </thead>
                         <tbody>
+                            @php
+                                $a =1;
+                            @endphp
                             @foreach ($staf_ahli as $staf)
                             @if ($staf->nama_staf_ahli != '-')
-                            <tr>
-                                <td>{{$loop->iteration}}</td>
+                            <tr> 
+                                <td>{{$a++}}</td>
                                 <td>{{$staf->nama_staf_ahli}}</td>
                                 @if ($staf->status == 0)
                                     <td>Aktif</td>
@@ -88,10 +91,13 @@
                                 </tr>                            
                             </thead>
                             <tbody>
+                                @php
+                                        $a =1;
+                                    @endphp
                                 @foreach ($asisten as $result)
                                 @if ($result->nama_asisten != '-')
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$a++}}</td>
                                     <td>{{$result->nama_asisten}}</td>
                                     @if ($result->status == 0)
                                         <td>Aktif</td>
@@ -129,10 +135,13 @@
                                 </tr>                            
                             </thead>
                             <tbody>
+                                @php
+                                        $a =1;
+                                    @endphp
                                 @foreach ($bagian as $result)
                                 @if ($result->nama_bagian != '-')
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$a++}}</td>
                                     <td>{{$result->nama_asisten}}</td>
                                     <td>{{$result->nama_bagian}}</td>
                                     @if ($result->status == 0)
@@ -172,10 +181,13 @@
                                     </tr>                            
                                 </thead>
                                 <tbody>
-                                    @foreach ($sub_bagian as $result)
+                                    @php
+                                        $a =1;
+                                    @endphp
+                                    @foreach  ($sub_bagian as $result)
                                     @if ($result->nama_sub_bagian != '-')
                                     <tr>
-                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$a++}}</td>
                                         <td>{{$result->nama_bagian}}</td>
                                         <td>{{$result->nama_sub_bagian}}</td>
                                         @if ($result->status == 0)

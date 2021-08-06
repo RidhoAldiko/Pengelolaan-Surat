@@ -55,6 +55,7 @@ class EffortSuratController extends Controller
     public function store(EffortSuratRequest $request)
     {
         $data = $request->all();
+        $data['tanggal_effort'] = date('Y-m-d H:i:s',strtotime($data['tanggal_effort'] ));
         $create=EffortSurat::create($data);
         $update=SuratKeluar::where('id_surat_keluar', $request->id_surat_keluar)->update(['status' => '0']);
         return redirect()->route('effort-surat.index')->with('status',"Data Approval Surat Masuk berhasil ditambah");
@@ -102,6 +103,9 @@ class EffortSuratController extends Controller
     public function update(SuratKeluarRequest $request, $id)
     {
         $data = $request->all();
+        $data['tanggal_surat'] = date('Y-m-d H:i:s',strtotime($data['tanggal_surat'] ));
+        $data['tanggal_effort'] = date('Y-m-d H:i:s',strtotime($data['tanggal_effort'] ));
+        // dd($data);
         $surat = SuratKeluar::findOrFail($id);
         if ($request->hasFile('file_surat')) {
             // jika file surat ada
@@ -119,7 +123,7 @@ class EffortSuratController extends Controller
         //update data disposisi surat
         $update = EffortSurat::where('id_surat_keluar',$id)->update([
             'indeks' => $request->indeks,
-            'tanggal_effort' => $request->tanggal_effort,
+            'tanggal_effort' => date('Y-m-d H:i:s',strtotime($request->tanggal_effort)),
             ]);
         return redirect()->route('effort-surat.index')->with('status',"Data Approval Surat Keluar berhasil diubah");
     }
@@ -148,11 +152,11 @@ class EffortSuratController extends Controller
 
     public function store_forward(TeruskanEffortSuratRequest $request){
         $data = $request->all();
-       
         $explode = explode(' - ',$request->id,-1);
         //masukan nip ke variabel data['id]
         $data ['id'] = $explode[0];
         $data ['status'] = '0';
+        
         // dd($data);
         $result = SuratKeluar::join('effort_surat_keluar', 'effort_surat_keluar.id_surat_keluar', '=', 'surat_keluar.id_surat_keluar')
                 ->where('id_effort_surat',$request->id_effort_surat)

@@ -43,7 +43,7 @@
                             <div class="form-group">
                                 <label>Tempat Lahir, Tanggal Lahir</label>
                                 <p class="border-bottom text-gray-800">
-                                    {{ $result->tempat_lahir }}, {{ $result->tanggal_lahir }}
+                                    {{ $result->tempat_lahir }}, {{date("d/m/Y", strtotime($result->tanggal_lahir))}}
                                 </p>
                             </div>
                             <div class="form-group">

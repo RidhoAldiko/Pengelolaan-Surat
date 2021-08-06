@@ -40,7 +40,7 @@
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">Tanggal Surat</label>
                                 <div class="col-sm-9">
-                                    <p class="border-bottom text-gray-800"> {{ $result->tanggal_surat }}</p>
+                                    <p class="border-bottom text-gray-800"> {{date('d-m-Y',strtotime($result->tanggal_surat))}}</p>
                                 </div>
                         </div>
                         <div class="form-group row">
@@ -52,7 +52,7 @@
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">Tanggal Disposisi Surat</label>
                                 <div class="col-sm-9">
-                                    <p class="border-bottom text-gray-800"> {{ $result->tanggal_disposisi }}</p>
+                                    <p class="border-bottom text-gray-800">  {{date('d-m-Y',strtotime($result->tanggal_disposisi))}}</p>
                                 </div>
                         </div>
                         <div class="form-group row">
@@ -84,15 +84,41 @@
                             <label for="staticEmail" class="col-sm-3 col-form-label">Instruksi / Informasi</label>
                                 <div class="col-sm-9">
                                     <p class="border-bottom text-gray-800">
-                                        @php
+                                        @if ($result->status == 0)
+                                            {{"-"}}
+                                        @else
+                                            @php
+                                            $user = DB::table('teruskan_disposisi_masuk')
+                                                ->select('teruskan_disposisi_masuk.*','jabatan.id_jabatan','nama_pegawai','jabatan.id_jabatan','nama_jabatan','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian')
+                                                ->join('pegawai', 'pegawai.nip_pegawai', '=', 'teruskan_disposisi_masuk.id')
+                                                ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
+                                                ->join('unit_kerja', 'unit_kerja.nip_pegawai', '=', 'pegawai.nip_pegawai')
+                                                ->join('staf_ahli', 'staf_ahli.id_staf_ahli', '=', 'unit_kerja.id_staf_ahli')
+                                                ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
+                                                ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
+                                                ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
+                                                ->where('id_disposisi_surat_masuk','=',$result->id_disposisi_surat_masuk)
+                                                ->orderBy('id_teruskan_surat_masuk','DESC')
+                                                ->get();
+
+                                            foreach ($user as $usr) {
+                                                echo $usr->instruksi;
+                                                echo " - ";
+                                                if ($usr->id_jabatan == 1) {
+                                                    echo $usr->nama_jabatan;
+                                                } elseif ( $usr->id_jabatan == 2) {
+                                                    echo $usr->nama_jabatan; 
+                                                } elseif ( $usr->id_jabatan == 3) {
+                                                    echo $usr->nama_jabatan . '-' .$usr->nama_staf_ahli; 
+                                                }
+
+                                                echo "<br>";
+                                            }
+                                            
+                                            
+                                            @endphp
+                                        @endif
                                         
-                                        $user = DB::table('teruskan_disposisi_masuk')
-                                            ->where('id_disposisi_surat_masuk','=',$result->id_disposisi_surat_masuk)
-                                            ->orderBy('id_teruskan_surat_masuk','DESC')
-                                            ->take(1)
-                                            ->first();
-                                        echo $user->instruksi;
-                                        @endphp
                                     </p>
                                 </div>
                         </div>
