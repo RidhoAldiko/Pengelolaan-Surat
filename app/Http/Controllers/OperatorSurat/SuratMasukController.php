@@ -19,7 +19,7 @@ class SuratMasukController extends Controller
     //method data surat masuk
     public function index()
     {   
-        $results = SuratMasuk::where('status',null)->get();
+        $results = SuratMasuk::where('status',null)->orderBy('id_surat_masuk','DESC')->get();
         return view('operator-surat.surat-masuk.surat-masuk',\compact('results'));
     }
     //method create surat masuk

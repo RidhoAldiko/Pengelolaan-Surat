@@ -125,4 +125,14 @@ class AdminController extends Controller
         //arahkan ke halaman tabel data pengguna
         return redirect()->route('data-pengguna.index')->with('status','Pengguna Berhasil Ditambah');
     }
+
+    public function disable($id){
+        User::where('id', $id)->update(['flag' => 1]);
+        return redirect()->route('data-pengguna.index')->with('status','Pengguna Berhasil Dinonaktifkan');
+    }
+
+    public function enable($id){
+        User::where('id', $id)->update(['flag' => 0]);
+        return redirect()->route('data-pengguna.index')->with('status','Pengguna Berhasil Aktifkan');
+    }
 }

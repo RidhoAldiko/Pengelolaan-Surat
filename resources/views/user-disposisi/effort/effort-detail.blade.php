@@ -34,7 +34,7 @@
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">Tanggal Surat</label>
                                 <div class="col-sm-9">
-                                    <p class="border-bottom text-gray-800"> {{ $result->tanggal_surat }}</p>
+                                    <p class="border-bottom text-gray-800"> {{date("d/m/Y", strtotime($result->tanggal_surat))}}</p>
                                 </div>
                         </div>
                         <div class="form-group row">
@@ -46,7 +46,7 @@
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">Tanggal Approval Surat</label>
                                 <div class="col-sm-9">
-                                    <p class="border-bottom text-gray-800"> {{ $result->tanggal_effort }}</p>
+                                    <p class="border-bottom text-gray-800"> {{date("d/m/Y", strtotime($result->tanggal_effort))}}</p>
                                 </div>
                         </div>
                         <div class="form-group row">

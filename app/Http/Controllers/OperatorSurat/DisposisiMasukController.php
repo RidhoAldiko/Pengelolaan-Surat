@@ -31,6 +31,7 @@ class DisposisiMasukController extends Controller
                 ->where('status','0')//terdaftar
                 ->orWhere('status','2')//berjalan
                 ->orWhere('status','3')//berjalan
+                ->orderBy('id_disposisi_surat_masuk','DESC')
                 ->get();
         return view('operator-surat.disposisi.disposisi-surat',\compact('results'));
     }
@@ -54,7 +55,7 @@ class DisposisiMasukController extends Controller
     //method jangan disposisikan surat masuk
     public function ignore($id){
         $update=SuratMasuk::where('id_surat_masuk', $id)->update(['status' => '1']);
-        return redirect()->route('arsip-surat-masuk.index')->with('status',"Surat Masuk berhasil diarsipkan");
+        return redirect()->route('surat-masuk.index')->with('status',"Surat Masuk berhasil diarsipkan");
     }
 
     //method teruskan disposisi surat masuk

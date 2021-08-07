@@ -101,7 +101,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>INSTRUKSI/INFORMASIx)</td>
+                    <td>INSTRUKSI/INFORMASIx) <br>
+                        @foreach ($data as $result)
+                            {{$result->instruksi}} <br>
+                        @endforeach
+                    </td>
                     <td colspan="3">Dilihat dan Disetujui Oleh <br>
                         @foreach ($data as $item)
                             @if ( $item->id_jabatan == 1) 

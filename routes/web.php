@@ -84,6 +84,10 @@ Route::prefix('admin')
             Route::get('tambah-pengguna', [AdminController::class,'add_pengguna'])->name('data-pengguna.add');
             //admin: store data pengguna
             Route::post('data-pengguna', [AdminController::class,'store'])->name('data-pengguna.store');
+
+            Route::put('data-pengguna/{id}',[AdminController::class,'disable'])->name('data-pengguna.disable');
+
+            Route::get('data-pengguna/{id}/enable', [AdminController::class,'enable'])->name('data-pengguna.enable');
         //----Pegawai----
             Route::get('admin-pegawai', [PegawaiController::class,'index'])->name('admin-pegawai.index');
             Route::get('admin-pegawai/serverside', [PegawaiController::class,'pegawai_serverSide'])->name('admin-pegawai.serverside');
@@ -216,8 +220,22 @@ Route::prefix('operator-surat')
     //----Arsip surat Masuk----
         // operator-surat arsip surat
         Route::get('arsip-surat-masuk', [ArsipSuratMasukController::class,'index'])->name('arsip-surat-masuk.index');
+
+        
         // operator-surat serverside arsip surat
         Route::get('arsip-surat-masuk/server-side', [ArsipSuratMasukController::class,'arsip_surat_serverside'])->name('arsip-surat-masuk.serverside');
+
+        // operator-surat detail arsip surat
+        Route::get('arsip-surat-masuk/{id}', [ArsipSuratMasukController::class,'detail'])->name('arsip-surat-masuk.detail');
+
+        // operator-surat cetak arsip surat
+        Route::get('arsip-surat-masuk/{id}/cetak', [ArsipSuratMasukController::class,'cetak'])->name('arsip-surat-masuk.cetak');
+
+
+        
+        
+
+        
 
     //----Surat Keluar----
         // operator-surat store surat keluar 
@@ -265,8 +283,12 @@ Route::prefix('operator-surat')
         Route::get('arsip-surat-Keluar', [ArsipSuratKeluarController::class,'index'])->name('arsip-surat-keluar.index');
         //
         Route::get('arsip-surat-Keluar/{id}', [ArsipSuratKeluarController::class,'show'])->name('arsip-surat-keluar.show');
+
+        Route::get('arsip-surat-Keluar/{id}/cetak', [ArsipSuratKeluarController::class,'cetak'])->name('arsip-surat-keluar.cetak');
+
         // operator-surat serverside arsip surat
         Route::get('arsip-surat-keluar/server-side', [ArsipSuratKeluarController::class,'arsip_surat_serverside'])->name('arsip-surat-keluar.serverside');
+
     
     });
 
@@ -355,11 +377,11 @@ Route::prefix('operator-kepegawaian')
         Route::resource('pegawai-riwayat-kgb',RiwayatKGBController::class);
          // -----------------------dokumen pegawai---------------------------------
 
-         Route::resource('dokumen-pegawai',DokumenPegawaiController::class);
+        Route::resource('dokumen-pegawai',DokumenPegawaiController::class);
          // -----------------------kursus atau pelatihan---------------------------------
-         Route::resource('kursus-atau-pelatihan',KursusAtauPelatihanController::class);
+        Route::resource('kursus-atau-pelatihan',KursusAtauPelatihanController::class);
           //operator-kepegawaian: print data perorangan
-         Route::get('cetak-pegawai-per-orangan/{data_pegawai}', [PrintPegawaiController::class,'cetak_perorangan'])->name('print-pegawai.cetakperorangan');
+        Route::get('cetak-pegawai-per-orangan/{data_pegawai}', [PrintPegawaiController::class,'cetak_perorangan'])->name('print-pegawai.cetakperorangan');
          //operator-kepegawaian: print semua data pegawai
         Route::get('cetak-pegawai', [PrintPegawaiController::class,'cetakdata'])->name('print-pegawai.cetakdata');
     });

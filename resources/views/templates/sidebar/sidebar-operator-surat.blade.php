@@ -1,10 +1,10 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html">UMSETKPR</a>
+            UMSETKPR
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">KPR</a>
+            KPR
         </div>
         <ul class="sidebar-menu">
             
@@ -23,7 +23,8 @@
                 'disposisi-surat-masuk.show',
                 'disposisi-surat-masuk.edit',
                 'disposisi-surat-masuk.forward',
-                'arsip-surat-masuk.index'
+                'arsip-surat-masuk.index',
+                'arsip-surat-masuk.detail',
             ])}}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-copy"></i> <span>Surat Masuk</span></a>
                 <ul class="dropdown-menu">
@@ -33,7 +34,7 @@
                     <li class="{{set_active(['disposisi-surat-masuk.index','disposisi-surat-masuk.show','disposisi_surat_masuk.edit','disposisi-surat-masuk.forward'])}}">
                         <a class="nav-link " href="{{route('disposisi-surat-masuk.index')}}">Disposisi Surat</a>
                     </li>
-                    <li class="{{set_active(['arsip-surat-masuk.index'])}}">
+                    <li class="{{set_active(['arsip-surat-masuk.index','arsip-surat-masuk.detail'])}}">
                         <a class="nav-link " href="{{route('arsip-surat-masuk.index')}}">Arsip Surat</a>
                     </li>
                 </ul>
@@ -49,7 +50,8 @@
                     'effort-surat.show',
                     'effort-surat.edit',
                     'effort-surat.forward',
-                    'arsip-surat-keluar.index'
+                    'arsip-surat-keluar.index',
+                    'arsip-surat-keluar.show'
                 ])}}">
                     <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-copy"></i> <span>Surat Keluar</span></a>
                     <ul class="dropdown-menu">
@@ -70,7 +72,7 @@
                         ])}}">
                             <a class="nav-link " href="{{route('effort-surat.index')}}">Approval Surat</a>
                         </li>
-                        <li class="{{set_active(['arsip-surat-keluar.index'])}}">
+                        <li class="{{set_active(['arsip-surat-keluar.index','arsip-surat-keluar.show'])}}">
                             <a class="nav-link " href="{{route('arsip-surat-keluar.index')}}">Arsip Surat</a>
                         </li>
                     </ul>

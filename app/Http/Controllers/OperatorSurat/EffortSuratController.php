@@ -73,6 +73,7 @@ class EffortSuratController extends Controller
                 ->join('effort_surat_keluar', 'effort_surat_keluar.id_surat_keluar', '=', 'surat_keluar.id_surat_keluar')
                 ->where('id_effort_surat',$id)
                 ->first();
+        
         // dd($result);
         return view('operator-surat.effort.effort-surat-detail',\compact('result'));
     }
@@ -178,7 +179,7 @@ class EffortSuratController extends Controller
                 ->join('effort_surat_keluar', 'effort_surat_keluar.id_surat_keluar', '=', 'surat_keluar.id_surat_keluar')
                 ->where('id_effort_surat',$id)
                 ->first();
-        $data = TeruskanEffortSurat::select('teruskan_effort_surat.*', 'nama_pegawai','jabatan.id_jabatan','nama_jabatan','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian')
+        $data = TeruskanEffortSurat::select('teruskan_effort_surat.*', 'nama_pegawai','jabatan.id_jabatan','nama_jabatan','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian','instruksi')
         ->join('pegawai', 'pegawai.nip_pegawai', '=', 'teruskan_effort_surat.id')
         ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
         ->join('unit_kerja', 'unit_kerja.nip_pegawai', '=', 'pegawai.nip_pegawai')

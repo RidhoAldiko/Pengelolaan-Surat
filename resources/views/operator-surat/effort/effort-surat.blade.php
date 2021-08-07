@@ -38,7 +38,7 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$result->nomor_surat}}</td>
                                     <td>{{date('d/m/Y',strtotime($result->tanggal_surat))}}</td>
-                                    <td>{{date('d-m-Y',strtotime($result->tanggal_effort))}}</td>
+                                    <td>{{date('d/m/Y',strtotime($result->tanggal_effort))}}</td>
                                     <td>
                                         @if ($result->status == 0)
                                             {{ 'Terdaftar' }}
@@ -122,7 +122,7 @@
                                                     <i class="fas fa-trash fa-sm"></i> Hapus
                                                 </a>
                                             @elseif ($result->status == 3)
-                                                <a href="{{route('effort-surat.arsipkan',$result->id_effort_surat)}}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                <a href="{{route('effort-surat.arsipkan',$result->id_surat_keluar)}}" class="btn btn-warning text-white btn-sm" title="Edit">
                                                     <i class="fas fa-archive"></i> Arsipkan
                                                 </a>
                                                 <a target="_blank" href="{{route('effort-surat.cetak',$result->id_effort_surat)}}" class="btn btn-primary btn-sm" >

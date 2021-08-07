@@ -42,16 +42,23 @@
                                 <td>{{$result->email}}</td>
                                 <td>{{$result->nama_jabatan}}</td>
                                 <td>
-                                    @if ($result->status == 0)
+                                    @if ($result->flag == 0)
                                         {{'Aktif'}}
                                     @else
                                         {{'Tidak Aktif'}}
                                     @endif
                                 </td>
                                 <td>
-                                        <a href="#" class="btn btn-warning text-white btn-sm" title="Edit">
-                                            <i class="fas fa-pencil-alt"></i> Edit
-                                        </a>
+                                    @if ($result->flag == 0)
+                                    <a href="#" class="btn btn-danger text-white btn-sm getIdUser" title="Edit" data-toggle="modal" data-target="#userDisable" data-id="{{$result->id}}">
+                                        <i class="fas fa-toggle-off"></i> Nonaktifkan
+                                    </a>
+                                    @else
+                                    <a href="{{route('data-pengguna.enable',$result->id)}}" class="btn btn-success text-white btn-sm" title="Edit">
+                                        <i class="fas fa-toggle-on"></i> Aktifkan
+                                    </a>
+                                    @endif
+                                        
                                 </td>
                             </tr>
                             @endforeach
@@ -62,11 +69,41 @@
         </div>
     </div>
 </section>
+<div class="modal fade" id="userDisable" tabindex="-1" role="dialog" aria-labelledby="userDisableLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header justify-content-center">
+            <h4 class="modal-title h4" id="userDisableLabel">Ingin mengnonaktifkan pengguna ?</h4>
+            {{-- <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            </button> --}}
+        </div>
+        <div class="modal-body">
+            <h5 class="h5 text-center alert-text">Tekan "Nonaktifkan" untuk mengnonaktifkan pengguna.</h5> 
+            <div class="modal-footer d-flex justify-content-center">        
+                <form action="" method="post"  class="d-inline">
+                    @csrf
+                    @method('PUT')
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button class="btn btn-danger" type="submit">Nonaktifkan</button>
+                </form> </td>
+                
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
 @endsection
 @push('custom-js')
     <script>
         $(document).ready( function () {
             $('#data-pengguna').DataTable();
         } );
+
+        $('.getIdUser').on('click',function(){
+        var _id = $(this).data("id");
+        console.log(_id);
+        $('.modal-footer form[action]').attr('action', 'data-pengguna'+'/'+_id);
+    })
     </script>
 @endpush

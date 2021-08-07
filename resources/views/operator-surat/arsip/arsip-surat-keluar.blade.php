@@ -3,7 +3,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Arsip Surat Masuk</h1>
+        <h1>Arsip Surat Keluar</h1>
     </div>
     @if (session('status'))
     <div class="alert shadow alert-success alert-dismissible fade show" role="alert">
@@ -16,7 +16,7 @@
     <div class="section-body">
         <div class="card">
             <div class="card-header">
-                <h4>Data Arsip Surat Masuk</h4>
+                <h4>Data Arsip Surat Keluar</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

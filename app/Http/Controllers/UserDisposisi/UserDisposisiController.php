@@ -5,7 +5,9 @@ namespace App\Http\Controllers\UserDisposisi;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\SuratMasuk;
 use App\Models\Notifikasi;
+use App\Models\SuratKeluar;
 use Illuminate\Support\Facades\Auth;
 
 class UserDisposisiController extends Controller
@@ -17,7 +19,36 @@ class UserDisposisiController extends Controller
      */
     public function index()
     {
-        return \view('user-disposisi.dashboard');
+        $id = Auth::user()->id;
+        //cek level surat user yang login
+        $level = User::select('users.*','urutan_level','nama_level')
+                ->join('level_surat','level_surat.id_level_surat','=','users.id_level_surat')
+                ->where('id',$id)
+                ->first();
+        //tampilkan disposisi surat masuk berdasarkan id user
+        $disposisi = SuratMasuk::select('surat_masuk.*','id_teruskan_surat_masuk','indeks','disposisi_surat_masuk.id_disposisi_surat_masuk','tanggal_disposisi','teruskan_disposisi_masuk.id','teruskan_disposisi_masuk.status as status_teruskan','urutan_level')
+                ->join('disposisi_surat_masuk', 'disposisi_surat_masuk.id_surat_masuk', '=', 'surat_masuk.id_surat_masuk')
+                ->join('teruskan_disposisi_masuk', 'teruskan_disposisi_masuk.id_disposisi_surat_masuk', '=', 'disposisi_surat_masuk.id_disposisi_surat_masuk')
+                ->join('users','users.id','=','teruskan_disposisi_masuk.id')
+                ->join('level_surat','level_surat.id_level_surat','=','users.id_level_surat')
+                ->where('urutan_level',$level->urutan_level)
+                ->where('surat_masuk.status','2')
+                ->where('teruskan_disposisi_masuk.status','0')
+                ->where('users.id',$id)
+                ->count();
+
+        $approval = SuratKeluar::select('surat_keluar.*','id_teruskan_effort_surat','indeks','effort_surat_keluar.id_effort_surat','tanggal_effort','teruskan_effort_surat.id','teruskan_effort_surat.status as status_teruskan','urutan_level')
+        ->join('effort_surat_keluar', 'effort_surat_keluar.id_surat_keluar', '=', 'surat_keluar.id_surat_keluar')
+        ->join('teruskan_effort_surat', 'teruskan_effort_surat.id_effort_surat', '=', 'effort_surat_keluar.id_effort_surat')
+        ->join('users','users.id','=','teruskan_effort_surat.id')
+        ->join('level_surat','level_surat.id_level_surat','=','users.id_level_surat')
+        ->where('urutan_level',$level->urutan_level)
+        ->where('surat_keluar.status','2')
+        ->where('teruskan_effort_surat.status','0')
+        ->where('users.id',$id)
+        ->count();
+        // dd($approval);
+        return \view('user-disposisi.dashboard',compact('disposisi','approval'));
     }
 
     /**
