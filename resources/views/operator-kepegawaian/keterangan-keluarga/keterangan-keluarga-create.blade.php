@@ -104,7 +104,7 @@
                             @enderror
                         </div>
                         <div class="col-sm-3 col-md-4">
-                            <input type="date" id="tgl_lahir" name="tgl_lahir"  class="form-control @error('tgl_lahir') is-invalid @enderror" value="{{ old('tgl_lahir') }}" >
+                            <input type="text" id="tgl_lahir" name="tgl_lahir" autocomplete="off" class="form-control datepicker @error('tgl_lahir') is-invalid @enderror" placeholder="Tgl.lahir" value="{{ old('tgl_lahir') }}" >
                                 @error('tgl_lahir')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -116,7 +116,7 @@
                       <div class="form-group row align-items-center">
                         <label for="tgl_nikah" class="form-control-label col-sm-3 text-md-right">Tgl Nikah</label>
                         <div class="col-sm-6 col-md-9">
-                            <input type="date" id="tgl_nikah" name="tgl_nikah"  class="form-control @error('tgl_nikah') is-invalid @enderror" value="{{ old('tgl_nikah') }}" >
+                            <input type="text" id="tgl_nikah" name="tgl_nikah" autocomplete="off" class="form-control datepicker @error('tgl_nikah') is-invalid @enderror" value="{{ old('tgl_nikah') }}" >
                             @error('tgl_nikah')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

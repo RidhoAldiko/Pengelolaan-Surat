@@ -149,6 +149,7 @@ class OperatorKepegawaianController extends Controller
         ]);
         $data = $request->all();
         $data['status'] = 0;
+        $data['tanggal_lahir'] = date('Y-m-d H:i:s',strtotime($data['tanggal_lahir'] ));
         $store = Pegawai::create($data);
 
         if ($data['id_jabatan'] < 3) {
@@ -303,6 +304,7 @@ class OperatorKepegawaianController extends Controller
     public function update(PegawaiRequest $request, $id)
     {
         $data = $request->all();
+        $data['tanggal_lahir'] = date('Y-m-d H:i:s',strtotime($data['tanggal_lahir'] ));
         $item   = Pegawai::findOrFail($id);
         $item->update($data);
         if ($data['id_jabatan'] < 3) {

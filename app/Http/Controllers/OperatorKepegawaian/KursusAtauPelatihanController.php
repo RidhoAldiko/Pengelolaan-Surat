@@ -42,6 +42,8 @@ class KursusAtauPelatihanController extends Controller
          $explode = explode(' - ',$request->nip_pegawai,-1);
          //timpa nip lama dengan nip baru yang sudah dipisahkan dari nama
          $data ['nip_pegawai'] = $explode[0];
+         $data['mulai'] = date('Y-m-d H:i:s',strtotime($data['mulai'] ));
+         $data['selesai'] = date('Y-m-d H:i:s',strtotime($data['selesai'] ));
 
          KursusAtauPelatihan::create($data);
          return redirect()->route('kursus-atau-pelatihan.create')->with('status','Data Kursus/ Pelatihan berhasil ditambah');
@@ -81,6 +83,8 @@ class KursusAtauPelatihanController extends Controller
     public function update(KursusAtauPelatihanRequest $request, $id)
     {
         $data   =  $request->all();
+        $data['mulai'] = date('Y-m-d H:i:s',strtotime($data['mulai'] ));
+        $data['selesai'] = date('Y-m-d H:i:s',strtotime($data['selesai'] ));
         $item   = KursusAtauPelatihan::findOrFail($id);
         
         $item->update($data);

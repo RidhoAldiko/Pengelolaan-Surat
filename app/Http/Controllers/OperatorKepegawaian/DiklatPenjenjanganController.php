@@ -23,6 +23,7 @@ class DiklatPenjenjanganController extends Controller
         $explode = explode(' - ',$request->nip_pegawai,-1);
         //timpa nip lama dengan nip baru yang sudah dipisahkan dari nama
         $data ['nip_pegawai'] = $explode[0];
+        $data['tanggal'] = date('Y-m-d H:i:s',strtotime($data['tanggal'] ));
         
         DiklatPenjenjangan::create($data);
         return redirect()->route('pegawai-diklat-penjenjangan.create')->with('status','Data diklat penjenjangan berhasil ditambah');
@@ -37,8 +38,9 @@ class DiklatPenjenjanganController extends Controller
     public function update(DiklatPenjenjanganRequest $request, $id)
     {
         $data           = $request->all();
-        $item           = DiklatPenjenjangan::findOrFail($id);
+        $data['tanggal'] = date('Y-m-d H:i:s',strtotime($data['tanggal'] ));
 
+        $item           = DiklatPenjenjangan::findOrFail($id);
         $item->update($data);
         return redirect()->route('data-pegawai.edit',$data['nip_pegawai'])->with('status',"Data diklat penjenjangan berhasil diedit");
     }

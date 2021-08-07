@@ -26,6 +26,9 @@ class RiwayatKGBController extends Controller
         $explode = explode(' - ',$request->nip_pegawai,-1);
         //timpa nip lama dengan nip baru yang sudah dipisahkan dari nama
         $data['nip_pegawai'] = $explode[0];
+        $data['tanggal'] = date('Y-m-d H:i:s',strtotime($data['tanggal'] ));
+        $data['mulai_berlaku'] = date('Y-m-d H:i:s',strtotime($data['mulai_berlaku'] ));
+        $data['batas_berlaku'] = date('Y-m-d H:i:s',strtotime($data['batas_berlaku'] ));
         
         //cek data riwayatKGB, jika ada data lama statusnya nonaktifkan 
         $data_riwayatkgb = RiwayatKGB::where('nip_pegawai',$data['nip_pegawai'])->where('status', 0)->orderBy('id_riwayat_kgb','desc')->first();
@@ -52,6 +55,10 @@ class RiwayatKGBController extends Controller
     public function update(RiwayatKGBRequest $request, $id)
     {
         $data               = $request->all();
+        $data['tanggal'] = date('Y-m-d H:i:s',strtotime($data['tanggal'] ));
+        $data['mulai_berlaku'] = date('Y-m-d H:i:s',strtotime($data['mulai_berlaku'] ));
+        $data['batas_berlaku'] = date('Y-m-d H:i:s',strtotime($data['batas_berlaku'] ));
+        
         $item               = RiwayatKGB::findOrFail($id);
         $data['status']     = $item->status;
         $item->update($data);

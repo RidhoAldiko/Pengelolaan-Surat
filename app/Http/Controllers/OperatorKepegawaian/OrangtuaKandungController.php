@@ -22,7 +22,7 @@ class OrangtuaKandungController extends Controller
         //masukan nip ke variabel data['id]
         $data ['nip_pegawai'] = $explode[0];
         //timpa nip lama dengan nip baru yang sudah dipisahkan dari nama
-
+        $data['tgl_lahir'] = date('Y-m-d H:i:s',strtotime($data['tgl_lahir'] ));
         OrangtuaKandung::create($data);
         return redirect()->route('pegawai-orangtua-kandung.create')->with('status','Data Orang tua kandung berhasil ditambah');
     }
@@ -36,6 +36,7 @@ class OrangtuaKandungController extends Controller
     public function update(OrangtuaKandungRequest $request, $id)
     {
         $data   = $request->all();
+        $data['tgl_lahir'] = date('Y-m-d H:i:s',strtotime($data['tgl_lahir'] ));
         $item   = OrangtuaKandung::findOrFail($id);
         $item->update($data);
         return redirect()->route('data-pegawai.edit',$data['nip_pegawai'])->with('status',"Data Orang tua kandung berhasil diedit");

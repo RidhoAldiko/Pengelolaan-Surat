@@ -66,7 +66,7 @@
                       <div class="form-group row align-items-center">
                         <label for="tanggal" class="form-control-label col-sm-3 text-md-right">Tanggal</label>
                         <div class="col-sm-6 col-md-9">
-                            <input type="date" id="tanggal" name="tanggal"  class="form-control @error('tanggal') is-invalid @enderror" value="{{ $pegawai->tanggal }}" >
+                            <input type="text" id="tanggal" name="tanggal" autocomplete="off" class="form-control datepicker @error('tanggal') is-invalid @enderror" value="{{ date('d-m-Y',strtotime($pegawai->tanggal)) }}" >
                             @error('tanggal')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

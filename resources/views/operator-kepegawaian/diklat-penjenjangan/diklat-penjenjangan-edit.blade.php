@@ -58,7 +58,7 @@
                               @enderror
                         </div>
                         <div class="col-sm-3 col-md-4">
-                          <input type="text" id="tanggal" name="tanggal" onfocus="(this.type='date')"  class="form-control @error('tanggal') is-invalid @enderror" placeholder="tanggal" value="{{ $pegawai->tanggal }}" >
+                          <input type="text" id="tanggal" name="tanggal" autocomplete="off" class="form-control datepicker @error('tanggal') is-invalid @enderror" placeholder="tanggal" value="{{ date('d-m-Y',$pegawai->tanggal) }}" >
                               @error('tanggal')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>

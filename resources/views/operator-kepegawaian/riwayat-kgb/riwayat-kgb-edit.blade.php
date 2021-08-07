@@ -74,7 +74,7 @@
                                   @enderror
                             </div>
                             <div class="col-sm-3 col-md-4">
-                              <input type="date" id="tanggal" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror" value="{{ $pegawai->tanggal }}" >
+                              <input type="text" id="tanggal" name="tanggal" autocomplete="off" class="form-control datepicker @error('tanggal') is-invalid @enderror" value="{{ date('d-m-Y',strtotime($pegawai->tanggal)) }}" >
                                   @error('tanggal')
                                   <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>
@@ -115,7 +115,7 @@
                           <div class="form-group row align-items-center">
                             <label for="nomor" class="form-control-label col-sm-3 text-md-right">KGB YAD</label>
                             <div class="col-sm-3 col-md-4">
-                              <input type="date" id="mulai_berlaku" name="mulai_berlaku" class="form-control @error('mulai_berlaku') is-invalid @enderror" value="{{ $pegawai->mulai_berlaku }}" >
+                              <input type="text" id="mulai_berlaku" name="mulai_berlaku" autocomplete="off" class="form-control datepicker @error('mulai_berlaku') is-invalid @enderror" value="{{ date('d-m-Y',strtotime($pegawai->mulai_berlaku)) }}" >
                                   @error('mulai_berlaku')
                                   <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>
@@ -123,7 +123,7 @@
                                   @enderror
                               </div>
                             <div class="col-sm-3 col-md-4">
-                              <input type="date" id="batas_berlaku" name="batas_berlaku" class="form-control @error('batas_berlaku') is-invalid @enderror" value="{{ $pegawai->batas_berlaku }}" >
+                              <input type="text" id="batas_berlaku" name="batas_berlaku" autocomplete="off" class="form-control datepicker @error('batas_berlaku') is-invalid @enderror" value="{{ date('d-m-Y',strtotime($pegawai->batas_berlaku)) }}" >
                                   @error('batas_berlaku')
                                   <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>

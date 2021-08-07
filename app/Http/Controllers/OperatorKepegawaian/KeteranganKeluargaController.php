@@ -33,6 +33,8 @@ class KeteranganKeluargaController extends Controller
         $explode = explode(' - ',$request->nip_pegawai,-1);
         //masukan nip ke variabel data['id]
         $data ['nip_pegawai'] = $explode[0];
+        $data['tgl_lahir'] = date('Y-m-d H:i:s',strtotime($data['tgl_lahir'] ));
+        $data['tgl_nikah'] = date('Y-m-d H:i:s',strtotime($data['tgl_nikah'] ));
         //timpa nip lama dengan nip baru yang sudah dipisahkan dari nama
         
         KeteranganKeluarga::create($data);
@@ -59,7 +61,8 @@ class KeteranganKeluargaController extends Controller
                 //jika dia anak set tgl nikahnya null
                 $data['tgl_nikah']=null;
             }
-            
+        $data['tgl_lahir'] = date('Y-m-d H:i:s',strtotime($data['tgl_lahir'] ));
+        $data['tgl_nikah'] = date('Y-m-d H:i:s',strtotime($data['tgl_nikah'] ));   
         $item = KeteranganKeluarga::findOrFail($id);
         $item->update($data);
 

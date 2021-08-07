@@ -20,6 +20,7 @@
       </div>
     </div>
     @endif
+    <a href="{{ route('data-pegawai.edit',$pegawai->nip_pegawai) }}" class="btn btn-sm btn-warning mb-3 ml-3">Kembali</a>
     <div class="section-body">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -49,7 +50,7 @@
                       <div class="form-group row align-items-center">
                         <label for="mulai" class="form-control-label col-sm-3 text-md-right">Mulai s/d Selesai</label>
                         <div class="col-sm-3 col-md-4">
-                          <input type="date" id="mulai" name="mulai" class="form-control @error('mulai') is-invalid @enderror" value="{{ $pegawai->mulai }}" >
+                          <input type="text" id="mulai" name="mulai" class="form-control datepicker @error('mulai') is-invalid @enderror" value="{{ date('d-m-Y',strtotime($pegawai->mulai)) }}" >
                               @error('mulai')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>
@@ -57,7 +58,7 @@
                               @enderror
                         </div>
                         <div class="col-sm-3 col-md-4">
-                          <input type="date" id="selesai" name="selesai" class="form-control @error('selesai') is-invalid @enderror"  value="{{ $pegawai->selesai }}" >
+                          <input type="text" id="selesai" name="selesai" class="form-control datepicker @error('selesai') is-invalid @enderror"  value="{{ date('d-m-Y',strtotime($pegawai->selesai)) }}" >
                               @error('selesai')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>
