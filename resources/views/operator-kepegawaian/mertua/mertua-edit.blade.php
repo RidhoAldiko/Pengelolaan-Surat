@@ -54,7 +54,7 @@
                       <div class="form-group row align-items-center">
                         <label for="tgl_lahir" class="form-control-label col-sm-3 text-md-right">Tgl Lahir</label>
                         <div class="col-sm-6 col-md-9">
-                            <input type="date" id="tgl_lahir" name="tgl_lahir"  class="form-control @error('tgl_lahir') is-invalid @enderror" value="{{ $pegawai->tgl_lahir }}" >
+                            <input type="text" id="tgl_lahir" name="tgl_lahir"  class="form-control datepicker @error('tgl_lahir') is-invalid @enderror" value="{{ date('d-m-Y',$pegawai->tgl_lahir) }}" autocomplete="off" >
                             @error('tgl_lahir')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

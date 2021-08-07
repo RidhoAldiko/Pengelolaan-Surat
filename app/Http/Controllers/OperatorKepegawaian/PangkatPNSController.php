@@ -24,6 +24,8 @@ class PangkatPNSController extends Controller
         $explode = explode(' - ',$request->nip_pegawai,-1);
         //timpa nip lama dengan nip baru yang sudah dipisahkan dari nama
         $data['nip_pegawai'] = $explode[0];
+        $data['tmt'] = date('Y-m-d H:i:s',strtotime($data['tmt'] ));
+        $data['tanggal'] = date('Y-m-d H:i:s',strtotime($data['tanggal'] ));
         
         $pangkatPNS = PangkatPNS::where('nip_pegawai',$data['nip_pegawai'])->first();
             //jika sudah pernah input pangkat cpns maka campakan ke form lagi
@@ -60,6 +62,9 @@ class PangkatPNSController extends Controller
     public function update(PangkatPNSRequest $request, $id)
     {
         $data  = $request->all();
+        $data['tmt'] = date('Y-m-d H:i:s',strtotime($data['tmt'] ));
+        $data['tanggal'] = date('Y-m-d H:i:s',strtotime($data['tanggal'] ));
+        
         $item  = PangkatPNS::findOrFail($id);
         $item->update($data);
         return redirect()->route('data-pegawai.edit',$data['nip_pegawai'])->with('status',"Data riwayat Pangkat CPNS berhasil diedit");

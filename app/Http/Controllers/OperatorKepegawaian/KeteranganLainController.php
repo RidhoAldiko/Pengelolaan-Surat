@@ -21,7 +21,7 @@ class KeteranganLainController extends Controller
         $explode = explode(' - ',$request->nip_pegawai,-1);
         //masukan nip ke variabel data['id]
         $data ['nip_pegawai'] = $explode[0];
-        //timpa nip lama dengan nip baru yang sudah dipisahkan dari nama
+        $data['tanggal'] = date('Y-m-d H:i:s',strtotime($data['tanggal'] ));
 
         KeteranganLain::create($data);
         return redirect()->route('pegawai-keterangan-lain.create')->with('status','Data keterangan lain berhasil ditambah');
@@ -36,6 +36,8 @@ class KeteranganLainController extends Controller
     public function update(KeteranganLainRequest $request, $id)
     {
         $data = $request->all();
+        $data['tanggal'] = date('Y-m-d H:i:s',strtotime($data['tanggal'] ));
+        
         $item = KeteranganLain::findOrFail($id);
         $item->update($data);
 

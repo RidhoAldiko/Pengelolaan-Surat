@@ -25,6 +25,9 @@ class RiwayatPendidikanController extends Controller
         $data ['id'] = $explode[0];
         //timpa nip lama dengan nip baru yang sudah dipisahkan dari nama
         $data['nip_pegawai'] = $data['id'];
+        $data['tgl_sttb'] = date('Y-m-d H:i:s',strtotime($data['tgl_sttb'] ));
+        $data['mulai'] = date('Y-m-d H:i:s',strtotime($data['mulai'] ));
+        $data['sampai'] = date('Y-m-d H:i:s',strtotime($data['sampai'] ));
         RiwayatPendidikan::create($data);
 
         return redirect()->route('riwayat-pendidikan.create')->with('status',"Data Pendidikan berhasil ditambah");
@@ -41,6 +44,9 @@ class RiwayatPendidikanController extends Controller
     public function update(RiwayatPendidikanRequest $request, $id)
     {
         $data = $request->all();
+        $data['tgl_sttb'] = date('Y-m-d H:i:s',strtotime($data['tgl_sttb'] ));
+        $data['mulai'] = date('Y-m-d H:i:s',strtotime($data['mulai'] ));
+        $data['sampai'] = date('Y-m-d H:i:s',strtotime($data['sampai'] ));
         $item = RiwayatPendidikan::findOrFail($id);
         $item->update($data);
         return redirect()->route('data-pegawai.edit',$data['nip_pegawai'])->with('status',"Data Riwayat pendidikan berhasil diedit");

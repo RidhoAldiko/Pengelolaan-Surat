@@ -100,7 +100,7 @@
                               @enderror
                         </div>
                         <div class="col-sm-3 col-md-4">
-                          <input type="text" id="tanggal" name="tanggal" onfocus="(this.type='date')"  class="form-control @error('tanggal') is-invalid @enderror" placeholder="tanggal" value="{{old('tanggal')}}" >
+                          <input type="text" id="tanggal" name="tanggal" autocomplete="off" class="form-control datepicker @error('tanggal') is-invalid @enderror" placeholder="tanggal" value="{{old('tanggal')}}" >
                               @error('tanggal')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>
@@ -141,7 +141,7 @@
                       <div class="form-group row align-items-center">
                         <label for="nomor" class="form-control-label col-sm-3 text-md-right">KGB YAD</label>
                         <div class="col-sm-3 col-md-4">
-                          <input type="text" id="mulai_berlaku" name="mulai_berlaku" onfocus="(this.type='date')"  class="form-control @error('mulai_berlaku') is-invalid @enderror" placeholder="Dari" value="{{old('mulai_berlaku')}}" >
+                          <input type="text" id="mulai_berlaku" name="mulai_berlaku" autocomplete="off" class="form-control datepicker @error('mulai_berlaku') is-invalid @enderror" placeholder="Dari" value="{{old('mulai_berlaku')}}" >
                               @error('mulai_berlaku')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>
@@ -149,7 +149,7 @@
                               @enderror
                           </div>
                         <div class="col-sm-3 col-md-4">
-                          <input type="text" id="batas_berlaku" name="batas_berlaku" onfocus="(this.type='date')"  class="form-control @error('batas_berlaku') is-invalid @enderror" placeholder="Sampai" value="{{old('batas_berlaku')}}" >
+                          <input type="text" id="batas_berlaku" name="batas_berlaku" autocomplete="off" class="form-control datepicker @error('batas_berlaku') is-invalid @enderror" placeholder="Sampai" value="{{old('batas_berlaku')}}" >
                               @error('batas_berlaku')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>

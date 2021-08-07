@@ -61,7 +61,8 @@ class MutasiController extends Controller
                 $item = Pegawai::findOrFail($data ['nip_pegawai']);
                 $item->update([ 'status' => 0 ]);
             }
-        
+        $data['tanggal'] = date('Y-m-d H:i:s',strtotime($data['tanggal'] ));
+
         Mutasi::create($data);
         return redirect()->route('pegawai-mutasi.index')->with('status','Data Mutasi berhasil ditambah');
     }
@@ -75,6 +76,8 @@ class MutasiController extends Controller
     public function update(MutasiRequest $request, $id)
     {
         $data = $request->all();
+        $data['tanggal'] = date('Y-m-d H:i:s',strtotime($data['tanggal'] ));
+
         $item = Mutasi::findOrFail($id);
         $item->update($data);
 

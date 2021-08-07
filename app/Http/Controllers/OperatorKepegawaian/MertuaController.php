@@ -22,7 +22,8 @@ class MertuaController extends Controller
         //masukan nip ke variabel data['id]
         $data ['nip_pegawai'] = $explode[0];
         //timpa nip lama dengan nip baru yang sudah dipisahkan dari nama
-
+        $data['tgl_lahir'] = date('Y-m-d H:i:s',strtotime($data['tgl_lahir'] ));
+        
         Mertua::create($data);
         return redirect()->route('pegawai-mertua.create')->with('status','Data Mertua berhasil ditambah');
     }
@@ -35,6 +36,8 @@ class MertuaController extends Controller
     public function update(MertuaRequest $request, $id)
     {
         $data   = $request->all();
+        $data['tgl_lahir'] = date('Y-m-d H:i:s',strtotime($data['tgl_lahir'] ));
+
         $item   = Mertua::findOrFail($id);
         $item->update($data);
         return redirect()->route('data-pegawai.edit',$data['nip_pegawai'])->with('status',"Data Mertua berhasil diedit");
