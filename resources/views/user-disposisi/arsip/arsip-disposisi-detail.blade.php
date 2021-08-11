@@ -3,10 +3,10 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Detail Disposisi</h1>
+        <h1>Detail Histori Disposisi</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{route('data-disposisi.index')}}">Disposisi Surat Masuk</a></div>
-            <div class="breadcrumb-item">Detail Disposisi Surat</div>
+            <div class="breadcrumb-item active"><a href="{{route('arsip-disposisi.index')}}">Histori Disposisi</a></div>
+            <div class="breadcrumb-item">Detail Histori Disposisi </div>
         </div>
     </div>
     @if (session('status'))
@@ -20,7 +20,7 @@
     <div class="section-body">
         <div class="card shadow">
             <div class="card-header">
-                <h4>Detail Disposisi Surat Masuk</h4>
+                <h4>Detail Histori Disposisi</h4>
             </div>
             <div class="card-body">
                 <div class="row ">
@@ -154,7 +154,7 @@
                         
                     </div>
                 </div>
-                <a href="{{ route('data-disposisi.index') }}" class="btn btn-warning">
+                <a href="{{ route('arsip-disposisi.index') }}" class="btn btn-warning">
                     <i class="fas fa-chevron-left"></i> <span>Kembali</span>
                 </a>
             </div>

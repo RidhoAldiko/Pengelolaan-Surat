@@ -107,13 +107,23 @@ class DataEffortController extends Controller
 
     
     public function finish($id){
-        // dd($id);
-        $update=SuratKeluar::where('id_surat_keluar', $id)->update(['status' => '3']);
+
+        $result = SuratKeluar::select('surat_keluar.*','indeks','id_effort_surat','tanggal_effort')
+                ->join('effort_surat_keluar', 'effort_surat_keluar.id_surat_keluar', '=', 'surat_keluar.id_surat_keluar')
+                ->where('effort_surat_keluar.id_surat_keluar',$id)
+                ->first();
+        SuratKeluar::where('id_surat_keluar', $id)->update(['status' => '3']);
+        TeruskanEffortSurat::where('id_effort_surat', $result->id_effort_surat)->update(['status' => '1']);
         return redirect()->route('data-effort.index')->with('status',"Approval Surat Masuk berhasil di selesaikan");
     }
 
     public function ignore($id){
-        $update=SuratKeluar::where('id_surat_keluar', $id)->update(['status' => '4']);
+        $result = SuratKeluar::select('surat_keluar.*','indeks','id_effort_surat','tanggal_effort')
+                ->join('effort_surat_keluar', 'effort_surat_keluar.id_surat_keluar', '=', 'surat_keluar.id_surat_keluar')
+                ->where('effort_surat_keluar.id_surat_keluar',$id)
+                ->first();
+        SuratKeluar::where('id_surat_keluar', $id)->update(['status' => '4']);
+        TeruskanEffortSurat::where('id_effort_surat', $result->id_effort_surat)->update(['status' => '1']);
         return redirect()->route('data-effort.index')->with('status',"Approval Surat Masuk berhasil ditolak");
     }
 

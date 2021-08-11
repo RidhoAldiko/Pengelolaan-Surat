@@ -14,12 +14,20 @@
             
             <li class="menu-header">Menu</li>
             
-            <li class=active><a class="nav-link" href="{{route('data-disposisi.index')}}">
-                <i class="fas fa-copy"></i><span>Data disposisi</span></a>
+            <li class=""><a class="nav-link" href="{{route('data-disposisi.index')}}">
+                <i class="fas fa-copy"></i><span>Tugas disposisi</span></a>
             </li>
 
-            <li class=active><a class="nav-link" href="{{route('data-effort.index')}}">
-                <i class="fas fa-copy"></i><span>Approval Surat</span></a>
+            <li class=""><a class="nav-link" href="{{route('data-effort.index')}}">
+                <i class="fas fa-copy"></i><span>Tugas Approval</span></a>
+            </li>
+
+            <li class="{{set_active(['arsip-disposisi.index',])}}"><a class="nav-link" href="{{route('arsip-disposisi.index')}}">
+                <i class="fa fa-history" aria-hidden="true"></i><span>Histori Disposisi</span></a>
+            </li>
+            
+            <li class="{{set_active(['arsip-approval.index',])}}"><a class="nav-link" href="{{route('arsip-approval.index')}}">
+                <i class="fa fa-history" aria-hidden="true"></i><span>Histori Approval</span></a>
             </li>
                 
         </ul>

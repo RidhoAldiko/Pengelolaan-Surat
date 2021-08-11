@@ -133,7 +133,16 @@ class DataDisposisiController extends Controller
         //
     }
     public function finish($id){
-        $update=SuratMasuk::where('id_surat_masuk', $id)->update(['status' => '3']);
+        
+        $result = SuratMasuk::select('surat_masuk.*','indeks','disposisi_surat_masuk.id_disposisi_surat_masuk','tanggal_disposisi','id_teruskan_surat_masuk')
+                ->join('disposisi_surat_masuk', 'disposisi_surat_masuk.id_surat_masuk', '=', 'surat_masuk.id_surat_masuk')
+                ->join('teruskan_disposisi_masuk', 'teruskan_disposisi_masuk.id_disposisi_surat_masuk', '=', 'disposisi_surat_masuk.id_disposisi_surat_masuk')
+                ->where('disposisi_surat_masuk.id_surat_masuk',$id)
+                ->first();
+                
+        // dd($result->id_disposisi_surat_masuk);
+        TeruskanDisposisiMasuk::where('id_disposisi_surat_masuk', $result->id_disposisi_surat_masuk)->update(['status' => '1']);
+        SuratMasuk::where('id_surat_masuk', $result->id_surat_masuk)->update(['status' => '3']);
         return redirect()->route('data-disposisi.index')->with('status',"Data Disposisi Surat Masuk berhasil di selesaikan");
     }
 

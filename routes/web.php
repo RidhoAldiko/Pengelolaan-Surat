@@ -43,8 +43,10 @@ use App\Http\Controllers\OperatorSurat\EffortSuratController;
 use App\Http\Controllers\UserDisposisi\UserDisposisiController;
 use App\Http\Controllers\UserDisposisi\DataDisposisiController;
 use App\Http\Controllers\UserDisposisi\DataEffortController;
+use App\Http\Controllers\UserDisposisi\ArsipUserDisposisiController;
 use App\Http\Controllers\UserDisposisi\NotifikasiController;
 use App\Http\Controllers\UpdateProfileController;
+use App\Http\Controllers\UserDisposisi\ArsipApprovalController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -393,6 +395,26 @@ Route::prefix('user-disposisi')
          //----User Disposisi----
             //user-disposisi search pegawai
             // Route::get('notifikasi', [UserDisposisiController::class,'notifikasi'])->name('user-disposisi.notifikasi');
+
+
+            // arsip surat - user disposisi
+            Route::get('histori-disposisi', [ArsipUserDisposisiController::class,'index'])->name('arsip-disposisi.index');
+
+            Route::get('hostori-disposisi/{id}/detail', [ArsipUserDisposisiController::class,'detail'])->name('arsip-disposisi.detail');
+
+            Route::get('histori-disposisi/{id}/cetak', [ArsipUserDisposisiController::class,'cetak'])->name('arsip-disposisi.cetak');
+
+            Route::get('histori-disposisi/server-side', [ArsipUserDisposisiController::class,'arsip_disposisi_serverside'])->name('arsip-disposisi.serverside');
+            
+            Route::get('histori-approval/server-side', [ArsipApprovalController::class,'arsip_approval_serverside'])->name('arsip-approval.serverside');
+
+            Route::get('histori-approval', [ArsipApprovalController::class,'index'])->name('arsip-approval.index');
+
+            Route::get('histori-approval/{id}/detail', [ArsipApprovalController::class,'detail'])->name('arsip-approval.detail');
+            
+            Route::get('histori-approval/{id}/cetak', [ArsipApprovalController::class,'cetak'])->name('arsip-approval.cetak');
+            
+
             Route::get('search-pengguna', [UserDisposisiController::class,'search_pengguna'])->name('user-disposisi.search');
             Route::get('search-tujuan', [UserDisposisiController::class,'search_tujuan'])->name('user-disposisi-masuk.search');
             //admin dashboard
