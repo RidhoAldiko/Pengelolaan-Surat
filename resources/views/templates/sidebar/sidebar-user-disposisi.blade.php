@@ -15,11 +15,11 @@
             <li class="menu-header">Menu</li>
             
             <li class=""><a class="nav-link" href="{{route('data-disposisi.index')}}">
-                <i class="fas fa-copy"></i><span>Tugas disposisi</span></a>
+                <i class="fas fa-envelope-open-text"></i><span>Tugas disposisi</span></a>
             </li>
 
             <li class=""><a class="nav-link" href="{{route('data-effort.index')}}">
-                <i class="fas fa-copy"></i><span>Tugas Approval</span></a>
+                <i class="fas fa-paper-plane"></i><span>Tugas Approval</span></a>
             </li>
 
             <li class="{{set_active(['arsip-disposisi.index',])}}"><a class="nav-link" href="{{route('arsip-disposisi.index')}}">

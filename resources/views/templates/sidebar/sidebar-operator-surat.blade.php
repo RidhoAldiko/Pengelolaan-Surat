@@ -26,7 +26,7 @@
                 'arsip-surat-masuk.index',
                 'arsip-surat-masuk.detail',
             ])}}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-copy"></i> <span>Surat Masuk</span></a>
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-envelope-open-text"></i> <span>Surat Masuk</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{set_active(['surat-masuk.index','surat-masuk.create','surat-masuk.show','surat-masuk.edit','disposisi-surat-masuk.create'])}}">
                         <a class="nav-link " href="{{route('surat-masuk.index')}}">Tabel Surat</a>
@@ -53,7 +53,7 @@
                     'arsip-surat-keluar.index',
                     'arsip-surat-keluar.show'
                 ])}}">
-                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-copy"></i> <span>Surat Keluar</span></a>
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-paper-plane"></i> <span>Surat Keluar</span></a>
                     <ul class="dropdown-menu">
                         <li class="{{set_active([
                             'surat-keluar.index',

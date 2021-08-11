@@ -41,7 +41,7 @@
         <p style="display: inline;padding-right: 20px;padding-left:20px"></p>
         <p class="verticalLine"style="display: inline;padding-left:40px;">Tgl Masuk: 51/242/45</p>
         <p style="display: inline;padding-right: 20px;padding-left:20px"></p>
-        <p class="verticalLine"style="display: inline">Kode: <b>sdf6</b></p>
+        <p class="verticalLine"style="display: inline"></b></p>
 
         <p style="border-bottom-style:solid;border-bottom-width:1px;border-botom-color:black;"></p>
         <p style="border-bottom-style:solid;border-bottom-width:1px;border-botom-color:black;">
@@ -67,7 +67,7 @@
                 <tr>
                     <td width="40%" style="border-right: 0px; border-left:0px">No.Urut:</td>
                     <td style="border-right: 0px; border-left:0px">Tgl Diterima:</td>
-                    <td style="border-left:0px">Kode</td>
+                    <td style="border-left:0px"></td>
                     
                 </tr>
                 <tr>

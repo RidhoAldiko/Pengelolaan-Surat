@@ -10,7 +10,7 @@
         <div class="col-lg-6 col-md-6 col-sm-6 col-12">
             <div class="card shadow card-statistic-1">
                 <div class="card-header">
-                    <h4>Disposisi Surat</h4>
+                    <h4>Tugas Disposisi Surat</h4>
                 </div>
                 <div class="card-body mt-1 mb-4">
                     {{$disposisi}}
@@ -21,7 +21,7 @@
         <div class="col-lg-6 col-md-6 col-sm-6 col-12">
             <div class="card shadow card-statistic-1">
                 <div class="card-header">
-                    <h4>Approval Surat</h4>
+                    <h4>Tugas Approval Surat</h4>
                 </div>
                 <div class="card-body mt-1 mb-4">
                     {{$approval}}
