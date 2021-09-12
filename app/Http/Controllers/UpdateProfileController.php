@@ -16,13 +16,11 @@ class UpdateProfileController extends Controller
     public function update_profile(Request $request)
     {
         request()->validate([
-            'email' => 'required',
             'password_lama' => 'required',
-            'password' => 'required|min:6|string|confirmed'
+            'password' => 'required|min:8|string|confirmed'
         ],[
-            'email.required' => 'Email tidak boleh kosong',
             'password_lama.required' => 'Password lama tidak boleh kosong',
-            'password.min' => 'Minimal 6 karakter',
+            'password.min' => 'Minimal 8 karakter',
             'password.confirmed' => 'Password tidak sama'
         ]);
 
@@ -30,10 +28,9 @@ class UpdateProfileController extends Controller
         $data = $request->all();
         if (Hash::check($data['password_lama'],$password_aktif)) {
             auth()->user()->update([
-                'email' => $data['email'],
                 'password' => bcrypt($data['password'])
             ]);
-            return back()->with('status','Data berhasil diedit!');
+            return back()->with('status','password berhasil diubah!');
         }else{
             return back()->withErrors(['password_lama'=>'password lama anda tidak sesuai']);
         }

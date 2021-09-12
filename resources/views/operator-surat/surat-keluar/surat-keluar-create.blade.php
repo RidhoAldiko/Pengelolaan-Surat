@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title','Surat masuk')
+@section('title','Surat Keluar')
 @section('content')
 <section class="section">
     <div class="section-header">
@@ -22,7 +22,7 @@
                             
                             <div class="form-group">
                                 <label for="nomor_surat">Nomor Surat</label>
-                                <input type="text" id="nomor_surat" name="nomor_surat"  class="form-control @error('nomor_surat') is-invalid @enderror" placeholder="Masukan nomor surat" value="{{old('nomor_surat')}}" >
+                                <input type="text" autocomplete="off" id="nomor_surat" name="nomor_surat"  class="form-control @error('nomor_surat') is-invalid @enderror" placeholder="Masukan nomor surat" value="{{old('nomor_surat')}}" >
                                 @error('nomor_surat')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -31,7 +31,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="tanggal_surat">Tanggal Surat</label>
-                                <input type="text" id="tanggal_surat" name="tanggal_surat" class="form-control datepicker @error('tanggal_surat') is-invalid @enderror" placeholder="Masukan tanggal surat" value="{{old('tanggal_surat')}}" >
+                                <input type="text" autocomplete="off" id="tanggal_surat" name="tanggal_surat" class="form-control datepicker @error('tanggal_surat') is-invalid @enderror" placeholder="Masukan tanggal surat" value="{{old('tanggal_surat')}}" >
                                 @error('tanggal_surat')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -40,7 +40,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="perihal">Perihal Surat</label>
-                                <input type="text" id="perihal" name="perihal"  class="form-control @error('perihal') is-invalid @enderror" placeholder="Masukan Perihal Surat" value="{{old('perihal')}}" >
+                                <input type="text" autocomplete="off" id="perihal" name="perihal"  class="form-control @error('perihal') is-invalid @enderror" placeholder="Masukan Perihal Surat" value="{{old('perihal')}}" >
                                 @error('perihal')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -58,7 +58,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="hubungan_nomor_surat">Hubungan Nomor Surat</label>
-                                <input type="text" id="hubungan_nomor_surat" name="hubungan_nomor_surat"  class="form-control @error('hubungan_nomor_surat') is-invalid @enderror" placeholder="Masukan Hubungan Nomor Surat" value="{{old('hubungan_nomor_surat')}}" >
+                                <input type="text" autocomplete="off" id="hubungan_nomor_surat" name="hubungan_nomor_surat"  class="form-control @error('hubungan_nomor_surat') is-invalid @enderror" placeholder="Masukan Hubungan Nomor Surat" value="{{old('hubungan_nomor_surat')}}" >
                                 <span class="text-info">*Jika tidak ada boleh dikosongkan</span><br>
                                 @error('hubungan_nomor_surat')
                                 <span class="invalid-feedback" role="alert">

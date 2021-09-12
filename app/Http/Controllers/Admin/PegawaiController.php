@@ -102,13 +102,14 @@ class PegawaiController extends Controller
                     return ($data->status == 0) ? 'Aktif' : 'Nonaktif';
                 })
                 ->addColumn('aksi', function($data) {
-                    $button = ' 
+                    $button = ' <div class="btn-group" role="group" aria-label="Basic example">
                                 <a href="'.route('admin-pegawai.show',$data->nip_pegawai).'" class="btn btn-success text-white btn-sm" title="Edit">
                                 <i class="fas fa-info"></i> Detail
                                 </a>
                                 <a href="'.route('admin-pegawai.edit',$data->nip_pegawai).'" class="btn btn-warning text-white btn-sm" title="Edit">
                                     <i class="fas fa-pencil-alt"></i> Edit
                                 </a>
+                                </div>
                                 ';
                     return $button;
                 })
@@ -125,7 +126,7 @@ class PegawaiController extends Controller
         $this->validate($request,[
             'nip_pegawai' => 'unique:pegawai'
         ],[
-            'nip_pegawai.unique' => 'Nip pegawai tidak boleh sama',
+            'nip_pegawai.unique' => 'Nip pegawai telah terdaftar!',
         ]);
         $data = $request->all();
         $data['status'] = 0;

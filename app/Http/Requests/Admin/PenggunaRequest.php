@@ -25,7 +25,7 @@ class PenggunaRequest extends FormRequest
     {
         return [
             'nip_pegawai' => ['required','string', 'max:60'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users','regex:/^[A-Za-z0-9\.]*@(umsetkpr)[.](com)$/'],
         ];
     }
 
@@ -38,6 +38,7 @@ class PenggunaRequest extends FormRequest
             'email.required'  => 'Email tidak boleh kosong',
             'email.string'  => 'Email harus berupa string',
             'email.unique'  => 'Email sudah terdaftar',
+            'email.regex' => 'Email domain yang digunakan tidak diizinkan!',
         ];
     }
 }

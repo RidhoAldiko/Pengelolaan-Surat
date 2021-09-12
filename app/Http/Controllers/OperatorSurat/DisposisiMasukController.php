@@ -16,6 +16,7 @@ use App\Http\Requests\OperatorSurat\TeruskanDisposisiMasukRequest;
 use App\Models\DisposisiSuratMasuk as DisposisiMasuk;
 use App\Models\TeruskanDisposisiMasuk;
 use App\Models\Notifikasi;
+use Exception;
 
 class DisposisiMasukController extends Controller
 {
@@ -38,8 +39,14 @@ class DisposisiMasukController extends Controller
 
     public function ingatkan($id){
         $user = User::findOrFail($id);
-        Mail::to($user->email)->send(new DisposisiSurat());
-        return redirect()->route('disposisi-surat-masuk.index')->with('status',"Pengingat disposisi berhasil dikirim kepada pengguna");
+        
+        try {
+            Mail::to($user->email)->send(new DisposisiSurat());
+            return redirect()->route('disposisi-surat-masuk.index')->with('status',"Pengingat disposisi berhasil diteruskan kepada pengguna");
+        } catch (Exception $ex) {
+            return redirect()->route('disposisi-surat-masuk.index')->with('warning',"Koneksi internet anda tidak stabil, disposisi gagal diteruskan kepada pengguna, silahkan ulangi lagi!");
+        }
+        
     }
 
     /**
@@ -79,10 +86,16 @@ class DisposisiMasukController extends Controller
                 ->where('id_disposisi_surat_masuk',$request->id_disposisi_surat_masuk)
                 ->first('surat_masuk.id_surat_masuk');
         $user = User::where('id',$explode)->first();
-        Mail::to($user->email)->send(new DisposisiSurat());
-        $create=TeruskanDisposisiMasuk::create($data);
-        $update=SuratMasuk::where('id_surat_masuk', $result->id_surat_masuk)->update(['status' => '2']);
-        return redirect()->route('disposisi-surat-masuk.index')->with('status',"Disposisi Surat Masuk berhasil diteruskan kepada pengguna");
+        
+        try {
+            Mail::to('coba@gmail.com')->send(new DisposisiSurat());
+            TeruskanDisposisiMasuk::create($data);
+            SuratMasuk::where('id_surat_masuk', $result->id_surat_masuk)->update(['status' => '2']);
+            return redirect()->route('disposisi-surat-masuk.index')->with('status',"Disposisi Surat Masuk berhasil diteruskan kepada pengguna");
+        } catch (Exception $ex) {
+            return redirect()->route('disposisi-surat-masuk.forward',$request->id_disposisi_surat_masuk)->with('warning',"Koneksi internet anda tidak stabil, disposisi Surat Masuk gagal diteruskan kepada pengguna,Silahkan ulangi!");
+            
+        }
     }
 
     /**

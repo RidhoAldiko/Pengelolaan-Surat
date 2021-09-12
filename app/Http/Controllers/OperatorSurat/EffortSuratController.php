@@ -14,6 +14,7 @@ use App\Models\EffortSuratKeluar as EffortSurat;
 use App\Models\SuratKeluar;
 use App\Models\User;
 use App\Models\TeruskanEffortSurat;
+use Exception;
 
 class EffortSuratController extends Controller
 {
@@ -163,10 +164,15 @@ class EffortSuratController extends Controller
                 ->where('id_effort_surat',$request->id_effort_surat)
                 ->first('surat_keluar.id_surat_keluar');
         $user = User::where('id',$explode)->first();
-        Mail::to($user->email)->send(new ApprovalSuratKeluar());
-        $create=TeruskanEffortSurat::create($data);
-        $update=SuratKeluar::where('id_surat_keluar', $result->id_surat_keluar)->update(['status' => '2']);
-        return redirect()->route('effort-surat.index')->with('status',"Approval Surat Keluar berhasil diteruskan kepada pengguna");
+        try {
+            Mail::to($user->email)->send(new ApprovalSuratKeluar());
+            TeruskanEffortSurat::create($data);
+            SuratKeluar::where('id_surat_keluar', $result->id_surat_keluar)->update(['status' => '2']);
+            return redirect()->route('effort-surat.index')->with('status',"Approval Surat Keluar berhasil diteruskan kepada pengguna");
+        } catch (Exception $ex) {
+            return redirect()->route('effort-surat.forward',$request->id_effort_surat)->with('warning',"Koneksi internet anda tidak stabil, approval gagal diteruskan kepada pengguna, silahkan ulangi lagi!");
+        }
+
     }
 
     public function arsipkan($id){
@@ -196,7 +202,14 @@ class EffortSuratController extends Controller
     public function ingatkan($id){
         $user = User::findOrFail($id);
         // dd($user->email);
-        Mail::to($user->email)->send(new ApprovalSuratKeluar());
-        return redirect()->route('effort-surat.index')->with('status',"Pengingat approval berhasil dikirim kepada pengguna");
+
+        try {
+            Mail::to($user->email)->send(new ApprovalSuratKeluar());
+            return redirect()->route('effort-surat.index')->with('status',"Pengingat approval berhasil dikirim kepada pengguna");
+        } catch (Exception $ex) {
+            return redirect()->route('effort-surat.index')->with('warning',"Koneksi internet anda tidak stabil, pengingat approval gagal dikirim kepada pengguna, silahkan ulangi lagi!");
+        }
+        
+        
     }
 }

@@ -21,7 +21,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="nip_pegawai">NIP Pegawai</label>
-                                <input type="number" id="nip_pegawai" name="nip_pegawai"  class="form-control @error('nip_pegawai') is-invalid @enderror" placeholder="Masukan NIP Pegawai" value="{{old('nip_pegawai')}}" >
+                                <input type="number" autocomplete="off" id="nip_pegawai" name="nip_pegawai"  class="form-control @error('nip_pegawai') is-invalid @enderror" placeholder="Masukan NIP Pegawai" value="{{old('nip_pegawai')}}" >
                                 @error('nip_pegawai')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -31,7 +31,7 @@
 
                             <div class="form-group">
                                 <label for="nomor_karpeg">Nomor Kartu Pegawai</label>
-                                <input type="text" id="nomor_karpeg" name="nomor_karpeg"  class="form-control @error('nomor_karpeg') is-invalid @enderror" placeholder="Masukan Nomor kartu Pegawai" value="{{old('nomor_karpeg')}}" >
+                                <input type="text" autocomplete="off" id="nomor_karpeg" name="nomor_karpeg"  class="form-control @error('nomor_karpeg') is-invalid @enderror" placeholder="Masukan Nomor kartu Pegawai" value="{{old('nomor_karpeg')}}" >
                                 @error('nomor_karpeg')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -41,7 +41,7 @@
 
                             <div class="form-group">
                                 <label for="nama_pegawai">Nama Pegawai</label>
-                                <input type="text" id="nama_pegawai" name="nama_pegawai"  class="form-control  @error('nama_pegawai') is-invalid @enderror" placeholder="Masukan Nama Pegawai" value="{{old('nama_pegawai')}}" >
+                                <input type="text" autocomplete="off" id="nama_pegawai" name="nama_pegawai"  class="form-control  @error('nama_pegawai') is-invalid @enderror" placeholder="Masukan Nama Pegawai" value="{{old('nama_pegawai')}}" >
                                 @error('nama_pegawai')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -51,7 +51,7 @@
 
                             <div class="form-group">
                                 <label for="tempat_lahir">Tempat Lahir</label>
-                                <input type="text" id="tempat_lahir" name="tempat_lahir"  class="form-control  @error('tempat_lahir') is-invalid @enderror" placeholder="Masukan tempat lahir" value="{{old('tempat_lahir')}}" >
+                                <input type="text" autocomplete="off" id="tempat_lahir" name="tempat_lahir"  class="form-control  @error('tempat_lahir') is-invalid @enderror" placeholder="Masukan tempat lahir" value="{{old('tempat_lahir')}}" >
                                 @error('tempat_lahir')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -61,7 +61,7 @@
 
                             <div class="form-group">
                                 <label for="tanggal_lahir">Tanggal Lahir</label>
-                                <input type="text" id="tanggal_lahir" name="tanggal_lahir" class="form-control datepicker @error('tanggal_lahir') is-invalid @enderror" placeholder="Masukan Tanggal Lahir" value="{{old('tanggal_lahir')}}" >
+                                <input type="text" autocomplete="off" id="tanggal_lahir" name="tanggal_lahir" class="form-control datepicker @error('tanggal_lahir') is-invalid @enderror" placeholder="Masukan Tanggal Lahir" value="{{old('tanggal_lahir')}}" >
                                 @error('tanggal_lahir')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

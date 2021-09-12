@@ -14,15 +14,17 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow ">
-                    <div class="card-header">
-                        <h4>Tambah Pengguna Sistem</h4>
-                    </div>
+                    
                     <div class="card-body">
+                        <div class="card-title">
+                            <h4>Tambah Pengguna Sistem</h4>
+                            <small class="text-info">*catatan: staff sub bagian tidak termasuk dalam kategori pengguna!</small>
+                        </div>
                         <form action="{{route('data-pengguna.store')}}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label for="nip_pegawai">NIP Pegawai</label>
-                                <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input-admin @error('nip_pegawai') is-invalid @enderror" placeholder="Masukan NIP / Nama Pegawai" value="{{old('nip_pegawai')}}">
+                                <input type="text" autocomplete="off" name="nip_pegawai" id="nip_pegawai" class="form-control search-input-admin @error('nip_pegawai') is-invalid @enderror" placeholder="Masukan NIP / Nama Pegawai" value="{{old('nip_pegawai')}}">
                                 <div class="row">
                                     <div class="col-md-8 search-result-admin">
                                     </div>
@@ -36,7 +38,7 @@
                             
                             <div class="form-group">
                                 <label for="email">Email Pegawai</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror"  id="email" name="email" placeholder="Masukan Email Pegawai" value="{{old('email')}}">
+                                <input type="email" autocomplete="off" class="form-control @error('email') is-invalid @enderror"  id="email" name="email" placeholder="Masukan Email Pegawai" value="{{old('email')}}">
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

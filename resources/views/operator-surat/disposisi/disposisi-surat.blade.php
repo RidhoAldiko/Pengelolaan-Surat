@@ -13,6 +13,15 @@
         </button>
     </div>
     @endif
+
+    @if (session('warning'))
+    <div class="alert shadow alert-danger alert-dismissible fade show" role="alert">
+        {{ session('warning') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     <div class="section-body">
         <div class="card">
             <div class="card-header">
@@ -88,6 +97,7 @@
                                         @endif
                                     </td>
                                     <td>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
                                         @if ($result->status == 0)
                                             <a href="{{route('disposisi-surat-masuk.show',$result->id_disposisi_surat_masuk)}}" class="btn btn-success text-white btn-sm">
                                                 <i class="fas fa-info"></i> Detail
@@ -126,6 +136,7 @@
                                                 </a>
                                             @endif
                                         @endif
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 // use App\Models\Notifikasi;
 use App\Models\TeruskanDisposisiMasuk;
+use Exception;
 use Illuminate\Support\Facades\Storage;
 
 class DataDisposisiController extends Controller
@@ -74,14 +75,20 @@ class DataDisposisiController extends Controller
         //     'status' => '0',
         // ]);
         // $data['id_disposisi_surat_masuk']
-        $user = User::where('id',$explode)->first();
-        Mail::to($user->email)->send(new DisposisiSurat());
+        
         $result = SuratMasuk::join('disposisi_surat_masuk', 'disposisi_surat_masuk.id_surat_masuk', '=', 'surat_masuk.id_surat_masuk')
                 ->where('id_disposisi_surat_masuk',$request->id_disposisi_surat_masuk)
                 ->first('surat_masuk.id_surat_masuk');
-        $update=TeruskanDisposisiMasuk::where('id_disposisi_surat_masuk', $data['id_disposisi_surat_masuk'])->update(['status' => '1']);
-        $create=TeruskanDisposisiMasuk::create($data);
-        return redirect()->route('data-disposisi.index')->with('status',"Disposisi Surat Masuk berhasil diteruskan kepada pengguna");
+
+        $user = User::where('id',$explode)->first();
+        try {
+            Mail::to($user->email)->send(new DisposisiSurat());
+            TeruskanDisposisiMasuk::where('id_disposisi_surat_masuk', $data['id_disposisi_surat_masuk'])->update(['status' => '1']);
+            TeruskanDisposisiMasuk::create($data);
+            return redirect()->route('data-disposisi.index')->with('status',"Disposisi Surat Masuk berhasil diteruskan kepada pengguna");
+        } catch (Exception $ex) {
+            return redirect()->route('data-disposisi.forward',$request->id_disposisi_surat_masuk)->with('warning',"Koneksi internet anda tidak stabil, disposisi Surat Masuk gagal diteruskan kepada pengguna,Silahkan ulangi!");
+        }
     }
 
     /**

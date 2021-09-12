@@ -11,6 +11,7 @@ use App\Models\SuratKeluar;
 use App\Models\TeruskanEffortSurat;
 use App\Models\User;
 use App\Models\Pegawai;
+use Exception;
 
 class DataEffortController extends Controller
 {
@@ -82,11 +83,18 @@ class DataEffortController extends Controller
                 ->where('id_effort_surat',$request->id_effort_surat)
                 ->first('surat_keluar.id_surat_keluar');
         $user = User::where('id',$explode)->first();
-        Mail::to($user->email)->send(new ApprovalSuratKeluar());
-        $update=TeruskanEffortSurat::where('id_effort_surat', $data['id_effort_surat'])->update(['status' => '1']);
-        $create=TeruskanEffortSurat::create($data);
-        $update=SuratKeluar::where('id_surat_keluar', $result->id_surat_keluar)->update(['status' => '2']);
-        return redirect()->route('data-effort.index')->with('status',"Approval Surat Keluar berhasil diteruskan kepada pengguna");
+        
+        try {
+            Mail::to($user->email)->send(new ApprovalSuratKeluar());
+            TeruskanEffortSurat::where('id_effort_surat', $data['id_effort_surat'])->update(['status' => '1']);
+            TeruskanEffortSurat::create($data);
+            SuratKeluar::where('id_surat_keluar', $result->id_surat_keluar)->update(['status' => '2']);
+            return redirect()->route('data-effort.index')->with('status',"Approval Surat Keluar berhasil diteruskan kepada pengguna");
+        } catch (Exception $ex) {
+            return redirect()->route('data-effort.index')->with('warning',"Koneksi internet anda tidak stabil, apporval gagal diteruskan kepada pengguna, silahkan ulangi lagi!");
+        }
+        
+        
     }
 
     /**

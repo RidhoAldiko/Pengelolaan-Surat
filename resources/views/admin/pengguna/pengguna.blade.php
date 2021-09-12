@@ -51,11 +51,11 @@
                                 <td>
                                     @if ($result->flag == 0)
                                     <a href="#" class="btn btn-danger text-white btn-sm getIdUser" title="Edit" data-toggle="modal" data-target="#userDisable" data-id="{{$result->id}}">
-                                        <i class="fas fa-toggle-off"></i> Nonaktifkan
+                                        <i class="fas fa-ban"></i> Nonaktifkan
                                     </a>
                                     @else
                                     <a href="{{route('data-pengguna.enable',$result->id)}}" class="btn btn-success text-white btn-sm" title="Edit">
-                                        <i class="fas fa-toggle-on"></i> Aktifkan
+                                        <i class="far fa-check-circle"></i> Aktifkan
                                     </a>
                                     @endif
                                         

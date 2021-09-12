@@ -45,11 +45,11 @@
         <p style="border-bottom-style:solid;border-bottom-width:1px;border-botom-color:black;"></p>
         <p style="border-bottom-style:solid;border-bottom-width:1px;border-botom-color:black;">
         Isi Ringkas : {{$result->isi_ringkasan}}</p>
-        <p style="border-bottom-style:solid;border-bottom-width:1px;border-botom-color:black;">Lampiran: </p>
+        {{-- <p style="border-bottom-style:solid;border-bottom-width:1px;border-botom-color:black;">Lampiran: </p> --}}
     
-        <p style="display: inline;">Dari:</p>
+        <p style="display: inline;">Dari: {{$result->pengirim}}</p>
         <p style="display: inline;padding-right: 200px;padding-left:20px"></p>
-        <p class="verticalLine"style="display: inline">Kepada:</p>
+        {{-- <p class="verticalLine"style="display: inline">Kepada: Bapak Bupati KamPar</p> --}}
 
         <p style="border-bottom-style:solid;border-bottom-width:1px;border-botom-color:black;"></p>
         <p style="display: inline;">Tanggal: {{date('d-m-Y')}}</p>

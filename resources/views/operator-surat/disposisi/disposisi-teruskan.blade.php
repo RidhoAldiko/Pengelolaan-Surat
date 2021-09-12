@@ -9,6 +9,14 @@
             <div class="breadcrumb-item">Teruskan Disposisi Surat</div>
         </div>
     </div>
+    @if (session('warning'))
+    <div class="alert shadow alert-danger alert-dismissible fade show" role="alert">
+        {{ session('warning') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     <div class="section-body ">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -21,7 +29,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="id_disposisi_surat_masuk">Tujuan Disposisi</label>
-                                <input type="text" name="id" id="id" class="form-control search-input-surat @error('id') is-invalid @enderror" placeholder="Masukan Nama / Jabatan / Unit Kerja" value="{{old('id')}}">
+                                <input type="text" autocomplete="off" name="id" id="id" class="form-control search-input-surat @error('id') is-invalid @enderror" placeholder="Masukan Nama / Jabatan / Unit Kerja" value="{{old('id')}}">
                                 <div class="row">
                                     <div class="col-md-8 search-result-surat">
                                     </div>

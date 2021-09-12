@@ -49,6 +49,7 @@
                                         @endif
                                     </td>
                                     <td>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
                                         <a href="{{route('data-disposisi.show',$result->id_disposisi_surat_masuk)}}" class="btn btn-success text-white btn-sm">
                                             <i class="fas fa-info"></i> Detail
                                         </a>
@@ -58,6 +59,7 @@
                                         <a href="{{route('data-disposisi.finish',$result->id_surat_masuk)}}" class="btn btn-warning btn-sm" >
                                             <i class="fas fa-angle-right"></i> Selesaikan
                                         </a>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
                                     </td>
                                 </tr>
                                 @endif

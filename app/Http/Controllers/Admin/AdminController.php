@@ -10,6 +10,7 @@ use App\Mail\PenggunaSistem;
 use Illuminate\Http\Request;
 use App\Models\Pegawai;
 use App\Models\User;
+use Exception;
 
 class AdminController extends Controller
 {
@@ -41,7 +42,7 @@ class AdminController extends Controller
         ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
         ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
         ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
-        ->get();
+        ->orderBy('created_at','DESC')->get();
 
         // $results = User::select('users.*','nama_pegawai','pegawai.id_jabatan','nama_jabatan','unit_kerja.id_unit','nama_unit')
         //         ->join('pegawai', 'nip_pegawai', '=', 'users.id')
@@ -58,9 +59,10 @@ class AdminController extends Controller
         if ($request->has('data')) {
             $data = $request->data;
             //get nip pegawai 
-            $results = Pegawai::where('nip_pegawai', 'LIKE' ,'%' . $data . '%')
+            $pegawai = Pegawai::where('nip_pegawai', 'LIKE' ,'%' . $data . '%')
                                 ->orWhere('nama_pegawai', 'LIKE' ,'%' . $data . '%')
                                 ->get();
+            $results = $pegawai->where('id_jabatan','!=',7);
             //make output
             $output = '<div class="list-group  mt-2">';
             //cek jika data tersedia
@@ -121,9 +123,14 @@ class AdminController extends Controller
 
         // dd($data);
         $user = User::create($data);
-        Mail::to($data['email'])->send(new PenggunaSistem());
+        try {
+            Mail::to($data['email'])->send(new PenggunaSistem());
+            return redirect()->route('data-pengguna.index')->with('status','Pengguna Berhasil Ditambah');
+        } catch (Exception $ex) {
+            return redirect()->route('data-pengguna.index')->with('status','Pengguna Berhasil Ditambah,');
+        }
         //arahkan ke halaman tabel data pengguna
-        return redirect()->route('data-pengguna.index')->with('status','Pengguna Berhasil Ditambah');
+        // return redirect()->route('data-pengguna.index')->with('status','Pengguna Berhasil Ditambah');
     }
 
     public function disable($id){

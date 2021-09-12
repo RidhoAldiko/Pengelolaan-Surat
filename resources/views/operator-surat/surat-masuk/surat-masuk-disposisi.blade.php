@@ -22,7 +22,7 @@
                             <div class="form-group">
                                 <label for="indeks">indeks</label>
                                 <input type="hidden" name="id_surat_masuk" id="id_surat_masuk" value="{{$id}}">
-                                <input type="text" id="indeks" name="indeks"  class="form-control @error('indeks') is-invalid @enderror" placeholder="Masukan indeks" value="{{old('indeks')}}" >
+                                <input type="text" autocomplete="off"  id="indeks" name="indeks"  class="form-control @error('indeks') is-invalid @enderror" placeholder="Masukan indeks" value="{{old('indeks')}}" >
                                 @error('indeks')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -32,7 +32,7 @@
 
                             <div class="form-group">
                                 <label for="tanggal_disposisi">Tanggal Disposisi</label>
-                                <input type="text" id="tanggal_disposisi" name="tanggal_disposisi"  class="form-control datepicker @error('tanggal_disposisi') is-invalid @enderror" placeholder="Masukan tanggal disposisi" value="{{old('tanggal_disposisi')}}" >
+                                <input type="text" autocomplete="off" id="tanggal_disposisi" name="tanggal_disposisi"  class="form-control datepicker @error('tanggal_disposisi') is-invalid @enderror" placeholder="Masukan tanggal disposisi" value="{{old('tanggal_disposisi')}}" >
                                 @error('tanggal_disposisi')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

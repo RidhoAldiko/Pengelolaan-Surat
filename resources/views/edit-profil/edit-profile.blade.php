@@ -28,23 +28,10 @@
                         <form action="{{ route('edit_profil.update') }}" method="POST">
                             @method('PATCH')
                             @csrf
-                            
-                            <div class="form-group row align-items-center">
-                                <label for="email" class="form-control-label col-sm-3 text-md-right">Email</label>
-                                <div class="col-sm-6 col-md-9">
-                                    <input type="email" id="email" name="email"  class="form-control @error('email') is-invalid @enderror"  value="{{ $data->email }}" >
-                                    @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                              </div>
-
                               <div class="form-group row align-items-center">
                                 <label for="password_lama" class="form-control-label col-sm-3 text-md-right">Password lama</label>
                                 <div class="col-sm-6 col-md-9">
-                                    <input type="password" id="password_lama" name="password_lama"  class="form-control @error('password_lama') is-invalid @enderror" value="{{ old('password_lama') }}">
+                                    <input type="password" autocomplete="off" id="password_lama" name="password_lama"  class="form-control @error('password_lama') is-invalid @enderror" value="{{ old('password_lama') }}">
                                     @error('password_lama')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -56,7 +43,7 @@
                               <div class="form-group row align-items-center">
                                 <label for="password" class="form-control-label col-sm-3 text-md-right">Password baru</label>
                                 <div class="col-sm-6 col-md-9">
-                                    <input type="password" id="password" name="password"  class="form-control @error('password') is-invalid @enderror">
+                                    <input type="password" autocomplete="off" id="password" name="password"  class="form-control @error('password') is-invalid @enderror">
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -68,7 +55,7 @@
                               <div class="form-group row align-items-center">
                                 <label for="password-confirm" class="form-control-label col-sm-3 text-md-right">Ulangi password baru</label>
                                 <div class="col-sm-6 col-md-9">
-                                    <input type="password" id="password-confirm" name="password_confirmation"  class="form-control @error('password-confirm') is-invalid @enderror">
+                                    <input type="password" autocomplete="off" id="password-confirm" name="password_confirmation"  class="form-control @error('password-confirm') is-invalid @enderror">
                                     @error('password-confirm')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
