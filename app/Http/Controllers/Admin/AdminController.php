@@ -108,27 +108,32 @@ class AdminController extends Controller
         $explode = explode(' - ',$request->nip_pegawai,-1);
         //masukan nip ke variabel data['id]
         $data ['id'] = $explode[0];
-        //cari tanggal lahir berdasarkan nip
-        $result = Pegawai::where('nip_pegawai',$data['id'])->first();
-        $date = date('d-m-Y', strtotime($result->tanggal_lahir));
-        //bersihkan  dash (-) pada tanggal lahir
-        $tanggal_lahir = str_replace("-", "", $date);
-        //set nilai flag=0 (aktif)
-        $data['flag'] = '0';
-        //buat password dari tanggal lahir
-        $data['password'] = Hash::make($tanggal_lahir);
-        $data['role'] = '3';
-        $data['id_level_surat'] = $result->id_jabatan;
-        //create data ke database user
 
-        // dd($data);
-        $user = User::create($data);
-        try {
-            Mail::to($data['email'])->send(new PenggunaSistem());
-            return redirect()->route('data-pengguna.index')->with('status','Pengguna Berhasil Ditambah');
-        } catch (Exception $ex) {
-            return redirect()->route('data-pengguna.index')->with('status','Pengguna Berhasil Ditambah,');
+        $user = User::where('id',$data['id']);
+        if ($user->count() != 1) {
+            try {
+                Mail::to($data['email'])->send(new PenggunaSistem());
+                //cari tanggal lahir berdasarkan nip
+                $result = Pegawai::where('nip_pegawai',$data['id'])->first();
+                $date = date('d-m-Y', strtotime($result->tanggal_lahir));
+                //bersihkan  dash (-) pada tanggal lahir
+                $tanggal_lahir = str_replace("-", "", $date);
+                $data['flag'] = '0';
+                $data['password'] = Hash::make($tanggal_lahir);
+                $data['role'] = '3';
+                $data['id_level_surat'] = $result->id_jabatan;
+                $user = User::create($data);
+                return redirect()->route('data-pengguna.index')->with('status','Pengguna Berhasil Ditambah');
+            } catch (Exception $ex) {
+                return redirect()->route('data-pengguna.add')->with('warning','Koneksi internet anda tidak stabil,Pengguna gagal Ditambahkan, Silahkan ulangi lagi!');
+            }
+
+        } else {
+            return back()->withErrors(['nip_pegawai'=>'Nip pegawai sudah terdaftar!']);
         }
+        
+
+        
         //arahkan ke halaman tabel data pengguna
         // return redirect()->route('data-pengguna.index')->with('status','Pengguna Berhasil Ditambah');
     }
