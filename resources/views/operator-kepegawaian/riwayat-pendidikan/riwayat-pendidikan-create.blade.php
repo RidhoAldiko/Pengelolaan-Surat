@@ -34,7 +34,7 @@
                       <div class="form-group row align-items-center">
                         <label for="nip_pegawai" class="form-control-label col-sm-3 text-md-right">Pegawai</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input @error('nip_pegawai') is-invalid @enderror" placeholder="Masukan NIP Pegawai" >
+                          <input type="text" name="nip_pegawai" id="nip_pegawai" class="form-control search-input @error('nip_pegawai') is-invalid @enderror" placeholder="Masukan NIP Pegawai" autocomplete="off" >
                           <div class="row">
                               <div class="col-md-12 search-result">
                               </div>

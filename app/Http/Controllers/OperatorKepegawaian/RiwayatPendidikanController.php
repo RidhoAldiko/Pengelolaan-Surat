@@ -28,6 +28,12 @@ class RiwayatPendidikanController extends Controller
         $data['tgl_sttb'] = date('Y-m-d H:i:s',strtotime($data['tgl_sttb'] ));
         $data['mulai'] = date('Y-m-d H:i:s',strtotime($data['mulai'] ));
         $data['sampai'] = date('Y-m-d H:i:s',strtotime($data['sampai'] ));
+
+        //jika tidak menginputkan tanggal mulai dan selesai pendidikan maka set null
+        if ($data['mulai']==='1970-01-01 00:00:00' && $data['sampai']==='1970-01-01 00:00:00') {
+            $data['mulai']=null;
+            $data['sampai']=null;
+        }
         RiwayatPendidikan::create($data);
 
         return redirect()->route('riwayat-pendidikan.create')->with('status',"Data Pendidikan berhasil ditambah");
@@ -47,6 +53,11 @@ class RiwayatPendidikanController extends Controller
         $data['tgl_sttb'] = date('Y-m-d H:i:s',strtotime($data['tgl_sttb'] ));
         $data['mulai'] = date('Y-m-d H:i:s',strtotime($data['mulai'] ));
         $data['sampai'] = date('Y-m-d H:i:s',strtotime($data['sampai'] ));
+        //jika tidak menginputkan tanggal mulai dan selesai pendidikan maka set null
+        if ($data['mulai']==='1970-01-01 00:00:00' && $data['sampai']==='1970-01-01 00:00:00') {
+            $data['mulai']=null;
+            $data['sampai']=null;
+        }
         $item = RiwayatPendidikan::findOrFail($id);
         $item->update($data);
         return redirect()->route('data-pegawai.edit',$data['nip_pegawai'])->with('status',"Data Riwayat pendidikan berhasil diedit");
