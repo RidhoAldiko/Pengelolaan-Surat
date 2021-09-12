@@ -9,7 +9,14 @@
             <div class="breadcrumb-item">Tambah Pengguna Sistem</div>
         </div>
     </div>
-
+    @if (session('warning'))
+    <div class="alert shadow alert-danger alert-dismissible fade show" role="alert">
+        {{ session('warning') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     <div class="section-body ">
         <div class="row justify-content-center">
             <div class="col-md-8">
