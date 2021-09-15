@@ -684,14 +684,16 @@
                                                                     <td> {{ $item->sampai == null ? '-' : date('d/m/Y', strtotime($item->sampai)) }}</td>
                                                                     <td>{{ $item->tanda_lulus }}</td>
                                                                     <td>
-                                                                        <a href="{{ route('riwayat-pendidikan.edit',$item->id_riwayatpendidikan) }}" class="btn btn-warning text-white btn-sm" title="Edit">
-                                                                            <i class="fas fa-pencil-alt"></i>
-                                                                        </a>
-                                                                        <form action="{{ route('riwayat-pendidikan.destroy',$item->id_riwayatpendidikan) }}" method="post" class="d-inline">
-                                                                            @csrf
-                                                                            @method('delete')
-                                                                            <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus riwayat pendidikan ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
-                                                                        </form> 
+                                                                        <div class="btn-group">
+                                                                            <a href="{{ route('riwayat-pendidikan.edit',$item->id_riwayatpendidikan) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </a>
+                                                                            <form action="{{ route('riwayat-pendidikan.destroy',$item->id_riwayatpendidikan) }}" method="post" class="d-inline">
+                                                                                @csrf
+                                                                                @method('delete')
+                                                                                <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus riwayat pendidikan ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                            </form> 
+                                                                        </div>
                                                                     </td>
                                                                 </tr>
                                                             @endforeach
@@ -737,14 +739,16 @@
                                                             <td>{{ $item->tempat }}</td>
                                                             <td>{{ $item->keterangan }}</td>
                                                             <td>
-                                                                <a href="{{ route('kursus-atau-pelatihan.edit',$item->id_kursus) }}" class="btn btn-warning text-white btn-sm " title="Edit">
-                                                                    <i class="fas fa-pencil-alt"></i>
-                                                                </a>
-                                                                <form action="{{ route('kursus-atau-pelatihan.destroy',$item->id_kursus) }}" method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus riwayat kursus/pelatihan ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
-                                                                </form> 
+                                                                <div class="btn-group">
+                                                                    <a href="{{ route('kursus-atau-pelatihan.edit',$item->id_kursus) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                                                        <i class="fas fa-pencil-alt"></i>
+                                                                    </a>
+                                                                    <form action="{{ route('kursus-atau-pelatihan.destroy',$item->id_kursus) }}" method="post" class="d-inline">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus riwayat kursus/pelatihan ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                    </form> 
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -793,14 +797,16 @@
                                                                 <td>{{ $item->tempat }}</td>
                                                                 <td>{{ $item->pimpinan }}</td>
                                                                 <td>
-                                                                    <a href="{{ route('pegawai-organisasi.edit',$item->id_organisasi) }}" class="btn btn-warning text-white btn-sm" title="Edit">
-                                                                        <i class="fas fa-pencil-alt"></i>
-                                                                    </a>
-                                                                    <form action="{{ route('pegawai-organisasi.destroy',$item->id_organisasi) }}" method="post" class="d-inline">
-                                                                        @csrf
-                                                                        @method('delete')
-                                                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus riwayat organisasi ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
-                                                                    </form> 
+                                                                    <div class="btn-group">
+                                                                        <a href="{{ route('pegawai-organisasi.edit',$item->id_organisasi) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                                                            <i class="fas fa-pencil-alt"></i>
+                                                                        </a>
+                                                                        <form action="{{ route('pegawai-organisasi.destroy',$item->id_organisasi) }}" method="post" class="d-inline">
+                                                                            @csrf
+                                                                            @method('delete')
+                                                                            <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus riwayat organisasi ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                        </form> 
+                                                                    </div>
                                                                 </td>
                                                             </tr>
                                                         @endforeach
@@ -976,14 +982,16 @@
                                                             <td>{{ $item->pekerjaan }}</td>
                                                             <td>{{ $item->keterangan }}</td>
                                                             <td>
-                                                                <a href="{{ route('pegawai-keterangan-keluarga.edit',$item->id_ketKeluarga) }}" class="btn btn-warning text-white btn-sm" title="Edit">
-                                                                    <i class="fas fa-pencil-alt"></i>
-                                                                </a>
-                                                                <form action="{{ route('pegawai-keterangan-keluarga.destroy',$item->id_ketKeluarga) }}" method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data keterangan keluarga ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
-                                                                </form> 
+                                                                <div class="btn-group">
+                                                                    <a href="{{ route('pegawai-keterangan-keluarga.edit',$item->id_ketKeluarga) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                                                        <i class="fas fa-pencil-alt"></i>
+                                                                    </a>
+                                                                    <form action="{{ route('pegawai-keterangan-keluarga.destroy',$item->id_ketKeluarga) }}" method="post" class="d-inline">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data keterangan keluarga ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                    </form> 
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -1029,14 +1037,16 @@
                                                             <td>{{ $item->pekerjaan }}</td>
                                                             <td>{{ $item->keterangan }}</td>
                                                             <td>
-                                                                <a href="{{ route('pegawai-orangtua-kandung.edit',$item->id_orangtua) }}" class="btn btn-warning text-white btn-sm" title="Edit">
-                                                                    <i class="fas fa-pencil-alt"></i>
-                                                                </a>
-                                                                <form action="{{ route('pegawai-orangtua-kandung.destroy',$item->id_orangtua) }}" method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data Orang tua kandung ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
-                                                                </form> 
+                                                                <div class="btn-group">
+                                                                    <a href="{{ route('pegawai-orangtua-kandung.edit',$item->id_orangtua) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                                                        <i class="fas fa-pencil-alt"></i>
+                                                                    </a>
+                                                                    <form action="{{ route('pegawai-orangtua-kandung.destroy',$item->id_orangtua) }}" method="post" class="d-inline">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data Orang tua kandung ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                    </form> 
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -1082,14 +1092,16 @@
                                                             <td>{{ $item->pekerjaan }}</td>
                                                             <td>{{ $item->keterangan }}</td>
                                                             <td>
-                                                                <a href="{{ route('pegawai-saudara-kandung.edit',$item->id_saudarakandung) }}" class="btn btn-warning text-white btn-sm" title="Edit">
-                                                                    <i class="fas fa-pencil-alt"></i>
-                                                                </a>
-                                                                <form action="{{ route('pegawai-saudara-kandung.destroy',$item->id_saudarakandung) }}" method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data saudara kandung ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
-                                                                </form> 
+                                                                <div class="btn-group">
+                                                                    <a href="{{ route('pegawai-saudara-kandung.edit',$item->id_saudarakandung) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                                                        <i class="fas fa-pencil-alt"></i>
+                                                                    </a>
+                                                                    <form action="{{ route('pegawai-saudara-kandung.destroy',$item->id_saudarakandung) }}" method="post" class="d-inline">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data saudara kandung ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                    </form> 
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -1135,7 +1147,8 @@
                                                             <td>{{ $item->pekerjaan }}</td>
                                                             <td>{{ $item->keterangan }}</td>
                                                             <td>
-                                                                <a href="{{ route('pegawai-mertua.edit',$item->id_mertua) }}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                               <div class="btn-group">
+                                                                <a href="{{ route('pegawai-mertua.edit',$item->id_mertua) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
                                                                     <i class="fas fa-pencil-alt"></i>
                                                                 </a>
                                                                 <form action="{{ route('pegawai-mertua.destroy',$item->id_mertua) }}" method="post" class="d-inline">
@@ -1143,6 +1156,7 @@
                                                                     @method('delete')
                                                                     <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data Mertua ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
                                                                 </form> 
+                                                               </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -1188,14 +1202,16 @@
                                                             <td>{{ $item->nomor }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
                                                             <td>
-                                                                <a href="{{ route('pegawai-diklat-penjenjangan.edit',$item->id_diklat) }}" class="btn btn-warning text-white btn-sm" title="Edit">
-                                                                    <i class="fas fa-pencil-alt"></i>
-                                                                </a>
-                                                                <form action="{{ route('pegawai-diklat-penjenjangan.destroy',$item->id_diklat) }}" method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data Diklat Penjenjangan ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
-                                                                </form> 
+                                                                <div class="btn-group">
+                                                                    <a href="{{ route('pegawai-diklat-penjenjangan.edit',$item->id_diklat) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                                                        <i class="fas fa-pencil-alt"></i>
+                                                                    </a>
+                                                                    <form action="{{ route('pegawai-diklat-penjenjangan.destroy',$item->id_diklat) }}" method="post" class="d-inline">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data Diklat Penjenjangan ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                    </form> 
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -1237,14 +1253,16 @@
                                                             <td>{{ $item->tahun }}</td>
                                                             <td>{{ $item->negara_instansi }}</td>
                                                             <td>
-                                                                <a href="{{ route('pegawai-penghargaan.edit',$item->id_penghargaan) }}" class="btn btn-warning text-white btn-sm" title="Edit">
-                                                                    <i class="fas fa-pencil-alt"></i>
-                                                                </a>
-                                                                <form action="{{ route('pegawai-penghargaan.destroy',$item->id_penghargaan) }}" method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data bintang/penghargaan ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
-                                                                </form> 
+                                                                <div class="btn-group">
+                                                                    <a href="{{ route('pegawai-penghargaan.edit',$item->id_penghargaan) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                                                        <i class="fas fa-pencil-alt"></i>
+                                                                    </a>
+                                                                    <form action="{{ route('pegawai-penghargaan.destroy',$item->id_penghargaan) }}" method="post" class="d-inline">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data bintang/penghargaan ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                    </form> 
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -1288,14 +1306,16 @@
                                                             <td>{{ $item->lama }}</td>
                                                             <td>{{ $item->membiayai }}</td>
                                                             <td>
-                                                                <a href="{{ route('pegawai-pengalaman-keluar-negeri.edit',$item->id_keluarnegri) }}" class="btn btn-warning text-white btn-sm" title="Edit">
-                                                                    <i class="fas fa-pencil-alt"></i>
-                                                                </a>
-                                                                <form action="{{ route('pegawai-pengalaman-keluar-negeri.destroy',$item->id_keluarnegri) }}" method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data pengalaman keluar negeri ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
-                                                                </form> 
+                                                                <div class="btn-group">
+                                                                    <a href="{{ route('pegawai-pengalaman-keluar-negeri.edit',$item->id_keluarnegri) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                                                        <i class="fas fa-pencil-alt"></i>
+                                                                    </a>
+                                                                    <form action="{{ route('pegawai-pengalaman-keluar-negeri.destroy',$item->id_keluarnegri) }}" method="post" class="d-inline">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data pengalaman keluar negeri ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                    </form> 
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -1339,14 +1359,16 @@
                                                             <td>{{ $item->nomor }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
                                                             <td>
-                                                                <a href="{{ route('pegawai-keterangan-lain.edit',$item->id_ketlain) }}" class="btn btn-warning text-white btn-sm" title="Edit">
-                                                                    <i class="fas fa-pencil-alt"></i>
-                                                                </a>
-                                                                <form action="{{ route('pegawai-keterangan-lain.destroy',$item->id_ketlain) }}" method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data keterangan lain ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
-                                                                </form> 
+                                                                <div class="btn-group">
+                                                                    <a href="{{ route('pegawai-keterangan-lain.edit',$item->id_ketlain) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                                                        <i class="fas fa-pencil-alt"></i>
+                                                                    </a>
+                                                                    <form action="{{ route('pegawai-keterangan-lain.destroy',$item->id_ketlain) }}" method="post" class="d-inline">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data keterangan lain ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                    </form> 
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -1392,14 +1414,16 @@
                                                             <td>{{ $item->tujuan }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
                                                             <td>
-                                                                <a href="{{ route('pegawai-mutasi.edit',$item->id_mutasi) }}" class="btn btn-warning text-white btn-sm" title="Edit">
-                                                                    <i class="fas fa-pencil-alt"></i>
-                                                                </a>
-                                                                <form action="{{ route('pegawai-mutasi.destroy',$item->id_mutasi) }}" method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data mutasi ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
-                                                                </form> 
+                                                                <div class="btn-group">
+                                                                    <a href="{{ route('pegawai-mutasi.edit',$item->id_mutasi) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                                                        <i class="fas fa-pencil-alt"></i>
+                                                                    </a>
+                                                                    <form action="{{ route('pegawai-mutasi.destroy',$item->id_mutasi) }}" method="post" class="d-inline">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data mutasi ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                    </form> 
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -1443,14 +1467,16 @@
                                                             <td>{{ $item->keterangan }}</td>
                                                             <td><a href='{{ asset('/storage/file_dokumen/'.$item->file_dokumen)}}' target='_blank' title='download'><h4><i class='fa fa-file'></i></h4></a></td>
                                                             <td>
-                                                                <a href="{{ route('dokumen-pegawai.edit',$item->id_dokpegawai) }}" class="btn btn-warning text-white btn-sm" title="Edit">
-                                                                    <i class="fas fa-pencil-alt"></i>
-                                                                </a>
-                                                                <form action="{{ route('dokumen-pegawai.destroy',$item->id_dokpegawai) }}" method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus Dokumen ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
-                                                                </form> 
+                                                                <div class="btn-group">
+                                                                    <a href="{{ route('dokumen-pegawai.edit',$item->id_dokpegawai) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                                                        <i class="fas fa-pencil-alt"></i>
+                                                                    </a>
+                                                                    <form action="{{ route('dokumen-pegawai.destroy',$item->id_dokpegawai) }}" method="post" class="d-inline">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus Dokumen ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                    </form> 
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -1499,14 +1525,16 @@
                                                             <td>{{ $pangkat_cpns->nomor }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($pangkat_cpns->tanggal)) }}</td>
                                                             <td>
-                                                                <a href="{{ route('pegawai-pangkat-cpns.edit',$pangkat_cpns->id_pangkat_cpns) }}" class="btn btn-warning text-white btn-sm" title="Edit">
-                                                                    <i class="fas fa-pencil-alt"></i>
-                                                                </a>
-                                                                <form action="{{ route('pegawai-pangkat-cpns.destroy',$pangkat_cpns->id_pangkat_cpns) }}" method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data riwayat pangkat cpns ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
-                                                                </form> 
+                                                                <div class="btn-group">
+                                                                    <a href="{{ route('pegawai-pangkat-cpns.edit',$pangkat_cpns->id_pangkat_cpns) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                                                        <i class="fas fa-pencil-alt"></i>
+                                                                    </a>
+                                                                    <form action="{{ route('pegawai-pangkat-cpns.destroy',$pangkat_cpns->id_pangkat_cpns) }}" method="post" class="d-inline">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data riwayat pangkat cpns ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                    </form> 
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                 </tbody>
@@ -1552,14 +1580,16 @@
                                                             <td>{{ $pangkat_pns->nomor }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($pangkat_pns->tanggal)) }}</td>
                                                             <td>
-                                                                <a href="{{ route('pegawai-pangkat-pns.edit',$pangkat_pns->id_pangkat_pns) }}" class="btn btn-warning text-white btn-sm" title="Edit">
-                                                                    <i class="fas fa-pencil-alt"></i>
-                                                                </a>
-                                                                <form action="{{ route('pegawai-pangkat-pns.destroy',$pangkat_pns->id_pangkat_pns) }}" method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data riwayat pangkat pns ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
-                                                                </form> 
+                                                                <div class="btn-group">
+                                                                    <a href="{{ route('pegawai-pangkat-pns.edit',$pangkat_pns->id_pangkat_pns) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                                                        <i class="fas fa-pencil-alt"></i>
+                                                                    </a>
+                                                                    <form action="{{ route('pegawai-pangkat-pns.destroy',$pangkat_pns->id_pangkat_pns) }}" method="post" class="d-inline">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data riwayat pangkat pns ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                    </form> 
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                 </tbody>
@@ -1606,14 +1636,16 @@
                                                             <td>{{ $item->nomor }}</td>
                                                             <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
                                                             <td>
-                                                                <a href="{{ route('pegawai-riwayat-pangkat.edit',$item->id_riwayat_pangkat) }}" class="btn btn-warning text-white btn-sm" title="Edit">
-                                                                    <i class="fas fa-pencil-alt"></i>
-                                                                </a>
-                                                                <form action="{{ route('pegawai-riwayat-pangkat.destroy',$item->id_riwayat_pangkat) }}" method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data riwayat pangkat ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
-                                                                </form> 
+                                                                <div class="btn-group">
+                                                                    <a href="{{ route('pegawai-riwayat-pangkat.edit',$item->id_riwayat_pangkat) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                                                        <i class="fas fa-pencil-alt"></i>
+                                                                    </a>
+                                                                    <form action="{{ route('pegawai-riwayat-pangkat.destroy',$item->id_riwayat_pangkat) }}" method="post" class="d-inline">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data riwayat pangkat ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                    </form> 
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -1667,14 +1699,16 @@
                                                             <td>{{ $item->peraturan }}</td>
                                                             <td> {{ $item->status == '0' ? 'Aktif' : 'Nonaktif' }}</td>
                                                             <td>
-                                                                <a href="{{ route('pegawai-riwayat-kgb.edit',$item->id_riwayat_kgb) }}" class="btn btn-warning text-white btn-sm" title="Edit">
-                                                                    <i class="fas fa-pencil-alt"></i>
-                                                                </a>
-                                                                <form action="{{ route('pegawai-riwayat-kgb.destroy',$item->id_riwayat_kgb) }}" method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data kenaikan gaji berkala ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
-                                                                </form> 
+                                                                <div class="btn-group">
+                                                                    <a href="{{ route('pegawai-riwayat-kgb.edit',$item->id_riwayat_kgb) }}" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                                                        <i class="fas fa-pencil-alt"></i>
+                                                                    </a>
+                                                                    <form action="{{ route('pegawai-riwayat-kgb.destroy',$item->id_riwayat_kgb) }}" method="post" class="d-inline">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin menghapus data kenaikan gaji berkala ini?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                                                    </form> 
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach

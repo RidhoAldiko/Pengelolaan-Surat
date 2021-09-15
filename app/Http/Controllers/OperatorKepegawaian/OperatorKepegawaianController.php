@@ -117,15 +117,17 @@ class OperatorKepegawaianController extends Controller
                 })
                 ->addColumn('aksi', function($data) {
                     $button = ' 
-                                <a href="'.route('data-pegawai.show',$data->nip_pegawai).'" class="btn btn-success text-white btn-sm" title="Edit">
-                                <i class="fas fa-info"></i> Detail
-                                </a>
-                                <a href="'.route('data-pegawai.edit',$data->nip_pegawai).'" class="btn btn-warning text-white btn-sm" title="Edit">
-                                    <i class="fas fa-pencil-alt"></i> Edit
-                                </a>
-                                <a href="'.route('print-pegawai.cetakperorangan',$data->nip_pegawai).'"  target="_blank" class="btn btn-primary text-white btn-sm" title="Edit">
-                                <i class="fas fa-print"></i> Print
-                                </a>
+                                <div class="btn-group">
+                                    <a href="'.route('data-pegawai.show',$data->nip_pegawai).'" class="btn btn-success text-white btn-sm mr-1" title="Edit">
+                                    <i class="fas fa-info"></i> Detail
+                                    </a>
+                                    <a href="'.route('data-pegawai.edit',$data->nip_pegawai).'" class="btn btn-warning text-white btn-sm mr-1" title="Edit">
+                                        <i class="fas fa-pencil-alt"></i> Edit
+                                    </a>
+                                    <a href="'.route('print-pegawai.cetakperorangan',$data->nip_pegawai).'"  target="_blank" class="btn btn-primary text-white btn-sm" title="Edit">
+                                    <i class="fas fa-print"></i> Print
+                                    </a>
+                                </div>
                                 ';
                     return $button;
                 })
