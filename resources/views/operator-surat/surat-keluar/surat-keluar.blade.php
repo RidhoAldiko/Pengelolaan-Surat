@@ -40,16 +40,16 @@
                                     <td>{{$result->perihal}}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{route('effort-surat.create',$result->id_surat_keluar)}}" class="btn btn-primary text-white btn-sm" title="Edit">
+                                            <a href="{{route('effort-surat.create',$result->id_surat_keluar)}}" class="btn btn-primary text-white btn-sm mx-1" title="Edit">
                                                 <i class="fas fa-angle-right"></i> Approve
                                                 </a>
-                                            <a href="{{route('surat-keluar.show',$result->id_surat_keluar)}}" class="btn btn-success text-white btn-sm" title="Edit">
+                                            <a href="{{route('surat-keluar.show',$result->id_surat_keluar)}}" class="btn btn-success text-white btn-sm mx-1" title="Edit">
                                             <i class="fas fa-info"></i> Detail
                                             </a>
-                                            <a href="{{route('surat-keluar.edit',$result->id_surat_keluar)}}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                            <a href="{{route('surat-keluar.edit',$result->id_surat_keluar)}}" class="btn btn-warning text-white btn-sm mx-1" title="Edit">
                                                 <i class="fas fa-pencil-alt"></i> Edit
                                             </a>
-                                            <a href="#" class="btn btn-danger btn-sm getIdSuratKeluar" data-toggle="modal" data-target="#deleteSurat" data-id="{{$result->id_surat_keluar}}" >
+                                            <a href="#" class="btn btn-danger btn-sm mx-1 getIdSuratKeluar" data-toggle="modal" data-target="#deleteSurat" data-id="{{$result->id_surat_keluar}}" >
                                                 <i class="fas fa-trash fa-sm"></i> Hapus
                                             </a>
                                         </div>

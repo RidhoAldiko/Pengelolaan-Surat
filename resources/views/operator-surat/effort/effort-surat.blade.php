@@ -98,20 +98,20 @@
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                         @if ($result->status == 0)
-                                            <a href="{{route('effort-surat.show',$result->id_effort_surat)}}" class="btn btn-success text-white btn-sm">
+                                            <a href="{{route('effort-surat.show',$result->id_effort_surat)}}" class="btn btn-success text-white btn-sm mx-1">
                                                 <i class="fas fa-info"></i> Detail
                                             </a>
-                                            <a href="{{route('effort-surat.forward',$result->id_effort_surat)}}" class="btn btn-primary btn-sm" >
+                                            <a href="{{route('effort-surat.forward',$result->id_effort_surat)}}" class="btn btn-primary btn-sm mx-1" >
                                                 <i class="fas fa-angle-right"></i> Teruskan
                                             </a>
-                                            <a href="{{route('effort-surat.edit',$result->id_effort_surat)}}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                            <a href="{{route('effort-surat.edit',$result->id_effort_surat)}}" class="btn btn-warning text-white btn-sm mx-1"  title="Edit">
                                                 <i class="fas fa-pencil-alt"></i> Edit
                                             </a>
-                                            <a href="#" class="btn btn-danger btn-sm getIdSuratKeluar" data-toggle="modal" data-target="#deleteEffort" data-id="{{$result->id_surat_keluar}}" >
+                                            <a href="#" class="btn btn-danger btn-sm mx-1 getIdSuratKeluar" data-toggle="modal" data-target="#deleteEffort" data-id="{{$result->id_surat_keluar}}" >
                                                 <i class="fas fa-trash fa-sm"></i> Hapus
                                             </a>
                                         @else
-                                            <a href="{{route('effort-surat.show',$result->id_effort_surat)}}" class="btn btn-success text-white btn-sm" title="Edit">
+                                            <a href="{{route('effort-surat.show',$result->id_effort_surat)}}" class="btn btn-success text-white btn-sm mx-1" title="Edit">
                                                 <i class="fas fa-info"></i> Detail
                                             </a>
                                             @if ($result->status == 2)
@@ -123,18 +123,18 @@
                                                 ->take(1)
                                                 ->first();
                                             @endphp
-                                            <a href="{{route('effort-surat.ingatkan',$user->id)}}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                            <a href="{{route('effort-surat.ingatkan',$user->id)}}" class="btn btn-warning text-white btn-sm mx-1" title="Edit">
                                                 <i class="fa fa-bell" aria-hidden="true"></i> Ingatkan
                                             </a>
                                             @elseif ($result->status == 4)
-                                                <a href="#" class="btn btn-danger btn-sm getIdSuratKeluar" data-toggle="modal" data-target="#deleteEffort" data-id="{{$result->id_surat_keluar}}" >
+                                                <a href="#" class="btn btn-danger btn-sm mx-1 getIdSuratKeluar" data-toggle="modal" data-target="#deleteEffort" data-id="{{$result->id_surat_keluar}}" >
                                                     <i class="fas fa-trash fa-sm"></i> Hapus
                                                 </a>
                                             @elseif ($result->status == 3)
-                                                <a href="{{route('effort-surat.arsipkan',$result->id_surat_keluar)}}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                <a href="{{route('effort-surat.arsipkan',$result->id_surat_keluar)}}" class="btn btn-warning text-white btn-sm mx-1" title="Edit">
                                                     <i class="fas fa-archive"></i> Arsipkan
                                                 </a>
-                                                <a target="_blank" href="{{route('effort-surat.cetak',$result->id_effort_surat)}}" class="btn btn-primary btn-sm" >
+                                                <a target="_blank" href="{{route('effort-surat.cetak',$result->id_effort_surat)}}" class="btn btn-primary btn-sm mx-1" >
                                                     <i class="fas fa-print"></i> Print
                                                 </a>
                                             @endif

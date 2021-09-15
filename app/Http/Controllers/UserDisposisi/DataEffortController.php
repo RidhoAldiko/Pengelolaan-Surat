@@ -68,7 +68,16 @@ class DataEffortController extends Controller
     {
         $level = Auth::user()->id_level_surat;
         $data = $request->all();
-        
+        // dd($data);
+        $this->validate($request,[
+            'id' => 'required',
+            'instruksi' => 'required',
+            'paraf'  => 'required'
+        ],[
+            'id.required' => 'Tujuan approval belum ditentukan!',
+            'instruksi.required' => 'Instruksi / Informasi tidak boleh kosong!',
+            'paraf.required'  => 'Surat keluar harus melalui persetujuan',
+        ]);
         if ($level > 4 ) {
             $explode = explode(' - ',$request->id,-1);
             //masukan nip ke variabel data['id]

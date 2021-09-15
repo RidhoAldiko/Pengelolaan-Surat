@@ -22,7 +22,7 @@
                             <div class="form-group">
                                 <label for="id_disposisi_surat_masuk">Tujuan Approval</label>
                                 @if (Auth::user()->id_level_surat==6)
-                                    <input type="text" name="id" id="id" class="form-control search-input-surat-user @error('id') is-invalid @enderror" placeholder="Masukan Nama / Unit Bagian" value="{{old('id')}}">
+                                    <input type="text" autocomplete="off" name="id" id="id" class="form-control search-input-surat-user @error('id') is-invalid @enderror" placeholder="Masukan Nama / Unit Bagian" value="{{old('id')}}">
                                     <div class="row">
                                         <div class="col-md-8 search-result-surat-user">
                                         </div>
@@ -33,7 +33,7 @@
                                     </span>
                                     @enderror
                                 @elseif (Auth::user()->id_level_surat==5)
-                                    <input type="text" name="id" id="id" class="form-control search-input-surat-user @error('id') is-invalid @enderror" placeholder="Masukan Nama / Unit Asisten / Unit Staf Ahli" value="{{old('id')}}">
+                                    <input type="text" autocomplete="off" name="id" id="id" class="form-control search-input-surat-user @error('id') is-invalid @enderror" placeholder="Masukan Nama / Unit Asisten / Unit Staf Ahli" value="{{old('id')}}">
                                     <div class="row">
                                         <div class="col-md-8 search-result-surat-user">
                                         </div>
@@ -64,7 +64,7 @@
 
                             <div class="form-group">
                                 <label for="instruksi">Instruksi / Informasi</label>
-                                <textarea class="form-control @error('instruksi') is-invalid @enderror" id="instruksi" name="instruksi" rows="3">{{old('instruksi')}}</textarea>
+                                <textarea  class="form-control @error('instruksi') is-invalid @enderror" id="instruksi" name="instruksi" rows="3">{{old('instruksi')}}</textarea>
                                 @error('instruksi')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

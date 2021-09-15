@@ -48,11 +48,11 @@ class ArsipSuratKeluarController extends Controller
                 ->addColumn('aksi', function($data) {
                     $button = '
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="'.route('arsip-surat-keluar.show',$data->id_surat_keluar).'" class="btn btn-success text-white btn-sm" title="Edit">
+                                <a href="'.route('arsip-surat-keluar.show',$data->id_surat_keluar).'" class="btn btn-success text-white btn-sm mx-1" title="Edit">
                                     <i class="fas fa-info"></i> Detail
                                 </a>
 
-                                <a target="_blank" href="'.route('arsip-surat-keluar.cetak',$data->id_surat_keluar).'" class="btn btn-primary text-white btn-sm" title="Edit">
+                                <a target="_blank" href="'.route('arsip-surat-keluar.cetak',$data->id_surat_keluar).'" class="btn btn-primary text-white btn-sm mx-1" title="Edit">
                                 <i class="fas fa-print"></i> Print
                                 </a>
                             </div>    

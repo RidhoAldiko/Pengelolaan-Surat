@@ -58,6 +58,7 @@ class PegawaiController extends Controller
         // return $data;
         return view('admin.pegawai.pegawai');
     }
+    
     public function pegawai_serverSide(){
         //get data pegawai 
         $data = Pegawai::select('pegawai.*','nama_jabatan','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian')
@@ -67,7 +68,7 @@ class PegawaiController extends Controller
         ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
         ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
         ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
-        ->get();
+        ->orderBy('created_at','DESC')->get();
         return DataTables::of($data)
                 ->addIndexColumn()
                 ->editColumn('nip', function($data){ 
