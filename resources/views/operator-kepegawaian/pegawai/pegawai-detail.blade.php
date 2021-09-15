@@ -865,11 +865,7 @@
                                             <table class="table table-bordered table-hover table-striped" width="100%" cellspacing="0">
                                                 <thead>
                                                         <tr class="text-center">
-<<<<<<< HEAD
-                                                            <th scope="col">Nama Dokumen</th>
-=======
                                                             <th scope="col">Nama file</th>
->>>>>>> 9fefc7e68ba25d17dc8e832801baadc140c70d88
                                                             <th scope="col">Keterangan</th>
                                                             <th scope="col">File Dokumen</th>
                                                         </tr>

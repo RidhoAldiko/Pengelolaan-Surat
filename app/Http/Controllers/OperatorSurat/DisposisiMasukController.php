@@ -76,19 +76,13 @@ class DisposisiMasukController extends Controller
         //masukan nip ke variabel data['id]
         $data ['id'] = $explode[0];
         $data ['status'] = '0';
-        // Notifikasi::create($notif = [
-        //     'judul' => 'Disposisi Surat Masuk',
-        //     'pesan' =>'Disposisi surat belum diteruskan',
-        //     'id_user' => $explode[0],
-        //     'status' => '0',
-        // ]);
         $result = SuratMasuk::join('disposisi_surat_masuk', 'disposisi_surat_masuk.id_surat_masuk', '=', 'surat_masuk.id_surat_masuk')
                 ->where('id_disposisi_surat_masuk',$request->id_disposisi_surat_masuk)
                 ->first('surat_masuk.id_surat_masuk');
         $user = User::where('id',$explode)->first();
         
         try {
-            Mail::to('coba@gmail.com')->send(new DisposisiSurat());
+            Mail::to($user->email)->send(new DisposisiSurat());
             TeruskanDisposisiMasuk::create($data);
             SuratMasuk::where('id_surat_masuk', $result->id_surat_masuk)->update(['status' => '2']);
             return redirect()->route('disposisi-surat-masuk.index')->with('status',"Disposisi Surat Masuk berhasil diteruskan kepada pengguna");

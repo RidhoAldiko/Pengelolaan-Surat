@@ -50,20 +50,20 @@
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="{{route('data-effort.show',$result->id_effort_surat)}}" class="btn btn-success text-white btn-sm">
+                                        <a href="{{route('data-effort.show',$result->id_effort_surat)}}" class="btn btn-success text-white btn-sm mx-1">
                                             <i class="fas fa-info"></i> Detail
                                         </a>
                                         @if (Auth::user()->id_level_surat > 2)
-                                        <a href="{{route('data-effort.forward',$result->id_effort_surat)}}" class="btn btn-primary btn-sm" >
+                                        <a href="{{route('data-effort.forward',$result->id_effort_surat)}}" class="btn btn-primary btn-sm mx-1" >
                                             <i class="fas fa-angle-right"></i> Teruskan
                                         </a>
                                         @endif
                                         @if (Auth::user()->id_level_surat==5 || Auth::user()->id_level_surat==4 || Auth::user()->id_level_surat==2)
-                                        <a href="{{route('data-effort.ignore',$result->id_surat_keluar)}}" class="btn btn-danger btn-sm" >
+                                        <a href="{{route('data-effort.ignore',$result->id_surat_keluar)}}" class="btn btn-danger btn-sm mx-1" >
                                             <i class="fa fa-window-close" aria-hidden="true"></i> Tolak
                                         </a>
                                         @endif
-                                        <a href="{{route('data-effort.finish',$result->id_surat_keluar)}}" class="btn btn-warning btn-sm" >
+                                        <a href="{{route('data-effort.finish',$result->id_surat_keluar)}}" class="btn btn-warning btn-sm mx-1" >
                                             <i class="fas fa-check"></i> Selesaikan
                                         </a>
                                         </div>

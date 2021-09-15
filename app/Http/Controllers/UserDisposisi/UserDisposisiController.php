@@ -167,21 +167,21 @@ class UserDisposisiController extends Controller
             //jika level pengguna kepala bagian
             if ($level == 5) {
                 //cari tujuan approve (staf ahli atau asisten)
-                $results = User::select('users.*','nama_pegawai','jabatan.id_jabatan','nama_jabatan','nama_staf_ahli','nama_asisten','nama_bagian','nama_sub_bagian')
+                $results = User::select('users.*','nama_pegawai','jabatan.id_jabatan','nama_jabatan','nama_staf_ahli','nama_asisten')
                 ->join('pegawai', 'nip_pegawai', '=', 'users.id')
                 ->join('jabatan', 'jabatan.id_jabatan', '=', 'pegawai.id_jabatan')
                 ->join('unit_kerja', 'unit_kerja.nip_pegawai', '=', 'pegawai.nip_pegawai')
                 ->join('staf_ahli', 'staf_ahli.id_staf_ahli', '=', 'unit_kerja.id_staf_ahli')
                 ->join('asisten', 'asisten.id_asisten', '=', 'unit_kerja.id_asisten')
                 ->join('bagian', 'bagian.id_bagian', '=', 'unit_kerja.id_bagian')
-                ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')
+                ->join('sub_bagian', 'sub_bagian.id_sub_bagian', '=', 'unit_kerja.id_sub_bagian')   
+                ->where('nama_pegawai', 'LIKE' ,'%' . $data . '%')
+                ->orWhere('nama_staf_ahli', 'LIKE' ,'%' . $data . '%')
+                ->orWhere('nama_asisten', 'LIKE' ,'%' . $data . '%')
                 ->where(function($q) {
                     $q->where('jabatan.id_jabatan',3)
                     ->orWhere('jabatan.id_jabatan',4);
                 })
-                ->where('nama_pegawai', 'LIKE' ,'%' . $data . '%')
-                ->orWhere('nama_staf_ahli', 'LIKE' ,'%' . $data . '%')
-                ->orWhere('nama_asisten', 'LIKE' ,'%' . $data . '%')
                 ->get();
             } else 
             //jika level pengguna kepala sub bagian

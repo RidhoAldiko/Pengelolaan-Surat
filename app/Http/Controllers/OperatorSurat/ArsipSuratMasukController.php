@@ -49,18 +49,18 @@ class ArsipSuratMasukController extends Controller
 
                     if ($data->status == 1) {
                         $button = '
-                                <a href="'.route('arsip-surat-masuk.detail',$data->id_surat_masuk).'" class="btn btn-success text-white btn-sm" title="Edit">
+                                <a href="'.route('arsip-surat-masuk.detail',$data->id_surat_masuk).'" class="btn btn-success text-white btn-sm mx-1" title="Edit">
                                     <i class="fas fa-info"></i> Detail
                                 </a>
                             ';
                     } else {
                         $button = '
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="'.route('arsip-surat-masuk.detail',$data->id_surat_masuk).'" class="btn btn-success text-white btn-sm" title="Edit">
+                                <a href="'.route('arsip-surat-masuk.detail',$data->id_surat_masuk).'" class="btn btn-success text-white btn-sm mx-1" title="Edit">
                                     <i class="fas fa-info"></i> Detail
                                 </a>
 
-                                <a target="_blank" href="'.route('arsip-surat-masuk.cetak',$data->id_surat_masuk).'" class="btn btn-primary text-white btn-sm" title="Edit">
+                                <a target="_blank" href="'.route('arsip-surat-masuk.cetak',$data->id_surat_masuk).'" class="btn btn-primary text-white btn-sm mx-1" title="Edit">
                                 <i class="fas fa-print"></i> Print
                                 </a>
                             </div>    

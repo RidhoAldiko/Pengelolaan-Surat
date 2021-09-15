@@ -41,22 +41,22 @@
                                     <td>{{$result->nomor_surat}}</td>
                                     <td>{{date("d/m/Y", strtotime($result->tanggal_surat))}}</td>
                                     <td>
-                                            <a href="{{route('disposisi-surat-masuk.ignore',$result->id_surat_masuk)}}" class="btn btn-danger btn-sm" >
+                                            <a href="{{route('disposisi-surat-masuk.ignore',$result->id_surat_masuk)}}" class="btn btn-danger btn-sm mx-1" >
                                                 <i class="fas fa-times"></i>
                                             </a>
-                                            <a href="{{route('disposisi-surat-masuk.create',$result->id_surat_masuk)}}" class="btn btn-success btn-sm" >
+                                            <a href="{{route('disposisi-surat-masuk.create',$result->id_surat_masuk)}}" class="btn btn-success btn-sm mx-1" >
                                                 <i class="fas fa-check"></i>
                                             </a>
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{route('surat-masuk.show',$result->id_surat_masuk)}}" class="btn btn-success text-white btn-sm" title="Edit">
+                                            <a href="{{route('surat-masuk.show',$result->id_surat_masuk)}}" class="btn btn-success text-white btn-sm mx-1" title="Edit">
                                             <i class="fas fa-info"></i> Detail
                                                 </a>
-                                            <a href="{{route('surat-masuk.edit',$result->id_surat_masuk)}}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                            <a href="{{route('surat-masuk.edit',$result->id_surat_masuk)}}" class="btn btn-warning text-white btn-sm mx-1" title="Edit">
                                                 <i class="fas fa-pencil-alt"></i> Edit
                                             </a>
-                                            <a href="#" class="btn btn-danger btn-sm getIdSuratMasuk" data-toggle="modal" data-target="#deleteSurat" data-id="{{$result->id_surat_masuk}}" >
+                                            <a href="#" class="btn btn-danger btn-sm mx-1 getIdSuratMasuk" data-toggle="modal" data-target="#deleteSurat" data-id="{{$result->id_surat_masuk}}" >
                                                 <i class="fas fa-trash fa-sm"></i> Hapus
                                             </a>
                                         </div>    

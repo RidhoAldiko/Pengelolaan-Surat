@@ -99,20 +99,20 @@
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                         @if ($result->status == 0)
-                                            <a href="{{route('disposisi-surat-masuk.show',$result->id_disposisi_surat_masuk)}}" class="btn btn-success text-white btn-sm">
+                                            <a href="{{route('disposisi-surat-masuk.show',$result->id_disposisi_surat_masuk)}}" class="btn btn-success text-white btn-sm mx-1">
                                                 <i class="fas fa-info"></i> Detail
                                             </a>
-                                            <a href="{{route('disposisi-surat-masuk.forward',$result->id_disposisi_surat_masuk)}}" class="btn btn-primary btn-sm" >
+                                            <a href="{{route('disposisi-surat-masuk.forward',$result->id_disposisi_surat_masuk)}}" class="btn btn-primary btn-sm mx-1" >
                                                 <i class="fas fa-angle-right"></i> Teruskan
                                             </a>
-                                            <a href="{{route('disposisi-surat-masuk.edit',$result->id_disposisi_surat_masuk)}}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                            <a href="{{route('disposisi-surat-masuk.edit',$result->id_disposisi_surat_masuk)}}" class="btn btn-warning text-white btn-sm mx-1" title="Edit">
                                                 <i class="fas fa-pencil-alt"></i> Edit
                                             </a>
-                                            <a href="#" class="btn btn-danger btn-sm getIdSurat" data-toggle="modal" data-target="#deleteDisposisi" data-id="{{$result->id_surat_masuk}}" >
+                                            <a href="#" class="btn btn-danger btn-sm mx-1 getIdSurat" data-toggle="modal" data-target="#deleteDisposisi" data-id="{{$result->id_surat_masuk}}" >
                                                 <i class="fas fa-trash fa-sm"></i> Hapus
                                             </a>
                                         @else
-                                            <a href="{{route('disposisi-surat-masuk.show',$result->id_disposisi_surat_masuk)}}" class="btn btn-success text-white btn-sm" title="Edit">
+                                            <a href="{{route('disposisi-surat-masuk.show',$result->id_disposisi_surat_masuk)}}" class="btn btn-success text-white btn-sm mx-1" title="Edit">
                                                 <i class="fas fa-info"></i> Detail
                                             </a>
                                             @if ($result->status == 2)
@@ -124,14 +124,14 @@
                                                 ->take(1)
                                                 ->first();
                                             @endphp
-                                            <a href="{{route('disposisi-surat-masuk.ingatkan',$user->id)}}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                            <a href="{{route('disposisi-surat-masuk.ingatkan',$user->id)}}" class="btn btn-warning text-white btn-sm mx-1" title="Edit">
                                                 <i class="fa fa-bell" aria-hidden="true"></i> Ingatkan
                                             </a>
                                             @elseif ($result->status == 3)
-                                                <a href="{{route('disposisi-surat-masuk.arsip',$result->id_surat_masuk)}}" class="btn btn-warning text-white btn-sm" title="Edit">
+                                                <a href="{{route('disposisi-surat-masuk.arsip',$result->id_surat_masuk)}}" class="btn btn-warning text-white btn-sm mx-1" title="Edit">
                                                     <i class="fas fa-archive"></i> Arsipkan
                                                 </a>
-                                                <a target="_blank" href="{{route('disposisi-surat-masuk.cetak',$result->id_disposisi_surat_masuk)}}" class="btn btn-primary text-white btn-sm" title="Edit">
+                                                <a target="_blank" href="{{route('disposisi-surat-masuk.cetak',$result->id_disposisi_surat_masuk)}}" class="btn btn-primary text-white btn-sm mx-1" title="Edit">
                                                     <i class="fas fa-print"></i> Print
                                                 </a>
                                             @endif
