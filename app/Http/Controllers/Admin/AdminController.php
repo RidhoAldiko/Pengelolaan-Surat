@@ -59,10 +59,10 @@ class AdminController extends Controller
         if ($request->has('data')) {
             $data = $request->data;
             //get nip pegawai 
-            $pegawai = Pegawai::where('nip_pegawai', 'LIKE' ,'%' . $data . '%')
+            $results = Pegawai::where('nip_pegawai', 'LIKE' ,'%' . $data . '%')
                                 ->orWhere('nama_pegawai', 'LIKE' ,'%' . $data . '%')
                                 ->get();
-            $results = $pegawai->where('id_jabatan','!=',7);
+            // $results = $pegawai->where('id_jabatan','!=',7);
             //make output
             $output = '<div class="list-group  mt-2">';
             //cek jika data tersedia
